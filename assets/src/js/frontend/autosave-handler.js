@@ -110,7 +110,7 @@
                 if ($el.attr('type') === 'file') {
                     return;
                 }
-                if ($el.attr('type') === 'hidden' && name !== 'wdm_recaptcha_token') {
+                if ($el.attr('type') === 'hidden') {
                     return;
                 }
 

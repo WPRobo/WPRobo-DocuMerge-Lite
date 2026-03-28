@@ -29,28 +29,12 @@
         fieldCounter: 0,
 
         /**
-         * Counter for generating unique step IDs.
-         *
-         * @since 1.2.0
-         * @type  {number}
-         */
-        stepCounter: 0,
-
-        /**
          * Array of field configuration objects.
          *
          * @since 1.0.0
          * @type  {Array}
          */
         fields: [],
-
-        /**
-         * Cycling colours for step container left borders and badges.
-         *
-         * @since 1.2.0
-         * @type  {Array}
-         */
-        stepColors: ['#042157', '#166441', '#7c3aed', '#d97706', '#dc2626'],
 
         /**
          * Map of field types to their human-readable labels.
@@ -74,10 +58,7 @@
             hidden:      'Hidden',
             html:             'HTML Block',
             section_divider:  'Section Divider',
-            password:         'Password',
             url:              'Website',
-            rating:           'Rating',
-            repeater:         'Repeater',
             ip_address:       'IP Address',
             tracking:         'Tracking'
         },
@@ -206,65 +187,6 @@
                 self.updateFieldOptions(e);
             });
 
-            // Conditional logic events.
-            $(document).on('change', '.wdm-enable-conditions', function(e) {
-                self.toggleConditions(e);
-            });
-
-            $(document).on('click', '.wdm-add-condition', function(e) {
-                e.preventDefault();
-                self.addCondition(e);
-            });
-
-            $(document).on('click', '.wdm-condition-remove', function(e) {
-                e.preventDefault();
-                self.removeCondition(e);
-            });
-
-            $(document).on('change', '.wdm-condition-field, .wdm-condition-operator, .wdm-condition-value', function(e) {
-                self.updateFieldConditions(e);
-            });
-
-            // Hide/show value input based on operator (is_empty / is_not_empty don't need a value).
-            $(document).on('change', '.wdm-condition-operator', function() {
-                var op = $(this).val();
-                var $value = $(this).closest('.wdm-condition-row').find('.wdm-condition-value');
-                if (op === 'is_empty' || op === 'is_not_empty') {
-                    $value.css('visibility', 'hidden').val('');
-                } else {
-                    $value.css('visibility', 'visible');
-                }
-            });
-
-            // Multi-step toggle.
-            $(document).on('change', '#wdm-multistep', function(e) {
-                self.toggleMultistep(e);
-            });
-
-            // Payment enabled toggle.
-            $(document).on('change', '#wdm-payment-enabled', function() {
-                if ( $(this).is(':checked') ) {
-                    $('.wdm-payment-fields-wrap').slideDown(200);
-                } else {
-                    $('.wdm-payment-fields-wrap').slideUp(200);
-                }
-            });
-
-            // Step container events.
-            $(document).on('click', '.wdm-step-collapse', function(e) {
-                e.preventDefault();
-                self.toggleStepCollapse($(this));
-            });
-
-            $(document).on('click', '.wdm-step-delete', function(e) {
-                e.preventDefault();
-                self.removeStepContainer($(this));
-            });
-
-            $(document).on('click', '#wdm-add-step-btn', function(e) {
-                e.preventDefault();
-                self.addStepContainer();
-            });
 
             // Builder main tabs (Fields vs Settings).
             $(document).on('click', '.wdm-builder-main-tab', function(e) {
@@ -375,43 +297,6 @@
             // Set initial active state on page load.
             $('.wdm-align-option input[type="radio"]:checked').closest('.wdm-align-option').addClass('wdm-align-active');
 
-            // Repeater column manager — add column.
-            $(document).on('click', '.wdm-repeater-col-add', function(e) {
-                e.preventDefault();
-                var $list = $(this).siblings('.wdm-repeater-columns-list');
-                var idx = $list.find('.wdm-repeater-col-row').length;
-                var rowHtml = '<div class="wdm-repeater-col-row" data-index="' + idx + '">' +
-                    '<input type="text" data-setting="col_label" class="wdm-input" placeholder="Column Label" value="">' +
-                    '<input type="text" data-setting="col_name" class="wdm-input" placeholder="Column Name" value="">' +
-                    '<button type="button" class="wdm-repeater-col-remove"><span class="dashicons dashicons-no-alt"></span></button>' +
-                '</div>';
-                $list.append(rowHtml);
-            });
-
-            // Repeater column manager — remove column.
-            $(document).on('click', '.wdm-repeater-col-remove', function(e) {
-                e.preventDefault();
-                $(this).closest('.wdm-repeater-col-row').remove();
-            });
-
-            // Repeater column manager — update columns data on input change.
-            $(document).on('change input', '[data-setting="col_label"], [data-setting="col_name"]', function() {
-                var $card = $(this).closest('.wdm-field-card');
-                var fieldId = $card.data('field-id');
-                var cols = [];
-                $card.find('.wdm-repeater-col-row').each(function() {
-                    cols.push({
-                        label: $(this).find('[data-setting="col_label"]').val() || '',
-                        name: $(this).find('[data-setting="col_name"]').val() || ''
-                    });
-                });
-                $.each(self.fields, function(i, f) {
-                    if (f.id === fieldId) {
-                        f.columns = cols;
-                        return false;
-                    }
-                });
-            });
 
             // Click field label to open settings (same as edit button).
             $(document).on('click', '.wdm-field-label-preview', function(e) {
@@ -506,22 +391,9 @@
                     var mouseX = e.pageX;
                     $('.wdm-drop-indicator').remove();
 
-                    // Find the closest step body or flat canvas the cursor is over.
+                    // Find the canvas the cursor is over.
                     var $target = null;
-                    $('.wdm-step-container-body').each(function() {
-                        var $body  = $(this);
-                        var offset = $body.offset();
-                        var w = $body.outerWidth();
-                        var h = $body.outerHeight();
-                        if (mouseX >= offset.left && mouseX <= offset.left + w &&
-                            mouseY >= offset.top  && mouseY <= offset.top + h) {
-                            $target = $body;
-                            return false;
-                        }
-                    });
-
-                    // Fallback to flat canvas if no step containers.
-                    if (!$target) {
+                    {
                         var $canvas = $('#wdm-builder-canvas');
                         var co = $canvas.offset();
                         if (mouseX >= co.left && mouseX <= co.left + $canvas.outerWidth() &&
@@ -612,11 +484,6 @@
                 divider_style: 'line',
                 show_title: true,
                 title_alignment: 'left',
-                confirm_password: false, show_strength: true,
-                max_stars: 5,
-                columns: [{ label: 'Item', name: 'item' }, { label: 'Quantity', name: 'qty' }],
-                min_rows: 1,
-                max_rows: 10,
                 track_utms: true,
                 track_referrer: true,
                 track_landing_page: true
@@ -632,55 +499,27 @@
 
             var cardHtml = this.generateFieldCard(field);
 
-            // In multi-step mode, sidebar drag-drop targets step bodies directly.
-            // This fallback handles the flat canvas mode only.
-            var $stepContainers = $('#wdm-builder-canvas .wdm-step-container');
-            if ( $stepContainers.length ) {
-                // Append to last step body as fallback for flat canvas drop.
-                var $lastBody = $stepContainers.last().find('.wdm-step-container-body');
-                var lastStep  = parseInt( $stepContainers.last().data('step'), 10 ) || 1;
-                field.step = lastStep;
+            var $cards = $('#wdm-builder-canvas').find('.wdm-field-card');
 
-                // Use _dropIndex for position within the target step body.
-                var $stepTarget = this._dropTarget || $lastBody;
-                var $stepCards  = $stepTarget.find('> .wdm-field-card');
-                var sIdx        = this._dropIndex;
-
-                if ( typeof sIdx === 'number' && sIdx >= 0 && sIdx < $stepCards.length ) {
-                    $(cardHtml).insertBefore($stepCards.eq(sIdx));
-                    // Update step number from the actual container.
-                    field.step = parseInt( $stepTarget.closest('.wdm-step-container').data('step'), 10 ) || lastStep;
-                } else {
-                    $lastBody.append(cardHtml);
-                }
-
-                this.fields.push(field);
-                this.syncFieldStepsFromDOM();
-                this.updateFieldOrder();
-                this.updateStepEmptyStates();
+            // Insert at the correct position.
+            if (index >= 0 && index < $cards.length) {
+                $(cardHtml).insertBefore($cards.eq(index));
             } else {
-                var $cards = $('#wdm-builder-canvas').find('.wdm-field-card');
+                $('#wdm-builder-canvas').append(cardHtml);
+            }
 
-                // Insert at the correct position.
-                if (index >= 0 && index < $cards.length) {
-                    $(cardHtml).insertBefore($cards.eq(index));
-                } else {
-                    $('#wdm-builder-canvas').append(cardHtml);
-                }
-
-                // Insert into fields array at the correct index.
-                if (index >= 0 && index < this.fields.length) {
-                    this.fields.splice(index, 0, field);
-                } else {
-                    this.fields.push(field);
-                }
+            // Insert into fields array at the correct index.
+            if (index >= 0 && index < this.fields.length) {
+                this.fields.splice(index, 0, field);
+            } else {
+                this.fields.push(field);
             }
 
             // Hide placeholder.
             $('#wdm-canvas-placeholder').hide();
 
-            // Refresh sortable and singleton button states.
-            if ( ! $stepContainers.length && $('#wdm-builder-canvas').hasClass('ui-sortable') ) {
+            // Refresh sortable.
+            if ( $('#wdm-builder-canvas').hasClass('ui-sortable') ) {
                 $('#wdm-builder-canvas').sortable('refresh');
             }
             this.updateSingletonButtons();
@@ -721,9 +560,6 @@
             var label      = this.typeLabels[type] || type;
             var mergeTag   = label.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
 
-            // Payment and captcha are always required.
-            var alwaysRequired = ( type === 'payment' || type === 'captcha' );
-
             var field = {
                 id:            fieldId,
                 type:          type,
@@ -731,7 +567,7 @@
                 name:          mergeTag,
                 placeholder:   '',
                 help_text:     '',
-                required:      alwaysRequired,
+                required:      false,
                 width:         'full',
                 options:       [],
                 conditions:    [],
@@ -761,11 +597,6 @@
                 divider_style: 'line',
                 show_title:    true,
                 title_alignment: 'left',
-                confirm_password: false, show_strength: true,
-                max_stars:     5,
-                columns:       [{ label: 'Item', name: 'item' }, { label: 'Quantity', name: 'qty' }],
-                min_rows:      1,
-                max_rows:      10,
                 track_utms:    true,
                 track_referrer: true,
                 track_landing_page: true
@@ -783,21 +614,9 @@
             var cardHtml = this.generateFieldCard(field);
 
             $('#wdm-canvas-placeholder').hide();
-
-            // If multi-step is active, append to the last step container.
-            var $stepContainers = $('#wdm-builder-canvas .wdm-step-container');
-            if ( $stepContainers.length ) {
-                var $lastBody = $stepContainers.last().find('.wdm-step-container-body');
-                var lastStep  = parseInt( $stepContainers.last().data('step'), 10 ) || 1;
-                field.step = lastStep;
-                $lastBody.append(cardHtml);
-                this.updateStepEmptyStates();
-            } else {
-                $('#wdm-builder-canvas').append(cardHtml);
-            }
+            $('#wdm-builder-canvas').append(cardHtml);
 
             this.fields.push(field);
-            this.applyPendingConditions(field.id);
             this.updateSingletonButtons();
         },
 
@@ -830,7 +649,6 @@
                         '<div class="wdm-field-tabs">' +
                             '<button type="button" class="wdm-field-tab wdm-field-tab-active" data-tab="general">General</button>' +
                             '<button type="button" class="wdm-field-tab" data-tab="validation">Validation</button>' +
-                            '<button type="button" class="wdm-field-tab" data-tab="logic">Logic</button>' +
                             '<button type="button" class="wdm-field-tab" data-tab="appearance">Appearance</button>' +
                         '</div>' +
 
@@ -944,42 +762,6 @@
                                 '</select>' +
                             '</div>';
 
-            // Repeater: custom General tab — label, help text, columns manager, min/max rows.
-            } else if ( field.type === 'repeater' ) {
-                html += '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Label').html() + '</label>' +
-                                '<input type="text" data-setting="label" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.label).html() + '">' +
-                            '</div>' +
-                            '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Help Text').html() + '</label>' +
-                                '<input type="text" data-setting="help_text" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.help_text).html() + '">' +
-                            '</div>' +
-                            '<div class="wdm-builder-field-setting">' +
-                                '<label><input type="checkbox" data-setting="required" class="wdm-builder-setting-input"' + checkedAttr + '> ' + $('<span>').text('Required').html() + '</label>' +
-                            '</div>';
-                var cols = field.columns || [{label:'Item',name:'item'},{label:'Quantity',name:'qty'}];
-                html += '<div class="wdm-builder-field-setting">' +
-                            '<label>Columns</label>' +
-                            '<div class="wdm-repeater-columns-list">';
-                for (var ci = 0; ci < cols.length; ci++) {
-                    html += '<div class="wdm-repeater-col-row" data-index="' + ci + '">' +
-                        '<input type="text" data-setting="col_label" class="wdm-input" placeholder="Column Label" value="' + $('<span>').text(cols[ci].label).html() + '">' +
-                        '<input type="text" data-setting="col_name" class="wdm-input" placeholder="Column Name" value="' + $('<span>').text(cols[ci].name).html() + '">' +
-                        '<button type="button" class="wdm-repeater-col-remove"><span class="dashicons dashicons-no-alt"></span></button>' +
-                    '</div>';
-                }
-                html += '</div>' +
-                    '<button type="button" class="wdm-repeater-col-add">+ Add Column</button>' +
-                '</div>' +
-                '<div class="wdm-builder-field-setting">' +
-                    '<label>Min Rows</label>' +
-                    '<input type="number" data-setting="min_rows" class="wdm-builder-setting-input wdm-input wdm-input-small" value="' + (field.min_rows || 1) + '" min="1" max="50">' +
-                '</div>' +
-                '<div class="wdm-builder-field-setting">' +
-                    '<label>Max Rows</label>' +
-                    '<input type="number" data-setting="max_rows" class="wdm-builder-setting-input wdm-input wdm-input-small" value="' + (field.max_rows || 10) + '" min="1" max="50">' +
-                '</div>';
-
             // All other field types: standard General tab fields.
             } else {
                 html += '<div class="wdm-builder-field-setting">' +
@@ -1008,12 +790,7 @@
                             '</div>' +
                             '<div class="wdm-builder-field-setting">';
 
-                var isAlwaysRequired = ( field.type === 'payment' || field.type === 'captcha' );
-                if ( isAlwaysRequired ) {
-                    html += '<label><input type="checkbox" data-setting="required" class="wdm-builder-setting-input" checked disabled> ' + $('<span>').text('Required (always)').html() + '</label>';
-                } else {
-                    html += '<label><input type="checkbox" data-setting="required" class="wdm-builder-setting-input"' + checkedAttr + '> ' + $('<span>').text('Required').html() + '</label>';
-                }
+                html += '<label><input type="checkbox" data-setting="required" class="wdm-builder-setting-input"' + checkedAttr + '> ' + $('<span>').text('Required').html() + '</label>';
 
                 html += '</div>' +
                             '<div class="wdm-builder-field-setting">' +
@@ -1130,28 +907,6 @@
                         '</div>';
             }
 
-            // Password field settings (inside General tab).
-            if ( field.type === 'password' ) {
-                html += '<div class="wdm-builder-field-setting">' +
-                            '<label><input type="checkbox" data-setting="confirm_password" class="wdm-builder-setting-input"' + (field.confirm_password ? ' checked' : '') + '> Require password confirmation</label>' +
-                            '<span class="wdm-description">Shows a second &ldquo;Confirm Password&rdquo; field</span>' +
-                        '</div>' +
-                        '<div class="wdm-builder-field-setting">' +
-                            '<label><input type="checkbox" data-setting="show_strength" class="wdm-builder-setting-input"' + (field.show_strength !== false ? ' checked' : '') + '> Show password strength indicator</label>' +
-                        '</div>';
-            }
-
-            // Rating field settings (inside General tab).
-            if ( field.type === 'rating' ) {
-                html += '<div class="wdm-builder-field-setting">' +
-                            '<label>Max Stars</label>' +
-                            '<select data-setting="max_stars" class="wdm-builder-setting-input wdm-select">' +
-                                '<option value="3"' + (parseInt(field.max_stars, 10) === 3 ? ' selected' : '') + '>3 Stars</option>' +
-                                '<option value="5"' + (parseInt(field.max_stars, 10) === 5 ? ' selected' : '') + '>5 Stars</option>' +
-                                '<option value="10"' + (parseInt(field.max_stars, 10) === 10 ? ' selected' : '') + '>10 Stars</option>' +
-                            '</select>' +
-                        '</div>';
-            }
 
             // Close General tab content.
             html += '</div>';
@@ -1187,7 +942,7 @@
             }
 
             // Text-specific validation fields.
-            if ( field.type === 'text' || field.type === 'textarea' || field.type === 'email' || field.type === 'phone' || field.type === 'password' || field.type === 'url' ) {
+            if ( field.type === 'text' || field.type === 'textarea' || field.type === 'email' || field.type === 'phone' || field.type === 'url' ) {
                 html += '<div class="wdm-builder-field-setting">' +
                             '<label>' + $('<span>').text('Min Length').html() + '</label>' +
                             '<input type="number" data-setting="min_length" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(minLength).html() + '">' +
@@ -1201,49 +956,6 @@
             // Close Validation tab content.
             html += '</div>';
 
-            // ── Tab 3: Logic ────────────────────────────────
-            html += '<div class="wdm-field-tab-content" data-tab="logic">';
-
-            // Conditional logic section.
-            var conditions = field.conditions || [];
-            var hasConditions = conditions.length > 0;
-            html += '<div class="wdm-builder-field-setting wdm-conditions-section">' +
-                        '<label>' +
-                            '<input type="checkbox" class="wdm-enable-conditions" data-setting="has_conditions"' + ( hasConditions ? ' checked' : '' ) + '> ' +
-                            'Show this field only when...' +
-                        '</label>' +
-                        '<div class="wdm-conditions-wrap" style="display:' + ( hasConditions ? 'block' : 'none' ) + ';">' +
-                            '<div class="wdm-conditions-list">';
-
-            var self = this;
-            $.each(conditions, function(i, condition) {
-                var otherFieldOptions = self.getOtherFieldOptions(field.id);
-                var hideValue = (condition.operator === 'is_empty' || condition.operator === 'is_not_empty');
-                html += '<div class="wdm-condition-row">' +
-                            '<select class="wdm-condition-field wdm-select">' + otherFieldOptions + '</select>' +
-                            '<select class="wdm-condition-operator wdm-select">' +
-                                '<option value="equals"' + ( condition.operator === 'equals' ? ' selected' : '' ) + '>Equals</option>' +
-                                '<option value="not_equals"' + ( condition.operator === 'not_equals' ? ' selected' : '' ) + '>Not equals</option>' +
-                                '<option value="contains"' + ( condition.operator === 'contains' ? ' selected' : '' ) + '>Contains</option>' +
-                                '<option value="not_contains"' + ( condition.operator === 'not_contains' ? ' selected' : '' ) + '>Not contains</option>' +
-                                '<option value="is_empty"' + ( condition.operator === 'is_empty' ? ' selected' : '' ) + '>Is empty</option>' +
-                                '<option value="is_not_empty"' + ( condition.operator === 'is_not_empty' ? ' selected' : '' ) + '>Is not empty</option>' +
-                            '</select>' +
-                            '<input type="text" class="wdm-condition-value wdm-input" placeholder="Enter value..." value="' + $('<span>').text(condition.value || '').html() + '"' + ( hideValue ? ' style="visibility:hidden;"' : '' ) + '>' +
-                            '<button type="button" class="wdm-condition-remove" title="Remove condition"><span class="dashicons dashicons-no-alt"></span></button>' +
-                        '</div>';
-            });
-
-            html += '</div>' +
-                        '<button type="button" class="wdm-add-condition wdm-btn wdm-btn-sm">+ Add Condition</button>' +
-                    '</div>' +
-                '</div>';
-
-            // Multi-step assignment is now handled by visual step containers.
-            // The field's step is determined by which container it resides in.
-
-            // Close Logic tab content.
-            html += '</div>';
 
             // ── Tab 4: Appearance ──────────────────────────
             html += '<div class="wdm-field-tab-content" data-tab="appearance">' +
@@ -1262,13 +974,6 @@
             // Close settings panel and card.
             html += '</div>' +
                 '</div>';
-
-            // After appending, we need to set selected condition fields.
-            // Store conditions data on the card for post-render selection.
-            this._pendingConditions = this._pendingConditions || {};
-            if ( hasConditions ) {
-                this._pendingConditions[field.id] = conditions;
-            }
 
             return html;
         },
@@ -1312,14 +1017,10 @@
             $card.fadeOut(200, function() {
                 $(this).remove();
 
-                // Show placeholder if canvas is empty (flat mode).
-                if ( ! $('#wdm-builder-canvas').find('.wdm-field-card').length &&
-                     ! $('#wdm-builder-canvas').find('.wdm-step-container').length ) {
+                // Show placeholder if canvas is empty.
+                if ( ! $('#wdm-builder-canvas').find('.wdm-field-card').length ) {
                     $('#wdm-canvas-placeholder').show();
                 }
-
-                // Update step empty states if in multi-step mode.
-                self.updateStepEmptyStates();
 
                 // Re-enable singleton buttons after deletion.
                 self.updateSingletonButtons();
@@ -1339,11 +1040,6 @@
             var value;
 
             if ( ! setting ) {
-                return;
-            }
-
-            // Repeater column inputs are handled by a dedicated handler.
-            if ( setting === 'col_label' || setting === 'col_name' ) {
                 return;
             }
 
@@ -1430,7 +1126,7 @@
          * @return {boolean}
          */
         isSingletonField: function(type) {
-            return type === 'captcha' || type === 'payment';
+            return false;
         },
 
         /**
@@ -1451,21 +1147,10 @@
         },
 
         /**
-         * Update sidebar button states — disable buttons for singleton
-         * fields that are already on the canvas.
+         * Update sidebar button states (no singletons in Lite).
          */
         updateSingletonButtons: function() {
-            var self = this;
-            var singletons = ['captcha', 'payment'];
-
-            $.each(singletons, function(i, type) {
-                var $btn = $('.wdm-field-type-btn[data-type="' + type + '"]');
-                if (self.hasFieldType(type)) {
-                    $btn.prop('disabled', true).addClass('wdm-singleton-used');
-                } else {
-                    $btn.prop('disabled', false).removeClass('wdm-singleton-used');
-                }
-            });
+            // No singleton fields in Lite version.
         },
 
         // ─────────────────────────────────────────────────────────
@@ -1488,20 +1173,6 @@
             var outputFormat   = $('#wdm-form-output').val();
             var submitLabel    = $.trim($('#wdm-submit-label').val());
             var successMessage = $.trim($('#wdm-success-message').val());
-            var multistep      = $('#wdm-multistep').is(':checked') ? 1 : 0;
-
-            // Sync field step assignments from DOM if multi-step is active.
-            if ( multistep ) {
-                this.syncFieldStepsFromDOM();
-            }
-
-            // Collect multi-step labels.
-            var multistepLabels = [];
-            if ( multistep ) {
-                $('.wdm-step-container').each(function() {
-                    multistepLabels.push( $.trim( $(this).find('.wdm-step-label-input').val() ) || 'Step ' + $(this).data('step') );
-                });
-            }
 
             // Button appearance settings.
             var settingsObj = {
@@ -1519,8 +1190,7 @@
                 limit_email_field: $('#wdm-limit-email-field').val() || '',
                 limit_per_ip:      $('#wdm-limit-per-ip').val() || '0',
                 limit_per_user:    $('#wdm-limit-per-user').val() || '0',
-                closed_message:    $.trim($('#wdm-closed-message').val()) || '',
-                webhook_url:    $.trim($('#wdm-webhook-url-field').val()) || ''
+                closed_message:    $.trim($('#wdm-closed-message').val()) || ''
             };
 
             // Integration settings (external_form_id + field_map).
@@ -1537,10 +1207,6 @@
             });
             if ( Object.keys(fieldMap).length > 0 ) {
                 settingsObj.field_map = fieldMap;
-            }
-
-            if ( multistep && multistepLabels.length ) {
-                settingsObj.multistep_labels = multistepLabels;
             }
 
             var settings = JSON.stringify(settingsObj);
@@ -1567,16 +1233,13 @@
                     output_format:   outputFormat,
                     submit_label:    submitLabel,
                     success_message: successMessage,
-                    multistep:       multistep,
+                    multistep:       0,
                     settings:        settings,
                     mode:            $('#wdm-form-mode').val() || 'standalone',
                     integration:     $('#wdm-form-integration').val() || '',
                     delivery_methods: JSON.stringify(
                         $('.wdm-delivery-method:checked').map(function() { return $(this).val(); }).get()
-                    ),
-                    enable_payment:  $('#wdm-payment-enabled').is(':checked') ? '1' : '0',
-                    payment_amount:  $('#wdm-payment-amount').val() || '0',
-                    payment_currency: $('#wdm-payment-currency').val() || 'USD'
+                    )
                 },
                 beforeSend: function() {
                     $btn.prop('disabled', true).addClass('wdm-loading');
@@ -1698,11 +1361,6 @@
 
             this.fieldCounter = maxNum;
             this.updateSingletonButtons();
-
-            // Build step containers if multi-step is enabled.
-            if ( $('#wdm-multistep').is(':checked') ) {
-                this.buildStepContainers();
-            }
         },
 
         /**
@@ -1745,7 +1403,6 @@
             $('#wdm-builder-canvas').append(cardHtml);
 
             this.fields.push(defaults);
-            this.applyPendingConditions(defaults.id);
         },
 
         // ─────────────────────────────────────────────────────────
@@ -1999,738 +1656,8 @@
             });
         },
 
-        // ─────────────────────────────────────────────────────────
-        //  Conditional logic
-        // ─────────────────────────────────────────────────────────
 
-        /**
-         * Toggle the conditions wrap visibility based on checkbox.
-         *
-         * @since 1.1.0
-         * @param {Event} e The change event.
-         */
-        toggleConditions: function(e) {
-            var $checkbox = $(e.target);
-            var $card     = $checkbox.closest('.wdm-field-card');
-            var $wrap     = $card.find('.wdm-conditions-wrap');
-
-            if ( $checkbox.is(':checked') ) {
-                $wrap.slideDown(200);
-            } else {
-                $wrap.slideUp(200);
-                // Clear conditions when unchecked.
-                var fieldId = $card.data('field-id');
-                $.each(this.fields, function(i, field) {
-                    if ( field.id === fieldId ) {
-                        field.conditions = [];
-                        return false;
-                    }
-                });
-            }
-        },
-
-        /**
-         * Add a new condition row.
-         *
-         * @since 1.1.0
-         * @param {Event} e The click event.
-         */
-        addCondition: function(e) {
-            var $btn     = $(e.target).closest('.wdm-add-condition');
-            var $card    = $btn.closest('.wdm-field-card');
-            var fieldId  = $card.data('field-id');
-            var $list    = $card.find('.wdm-conditions-list');
-            var options  = this.getOtherFieldOptions(fieldId);
-
-            var rowHtml = '<div class="wdm-condition-row">' +
-                '<select class="wdm-condition-field wdm-select">' + options + '</select>' +
-                '<select class="wdm-condition-operator wdm-select">' +
-                    '<option value="equals">Equals</option>' +
-                    '<option value="not_equals">Not equals</option>' +
-                    '<option value="contains">Contains</option>' +
-                    '<option value="not_contains">Not contains</option>' +
-                    '<option value="is_empty">Is empty</option>' +
-                    '<option value="is_not_empty">Is not empty</option>' +
-                '</select>' +
-                '<input type="text" class="wdm-condition-value wdm-input" placeholder="Enter value..." value="">' +
-                '<button type="button" class="wdm-condition-remove" title="Remove condition"><span class="dashicons dashicons-no-alt"></span></button>' +
-            '</div>';
-
-            $list.append(rowHtml);
-        },
-
-        /**
-         * Remove a condition row and update field data.
-         *
-         * @since 1.1.0
-         * @param {Event} e The click event.
-         */
-        removeCondition: function(e) {
-            var $btn  = $(e.target).closest('.wdm-condition-remove');
-            var $card = $btn.closest('.wdm-field-card');
-
-            $btn.closest('.wdm-condition-row').remove();
-
-            // Rebuild conditions.
-            this.rebuildFieldConditions($card);
-        },
-
-        /**
-         * Rebuild field.conditions[] from all condition rows.
-         *
-         * @since 1.1.0
-         * @param {Event} e The change event.
-         */
-        updateFieldConditions: function(e) {
-            var $card = $(e.target).closest('.wdm-field-card');
-            this.rebuildFieldConditions($card);
-        },
-
-        /**
-         * Rebuild conditions array from DOM rows for a given card.
-         *
-         * @since 1.1.0
-         * @param {jQuery} $card The field card element.
-         */
-        rebuildFieldConditions: function($card) {
-            var fieldId    = $card.data('field-id');
-            var conditions = [];
-
-            $card.find('.wdm-condition-row').each(function() {
-                conditions.push({
-                    field:    $(this).find('.wdm-condition-field').val(),
-                    operator: $(this).find('.wdm-condition-operator').val(),
-                    value:    $(this).find('.wdm-condition-value').val(),
-                    action:   'show'
-                });
-            });
-
-            $.each(this.fields, function(i, field) {
-                if ( field.id === fieldId ) {
-                    field.conditions = conditions;
-                    return false;
-                }
-            });
-        },
-
-        /**
-         * Get <option> HTML for all fields except the specified one.
-         *
-         * @since 1.1.0
-         * @param  {string} currentFieldId The field ID to exclude.
-         * @return {string}                The option elements HTML.
-         */
-        getOtherFieldOptions: function(currentFieldId) {
-            var html = '<option value="">-- Select field --</option>';
-
-            $.each(this.fields, function(i, field) {
-                if ( field.id !== currentFieldId ) {
-                    html += '<option value="' + $('<span>').text(field.name).html() + '">' + $('<span>').text(field.label).html() + '</option>';
-                }
-            });
-
-            return html;
-        },
-
-        /**
-         * Apply pending condition field selections after card is in DOM.
-         *
-         * @since 1.1.0
-         * @param {string} fieldId The field ID to apply conditions for.
-         */
-        applyPendingConditions: function(fieldId) {
-            if ( ! this._pendingConditions || ! this._pendingConditions[fieldId] ) {
-                return;
-            }
-
-            var conditions = this._pendingConditions[fieldId];
-            var $card = $('.wdm-field-card[data-field-id="' + fieldId + '"]');
-            var $rows = $card.find('.wdm-condition-row');
-
-            $rows.each(function(i) {
-                if ( conditions[i] && conditions[i].field ) {
-                    $(this).find('.wdm-condition-field').val(conditions[i].field);
-                }
-            });
-
-            delete this._pendingConditions[fieldId];
-        },
-
-        // ─────────────────────────────────────────────────────────
-        //  Multi-step support
-        // ─────────────────────────────────────────────────────────
-
-        /**
-         * Toggle multi-step mode on or off.
-         *
-         * When enabled, builds visual step containers on the canvas.
-         * When disabled, flattens all containers back to a flat canvas.
-         *
-         * @since 1.2.0
-         * @param {Event} e The change event.
-         */
-        toggleMultistep: function(e) {
-            var $checkbox = $(e.target);
-            var isChecked = $checkbox.is(':checked');
-
-            if ( isChecked ) {
-                this.buildStepContainers();
-            } else {
-                this.flattenStepContainers();
-            }
-        },
-
-        // ─────────────────────────────────────────────────────────
-        //  Multi-step visual containers
-        // ─────────────────────────────────────────────────────────
-
-        /**
-         * Get the colour for a step number (cycles through stepColors).
-         *
-         * @since  1.2.0
-         * @param  {number} stepNum 1-based step number.
-         * @return {string}         Hex colour string.
-         */
-        getStepColor: function(stepNum) {
-            return this.stepColors[ (stepNum - 1) % this.stepColors.length ];
-        },
-
-        /**
-         * Build step container HTML for a given step number and label.
-         *
-         * @since  1.2.0
-         * @param  {number} stepNum Step number (1-based).
-         * @param  {string} label   Step label text.
-         * @return {string}         HTML string.
-         */
-        buildStepContainerHTML: function(stepNum, label) {
-            var color = this.getStepColor(stepNum);
-            var canDelete = stepNum > 1 ? '' : ' style="display:none;"';
-
-            return '<div class="wdm-step-container" data-step="' + stepNum + '" style="border-left-color: ' + color + ';">' +
-                '<div class="wdm-step-container-header">' +
-                    '<span class="wdm-step-number" style="background: ' + color + ';">' + stepNum + '</span>' +
-                    '<input type="text" class="wdm-step-label-input" value="' + $('<span>').text(label).html() + '" placeholder="Step name...">' +
-                    '<div class="wdm-step-container-actions">' +
-                        '<button type="button" class="wdm-step-collapse" title="Collapse"><span class="dashicons dashicons-arrow-up-alt2"></span></button>' +
-                        '<button type="button" class="wdm-step-delete" title="Remove step"' + canDelete + '><span class="dashicons dashicons-no-alt"></span></button>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="wdm-step-container-body">' +
-                    '<div class="wdm-step-container-empty">Drag fields here</div>' +
-                '</div>' +
-            '</div>';
-        },
-
-        /**
-         * Build visual step containers and distribute existing field cards.
-         *
-         * Groups fields by their step property and creates accordion-style
-         * step panels. Makes each step body sortable and connected.
-         *
-         * @since 1.2.0
-         */
-        buildStepContainers: function() {
-            var self    = this;
-            var $canvas = $('#wdm-builder-canvas');
-
-            // Determine existing steps from field data.
-            var maxStep = 1;
-            $.each(this.fields, function(i, field) {
-                var s = parseInt(field.step, 10) || 1;
-                if ( s > maxStep ) { maxStep = s; }
-            });
-
-            // Ensure at least 2 steps when enabling multi-step.
-            if ( maxStep < 2 ) { maxStep = 2; }
-
-            // Read saved step labels from form settings if available.
-            var savedLabels = [];
-            try {
-                var settingsJson = $('#wdm-form-settings-json').val();
-                if ( settingsJson ) {
-                    var parsed = JSON.parse(settingsJson);
-                    if ( parsed.multistep_labels ) { savedLabels = parsed.multistep_labels; }
-                }
-            } catch(ex) {}
-
-            // Also try to read from existing PHP-rendered settings data.
-            if ( ! savedLabels.length && typeof wprobo_documerge_form_settings !== 'undefined' && wprobo_documerge_form_settings && wprobo_documerge_form_settings.multistep_labels ) {
-                savedLabels = wprobo_documerge_form_settings.multistep_labels;
-            }
-
-            // Detach all existing field cards from the canvas.
-            var $fieldCards = $canvas.find('.wdm-field-card').detach();
-
-            // Remove any existing step containers and add-step button.
-            $canvas.find('.wdm-step-container, #wdm-add-step-btn').remove();
-
-            // Hide flat-canvas placeholder.
-            $('#wdm-canvas-placeholder').hide();
-
-            // Create step containers.
-            this.stepCounter = 0;
-            for ( var s = 1; s <= maxStep; s++ ) {
-                var label = savedLabels[s - 1] || 'Step ' + s;
-                $canvas.append( this.buildStepContainerHTML(s, label) );
-                this.stepCounter = s;
-            }
-
-            // Add the "Add Step" button.
-            $canvas.append('<button type="button" class="wdm-add-step-btn" id="wdm-add-step-btn"><span class="dashicons dashicons-plus-alt2"></span> Add Step</button>');
-
-            // Distribute field cards into their step containers.
-            $fieldCards.each(function() {
-                var fieldId = $(this).data('field-id');
-                var stepNum = 1;
-
-                $.each(self.fields, function(i, field) {
-                    if ( field.id === fieldId ) {
-                        stepNum = parseInt(field.step, 10) || 1;
-                        return false;
-                    }
-                });
-
-                // Clamp to available steps.
-                if ( stepNum > self.stepCounter ) { stepNum = self.stepCounter; }
-
-                var $container = $canvas.find('.wdm-step-container[data-step="' + stepNum + '"]');
-                $container.find('.wdm-step-container-body').append($(this));
-            });
-
-            // Update empty state visibility for each container.
-            this.updateStepEmptyStates();
-
-            // Initialize connected sortables on step bodies.
-            this.initStepSortables();
-        },
-
-        /**
-         * Initialize jQuery UI Sortable on all step container bodies.
-         *
-         * Each body is sortable and connected to all other step bodies,
-         * allowing drag between steps.
-         *
-         * @since 1.2.0
-         */
-        initStepSortables: function() {
-            var self = this;
-
-            // Destroy existing sortable and droppable on flat canvas if active.
-            if ( $('#wdm-builder-canvas').hasClass('ui-sortable') ) {
-                $('#wdm-builder-canvas').sortable('destroy');
-            }
-            if ( $('#wdm-builder-canvas').hasClass('ui-droppable') ) {
-                $('#wdm-builder-canvas').droppable('destroy');
-            }
-
-            var $bodies = $('.wdm-step-container-body');
-
-            $bodies.sortable({
-                handle:      '.wdm-field-drag-handle',
-                placeholder: 'wdm-field-placeholder',
-                items:       '.wdm-field-card',
-                connectWith: '.wdm-step-container-body',
-                distance:    3,
-                tolerance:   'pointer',
-                cursor:      'grabbing',
-                revert:      false,
-                scroll:      true,
-                scrollSensitivity: 60,
-                helper: function(e, el) {
-                    return el.clone().css({ width: el.outerWidth(), opacity: 0.9 });
-                },
-                start: function(e, ui) {
-                    ui.item.css('visibility', 'hidden');
-                },
-                stop: function(e, ui) {
-                    ui.item.css('visibility', '');
-                },
-                update: function(event, ui) {
-                    if ( this === ui.item.parent()[0] ) {
-                        self.syncFieldStepsFromDOM();
-                        self.updateFieldOrder();
-                        self.updateStepEmptyStates();
-                    }
-                },
-                receive: function() {
-                    self.updateStepEmptyStates();
-                },
-                remove: function() {
-                    self.updateStepEmptyStates();
-                }
-            });
-
-            // Make canvas also droppable for sidebar drag-drops.
-            $bodies.droppable({
-                accept:     '.wdm-field-type-btn',
-                hoverClass: 'wdm-step-drop-hover',
-                tolerance:  'pointer',
-                drop: function(e, ui) {
-                    var $btn  = ui.draggable;
-                    var $body = $(this);
-                    var stepNum = parseInt( $body.closest('.wdm-step-container').data('step'), 10 );
-
-                    $('.wdm-drop-indicator').remove();
-                    self.addFieldToStep(e, $btn, $body, stepNum);
-                    $body.removeClass('wdm-step-drop-hover');
-                }
-            });
-        },
-
-        /**
-         * Add a new field to a specific step container body.
-         *
-         * @since  1.2.0
-         * @param  {Event}  e       The drop event.
-         * @param  {jQuery} $btn    The dragged field type button.
-         * @param  {jQuery} $body   The step container body element.
-         * @param  {number} stepNum The step number.
-         */
-        addFieldToStep: function(e, $btn, $body, stepNum) {
-            var type = $btn.data('type');
-            if ( $btn.prop('disabled') ) { return; }
-
-            if ( this.isSingletonField(type) && this.hasFieldType(type) ) {
-                this.showNotice('error', this.typeLabels[type] + ' field can only be added once per form.');
-                return;
-            }
-
-            this.fieldCounter++;
-            var fieldId  = 'field_' + this.fieldCounter;
-            var label    = this.typeLabels[type] || type;
-            var mergeTag = label.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-
-            var field = {
-                id: fieldId, type: type, label: label, name: mergeTag,
-                placeholder: '', help_text: '', required: false, width: 'full',
-                options: [], conditions: [], step: stepNum, error_message: '',
-                min_length: '', max_length: '', min_value: '', max_value: '',
-                step_value: '', date_format: 'Y-m-d',
-                disable_past: false, max_future_months: '', searchable: false,
-                css_class: '', css_id: '',
-                label_position: 'top',
-                show_country_code: true, default_country: 'GB',
-                allowed_types: 'jpg,jpeg,png,gif,pdf,doc,docx',
-                max_file_size: 5, multiple: false,
-                show_line2: true, show_country: true,
-                name_format: 'first_last',
-                default_value: '', dynamic_value: 'none', custom_value: '',
-                html_content: '<p>Add your content here.</p>',
-                divider_style: 'line',
-                show_title: true,
-                title_alignment: 'left',
-                confirm_password: false, show_strength: true,
-                max_stars: 5,
-                columns: [{ label: 'Item', name: 'item' }, { label: 'Quantity', name: 'qty' }],
-                min_rows: 1,
-                max_rows: 10,
-                track_utms: true,
-                track_referrer: true,
-                track_landing_page: true
-            };
-
-            if ( type === 'dropdown' || type === 'radio' || type === 'checkbox' ) {
-                field.options = [
-                    { label: 'Option 1', value: 'option_1' },
-                    { label: 'Option 2', value: 'option_2' },
-                    { label: 'Option 3', value: 'option_3' }
-                ];
-            }
-
-            var cardHtml = this.generateFieldCard(field);
-            var $cards   = $body.find('> .wdm-field-card');
-            var dropIdx  = this._dropIndex;
-
-            // Insert at the correct position using _dropIndex.
-            if ( typeof dropIdx === 'number' && dropIdx >= 0 && dropIdx < $cards.length ) {
-                $(cardHtml).insertBefore($cards.eq(dropIdx));
-            } else {
-                $body.append(cardHtml);
-            }
-
-            this.fields.push(field);
-            this.applyPendingConditions(field.id);
-            this.syncFieldStepsFromDOM();
-            this.updateFieldOrder();
-            this.updateSingletonButtons();
-            this.updateStepEmptyStates();
-
-            // Refresh sortable.
-            $body.sortable('refresh');
-        },
-
-        /**
-         * Flatten step containers back to a flat canvas.
-         *
-         * Called when multi-step is disabled. All field cards move
-         * back into the flat canvas. All fields reset to step 1.
-         *
-         * @since 1.2.0
-         */
-        flattenStepContainers: function() {
-            var $canvas = $('#wdm-builder-canvas');
-
-            // Destroy sortable on step bodies.
-            $('.wdm-step-container-body').each(function() {
-                if ( $(this).hasClass('ui-sortable') ) {
-                    $(this).sortable('destroy');
-                }
-                if ( $(this).hasClass('ui-droppable') ) {
-                    $(this).droppable('destroy');
-                }
-            });
-
-            // Detach all field cards in DOM order.
-            var $allCards = $canvas.find('.wdm-field-card').detach();
-
-            // Remove step containers and add-step button.
-            $canvas.find('.wdm-step-container, #wdm-add-step-btn').remove();
-
-            // Re-append field cards to flat canvas.
-            if ( $allCards.length ) {
-                $canvas.append($allCards);
-                $('#wdm-canvas-placeholder').hide();
-            } else {
-                $('#wdm-canvas-placeholder').show();
-            }
-
-            // Reset all fields to step 1.
-            $.each(this.fields, function(i, field) {
-                field.step = 1;
-            });
-
-            // Re-initialize flat canvas sortable.
-            this.initSortable();
-        },
-
-        /**
-         * Add a new step container at the end.
-         *
-         * @since 1.2.0
-         */
-        addStepContainer: function() {
-            this.stepCounter++;
-            var stepNum = this.stepCounter;
-            var label   = 'Step ' + stepNum;
-            var html    = this.buildStepContainerHTML(stepNum, label);
-
-            $(html).insertBefore('#wdm-add-step-btn');
-
-            // Initialize sortable on the new step body.
-            var self    = this;
-            var $newBody = $('.wdm-step-container[data-step="' + stepNum + '"] .wdm-step-container-body');
-
-            $newBody.sortable({
-                handle:      '.wdm-field-drag-handle',
-                placeholder: 'wdm-field-placeholder',
-                items:       '.wdm-field-card',
-                connectWith: '.wdm-step-container-body',
-                distance:    3,
-                tolerance:   'pointer',
-                cursor:      'grabbing',
-                revert:      false,
-                scroll:      true,
-                scrollSensitivity: 60,
-                helper: function(e, el) {
-                    return el.clone().css({ width: el.outerWidth(), opacity: 0.9 });
-                },
-                start: function(e, ui) {
-                    ui.item.css('visibility', 'hidden');
-                },
-                stop: function(e, ui) {
-                    ui.item.css('visibility', '');
-                },
-                update: function(event, ui) {
-                    if ( this === ui.item.parent()[0] ) {
-                        self.syncFieldStepsFromDOM();
-                        self.updateFieldOrder();
-                        self.updateStepEmptyStates();
-                    }
-                },
-                receive: function() { self.updateStepEmptyStates(); },
-                remove: function() { self.updateStepEmptyStates(); }
-            });
-
-            $newBody.droppable({
-                accept:     '.wdm-field-type-btn',
-                hoverClass: 'wdm-step-drop-hover',
-                tolerance:  'pointer',
-                drop: function(e, ui) {
-                    var $btn = ui.draggable;
-                    $('.wdm-drop-indicator').remove();
-                    self.addFieldToStep(e, $btn, $(this), stepNum);
-                }
-            });
-
-            // Refresh existing sortables to include new connectWith target.
-            $('.wdm-step-container-body').sortable('option', 'connectWith', '.wdm-step-container-body');
-
-            // Scroll to the new step.
-            $('html, body').animate({
-                scrollTop: $newBody.closest('.wdm-step-container').offset().top - 80
-            }, 300);
-        },
-
-        /**
-         * Remove a step container and move its fields to the previous step.
-         *
-         * @since  1.2.0
-         * @param  {jQuery} $btn The clicked delete button.
-         */
-        removeStepContainer: function($btn) {
-            var $container = $btn.closest('.wdm-step-container');
-            var stepNum    = parseInt( $container.data('step'), 10 );
-            var $containers = $('.wdm-step-container');
-
-            // Cannot remove the only step.
-            if ( $containers.length <= 1 ) {
-                this.showNotice('error', 'You must have at least one step.');
-                return;
-            }
-
-            if ( ! window.confirm('Remove this step? Its fields will move to the previous step.') ) {
-                return;
-            }
-
-            // Find the previous step container (or next if this is step 1).
-            var $target;
-            var $prev = $container.prev('.wdm-step-container');
-            if ( $prev.length ) {
-                $target = $prev;
-            } else {
-                $target = $container.next('.wdm-step-container');
-            }
-
-            // Move field cards to target container.
-            var $cards = $container.find('.wdm-field-card');
-            if ( $cards.length ) {
-                $target.find('.wdm-step-container-body').append($cards);
-            }
-
-            // Destroy sortable/droppable on the removed container body.
-            var $body = $container.find('.wdm-step-container-body');
-            if ( $body.hasClass('ui-sortable') ) { $body.sortable('destroy'); }
-            if ( $body.hasClass('ui-droppable') ) { $body.droppable('destroy'); }
-
-            $container.fadeOut(200, function() {
-                $(this).remove();
-            });
-
-            // Re-number remaining steps after a short delay for the fadeOut.
-            var self = this;
-            setTimeout(function() {
-                self.renumberStepContainers();
-                self.syncFieldStepsFromDOM();
-                self.updateStepEmptyStates();
-            }, 250);
-        },
-
-        /**
-         * Toggle collapse/expand of a step container body.
-         *
-         * @since  1.2.0
-         * @param  {jQuery} $btn The collapse button.
-         */
-        toggleStepCollapse: function($btn) {
-            var $container = $btn.closest('.wdm-step-container');
-            var $body      = $container.find('.wdm-step-container-body');
-            var $icon      = $btn.find('.dashicons');
-
-            $body.slideToggle(200);
-            $container.toggleClass('wdm-step-collapsed');
-
-            if ( $container.hasClass('wdm-step-collapsed') ) {
-                $icon.removeClass('dashicons-arrow-up-alt2').addClass('dashicons-arrow-down-alt2');
-            } else {
-                $icon.removeClass('dashicons-arrow-down-alt2').addClass('dashicons-arrow-up-alt2');
-            }
-        },
-
-        /**
-         * Re-number all step containers after one is removed.
-         *
-         * Updates data-step, badge numbers, colours, labels, and
-         * the delete button visibility (step 1 cannot be deleted).
-         *
-         * @since 1.2.0
-         */
-        renumberStepContainers: function() {
-            var self = this;
-            this.stepCounter = 0;
-
-            $('.wdm-step-container').each(function(i) {
-                var newNum = i + 1;
-                var color  = self.getStepColor(newNum);
-
-                $(this).attr('data-step', newNum).css('border-left-color', color);
-                $(this).find('.wdm-step-number').text(newNum).css('background', color);
-
-                // Update default label if it matches the old pattern "Step N".
-                var $label = $(this).find('.wdm-step-label-input');
-                var currentLabel = $.trim( $label.val() );
-                if ( /^Step \d+$/.test(currentLabel) ) {
-                    $label.val('Step ' + newNum);
-                }
-
-                // Show/hide delete button (cannot delete step 1 if only 1 step).
-                var $delBtn = $(this).find('.wdm-step-delete');
-                if ( newNum === 1 && $('.wdm-step-container').length <= 1 ) {
-                    $delBtn.hide();
-                } else {
-                    $delBtn.show();
-                }
-
-                self.stepCounter = newNum;
-            });
-        },
-
-        /**
-         * Sync field step assignments from DOM position.
-         *
-         * Reads which step container each field card currently resides in
-         * and updates the corresponding field object's step property.
-         *
-         * @since 1.2.0
-         */
-        syncFieldStepsFromDOM: function() {
-            var self = this;
-
-            $('.wdm-step-container').each(function() {
-                var stepNum = parseInt( $(this).data('step'), 10 ) || 1;
-
-                $(this).find('.wdm-field-card').each(function() {
-                    var fieldId = $(this).data('field-id');
-
-                    $.each(self.fields, function(i, field) {
-                        if ( field.id === fieldId ) {
-                            field.step = stepNum;
-                            return false;
-                        }
-                    });
-                });
-            });
-        },
-
-        /**
-         * Show or hide the empty-state placeholder in each step container.
-         *
-         * @since 1.2.0
-         */
-        updateStepEmptyStates: function() {
-            $('.wdm-step-container-body').each(function() {
-                var $body  = $(this);
-                var $empty = $body.find('.wdm-step-container-empty');
-
-                if ( $body.find('.wdm-field-card').length ) {
-                    $empty.hide();
-                } else {
-                    $empty.show();
-                }
-            });
-        }
     };
-
     $(document).ready(function() {
         WPRoboDocuMerge_FormBuilder.init();
     });

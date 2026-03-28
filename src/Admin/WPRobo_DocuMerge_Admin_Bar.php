@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Registers a DocuMerge parent node in the WordPress admin bar with
  * sub-menu links. On frontend pages that embed a single DocuMerge
- * form (via shortcode, Gutenberg block, or Elementor widget), an
+ * form (via shortcode or Gutenberg block), an
  * additional "Edit Form" link is shown.
  *
  * @since 1.0.0
@@ -133,7 +133,7 @@ class WPRobo_DocuMerge_Admin_Bar {
      * Detect DocuMerge form IDs embedded on the current page.
      *
      * Checks for the [documerge_form] shortcode, the Gutenberg block
-     * wprobo-documerge/form-embed, and Elementor widget data.
+     * wprobo-documerge/form-embed.
      *
      * @since 1.0.0
      *
@@ -165,19 +165,6 @@ class WPRobo_DocuMerge_Admin_Bar {
                     $attrs = json_decode( $json, true );
                     if ( ! empty( $attrs['formId'] ) ) {
                         $form_ids[] = absint( $attrs['formId'] );
-                    }
-                }
-            }
-        }
-
-        // 3. Elementor widget detection — check post meta for widget data.
-        $elementor_data = get_post_meta( $post->ID, '_elementor_data', true );
-        if ( ! empty( $elementor_data ) && is_string( $elementor_data ) ) {
-            // Search for our widget name and form_id in the serialized JSON.
-            if ( false !== strpos( $elementor_data, 'wprobo-documerge-form' ) ) {
-                if ( preg_match_all( '/"form_id"\s*:\s*"?(\d+)"?/', $elementor_data, $matches ) ) {
-                    foreach ( $matches[1] as $id ) {
-                        $form_ids[] = absint( $id );
                     }
                 }
             }

@@ -255,23 +255,10 @@ class WPRobo_DocuMerge_Form_Submission {
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
-		$post_data  = wp_unslash( $_POST );
-		$multi_step = new WPRobo_DocuMerge_Multi_Step();
+		$post_data = wp_unslash( $_POST );
 
-		// Filter to only visible fields based on conditional logic.
-		$visible_fields = array();
-
-		foreach ( $fields as $field ) {
-			if ( ! empty( $field['conditions'] ) && is_array( $field['conditions'] ) ) {
-				$should_show = $multi_step->wprobo_documerge_evaluate_conditions( $field['conditions'], $post_data );
-
-				if ( ! $should_show ) {
-					continue;
-				}
-			}
-
-			$visible_fields[] = $field;
-		}
+		// In Lite, all fields are always visible (no conditional logic).
+		$visible_fields = $fields;
 
 		// ── Step 4: Server-side validation ──────────────────────────────
 

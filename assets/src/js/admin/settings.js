@@ -27,12 +27,8 @@
          */
         tabActions: {
             general:   'wprobo_documerge_save_general',
-            stripe:    'wprobo_documerge_save_stripe',
             email:     'wprobo_documerge_save_email',
-            captcha:   'wprobo_documerge_save_captcha',
-            advanced:  'wprobo_documerge_save_advanced',
-            styles:    'wprobo_documerge_save_styles',
-            customcss: 'wprobo_documerge_save_customcss'
+            advanced:  'wprobo_documerge_save_advanced'
         },
 
         /**
@@ -42,40 +38,6 @@
          */
         init: function() {
             this.bindEvents();
-
-            // Initialize CodeMirror on the Custom CSS textarea if available.
-            if (typeof CodeMirror !== 'undefined' && document.getElementById('wdm-custom-css')) {
-                var cmEditor = CodeMirror.fromTextArea(document.getElementById('wdm-custom-css'), {
-                    mode:           'css',
-                    theme:          'material-darker',
-                    lineNumbers:    true,
-                    lineWrapping:   true,
-                    indentUnit:     4,
-                    tabSize:        4,
-                    indentWithTabs: false,
-                    autoCloseBrackets: true,
-                    matchBrackets:  true,
-                    extraKeys: {
-                        'Ctrl-Space': 'autocomplete'
-                    }
-                });
-
-                // Sync CodeMirror content back to textarea before AJAX save.
-                cmEditor.on('change', function() {
-                    cmEditor.save();
-                });
-
-                // Store reference globally so the class pill click can use it.
-                window.wdmCssEditor = cmEditor;
-
-                // Highlight class pills that are already used in the CSS.
-                var self = this;
-                cmEditor.on('change', function() {
-                    self.highlightUsedClasses();
-                });
-                // Run once on load.
-                setTimeout(function() { self.highlightUsedClasses(); }, 500);
-            }
 
             // Restore active tab from URL hash.
             var hash = window.location.hash.replace('#', '');
@@ -114,26 +76,6 @@
         },
 
         /**
-         * Highlight class pills that are already in use in the CSS editor.
-         */
-        highlightUsedClasses: function() {
-            var cssContent = '';
-            if (window.wdmCssEditor) {
-                cssContent = window.wdmCssEditor.getValue();
-            } else {
-                cssContent = $('#wdm-custom-css').val() || '';
-            }
-            $('.wdm-css-class-pill').each(function() {
-                var cls = $(this).data('class') || $(this).text();
-                if (cssContent.indexOf(cls) !== -1) {
-                    $(this).addClass('wdm-class-in-use');
-                } else {
-                    $(this).removeClass('wdm-class-in-use');
-                }
-            });
-        },
-
-        /**
          * Bind all event handlers.
          *
          * @since 1.0.0
@@ -159,14 +101,6 @@
                 self.togglePassword($(this));
             });
 
-            // Copy webhook URL.
-            $(document).on('click', '#wdm-copy-webhook', function(e) {
-                e.preventDefault();
-                var value = $('.wdm-webhook-url').val();
-                self.copyToClipboard(value);
-                self.showToast(wprobo_documerge_vars.i18n.copied, 'success');
-            });
-
             // Copy system info.
             $(document).on('click', '#wdm-copy-system-info', function(e) {
                 e.preventDefault();
@@ -175,45 +109,6 @@
                 self.showToast(wprobo_documerge_vars.i18n.copied, 'success');
             });
 
-            // Init Select2 on font family dropdown.
-            if ( $.fn.select2 && $('#wdm-font-family-select').length ) {
-                $('#wdm-font-family-select').select2({ width: '100%', placeholder: 'Search fonts...' });
-            }
-
-            // Reset styles to defaults.
-            $(document).on('click', '#wdm-reset-styles', function(e) {
-                e.preventDefault();
-                if ( ! confirm('Reset all form styles to defaults? This will clear all custom styling.') ) {
-                    return;
-                }
-                var defaults = {
-                    form_bg:'#ffffff',form_border_color:'#dde5f0',form_border_width:'0',
-                    form_border_radius:'0',form_padding:'0',form_shadow:'',form_shadow_color:'#000000',
-                    label_size:'14',label_weight:'600',label_color:'#1a1a1a',label_margin:'6',
-                    input_bg:'#ffffff',input_border_color:'#dde5f0',input_border_width:'1',
-                    input_border_radius:'6',input_padding:'12',input_font_size:'14',
-                    input_color:'#1a1a1a',input_focus_color:'#042157',input_placeholder_color:'#9ca3af',
-                    btn_bg:'#042157',btn_color:'#ffffff',btn_hover_bg:'#0a3d8f',btn_hover_color:'#ffffff',
-                    btn_radius:'6',btn_font_size:'14',btn_padding_v:'12',btn_padding_h:'24',
-                    error_color:'#dc2626',error_border_color:'#dc2626',success_color:'#166441',
-                    form_max_width:'640',form_font_family:'system'
-                };
-                var $panel = $('.wdm-settings-panel[data-tab="styles"]');
-                $.each(defaults, function(key, val) {
-                    var $input = $panel.find('[name="wprobo_documerge_style_' + key + '"]');
-                    if (!$input.length) return;
-                    if ($input.attr('type') === 'checkbox') {
-                        $input.prop('checked', val === '1');
-                    } else if ($input.is('select')) {
-                        $input.val(val);
-                        if ($input.hasClass('wdm-select2') && $.fn.select2) { $input.trigger('change.select2'); }
-                    } else {
-                        $input.val(val);
-                    }
-                });
-                // Auto-save after reset.
-                $panel.find('.wdm-settings-save[data-tab="styles"]').trigger('click');
-            });
 
             // Danger Zone actions.
             $(document).on('click', '.wdm-danger-action', function(e) {
@@ -227,8 +122,7 @@
                     delete_templates:   'DELETE ALL TEMPLATES and their uploaded DOCX files?',
                     delete_documents:   'DELETE ALL GENERATED DOCUMENTS (PDF/DOCX files)? Submission records are kept but downloads will stop working.',
                     reset_settings:     'RESET ALL SETTINGS to factory defaults? Forms, templates, and submissions are not affected.',
-                    reset_analytics:    'RESET ALL ANALYTICS DATA? Views, starts, and completions will be cleared.',
-                    factory_reset:      'FULL FACTORY RESET — This will DELETE EVERYTHING: submissions, forms, templates, documents, settings, analytics, and logs. The plugin will return to a freshly-installed state.\n\nType "RESET" to confirm.'
+                    factory_reset:      'FULL FACTORY RESET — This will DELETE EVERYTHING: submissions, forms, templates, documents, settings, and logs. The plugin will return to a freshly-installed state.\n\nType "RESET" to confirm.'
                 };
 
                 if (actionName === 'factory_reset') {
@@ -273,13 +167,6 @@
                 self.toggleIntegrationField($(this).val());
             });
 
-            // CAPTCHA type toggle — show/hide relevant key fields.
-            $(document).on('change', 'input[name="wprobo_documerge_captcha_type"]', function() {
-                var selected = $(this).val();
-                $('.wdm-captcha-fields').slideUp(200);
-                $('.wdm-captcha-fields[data-captcha-type="' + selected + '"]').slideDown(200);
-            });
-
             // Re-run Setup Wizard button.
             $(document).on('click', '#wdm-rerun-wizard', function(e) {
                 e.preventDefault();
@@ -307,56 +194,6 @@
                         $btn.prop('disabled', false).removeClass('wdm-loading');
                     }
                 });
-            });
-
-            // Stripe mode toggle — show/hide test vs live key fields.
-            $(document).on('change', 'input[name="wprobo_documerge_stripe_mode"]', function() {
-                var mode = $(this).val();
-
-                $('.wdm-stripe-mode-fields').each(function() {
-                    var $section = $(this);
-                    if ( $section.data('stripe-mode') === mode ) {
-                        $section.slideDown(200);
-                        // Restore name attributes from data-name.
-                        $section.find('input[type="password"]').each(function() {
-                            var savedName = $(this).attr('data-name');
-                            if ( savedName ) {
-                                $(this).attr('name', savedName);
-                            }
-                        });
-                    } else {
-                        $section.slideUp(200);
-                        // Store name in data-name HTML attr and remove name so they can't be submitted.
-                        // Do NOT clear values — user may toggle back and expect them.
-                        $section.find('input[type="password"]').each(function() {
-                            var currentName = $(this).attr('name');
-                            if ( currentName ) {
-                                $(this).attr('data-name', currentName).removeAttr('name');
-                            }
-                        });
-                    }
-                });
-
-                // Toggle mode notices.
-                if ( 'live' === mode ) {
-                    $('.wdm-stripe-live-warning').slideDown(200);
-                    $('.wdm-stripe-test-notice').slideUp(200);
-                } else {
-                    $('.wdm-stripe-live-warning').slideUp(200);
-                    $('.wdm-stripe-test-notice').slideDown(200);
-                }
-            });
-
-            // On page load, remove name attrs from the initially hidden mode's fields.
-            $('.wdm-stripe-mode-fields').each(function() {
-                if ( $(this).is(':hidden') ) {
-                    $(this).find('input[type="password"]').each(function() {
-                        var currentName = $(this).attr('name');
-                        if ( currentName ) {
-                            $(this).attr('data-name', currentName).removeAttr('name');
-                        }
-                    });
-                }
             });
 
             // ── Import / Export ──────────────────────────────────────
@@ -443,28 +280,6 @@
                 $('#wdm-import-run').prop('disabled', !anyChecked);
             });
 
-            // Click CSS class pill to insert into editor.
-            $(document).on('click', '.wdm-css-class-pill', function(e) {
-                e.preventDefault();
-                var className = $(this).data('class') || $(this).text();
-                var insertion = className + ' {\n    \n}\n\n';
-
-                if (window.wdmCssEditor) {
-                    // Insert at cursor in CodeMirror.
-                    var doc = window.wdmCssEditor.getDoc();
-                    var cursor = doc.getCursor();
-                    doc.replaceRange(insertion, cursor);
-                    // Position cursor inside the braces.
-                    window.wdmCssEditor.setCursor({line: cursor.line + 1, ch: 4});
-                    window.wdmCssEditor.focus();
-                } else {
-                    // Fallback to textarea.
-                    var $editor = $('#wdm-custom-css');
-                    var current = $editor.val();
-                    $editor.val(current + insertion);
-                    $editor.focus();
-                }
-            });
         },
 
         /**
@@ -487,11 +302,6 @@
             // Save tab to URL hash so page refresh restores it.
             if (window.history && window.history.replaceState) {
                 window.history.replaceState(null, '', window.location.pathname + window.location.search + '#' + tabId);
-            }
-
-            // Refresh CodeMirror when switching to Custom CSS tab.
-            if (tabId === 'customcss' && window.wdmCssEditor) {
-                setTimeout(function() { window.wdmCssEditor.refresh(); }, 50);
             }
         },
 
@@ -530,9 +340,8 @@
                     return;
                 }
 
-                // Skip inputs inside hidden containers (e.g. hidden Stripe mode fields).
-                // Use jQuery :hidden which checks computed display, not just inline style.
-                var $parent = $input.closest('.wdm-stripe-mode-fields, .wdm-captcha-fields, .wdm-integration-field-group');
+                // Skip inputs inside hidden containers.
+                var $parent = $input.closest('.wdm-integration-field-group');
                 if ( $parent.length && $parent.is(':hidden') ) {
                     return;
                 }
@@ -760,8 +569,7 @@
                     templates:   wprobo_documerge_vars.i18n.templates   || 'Templates',
                     forms:       wprobo_documerge_vars.i18n.forms       || 'Forms',
                     submissions: wprobo_documerge_vars.i18n.submissions || 'Submissions',
-                    settings:    wprobo_documerge_vars.i18n.settings_label || 'Settings',
-                    analytics:   wprobo_documerge_vars.i18n.analytics   || 'Analytics'
+                    settings:    wprobo_documerge_vars.i18n.settings_label || 'Settings'
                 };
 
                 $.each(data.data, function(key, val) {
@@ -852,8 +660,7 @@
                                 templates:   wprobo_documerge_vars.i18n.templates   || 'Templates',
                                 forms:       wprobo_documerge_vars.i18n.forms       || 'Forms',
                                 submissions: wprobo_documerge_vars.i18n.submissions || 'Submissions',
-                                settings:    wprobo_documerge_vars.i18n.settings_label || 'Settings',
-                                analytics:   wprobo_documerge_vars.i18n.analytics   || 'Analytics'
+                                settings:    wprobo_documerge_vars.i18n.settings_label || 'Settings'
                             };
                             $.each(response.data.results, function(key, count) {
                                 var label = result_labels[key] || key;

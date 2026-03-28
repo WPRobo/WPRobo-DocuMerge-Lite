@@ -130,51 +130,6 @@
                 });
             });
 
-            // Update payment status on a submission.
-            $(document).on('click', '.wdm-update-payment-status', function(e) {
-                e.preventDefault();
-                var $btn          = $(this);
-                var submissionId  = $btn.data('submission-id');
-                var $select       = $('.wdm-payment-status-select[data-submission-id="' + submissionId + '"]');
-                var paymentStatus = $select.val();
-                var originalText  = $btn.text();
-
-                $btn.prop('disabled', true).text(wprobo_documerge_vars.i18n.saving || 'Saving...');
-
-                $.ajax({
-                    url:  wprobo_documerge_vars.ajax_url,
-                    type: 'POST',
-                    data: {
-                        action:         'wprobo_documerge_update_payment_status',
-                        nonce:          wprobo_documerge_vars.nonce,
-                        submission_id:  submissionId,
-                        payment_status: paymentStatus
-                    },
-                    success: function(response) {
-                        $btn.prop('disabled', false);
-                        if ( response.success ) {
-                            $btn.text(response.data.message || 'Updated!');
-                            // Reload page if document was generated so download buttons appear.
-                            if ( response.data.reload ) {
-                                setTimeout(function() {
-                                    window.location.reload();
-                                }, 1000);
-                            } else {
-                                setTimeout(function() {
-                                    $btn.text(originalText);
-                                }, 2000);
-                            }
-                        } else {
-                            $btn.text(originalText);
-                            alert(response.data ? response.data.message : 'Error');
-                        }
-                    },
-                    error: function() {
-                        $btn.prop('disabled', false).text(originalText);
-                    }
-                });
-            });
-
             // Save admin note on a submission.
             $(document).on('click', '.wdm-save-note', function(e) {
                 e.preventDefault();

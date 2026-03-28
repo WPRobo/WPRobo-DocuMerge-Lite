@@ -155,19 +155,6 @@ class WPRobo_DocuMerge_Installer {
         ) {$charset_collate};";
         dbDelta( $sql );
 
-        // ── TABLE 4: Analytics ───────────────────────────────────────────
-        $sql = "CREATE TABLE {$wpdb->prefix}wprdm_analytics (
-            id          bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-            form_id     bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-            event_type  varchar(20)         NOT NULL DEFAULT '',
-            event_date  date                NOT NULL DEFAULT '0000-00-00',
-            event_count int(11)             NOT NULL DEFAULT 0,
-            PRIMARY KEY  (id),
-            UNIQUE KEY form_event_date (form_id, event_type, event_date),
-            KEY form_id (form_id)
-        ) {$charset_collate};";
-        dbDelta( $sql );
-
         // Store DB version for future migrations.
         update_option( 'wprobo_documerge_db_version', WPROBO_DOCUMERGE_DB_VERSION );
     }

@@ -156,17 +156,38 @@ $primary_action = array(
             if ( $pd['revenue'] > 0 ) { $has_payments = true; break; }
         }
     }
-    $has_form_stats = ! empty( $chart_data['forms'] );
     ?>
-    <?php if ( $has_payments || $has_form_stats ) : ?>
     <div class="wdm-charts-row">
-        <?php if ( $has_payments ) : ?>
+        <?php if ( $gate_dashboard->wprobo_documerge_is_pro() && $has_payments ) : ?>
         <div class="wdm-card wdm-chart-card">
             <div class="wdm-card-header">
                 <h2 class="wdm-card-title"><?php esc_html_e( 'Revenue (Last 7 Days)', 'wprobo-documerge' ); ?></h2>
             </div>
             <div class="wdm-card-body">
                 <canvas id="wdm-chart-payments" height="220"></canvas>
+            </div>
+        </div>
+        <?php elseif ( ! $gate_dashboard->wprobo_documerge_is_pro() ) : ?>
+        <div class="wdm-card wdm-chart-card">
+            <div class="wdm-card-header">
+                <h2 class="wdm-card-title"><?php esc_html_e( 'Revenue', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></h2>
+            </div>
+            <div class="wdm-card-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;text-align:center;padding:24px;">
+                <div style="display:flex;align-items:flex-end;gap:8px;margin-bottom:16px;">
+                    <?php
+                    $bar_heights = array( 40, 65, 50, 85, 70, 95, 110 );
+                    $bar_labels  = array( 'M', 'T', 'W', 'T', 'F', 'S', 'S' );
+                    foreach ( $bar_heights as $i => $h ) : ?>
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                        <div style="width:24px;background:linear-gradient(to top,#166441,#1e8a56);border-radius:3px 3px 0 0;opacity:0.2;height:<?php echo absint( $h ); ?>px;"></div>
+                        <span style="font-size:10px;color:#9ca3af;"><?php echo esc_html( $bar_labels[ $i ] ); ?></span>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <p style="color:#6b7280;font-size:13px;margin:0 0 12px;"><?php esc_html_e( 'Track payments and revenue with Stripe integration.', 'wprobo-documerge' ); ?></p>
+                <a href="<?php echo esc_url( $gate_dashboard->wprobo_documerge_get_upgrade_url() ); ?>" target="_blank" class="wdm-btn-upgrade" style="font-size:12px;padding:6px 16px;">
+                    <?php esc_html_e( 'Upgrade to Pro', 'wprobo-documerge' ); ?>
+                </a>
             </div>
         </div>
         <?php endif; ?>
@@ -199,7 +220,6 @@ $primary_action = array(
         </div>
         <?php endif; ?>
     </div>
-    <?php endif; ?>
 
     <!-- ── Recent Submissions ────────────────────────────────────── -->
     <div class="wdm-card">

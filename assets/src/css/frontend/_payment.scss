@@ -1,0 +1,187 @@
+/* Payment Field */
+.wdm-payment-field {
+    background: $color-white;
+    border: 1px solid $color-border;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(4, 33, 87, 0.08);
+}
+
+.wdm-payment-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $color-border;
+}
+
+.wdm-payment-amount {
+    font-size: 28px;
+    font-weight: 700;
+    color: $color-blue;
+}
+
+.wdm-payment-label {
+    font-size: 13px;
+    color: $color-white;
+    background: $color-blue;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.wdm-stripe-card-element {
+    padding: 14px;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    background: #ffffff;
+    min-height: 44px;
+    transition: border-color $transition, box-shadow $transition;
+}
+
+.wdm-stripe-card-element:focus-within,
+.wdm-stripe-card-element.StripeElement--focus {
+    border-color: $color-blue;
+    box-shadow: 0 0 0 3px rgba(4, 33, 87, 0.1);
+}
+
+.wdm-stripe-card-element.StripeElement--invalid {
+    border-color: $color-error;
+}
+
+.wdm-stripe-card-error {
+    color: $color-error;
+    font-size: 13px;
+    margin-top: 8px;
+    min-height: 18px;
+}
+
+.wdm-payment-footer {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid $color-border;
+}
+
+.wdm-stripe-badge {
+    font-size: 12px;
+    color: $color-muted;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Payment failed panel */
+.wdm-payment-failed {
+    text-align: center;
+    padding: 32px 24px;
+}
+
+.wdm-payment-failed-icon {
+    font-size: 48px;
+    color: $color-error;
+    margin-bottom: 16px;
+}
+
+.wdm-payment-failed h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: $color-error;
+    margin: 0 0 8px;
+}
+
+.wdm-payment-failed p {
+    color: $color-muted;
+    font-size: 14px;
+    margin: 0 0 20px;
+}
+
+/* Payment error state */
+.wdm-payment-error {
+    border-color: $color-error;
+    box-shadow: 0 0 0 3px rgba($color-error, 0.08);
+}
+
+.wdm-stripe-field-error {
+    border-color: $color-error !important;
+    box-shadow: 0 0 0 3px rgba($color-error, 0.08) !important;
+}
+
+/* Multi-line card fields */
+.wdm-stripe-multi-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.wdm-stripe-field-row {
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: $color-text;
+        margin-bottom: 6px;
+    }
+}
+
+.wdm-stripe-row-half {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.wdm-stripe-field {
+    padding: 14px;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    background: #ffffff;
+    min-height: 44px;
+    transition: border-color $transition, box-shadow $transition;
+
+    &.StripeElement--focus {
+        border-color: $color-blue;
+        box-shadow: 0 0 0 3px rgba(4, 33, 87, 0.1);
+    }
+
+    &.StripeElement--invalid {
+        border-color: $color-error;
+    }
+}
+
+/* Postal code input in multi-line layout */
+.wdm-stripe-postal-input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    background: #ffffff;
+    font-size: 16px;
+    font-family: inherit;
+    color: $color-text;
+    outline: none;
+    transition: border-color $transition, box-shadow $transition;
+
+    &::placeholder {
+        color: $color-muted;
+    }
+
+    &:focus {
+        border-color: $color-blue;
+        box-shadow: 0 0 0 3px rgba(4, 33, 87, 0.1);
+    }
+}
+
+/* Test mode banner */
+.wdm-test-mode-banner {
+    background: #fffbeb;
+    border: 1px solid #d97706;
+    color: #d97706;
+    padding: 8px 16px;
+    border-radius: $radius;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 16px;
+}

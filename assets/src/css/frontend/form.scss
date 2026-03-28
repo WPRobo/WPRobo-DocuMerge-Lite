@@ -1,0 +1,1178 @@
+// WPRobo DocuMerge — Frontend Form Styles (SCSS Source)
+
+// ── Variables ────────────────────────────────────────────────
+$color-blue:    #042157;
+$color-blue-hover: #0a3d8f;
+$color-green:   #166441;
+$color-border:  #dde5f0;
+$color-bg:      #f0f4fa;
+$color-text:    #1a1a1a;
+$color-muted:   #6b7280;
+$color-error:   #dc2626;
+$color-warning: #d97706;
+$color-white:   #fff;
+
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+$radius:        6px;
+$radius-sm:     4px;
+$radius-round:  50%;
+$radius-bar:    2px;
+
+$transition:    0.2s;
+
+// ── 1. Form Wrap ─────────────────────────────────────────────
+.wdm-form-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 0;
+    font-family: $font-stack;
+    color: $color-text;
+    font-size: 14px;
+    line-height: 1.5;
+    box-sizing: border-box;
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+}
+
+// ── 2. Form ──────────────────────────────────────────────────
+.wdm-form {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+// ── 3. Field Group ───────────────────────────────────────────
+.wdm-field-group {
+    margin-bottom: 20px;
+
+    // ── 4. Labels ────────────────────────────────────────────
+    label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: $color-text;
+    }
+
+    // ── 5. Required Mark ─────────────────────────────────────
+    .wdm-required {
+        color: $color-error;
+    }
+
+    // ── 9. Inputs ────────────────────────────────────────────
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    input[type="url"],
+    input[type="password"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid $color-border;
+        border-radius: $radius;
+        font-size: 14px;
+        font-family: inherit;
+        color: $color-text;
+        background: $color-white;
+        transition: border-color $transition, box-shadow $transition;
+        outline: none;
+
+        &:focus {
+            border-color: $color-blue;
+            box-shadow: 0 0 0 3px rgba($color-blue, 0.1);
+        }
+    }
+
+    textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+}
+
+// ── 6–8. Field Widths ────────────────────────────────────────
+.wdm-field-width-full {
+    width: 100%;
+}
+
+.wdm-field-width-half {
+    width: 48%;
+    display: inline-block;
+    vertical-align: top;
+
+    & + .wdm-field-width-half {
+        margin-left: 4%;
+    }
+}
+
+.wdm-field-width-third {
+    width: 31%;
+    display: inline-block;
+    vertical-align: top;
+
+    & + .wdm-field-width-third {
+        margin-left: 3.5%;
+    }
+}
+
+// ── 10. Error State on Inputs ────────────────────────────────
+.wdm-field-has-error {
+    input,
+    select,
+    textarea {
+        border-color: $color-error;
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba($color-error, 0.1);
+        }
+    }
+}
+
+// ── 11. Error Message ────────────────────────────────────────
+.wdm-field-error-msg {
+    display: block;
+    color: $color-error;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+// ── 12–13. Radio & Checkbox Groups ───────────────────────────
+.wdm-radio-group,
+.wdm-checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wdm-radio-label,
+.wdm-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: $radius;
+    transition: background-color 0.15s;
+
+    &:hover {
+        background-color: $color-bg;
+    }
+}
+
+// ── 14. Custom Radio & Checkbox Marks ────────────────────────
+.wdm-radio-label input[type="radio"],
+.wdm-checkbox-label input[type="checkbox"] {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid $color-border;
+    background: $color-white;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.wdm-radio-label input[type="radio"] {
+    border-radius: $radius-round;
+
+    &:checked {
+        border-color: $color-blue;
+        background: $color-blue;
+        box-shadow: inset 0 0 0 3px $color-white;
+    }
+}
+
+.wdm-checkbox-label input[type="checkbox"] {
+    border-radius: $radius-sm;
+
+    &:checked {
+        border-color: $color-blue;
+        background: $color-blue;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 5px;
+            width: 5px;
+            height: 9px;
+            border: solid $color-white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+// ── 15. Description ──────────────────────────────────────────
+.wdm-description {
+    font-size: 12px;
+    color: $color-muted;
+    margin-top: 4px;
+}
+
+// ── 16. Honeypot ─────────────────────────────────────────────
+.wdm-hp {
+    display: none;
+}
+
+// ── 16a. Screen Reader Only ──────────────────────────────────
+.wdm-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// ── 17–19. Buttons ───────────────────────────────────────────
+.wdm-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 12px 24px;
+    border-radius: $radius;
+    border: none;
+    cursor: pointer;
+    transition: background-color $transition, color $transition, border-color $transition;
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.wdm-btn-primary {
+    background-color: $color-blue;
+    color: $color-white;
+
+    &:hover,
+    &:focus {
+        background-color: $color-blue-hover;
+        color: $color-white;
+    }
+}
+
+.wdm-btn-ghost {
+    background: transparent;
+    color: $color-muted;
+    border: 1px solid $color-border;
+
+    &:hover,
+    &:focus {
+        background-color: $color-bg;
+        color: $color-text;
+    }
+}
+
+// ── 20. Submit Button ────────────────────────────────────────
+.wdm-submit-btn {
+    width: auto;
+    // Use custom properties for colors so hover works even with inline styles.
+    background-color: var(--wdm-btn-bg, $color-blue);
+    color: var(--wdm-btn-text, $color-white);
+    border-color: var(--wdm-btn-border, var(--wdm-btn-bg, $color-blue));
+
+    &:hover,
+    &:focus {
+        background-color: var(--wdm-btn-hover-bg, $color-blue-hover);
+        color: var(--wdm-btn-hover-text, $color-white);
+        border-color: var(--wdm-btn-hover-bg, $color-blue-hover);
+    }
+}
+
+// ── 20a. Disabled Button (captcha lock / submitting) ───────
+.wdm-btn-disabled,
+.wdm-btn-submitting {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+// ── 20b. Button Width Variants ──────────────────────────────
+.wdm-btn-full-width {
+    width: 100%;
+}
+
+.wdm-btn-half-width {
+    width: 50%;
+}
+
+// ── 20b. Button Style Variants ──────────────────────────────
+.wdm-btn-outline {
+    background: transparent;
+    border: 2px solid $color-blue;
+    color: $color-blue;
+
+    &:hover,
+    &:focus {
+        background-color: rgba($color-blue, 0.06);
+    }
+}
+
+.wdm-btn-rounded {
+    border-radius: 50px;
+}
+
+// ── 20c. Button Size Variants ───────────────────────────────
+.wdm-btn-small {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+.wdm-btn-large {
+    padding: 16px 32px;
+    font-size: 16px;
+}
+
+// ── 21. Spinner ──────────────────────────────────────────────
+.wdm-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba($color-white, 0.3);
+    border-top-color: $color-white;
+    border-radius: $radius-round;
+    animation: wdm-spin 0.6s linear infinite;
+}
+
+@keyframes wdm-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// ── 22. Form Submit Area ─────────────────────────────────────
+.wdm-form-submit {
+    text-align: right;
+    padding-top: 20px;
+    border-top: 1px solid $color-bg;
+}
+
+// ── 23–25. Multi-step Progress ───────────────────────────────
+.wdm-multistep-progress {
+    margin-bottom: 32px;
+    padding: 0 4px;
+}
+
+.wdm-progress-bar {
+    height: 6px;
+    background: $color-border;
+    border-radius: $radius-bar;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.wdm-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, $color-blue, lighten($color-blue, 12%));
+    border-radius: $radius-bar;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0;
+}
+
+// ── 26–27. Step Labels ───────────────────────────────────────
+.wdm-step-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding: 0 4px;
+    counter-reset: step-counter;
+}
+
+.wdm-step-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: $color-muted;
+    transition: color 0.2s ease;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: $radius;
+    user-select: none;
+
+    &:hover {
+        color: $color-blue;
+        background: rgba($color-blue, 0.04);
+    }
+
+    &::before {
+        counter-increment: step-counter;
+        content: counter(step-counter);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: $color-border;
+        color: $color-muted;
+        font-size: 11px;
+        font-weight: 700;
+        flex-shrink: 0;
+        transition: all 0.2s ease;
+    }
+
+    &.wdm-step-active {
+        color: $color-blue;
+        font-weight: 700;
+
+        &::before {
+            background: $color-blue;
+            color: $color-white;
+            box-shadow: 0 2px 6px rgba($color-blue, 0.3);
+        }
+    }
+
+    &.wdm-step-completed {
+        color: #166441;
+
+        &::before {
+            background: #166441;
+            color: $color-white;
+            content: '\2713';
+            font-size: 13px;
+        }
+
+        &:hover::before {
+            background: darken(#166441, 8%);
+        }
+    }
+}
+
+// ── 28–29. Steps ─────────────────────────────────────────────
+.wdm-step {
+    display: none;
+    animation: wdmStepFadeIn 0.3s ease;
+
+    &.wdm-step-active {
+        display: block;
+    }
+}
+
+@keyframes wdmStepFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ── 30. Form Navigation ──────────────────────────────────────
+.wdm-form-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    margin-top: 8px;
+    border-top: 1px solid $color-border;
+}
+
+.wdm-step-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: $color-text;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    background: $color-white;
+    border: 2px solid $color-border;
+    padding: 10px 20px;
+    border-radius: $radius;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    .dashicons {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        transition: transform 0.15s ease;
+    }
+
+    &:hover {
+        color: $color-blue;
+        border-color: $color-blue;
+        background: rgba($color-blue, 0.03);
+
+        .dashicons {
+            transform: translateX(-3px);
+        }
+    }
+}
+
+.wdm-step-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    padding: 10px 24px;
+
+    .dashicons {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        transition: transform 0.15s ease;
+    }
+
+    &:hover .dashicons {
+        transform: translateX(3px);
+    }
+}
+
+// ── 31–36. Success Panel ─────────────────────────────────────
+.wdm-form-success {
+    text-align: center;
+    padding: 48px 24px;
+}
+
+.wdm-success-icon .dashicons {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: $color-green;
+}
+
+.wdm-success-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: $color-blue;
+    margin: 16px 0 8px;
+}
+
+.wdm-success-message {
+    font-size: 14px;
+    color: $color-muted;
+    margin-bottom: 24px;
+}
+
+.wdm-download-btn {
+    display: inline-flex;
+    gap: 8px;
+}
+
+.wdm-success-email {
+    font-size: 13px;
+    color: $color-muted;
+    margin-top: 16px;
+}
+
+// ── 37–39. Error Panel ───────────────────────────────────────
+.wdm-form-error {
+    text-align: center;
+    padding: 48px 24px;
+}
+
+.wdm-error-icon .dashicons {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: $color-error;
+}
+
+.wdm-error-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: $color-error;
+    margin: 16px 0 8px;
+}
+
+// ── 40. Signature Canvas ─────────────────────────────────────
+.wdm-signature-canvas {
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+// ── 42. Address Field ───────────────────────────────────────
+.wdm-address-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wdm-address-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// ── 43. Name Field ──────────────────────────────────────────
+.wdm-name-fields {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    > input,
+    > select {
+        flex: 1;
+        min-width: 100px;
+    }
+
+    .wdm-name-title {
+        max-width: 100px;
+        flex: 0 0 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .wdm-name-fields {
+        flex-direction: column;
+
+        .wdm-name-title {
+            max-width: 100%;
+            flex: 1;
+        }
+    }
+}
+
+// ── 44. File Upload Field ───────────────────────────────────
+.wdm-file-upload-area {
+    position: relative;
+}
+
+.wdm-file-input-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.wdm-file-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 32px 20px;
+    border: 2px dashed $color-border;
+    border-radius: $radius;
+    background: rgba($color-bg, 0.4);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+
+    &:hover {
+        border-color: $color-blue;
+        background: rgba($color-blue, 0.03);
+    }
+}
+
+.wdm-file-dropzone-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    color: $color-blue;
+    opacity: 0.6;
+
+    .wdm-file-dropzone:hover & {
+        opacity: 1;
+    }
+}
+
+.wdm-file-dropzone-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: $color-text;
+}
+
+.wdm-file-dropzone-info {
+    font-size: 12px;
+    color: $color-muted;
+}
+
+.wdm-file-list {
+    margin-top: 8px;
+    font-size: 13px;
+    color: $color-text;
+}
+
+// ── 45. HTML Block ──────────────────────────────────────────
+.wdm-html-block {
+    padding: 16px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: $color-text;
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0 0 8px;
+        color: $color-text;
+    }
+
+    p {
+        margin: 0 0 12px;
+    }
+
+    a {
+        color: $color-blue;
+    }
+}
+
+// ── 46. Display-only fields (divider, HTML block) ───────────────
+.wdm-field-display-only {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.wdm-section-divider {
+    padding: 28px 0 12px;
+    margin-bottom: 4px;
+}
+
+.wdm-divider-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: $color-text;
+    margin: 0 0 12px 10px;
+    padding: 0;
+    line-height: 1.3;
+
+    &.wdm-align-center { text-align: center; margin-left: 0; }
+    &.wdm-align-right  { text-align: right; margin-left: 0; margin-right: 10px; }
+}
+
+.wdm-divider-line {
+    border: none;
+    margin: 0;
+    border-top: 1px solid $color-border;
+}
+
+.wdm-divider-dashed .wdm-divider-line {
+    background: none;
+    border-top: 2px dashed $color-border;
+    height: 0;
+}
+
+.wdm-divider-dotted .wdm-divider-line {
+    background: none;
+    border-top: 2px dotted $color-border;
+    height: 0;
+}
+
+.wdm-divider-double .wdm-divider-line {
+    background: none;
+    border-top: 3px double $color-border;
+    height: 0;
+}
+
+.wdm-divider-none .wdm-divider-line {
+    display: none;
+}
+
+// ── 47. Password Field ──────────────────────────────────────────
+.wdm-password-wrap {
+    position: relative;
+
+    .wdm-password-input {
+        width: 100%;
+        padding-right: 48px;
+    }
+
+    .wdm-password-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        color: $color-muted;
+        border-radius: 4px;
+        transition: all 0.2s;
+
+        &:hover {
+            color: $color-blue;
+            background: rgba($color-blue, 0.06);
+        }
+
+        .dashicons {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+    }
+}
+
+.wdm-password-confirm-wrap {
+    margin-top: 12px;
+
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: $color-text;
+    }
+}
+
+// ── 47b. Password Strength Bar ──────────────────────────────────
+.wdm-password-strength {
+    margin-top: 8px;
+}
+
+.wdm-strength-bar {
+    height: 4px;
+    background: $color-border;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.wdm-strength-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    width: 0;
+}
+
+.wdm-strength-label {
+    font-size: 11px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    color: $color-muted;
+}
+
+.wdm-strength-0 .wdm-strength-fill { width: 0; }
+.wdm-strength-1 { .wdm-strength-fill { width: 25%; background: #dc2626; } .wdm-strength-label { color: #dc2626; } }
+.wdm-strength-2 { .wdm-strength-fill { width: 50%; background: #f59e0b; } .wdm-strength-label { color: #f59e0b; } }
+.wdm-strength-3 { .wdm-strength-fill { width: 75%; background: #3b82f6; } .wdm-strength-label { color: #3b82f6; } }
+.wdm-strength-4 { .wdm-strength-fill { width: 100%; background: #166441; } .wdm-strength-label { color: #166441; } }
+
+// ── 48. Rating/Stars ────────────────────────────────────────────
+.wdm-rating-wrap {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.wdm-star {
+    cursor: pointer;
+    font-size: 24px;
+    color: $color-border;
+    transition: color 0.15s, transform 0.15s;
+    user-select: none;
+
+    .dashicons {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+    }
+
+    &:hover {
+        transform: scale(1.15);
+    }
+
+    &.wdm-star-filled {
+        color: #f59e0b;
+    }
+
+    &.wdm-star-hover {
+        color: #fbbf24;
+    }
+}
+
+// ── 49. Repeater ────────────────────────────────────────────────
+.wdm-repeater-wrap {
+    width: 100%;
+}
+
+.wdm-repeater-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+
+    th {
+        text-align: left;
+        font-size: 12px;
+        font-weight: 700;
+        color: $color-text;
+        padding: 8px 8px 8px 0;
+        border-bottom: 1px solid $color-border;
+    }
+
+    td {
+        padding: 6px 8px 6px 0;
+        vertical-align: middle;
+    }
+
+    .wdm-repeater-input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .wdm-repeater-actions {
+        width: 36px;
+        text-align: center;
+        padding-right: 0;
+    }
+}
+
+.wdm-repeater-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $color-muted;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.15s;
+
+    &:hover {
+        color: $color-error;
+        background: rgba($color-error, 0.06);
+    }
+
+    .dashicons {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.wdm-repeater-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: 1px dashed $color-border;
+    border-radius: $radius;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: $color-muted;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+
+    &:hover {
+        border-color: $color-blue;
+        color: $color-blue;
+    }
+
+    .dashicons {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+    }
+}
+
+// ── 50. Draft Restore Notice ────────────────────────────────────
+.wdm-draft-notice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-left: 3px solid #f59e0b;
+    border-radius: $radius;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #92400e;
+    flex-wrap: wrap;
+
+    .dashicons {
+        color: #f59e0b;
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+    }
+
+    span:nth-child(2) {
+        flex: 1;
+        font-weight: 600;
+    }
+
+    button {
+        background: none;
+        border: 1px solid #d97706;
+        border-radius: 4px;
+        padding: 4px 12px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        color: #92400e;
+        transition: all 0.15s;
+
+        &:hover {
+            background: #fbbf24;
+            color: #78350f;
+        }
+    }
+
+    .wdm-draft-clear {
+        background: transparent;
+        border-color: #dc2626;
+        color: #dc2626;
+
+        &:hover {
+            background: #fef2f2;
+        }
+    }
+}
+
+// ── 51. Character Count ─────────────────────────────────────────
+.wdm-char-count {
+    display: block;
+    text-align: right;
+    font-size: 11px;
+    color: $color-muted;
+    margin-top: 4px;
+    font-variant-numeric: tabular-nums;
+
+    &.wdm-char-warning {
+        color: #d97706;
+    }
+
+    &.wdm-char-limit {
+        color: $color-error;
+        font-weight: 700;
+    }
+}
+
+// ── 52. Tooltip ─────────────────────────────────────────────────
+.wdm-tooltip-wrap {
+    position: relative;
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.wdm-tooltip-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: $color-muted;
+    cursor: help;
+    transition: color 0.15s;
+
+    &:hover {
+        color: $color-blue;
+    }
+}
+
+.wdm-tooltip-text {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: $color-text;
+    color: $color-white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    white-space: normal;
+    min-width: 180px;
+    max-width: 280px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+
+    // Arrow.
+    &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border: 5px solid transparent;
+        border-top-color: $color-text;
+    }
+}
+
+.wdm-tooltip-wrap:hover .wdm-tooltip-text {
+    display: block;
+}
+
+// ── 53. Payment Field (Stripe) ────────────────────────────────────
+@import 'payment';
+
+// ── 41a. Form Closed State ───────────────────────────────────
+.wdm-form-closed {
+    text-align: center;
+    padding: 48px 24px;
+}
+
+.wdm-form-closed-message {
+    .dashicons {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+        color: $color-muted;
+        margin-bottom: 12px;
+    }
+
+    p {
+        font-size: 16px;
+        color: $color-muted;
+        margin: 0;
+        font-weight: 500;
+    }
+}
+
+// ── 41. Responsive ───────────────────────────────────────────
+@media (max-width: 600px) {
+    .wdm-form-wrap {
+        padding: 16px 0;
+    }
+
+    .wdm-field-width-half,
+    .wdm-field-width-third {
+        width: 100%;
+        display: block;
+    }
+
+    .wdm-field-width-half + .wdm-field-width-half,
+    .wdm-field-width-third + .wdm-field-width-third {
+        margin-left: 0;
+    }
+
+    .wdm-submit-btn {
+        width: 100%;
+    }
+
+    .wdm-btn {
+        width: 100%;
+    }
+
+    .wdm-form-submit {
+        text-align: center;
+    }
+
+    .wdm-form-nav {
+        flex-direction: column-reverse;
+        gap: 8px;
+    }
+}

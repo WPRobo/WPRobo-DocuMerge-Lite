@@ -71,8 +71,9 @@ register_deactivation_hook( __FILE__, function() {
     }
 } );
 
-// ─── Now check if Pro is loaded — if so, bail (Pro takes priority at runtime) ───
-if ( defined( 'WPROBO_DOCUMERGE_PRO' ) ) {
+// ─── Check if Pro is actually active (not just in memory from this request) ───
+$wprobo_active_plugins = (array) get_option( 'active_plugins', array() );
+if ( in_array( 'wprobo-docu-merge/wprobo-documerge.php', $wprobo_active_plugins, true ) ) {
     return;
 }
 
@@ -130,8 +131,11 @@ spl_autoload_register( function ( $class ) {
 
 // Bootstrap the plugin.
 add_action( 'plugins_loaded', function() {
-    // Final safety — if Pro loaded after us, don't double-bootstrap.
-    if ( defined( 'WPROBO_DOCUMERGE_PRO' ) ) {
+    // Check if Pro is actually active (not just loaded in memory from this request).
+    // During activation, Pro may have been deactivated but its constants remain in memory.
+    $active_plugins = (array) get_option( 'active_plugins', array() );
+    $pro_is_active  = in_array( 'wprobo-docu-merge/wprobo-documerge.php', $active_plugins, true );
+    if ( $pro_is_active ) {
         return;
     }
     \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Plugin::get_instance()->wprobo_documerge_run();

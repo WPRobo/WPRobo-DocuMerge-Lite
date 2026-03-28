@@ -136,22 +136,8 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 
 			<h3><?php esc_html_e( 'Special Fields', 'wprobo-documerge' ); ?></h3>
 			<div class="wdm-field-type-grid">
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'signature' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-art', __( 'Signature', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="signature">
-						<span class="dashicons dashicons-art"></span>
-						<?php esc_html_e( 'Signature', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'payment' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-money-alt', __( 'Payment', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="payment">
-						<span class="dashicons dashicons-money-alt"></span>
-						<?php esc_html_e( 'Payment', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-art', __( 'Signature', 'wprobo-documerge' ) ); ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-money-alt', __( 'Payment', 'wprobo-documerge' ) ); ?>
 				<button type="button" class="wdm-field-type-btn" data-type="captcha">
 					<span class="dashicons dashicons-shield"></span>
 					<?php esc_html_e( 'CAPTCHA', 'wprobo-documerge' ); ?>
@@ -160,66 +146,17 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 
 			<h3><?php esc_html_e( 'Advanced Fields', 'wprobo-documerge' ); ?></h3>
 			<div class="wdm-field-type-grid">
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'file_upload' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-upload', __( 'File Upload', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="file_upload">
-						<span class="dashicons dashicons-upload"></span>
-						<?php esc_html_e( 'File Upload', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'address' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-location', __( 'Address', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="address">
-						<span class="dashicons dashicons-location"></span>
-						<?php esc_html_e( 'Address', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'name' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-admin-users', __( 'Name', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="name">
-						<span class="dashicons dashicons-admin-users"></span>
-						<?php esc_html_e( 'Name', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'hidden' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-hidden', __( 'Hidden', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="hidden">
-						<span class="dashicons dashicons-hidden"></span>
-						<?php esc_html_e( 'Hidden', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'password' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-lock', __( 'Password', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="password">
-						<span class="dashicons dashicons-lock"></span>
-						<?php esc_html_e( 'Password', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-upload', __( 'File Upload', 'wprobo-documerge' ) ); ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-location', __( 'Address', 'wprobo-documerge' ) ); ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-admin-users', __( 'Name', 'wprobo-documerge' ) ); ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-hidden', __( 'Hidden', 'wprobo-documerge' ) ); ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-lock', __( 'Password', 'wprobo-documerge' ) ); ?>
 				<button type="button" class="wdm-field-type-btn" data-type="url">
 					<span class="dashicons dashicons-admin-links"></span>
 					<?php esc_html_e( 'Website', 'wprobo-documerge' ); ?>
 				</button>
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'rating' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-star-filled', __( 'Rating', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="rating">
-						<span class="dashicons dashicons-star-filled"></span>
-						<?php esc_html_e( 'Rating', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'repeater' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-plus-alt', __( 'Repeater', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="repeater">
-						<span class="dashicons dashicons-plus-alt"></span>
-						<?php esc_html_e( 'Repeater', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-star-filled', __( 'Rating', 'wprobo-documerge' ) ); ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-plus-alt', __( 'Repeater', 'wprobo-documerge' ) ); ?>
 				<button type="button" class="wdm-field-type-btn" data-type="ip_address">
 					<span class="dashicons dashicons-admin-site-alt3"></span>
 					<?php esc_html_e( 'IP Address', 'wprobo-documerge' ); ?>
@@ -232,22 +169,8 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 
 			<h3><?php esc_html_e( 'Layout Elements', 'wprobo-documerge' ); ?></h3>
 			<div class="wdm-field-type-grid">
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'html' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-editor-code', __( 'HTML Block', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="html">
-						<span class="dashicons dashicons-editor-code"></span>
-						<?php esc_html_e( 'HTML Block', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
-				<?php if ( $gate->wprobo_documerge_is_pro_field( 'section_divider' ) && ! $gate->wprobo_documerge_is_pro() ) : ?>
-					<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-minus', __( 'Divider', 'wprobo-documerge' ) ); ?>
-				<?php else : ?>
-					<button type="button" class="wdm-field-type-btn" data-type="section_divider">
-						<span class="dashicons dashicons-minus"></span>
-						<?php esc_html_e( 'Divider', 'wprobo-documerge' ); ?>
-					</button>
-				<?php endif; ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-editor-code', __( 'HTML Block', 'wprobo-documerge' ) ); ?>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-minus', __( 'Divider', 'wprobo-documerge' ) ); ?>
 			</div>
 
 		</div>
@@ -586,18 +509,10 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 
 						<div class="wdm-field-group">
 							<?php
-							$gate_fb = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
-							if ( ! $gate_fb->wprobo_documerge_can( 'multistep_forms' ) ) {
-								echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_disabled_toggle(
+							echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_disabled_toggle(
 									__( 'Enable multi-step form', 'wprobo-documerge' )
 								);
-							} else {
 							?>
-							<label class="wdm-checkbox-label">
-								<input type="checkbox" id="wdm-multistep" <?php checked( $form_multistep, 1 ); ?>>
-								<?php esc_html_e( 'Enable multi-step form', 'wprobo-documerge' ); ?>
-							</label>
-							<?php } ?>
 							<span class="wdm-description">
 								<?php esc_html_e( 'Split your form into multiple steps. Drag fields between steps on the Fields tab.', 'wprobo-documerge' ); ?>
 							</span>
@@ -806,75 +721,11 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 					<div class="wdm-settings-subtab-content" data-subtab="payment">
 
 						<?php
-						$gate_pay = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
-						if ( ! $gate_pay->wprobo_documerge_can( 'stripe_payments' ) ) {
-							echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+						echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
 								__( 'Payment Settings', 'wprobo-documerge' ),
 								__( 'Require Stripe payment before delivering documents. Configure amount, currency, and more.', 'wprobo-documerge' )
 							);
-						} else {
 						?>
-
-						<?php
-						$stripe_mode      = get_option( 'wprobo_documerge_stripe_mode', 'test' );
-						$stripe_configured = ! empty( get_option( 'wprobo_documerge_stripe_' . $stripe_mode . '_publishable_key', '' ) );
-						$pay_enabled      = isset( $form->payment_enabled ) ? absint( $form->payment_enabled ) : 0;
-						$pay_amount       = isset( $form->payment_amount ) ? floatval( $form->payment_amount ) : 0;
-						$pay_currency     = isset( $form->payment_currency ) && '' !== $form->payment_currency ? $form->payment_currency : get_option( 'wprobo_documerge_stripe_currency', 'USD' );
-						?>
-
-						<?php if ( ! $stripe_configured ) : ?>
-						<div class="wdm-notice wdm-notice-warning" style="margin-bottom:16px;">
-							<span class="wdm-notice-icon dashicons dashicons-info"></span>
-							<span class="wdm-notice-text">
-								<?php
-								printf(
-									/* translators: %s: link to settings page */
-									esc_html__( 'Stripe API keys are not configured. %sConfigure Stripe →%s', 'wprobo-documerge' ),
-									'<a href="' . esc_url( admin_url( 'admin.php?page=wprobo-documerge-settings#stripe' ) ) . '">',
-									'</a>'
-								);
-								?>
-							</span>
-						</div>
-						<?php endif; ?>
-
-						<div class="wdm-field-group">
-							<label>
-								<input type="checkbox" id="wdm-payment-enabled" value="1" <?php checked( $pay_enabled, 1 ); ?>>
-								<?php esc_html_e( 'Enable Payment', 'wprobo-documerge' ); ?>
-							</label>
-							<span class="wdm-description"><?php esc_html_e( 'Require payment before the document is generated and delivered.', 'wprobo-documerge' ); ?></span>
-						</div>
-
-						<div class="wdm-payment-fields-wrap" <?php echo ! $pay_enabled ? 'style="display:none;"' : ''; ?>>
-							<div class="wdm-field-group">
-								<label for="wdm-payment-amount"><?php esc_html_e( 'Payment Amount', 'wprobo-documerge' ); ?></label>
-								<input type="number" id="wdm-payment-amount" class="wdm-input" min="0" step="0.01" value="<?php echo esc_attr( $pay_amount > 0 ? number_format( $pay_amount, 2, '.', '' ) : '' ); ?>" placeholder="99.00">
-								<span class="wdm-description"><?php esc_html_e( 'Fixed amount to charge per submission.', 'wprobo-documerge' ); ?></span>
-							</div>
-
-							<div class="wdm-field-group">
-								<label for="wdm-payment-currency"><?php esc_html_e( 'Currency', 'wprobo-documerge' ); ?></label>
-								<?php
-								$currencies = apply_filters( 'wprobo_documerge_stripe_currencies', array(
-									'GBP' => 'GBP — British Pound',
-									'USD' => 'USD — US Dollar',
-									'EUR' => 'EUR — Euro',
-									'CAD' => 'CAD — Canadian Dollar',
-									'AUD' => 'AUD — Australian Dollar',
-								) );
-								?>
-								<select id="wdm-payment-currency" class="wdm-select">
-									<?php foreach ( $currencies as $code => $label ) : ?>
-										<option value="<?php echo esc_attr( $code ); ?>" <?php selected( $pay_currency, $code ); ?>><?php echo esc_html( $label ); ?></option>
-									<?php endforeach; ?>
-								</select>
-								<span class="wdm-description"><?php esc_html_e( 'Default currency from Stripe settings. Override per form here.', 'wprobo-documerge' ); ?></span>
-							</div>
-						</div>
-
-						<?php } // End Pro gate for Payment. ?>
 
 					</div>
 

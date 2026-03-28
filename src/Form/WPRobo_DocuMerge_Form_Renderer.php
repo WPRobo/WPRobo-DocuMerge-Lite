@@ -252,17 +252,6 @@ class WPRobo_DocuMerge_Form_Renderer {
 			return '';
 		}
 
-		// Inject form-level payment data into the payment field so it can display amount/currency.
-		if ( 'payment' === $field_type && $form_id > 0 ) {
-			$form_builder = new WPRobo_DocuMerge_Form_Builder();
-			$form_record  = $form_builder->wprobo_documerge_get_form( $form_id );
-
-			if ( null !== $form_record ) {
-				$field['form_payment_amount']   = isset( $form_record->payment_amount ) ? $form_record->payment_amount : 0;
-				$field['form_payment_currency'] = isset( $form_record->payment_currency ) ? $form_record->payment_currency : get_option( 'wprobo_documerge_stripe_currency', 'USD' );
-			}
-		}
-
 		$field_html = $field_class->wprobo_documerge_render_frontend( $field, '' );
 
 		// Apply smart placeholders for fields without a custom placeholder.

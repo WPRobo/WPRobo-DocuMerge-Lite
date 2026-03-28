@@ -2,9 +2,9 @@
 /**
  * Document delivery orchestrator.
  *
- * Handles all post-generation delivery: secure download tokens,
- * email delivery to submitters, admin notifications, and saving
- * generated documents to the WordPress media library.
+ * Handles post-generation delivery via secure download tokens.
+ * Email delivery, media library saving, and admin notifications
+ * are available in WPRobo DocuMerge Pro.
  *
  * @package    WPRobo_DocuMerge
  * @subpackage WPRobo_DocuMerge/src/Document
@@ -23,9 +23,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class WPRobo_DocuMerge_Delivery_Engine
  *
- * Orchestrates document delivery through multiple channels:
- * download links with time-limited tokens, email with optional
- * file attachment, and WordPress media library import.
+ * Orchestrates document delivery via secure download links
+ * with time-limited tokens. Email and media library delivery
+ * are available in WPRobo DocuMerge Pro.
  *
  * @since 1.0.0
  */
@@ -38,14 +38,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 	 * @var   int
 	 */
 	private const WPROBO_DOCUMERGE_DEFAULT_EXPIRY_HOURS = 72;
-
-	/**
-	 * Maximum retry attempts for email delivery.
-	 *
-	 * @since 1.0.0
-	 * @var   int
-	 */
-	private const WPROBO_DOCUMERGE_MAX_EMAIL_RETRIES = 1;
 
 	/**
 	 * Deliver a generated document through all configured delivery methods.
@@ -127,81 +119,17 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		 */
 		do_action( 'wprobo_documerge_before_delivery', $submission_id, $delivery_methods );
 
-		/**
-		 * Filters the list of delivery methods before processing.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param array $delivery_methods The delivery method slugs.
-		 * @param int   $submission_id    The submission ID.
-		 * @param int   $form_id          The form ID.
-		 */
-		$delivery_methods = apply_filters( 'wprobo_documerge_delivery_methods', $delivery_methods, $submission_id, (int) $submission->form_id );
-
-		$errors       = array();
 		$download_url = '';
-		$email_sent   = false;
 
-		// ── Download ─────────────────────────────────────────────────────
-		if ( in_array( 'download', $delivery_methods, true ) ) {
-			$download_result = $this->wprobo_documerge_prepare_download( $submission_id );
-			if ( is_wp_error( $download_result ) ) {
-				$errors[] = $download_result->get_error_message();
-			} else {
-				$download_url = $download_result;
-			}
-		}
-
-		// ── Email ────────────────────────────────────────────────────────
-		if ( in_array( 'email', $delivery_methods, true ) ) {
-			$email_result = $this->wprobo_documerge_send_submitter_email( $submission_id );
-			if ( is_wp_error( $email_result ) ) {
-				$errors[] = $email_result->get_error_message();
-			} else {
-				$email_sent = true;
-			}
-		}
-
-		// ── Media library ────────────────────────────────────────────────
-		if ( in_array( 'media', $delivery_methods, true ) ) {
-			$attachment = $this->wprobo_documerge_save_to_media( $submission_id );
-			if ( is_wp_error( $attachment ) ) {
-				$errors[] = $attachment->get_error_message();
-			}
-		}
-
-		// ── Custom delivery methods ─────────────────────────────────────
-		$built_in_methods = array( 'download', 'email', 'media' );
-		foreach ( $delivery_methods as $method ) {
-			if ( ! in_array( $method, $built_in_methods, true ) ) {
-				/**
-				 * Fires for a custom (non-built-in) delivery method.
-				 *
-				 * Dynamic hook name based on the method slug. For example,
-				 * a method named 'ftp' fires `wprobo_documerge_custom_delivery_ftp`.
-				 *
-				 * @since 1.1.0
-				 *
-				 * @param int    $submission_id The submission ID.
-				 * @param object $submission    The submission row object.
-				 */
-				do_action( "wprobo_documerge_custom_delivery_{$method}", $submission_id, $submission );
-			}
-		}
-
-		// ── Admin notification ───────────────────────────────────────────
-		if ( '1' === get_option( 'wprobo_documerge_notify_new_submission', '1' ) ) {
-			$this->wprobo_documerge_send_admin_notification( $submission_id );
-		}
-
-		// ── Update delivery status ───────────────────────────────────────
-		if ( ! empty( $errors ) ) {
+		// ── Download (only delivery method in Lite) ─────────────────────
+		$download_result = $this->wprobo_documerge_prepare_download( $submission_id );
+		if ( is_wp_error( $download_result ) ) {
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->update(
 				$submissions_table,
 				array(
 					'delivery_status' => 'partial',
-					'error_log'       => sanitize_textarea_field( implode( '; ', $errors ) ),
+					'error_log'       => sanitize_textarea_field( $download_result->get_error_message() ),
 					'updated_at'      => current_time( 'mysql' ),
 				),
 				array( 'id' => $submission_id ),
@@ -209,21 +137,13 @@ class WPRobo_DocuMerge_Delivery_Engine {
 				array( '%d' )
 			);
 
-			/**
-			 * Fires when document delivery fails entirely or partially.
-			 *
-			 * @since 1.1.0
-			 *
-			 * @param int       $submission_id The submission ID.
-			 * @param \WP_Error $error         The WP_Error with combined error messages.
-			 */
-			do_action( 'wprobo_documerge_delivery_failed', $submission_id, new \WP_Error( 'delivery_failed', implode( ', ', $errors ) ) );
+			/** This action is documented in src/Document/WPRobo_DocuMerge_Delivery_Engine.php */
+			do_action( 'wprobo_documerge_delivery_failed', $submission_id, $download_result );
 
-			return new \WP_Error(
-				'delivery_partial',
-				__( 'One or more delivery methods failed.', 'wprobo-documerge' )
-			);
+			return $download_result;
 		}
+
+		$download_url = $download_result;
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->update(
@@ -245,11 +165,11 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		 * @param int   $submission_id The submission ID.
 		 * @param array $results       Associative array with 'download' and 'email' boolean statuses.
 		 */
-		do_action( 'wprobo_documerge_document_delivered', $submission_id, array( 'download' => ! empty( $download_url ), 'email' => $email_sent ) );
+		do_action( 'wprobo_documerge_document_delivered', $submission_id, array( 'download' => true, 'email' => false ) );
 
 		return array(
 			'download_url' => $download_url,
-			'email_sent'   => $email_sent,
+			'email_sent'   => false,
 		);
 	}
 
@@ -412,410 +332,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 	}
 
 	/**
-	 * Send the generated document to the submitter via email.
-	 *
-	 * Loads the email template from templates/emails/document-delivery.php,
-	 * prepares a download link, optionally attaches the file, and sends
-	 * via wp_mail(). Schedules a retry on failure.
-	 *
-	 * @since  1.0.0
-	 * @param  int $submission_id The submission ID.
-	 * @return true|\WP_Error True on success, WP_Error on failure.
-	 */
-	public function wprobo_documerge_send_submitter_email( $submission_id ) {
-		global $wpdb;
-
-		$submission_id     = absint( $submission_id );
-		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
-		$forms_table       = $wpdb->prefix . 'wprdm_forms';
-		$templates_table   = $wpdb->prefix . 'wprdm_templates';
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$submission = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$submissions_table} WHERE id = %d", $submission_id )
-		);
-
-		if ( ! $submission ) {
-			return new \WP_Error( 'submission_not_found', __( 'Submission not found.', 'wprobo-documerge' ) );
-		}
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$form = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$forms_table} WHERE id = %d", absint( $submission->form_id ) )
-		);
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$template = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$templates_table} WHERE id = %d", absint( $submission->template_id ) )
-		);
-
-		// Build download URL.
-		$download_url = $this->wprobo_documerge_prepare_download( $submission_id );
-		if ( is_wp_error( $download_url ) ) {
-			return $download_url;
-		}
-
-		// Derive submitter name from form data.
-		$form_data_decoded = json_decode( $submission->form_data, true );
-		$fields_data       = is_array( $form_data_decoded ) && isset( $form_data_decoded['fields'] ) ? $form_data_decoded['fields'] : ( is_array( $form_data_decoded ) ? $form_data_decoded : array() );
-		$submitter_name    = '';
-		foreach ( array( 'full_name', 'name', 'first_name', 'your_name', 'client_name' ) as $name_key ) {
-			if ( ! empty( $fields_data[ $name_key ] ) ) {
-				$submitter_name = sanitize_text_field( $fields_data[ $name_key ] );
-				break;
-			}
-		}
-		if ( empty( $submitter_name ) ) {
-			$submitter_name = ! empty( $submission->submitter_email ) ? explode( '@', $submission->submitter_email )[0] : __( 'there', 'wprobo-documerge' );
-		}
-
-		// Prepare email variables for the template.
-		$email_vars = array(
-			'submission'     => $submission,
-			'form'           => $form,
-			'template'       => $template,
-			'download_url'   => $download_url,
-			'site_name'      => wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ),
-			'submitter_name' => $submitter_name,
-			'form_title'     => ! empty( $form->title ) ? $form->title : __( 'Form', 'wprobo-documerge' ),
-			'template_name'  => ! empty( $template->name ) ? $template->name : __( 'Document', 'wprobo-documerge' ),
-		);
-
-		// Load email body from template file.
-		$template_file = WPROBO_DOCUMERGE_PATH . 'templates/emails/document-delivery.php';
-		$body          = '';
-
-		if ( file_exists( $template_file ) ) {
-			ob_start();
-			// phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template variables.
-			extract( $email_vars );
-			include $template_file;
-			$body = ob_get_clean();
-		} else {
-			$body = sprintf(
-				/* translators: 1: site name, 2: download URL */
-				__( "Your document from %1\$s is ready.\n\nDownload your document: %2\$s", 'wprobo-documerge' ),
-				$email_vars['site_name'],
-				esc_url( $download_url )
-			);
-		}
-
-		// Email headers.
-		$from_name  = get_option( 'wprobo_documerge_email_from_name', $email_vars['site_name'] );
-		$from_email = get_option( 'wprobo_documerge_email_from', '' );
-		if ( empty( $from_email ) ) {
-			$from_email = get_option( 'admin_email' );
-		}
-		$reply_to = get_option( 'wprobo_documerge_email_reply_to', '' );
-
-		$headers = array(
-			'Content-Type: text/html; charset=UTF-8',
-			sprintf( 'From: %s <%s>', sanitize_text_field( $from_name ), sanitize_email( $from_email ) ),
-		);
-		if ( ! empty( $reply_to ) ) {
-			$headers[] = sprintf( 'Reply-To: %s', sanitize_email( $reply_to ) );
-		}
-
-		$to      = sanitize_email( $submission->submitter_email );
-		$subject = sprintf(
-			/* translators: %s: site name */
-			__( 'Your document from %s is ready', 'wprobo-documerge' ),
-			$email_vars['site_name']
-		);
-
-		// Optional file attachment.
-		$attachments = array();
-		$attach_file = get_option( 'wprobo_documerge_email_attach_doc', '1' );
-		$max_size_mb = absint( get_option( 'wprobo_documerge_email_max_attach_mb', 10 ) );
-
-		if ( '1' === $attach_file ) {
-			$attach_path = ! empty( $submission->doc_path_pdf ) ? $submission->doc_path_pdf : $submission->doc_path_docx;
-
-			if ( ! empty( $attach_path ) && file_exists( $attach_path ) ) {
-				$file_size_mb = filesize( $attach_path ) / ( 1024 * 1024 );
-
-				if ( $file_size_mb <= $max_size_mb ) {
-					$attachments[] = $attach_path;
-				}
-			}
-		}
-
-		/**
-		 * Filters the submitter email subject line.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param string $subject       The email subject.
-		 * @param int    $submission_id The submission ID.
-		 * @param int    $form_id       The form ID.
-		 */
-		$subject = apply_filters( 'wprobo_documerge_email_subject', $subject, $submission_id, (int) $submission->form_id );
-
-		/**
-		 * Filters the submitter email body content.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param string $body          The email body HTML.
-		 * @param int    $submission_id The submission ID.
-		 * @param int    $form_id       The form ID.
-		 */
-		$body = apply_filters( 'wprobo_documerge_email_body', $body, $submission_id, (int) $submission->form_id );
-
-		/**
-		 * Filters the submitter email headers.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param array $headers       The email headers.
-		 * @param int   $submission_id The submission ID.
-		 */
-		$headers = apply_filters( 'wprobo_documerge_email_headers', $headers, $submission_id );
-
-		/**
-		 * Filters the submitter email file attachments.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param array $attachments   Array of absolute file paths to attach.
-		 * @param int   $submission_id The submission ID.
-		 */
-		$attachments = apply_filters( 'wprobo_documerge_email_attachments', $attachments, $submission_id );
-
-		/**
-		 * Fires just before the submitter email is sent via wp_mail().
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param int    $submission_id The submission ID.
-		 * @param string $to            The recipient email address.
-		 * @param string $subject       The email subject.
-		 */
-		do_action( 'wprobo_documerge_before_email_send', $submission_id, $to, $subject );
-
-		// Set HTML content type filter.
-		$content_type_filter = function () {
-			return 'text/html';
-		};
-		add_filter( 'wp_mail_content_type', $content_type_filter );
-
-		$sent = wp_mail( $to, $subject, $body, $headers, $attachments );
-
-		remove_filter( 'wp_mail_content_type', $content_type_filter );
-
-		/**
-		 * Fires after the submitter email send attempt.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param int    $submission_id The submission ID.
-		 * @param string $to            The recipient email address.
-		 * @param bool   $sent          Whether wp_mail() reported success.
-		 */
-		do_action( 'wprobo_documerge_email_sent', $submission_id, $to, $sent );
-
-		if ( ! $sent ) {
-			// Schedule retry.
-			wp_schedule_single_event(
-				time() + 300,
-				'wprobo_documerge_retry_email',
-				array( $submission_id )
-			);
-
-			return new \WP_Error(
-				'email_send_failed',
-				__( 'Failed to send document email. A retry has been scheduled.', 'wprobo-documerge' )
-			);
-		}
-
-		return true;
-	}
-
-	/**
-	 * Send an admin notification about a new submission.
-	 *
-	 * Loads the admin notification email template and sends it to
-	 * the configured admin email address.
-	 *
-	 * @since  1.0.0
-	 * @param  int $submission_id The submission ID.
-	 * @return bool Whether wp_mail() reported success.
-	 */
-	public function wprobo_documerge_send_admin_notification( $submission_id ) {
-		global $wpdb;
-
-		$submission_id     = absint( $submission_id );
-		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
-		$forms_table       = $wpdb->prefix . 'wprdm_forms';
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$submission = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$submissions_table} WHERE id = %d", $submission_id )
-		);
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$form = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$forms_table} WHERE id = %d", absint( $submission->form_id ) )
-		);
-
-		$site_name = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
-
-		// Get template name for the email.
-		$templates_table  = $wpdb->prefix . 'wprdm_templates';
-		$admin_template   = $wpdb->get_row(
-			$wpdb->prepare( "SELECT name FROM {$templates_table} WHERE id = %d", absint( $submission->template_id ) )
-		);
-
-		$email_vars = array(
-			'submission'    => $submission,
-			'form'          => $form,
-			'site_name'     => $site_name,
-			'admin_url'     => admin_url( 'admin.php?page=wprobo-documerge-submissions&view=' . $submission_id ),
-			'form_title'    => ! empty( $form->title ) ? $form->title : __( 'Unknown Form', 'wprobo-documerge' ),
-			'template_name' => ! empty( $admin_template->name ) ? $admin_template->name : __( 'Document', 'wprobo-documerge' ),
-		);
-
-		// Load email template.
-		$template_file = WPROBO_DOCUMERGE_PATH . 'templates/emails/admin-notification.php';
-		$body          = '';
-
-		if ( file_exists( $template_file ) ) {
-			ob_start();
-			// phpcs:ignore WordPress.PHP.DontExtract.extract_extract -- Template variables.
-			extract( $email_vars );
-			include $template_file;
-			$body = ob_get_clean();
-		} else {
-			$body = sprintf(
-				/* translators: 1: submission ID, 2: form title, 3: admin URL */
-				__( "New submission #%1\$d received for form \"%2\$s\".\n\nView: %3\$s", 'wprobo-documerge' ),
-				$submission_id,
-				! empty( $form->title ) ? $form->title : __( 'Unknown', 'wprobo-documerge' ),
-				esc_url( $email_vars['admin_url'] )
-			);
-		}
-
-		$admin_email = get_option( 'wprobo_documerge_notification_email', '' );
-		if ( empty( $admin_email ) ) {
-			$admin_email = get_option( 'admin_email' );
-		}
-
-		/* translators: %s: site name */
-		$subject = sprintf( __( '[%s] DocuMerge: New document submission', 'wprobo-documerge' ), $site_name );
-
-		/**
-		 * Filters the admin notification email subject line.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param string $subject       The admin email subject.
-		 * @param int    $submission_id The submission ID.
-		 */
-		$subject = apply_filters( 'wprobo_documerge_admin_email_subject', $subject, $submission_id );
-
-		/**
-		 * Filters the admin notification email body content.
-		 *
-		 * @since 1.1.0
-		 *
-		 * @param string $body          The admin email body.
-		 * @param int    $submission_id The submission ID.
-		 */
-		$body = apply_filters( 'wprobo_documerge_admin_email_body', $body, $submission_id );
-
-		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
-		return wp_mail( sanitize_email( $admin_email ), $subject, $body, $headers );
-	}
-
-	/**
-	 * Save generated document files to the WordPress media library.
-	 *
-	 * Copies each generated file (DOCX and/or PDF) into the standard
-	 * uploads directory and creates a media library attachment.
-	 *
-	 * @since  1.0.0
-	 * @param  int $submission_id The submission ID.
-	 * @return array|\WP_Error Array of attachment IDs on success, WP_Error on failure.
-	 */
-	public function wprobo_documerge_save_to_media( $submission_id ) {
-		global $wpdb;
-
-		$submission_id     = absint( $submission_id );
-		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$submission = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$submissions_table} WHERE id = %d", $submission_id )
-		);
-
-		if ( ! $submission ) {
-			return new \WP_Error( 'submission_not_found', __( 'Submission not found.', 'wprobo-documerge' ) );
-		}
-
-		$files = array();
-		if ( ! empty( $submission->doc_path_docx ) && file_exists( $submission->doc_path_docx ) ) {
-			$files['docx'] = $submission->doc_path_docx;
-		}
-		if ( ! empty( $submission->doc_path_pdf ) && file_exists( $submission->doc_path_pdf ) ) {
-			$files['pdf'] = $submission->doc_path_pdf;
-		}
-
-		if ( empty( $files ) ) {
-			return new \WP_Error( 'no_files', __( 'No generated files found for this submission.', 'wprobo-documerge' ) );
-		}
-
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-		require_once ABSPATH . 'wp-admin/includes/media.php';
-		require_once ABSPATH . 'wp-admin/includes/image.php';
-
-		$upload_dir     = wp_upload_dir();
-		$attachment_ids = array();
-
-		$mime_types = array(
-			'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-			'pdf'  => 'application/pdf',
-		);
-
-		foreach ( $files as $format => $source_path ) {
-			$file_name = sanitize_file_name( basename( $source_path ) );
-			$dest_path = trailingslashit( $upload_dir['path'] ) . $file_name;
-
-			// Copy file to uploads directory.
-			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_copy
-			if ( ! copy( $source_path, $dest_path ) ) {
-				$attachment_ids[ $format ] = new \WP_Error(
-					'copy_failed',
-					/* translators: %s: file name */
-					sprintf( __( 'Failed to copy %s to uploads.', 'wprobo-documerge' ), $file_name )
-				);
-				continue;
-			}
-
-			$attachment_data = array(
-				'guid'           => trailingslashit( $upload_dir['url'] ) . $file_name,
-				'post_mime_type' => isset( $mime_types[ $format ] ) ? $mime_types[ $format ] : 'application/octet-stream',
-				'post_title'     => sanitize_text_field( pathinfo( $file_name, PATHINFO_FILENAME ) ),
-				'post_content'   => '',
-				'post_status'    => 'inherit',
-			);
-
-			$attach_id = wp_insert_attachment( $attachment_data, $dest_path );
-
-			if ( is_wp_error( $attach_id ) ) {
-				$attachment_ids[ $format ] = $attach_id;
-				continue;
-			}
-
-			$attach_meta = wp_generate_attachment_metadata( $attach_id, $dest_path );
-			wp_update_attachment_metadata( $attach_id, $attach_meta );
-
-			$attachment_ids[ $format ] = $attach_id;
-		}
-
-		return $attachment_ids;
-	}
-
-	/**
 	 * Register all WordPress hooks for the delivery engine.
 	 *
 	 * Hooks into 'init' for public download handling, registers AJAX
@@ -831,9 +347,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		// Admin AJAX download handler.
 		add_action( 'wp_ajax_wprobo_documerge_download_document', array( $this, 'wprobo_documerge_ajax_admin_download' ) );
 		add_action( 'wp_ajax_nopriv_wprobo_documerge_download_document_public', array( $this, 'wprobo_documerge_ajax_admin_download' ) );
-
-		// Retry email cron handler.
-		add_action( 'wprobo_documerge_retry_email', array( $this, 'wprobo_documerge_retry_email_handler' ) );
 
 		// Expired token cleanup cron handler.
 		add_action( 'wprobo_documerge_cleanup_expired_tokens', array( $this, 'wprobo_documerge_cleanup_expired_tokens' ) );
@@ -953,79 +466,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
 		readfile( $file_path );
 		exit;
-	}
-
-	/**
-	 * Handle email retry for a failed submission email.
-	 *
-	 * Called by the 'wprobo_documerge_retry_email' cron event.
-	 * Increments the retry count and attempts to resend the email.
-	 * After exceeding the maximum retries, marks delivery as failed.
-	 *
-	 * @since 1.0.0
-	 * @param int $submission_id The submission ID to retry.
-	 */
-	public function wprobo_documerge_retry_email_handler( $submission_id ) {
-		global $wpdb;
-
-		$submission_id     = absint( $submission_id );
-		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$submission = $wpdb->get_row(
-			$wpdb->prepare( "SELECT * FROM {$submissions_table} WHERE id = %d", $submission_id )
-		);
-
-		if ( ! $submission ) {
-			return;
-		}
-
-		$retry_count = absint( $submission->retry_count ) + 1;
-
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$wpdb->update(
-			$submissions_table,
-			array(
-				'retry_count' => $retry_count,
-				'updated_at'  => current_time( 'mysql' ),
-			),
-			array( 'id' => $submission_id ),
-			array( '%d', '%s' ),
-			array( '%d' )
-		);
-
-		// Exceeded maximum retries.
-		if ( $retry_count > self::WPROBO_DOCUMERGE_MAX_EMAIL_RETRIES ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			$wpdb->update(
-				$submissions_table,
-				array(
-					'delivery_status' => 'email_failed',
-					'updated_at'      => current_time( 'mysql' ),
-				),
-				array( 'id' => $submission_id ),
-				array( '%s', '%s' ),
-				array( '%d' )
-			);
-			return;
-		}
-
-		// Re-attempt email.
-		$result = $this->wprobo_documerge_send_submitter_email( $submission_id );
-
-		if ( ! is_wp_error( $result ) ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			$wpdb->update(
-				$submissions_table,
-				array(
-					'delivery_status' => 'delivered',
-					'updated_at'      => current_time( 'mysql' ),
-				),
-				array( 'id' => $submission_id ),
-				array( '%s', '%s' ),
-				array( '%d' )
-			);
-		}
 	}
 
 	/**

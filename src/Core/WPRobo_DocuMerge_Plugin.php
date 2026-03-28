@@ -77,23 +77,6 @@ class WPRobo_DocuMerge_Plugin {
      * @since 1.0.0
      */
     /**
-     * Handle incoming Stripe webhook requests.
-     *
-     * Fires on template_redirect when ?wprdm_webhook=stripe is present.
-     *
-     * @since 1.0.0
-     */
-    public function wprobo_documerge_handle_webhook_request() {
-        $webhook_type = get_query_var( 'wprdm_webhook', '' );
-        if ( 'stripe' !== $webhook_type ) {
-            return;
-        }
-
-        $webhook = new \WPRobo\DocuMerge\Payment\WPRobo_DocuMerge_Stripe_Webhook();
-        $webhook->wprobo_documerge_handle_request();
-    }
-
-    /**
      * Register the Gutenberg block for embedding forms.
      *
      * @since 1.0.0
@@ -191,12 +174,6 @@ class WPRobo_DocuMerge_Plugin {
     private function wprobo_documerge_register_hooks() {
         $gate = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
 
-        // Form Analytics — AJAX event tracking (Pro only).
-        if ( $gate->wprobo_documerge_can( 'analytics_dashboard' ) ) {
-            $analytics = new \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Analytics();
-            $analytics->wprobo_documerge_init_hooks();
-        }
-
         // Delivery Engine — handles public download URLs and cron hooks (runs on all requests).
         $delivery = new \WPRobo\DocuMerge\Document\WPRobo_DocuMerge_Delivery_Engine();
         $delivery->wprobo_documerge_init_hooks();
@@ -211,36 +188,6 @@ class WPRobo_DocuMerge_Plugin {
         // Form Submission AJAX handler (runs on all requests — handles nopriv too).
         $submission = new \WPRobo\DocuMerge\Form\WPRobo_DocuMerge_Form_Submission();
         $submission->wprobo_documerge_init_hooks();
-
-        // Stripe payment AJAX handlers (Pro only).
-        if ( $gate->wprobo_documerge_can( 'stripe_payments' ) ) {
-            $stripe = \WPRobo\DocuMerge\Payment\WPRobo_DocuMerge_Stripe_Handler::get_instance();
-            $stripe->wprobo_documerge_init_hooks();
-
-            // Stripe webhook endpoint.
-            $webhook = new \WPRobo\DocuMerge\Payment\WPRobo_DocuMerge_Stripe_Webhook();
-            $webhook->wprobo_documerge_init_hooks();
-        }
-
-        // Integration Manager — registers WPForms, CF7 hooks if active.
-        $integrations = \WPRobo\DocuMerge\Integrations\WPRobo_DocuMerge_Integration_Manager::get_instance();
-        $integrations->wprobo_documerge_init();
-        $integrations->wprobo_documerge_init_hooks();
-
-        // Webhook endpoint via query var (Pro only — requires Stripe).
-        if ( $gate->wprobo_documerge_can( 'stripe_payments' ) ) {
-            add_filter( 'query_vars', function ( $vars ) {
-                $vars[] = 'wprdm_webhook';
-                return $vars;
-            } );
-            add_action( 'template_redirect', array( $this, 'wprobo_documerge_handle_webhook_request' ) );
-        }
-
-        // Elementor widget — Pro only + only if Elementor is active.
-        if ( $gate->wprobo_documerge_can( 'elementor_widget' ) && did_action( 'elementor/loaded' ) ) {
-            $elementor_loader = new \WPRobo\DocuMerge\Integrations\WPRobo_DocuMerge_Elementor_Loader();
-            $elementor_loader->wprobo_documerge_init_hooks();
-        }
 
         // Admin Bar — add DocuMerge menu to WordPress toolbar.
         $admin_bar = new \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Admin_Bar();

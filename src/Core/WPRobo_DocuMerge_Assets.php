@@ -320,28 +320,12 @@ class WPRobo_DocuMerge_Assets {
             true
         );
 
-        // Analytics tracker — fires on every page with a form.
-        wp_enqueue_script(
-            'wprobo-documerge-analytics',
-            WPROBO_DOCUMERGE_URL . 'assets/js/frontend/analytics-handler.min.js',
-            array( 'jquery' ),
-            WPROBO_DOCUMERGE_VERSION,
-            true
-        );
-
         // Detect field types by loading actual form data from the DB.
         // The post content only has [documerge_form id="X"] — field info is in wprdm_forms.
-        $wprobo_documerge_has_signature  = false;
-        $wprobo_documerge_has_captcha    = false;
-        $wprobo_documerge_has_payment    = false;
         $wprobo_documerge_has_phone      = false;
         $wprobo_documerge_has_date       = false;
         $wprobo_documerge_has_searchable = false;
-        $wprobo_documerge_has_rating     = false;
-        $wprobo_documerge_has_repeater   = false;
-        $wprobo_documerge_has_password   = false;
-        $wprobo_documerge_has_tracking  = false;
-        $wprobo_documerge_captcha_type  = get_option( 'wprobo_documerge_captcha_type', 'none' );
+        $wprobo_documerge_has_tracking   = false;
 
         // Extract form IDs from shortcodes and blocks in the post content.
         $wprobo_documerge_form_ids = array();
@@ -363,15 +347,6 @@ class WPRobo_DocuMerge_Assets {
                     continue;
                 }
                 $fields_json = isset( $form_obj->fields ) ? $form_obj->fields : '';
-                if ( strpos( $fields_json, '"signature"' ) !== false ) {
-                    $wprobo_documerge_has_signature = true;
-                }
-                if ( strpos( $fields_json, '"captcha"' ) !== false ) {
-                    $wprobo_documerge_has_captcha = true;
-                }
-                if ( strpos( $fields_json, '"payment"' ) !== false || ! empty( $form_obj->payment_enabled ) ) {
-                    $wprobo_documerge_has_payment = true;
-                }
                 if ( strpos( $fields_json, '"phone"' ) !== false ) {
                     $wprobo_documerge_has_phone = true;
                 }
@@ -380,15 +355,6 @@ class WPRobo_DocuMerge_Assets {
                 }
                 if ( strpos( $fields_json, '"searchable":true' ) !== false || strpos( $fields_json, '"searchable":"1"' ) !== false ) {
                     $wprobo_documerge_has_searchable = true;
-                }
-                if ( strpos( $fields_json, '"rating"' ) !== false ) {
-                    $wprobo_documerge_has_rating = true;
-                }
-                if ( strpos( $fields_json, '"repeater"' ) !== false ) {
-                    $wprobo_documerge_has_repeater = true;
-                }
-                if ( strpos( $fields_json, '"password"' ) !== false ) {
-                    $wprobo_documerge_has_password = true;
                 }
                 if ( strpos( $fields_json, '"tracking"' ) !== false ) {
                     $wprobo_documerge_has_tracking = true;
@@ -466,57 +432,6 @@ class WPRobo_DocuMerge_Assets {
             );
         }
 
-        // Signature Pad — only on pages with signature field.
-        if ( $wprobo_documerge_has_signature ) {
-            wp_enqueue_script(
-                'wprobo-documerge-signature-pad',
-                WPROBO_DOCUMERGE_URL . 'assets/vendor/signature-pad/signature-pad.min.js',
-                array(),
-                '4.1.7',
-                true
-            );
-            wp_enqueue_script(
-                'wprobo-documerge-signature-handler',
-                WPROBO_DOCUMERGE_URL . 'assets/js/frontend/signature-handler.min.js',
-                array( 'jquery', 'wprobo-documerge-signature-pad' ),
-                WPROBO_DOCUMERGE_VERSION,
-                true
-            );
-        }
-
-        // Rating stars — only on pages with rating field.
-        if ( $wprobo_documerge_has_rating ) {
-            wp_enqueue_script(
-                'wprobo-documerge-rating-handler',
-                WPROBO_DOCUMERGE_URL . 'assets/js/frontend/rating-handler.min.js',
-                array( 'jquery' ),
-                WPROBO_DOCUMERGE_VERSION,
-                true
-            );
-        }
-
-        // Repeater — only on pages with repeater field.
-        if ( $wprobo_documerge_has_repeater ) {
-            wp_enqueue_script(
-                'wprobo-documerge-repeater-handler',
-                WPROBO_DOCUMERGE_URL . 'assets/js/frontend/repeater-handler.min.js',
-                array( 'jquery' ),
-                WPROBO_DOCUMERGE_VERSION,
-                true
-            );
-        }
-
-        // Password toggle — only on pages with password field.
-        if ( $wprobo_documerge_has_password ) {
-            wp_enqueue_script(
-                'wprobo-documerge-password-handler',
-                WPROBO_DOCUMERGE_URL . 'assets/js/frontend/password-handler.min.js',
-                array( 'jquery' ),
-                WPROBO_DOCUMERGE_VERSION,
-                true
-            );
-        }
-
         // Tracking handler — only on pages with tracking field.
         if ( $wprobo_documerge_has_tracking ) {
             wp_enqueue_script(
@@ -528,70 +443,14 @@ class WPRobo_DocuMerge_Assets {
             );
         }
 
-        // Captcha scripts — only on pages with captcha field.
-        if ( $wprobo_documerge_has_captcha && 'none' !== $wprobo_documerge_captcha_type ) {
-            if ( 'recaptcha_v2' === $wprobo_documerge_captcha_type ) {
-                wp_enqueue_script( 'wprobo-documerge-recaptcha', 'https://www.google.com/recaptcha/api.js', array(), null, true ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters
-            } elseif ( 'recaptcha_v3' === $wprobo_documerge_captcha_type ) {
-                $wprobo_documerge_v3_key = get_option( 'wprobo_documerge_recaptcha_v3_site_key', '' );
-                if ( ! empty( $wprobo_documerge_v3_key ) ) {
-                    wp_enqueue_script( 'wprobo-documerge-recaptcha', 'https://www.google.com/recaptcha/api.js?render=' . esc_attr( $wprobo_documerge_v3_key ), array(), null, true ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters
-                }
-            } elseif ( 'hcaptcha' === $wprobo_documerge_captcha_type ) {
-                wp_enqueue_script( 'wprobo-documerge-hcaptcha', 'https://js.hcaptcha.com/1/api.js', array(), null, true ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters
-            }
-
-            wp_enqueue_script(
-                'wprobo-documerge-captcha-handler',
-                WPROBO_DOCUMERGE_URL . 'assets/js/frontend/captcha-handler.min.js',
-                array( 'jquery' ),
-                WPROBO_DOCUMERGE_VERSION,
-                true
-            );
-        }
-
-        // Stripe.js — only on pages with payment-enabled forms.
-        $wprobo_documerge_stripe_pub = '';
-
-        if ( $wprobo_documerge_has_payment ) {
-            $stripe_handler = \WPRobo\DocuMerge\Payment\WPRobo_DocuMerge_Stripe_Handler::get_instance();
-            if ( $stripe_handler->wprobo_documerge_is_configured() ) {
-                $pub_key = $stripe_handler->wprobo_documerge_get_stripe_key( 'publishable' );
-                if ( ! is_wp_error( $pub_key ) ) {
-                    $wprobo_documerge_stripe_pub = $pub_key;
-
-                    wp_enqueue_script(
-                        'wprobo-documerge-stripe-js',
-                        'https://js.stripe.com/v3/',
-                        array(),
-                        null, // phpcs:ignore WordPress.WP.EnqueuedResourceParameters
-                        true
-                    );
-                    wp_enqueue_script(
-                        'wprobo-documerge-stripe-payment',
-                        WPROBO_DOCUMERGE_URL . 'assets/js/frontend/stripe-payment.min.js',
-                        array( 'jquery', 'wprobo-documerge-stripe-js' ),
-                        WPROBO_DOCUMERGE_VERSION,
-                        true
-                    );
-                }
-            }
-        }
-
         // Localize frontend script.
         wp_localize_script(
             'wprobo-documerge-frontend',
             'wprobo_documerge_frontend_vars',
             array(
-                'ajax_url'               => admin_url( 'admin-ajax.php' ),
-                'nonce'                  => wp_create_nonce( 'wprobo_documerge_frontend' ),
-                'captcha_type'           => $wprobo_documerge_captcha_type,
-                'recaptcha_v3_site_key'  => get_option( 'wprobo_documerge_recaptcha_v3_site_key', '' ),
-                'stripe_publishable_key' => $wprobo_documerge_stripe_pub,
-                'stripe_mode'            => get_option( 'wprobo_documerge_stripe_mode', 'test' ),
-                'stripe_card_layout'     => get_option( 'wprobo_documerge_stripe_card_layout', 'single' ),
-                'stripe_hide_postal'     => get_option( 'wprobo_documerge_stripe_hide_postal', '0' ),
-                'intl_tel_utils_url'     => WPROBO_DOCUMERGE_URL . 'assets/vendor/intl-tel-input/utils.js',
+                'ajax_url'           => admin_url( 'admin-ajax.php' ),
+                'nonce'              => wp_create_nonce( 'wprobo_documerge_frontend' ),
+                'intl_tel_utils_url' => WPROBO_DOCUMERGE_URL . 'assets/vendor/intl-tel-input/utils.js',
             )
         );
 

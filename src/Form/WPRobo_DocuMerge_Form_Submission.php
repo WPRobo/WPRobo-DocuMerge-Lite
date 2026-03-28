@@ -309,40 +309,7 @@ class WPRobo_DocuMerge_Form_Submission {
 			);
 		}
 
-		// ── Step 5: Captcha verification ────────────────────────────────
-
-		$has_captcha = false;
-
-		foreach ( $fields as $field ) {
-			if ( isset( $field['type'] ) && 'captcha' === $field['type'] ) {
-				$has_captcha = true;
-				break;
-			}
-		}
-
-		if ( $has_captcha ) {
-			$captcha_token = '';
-
-			if ( ! empty( $post_data['wdm_recaptcha_token'] ) ) {
-				$captcha_token = sanitize_text_field( $post_data['wdm_recaptcha_token'] );
-			} elseif ( ! empty( $post_data['h-captcha-response'] ) ) {
-				$captcha_token = sanitize_text_field( $post_data['h-captcha-response'] );
-			} elseif ( ! empty( $post_data['g-recaptcha-response'] ) ) {
-				$captcha_token = sanitize_text_field( $post_data['g-recaptcha-response'] );
-			}
-
-			$captcha_result = WPRobo_DocuMerge_Captcha_Verifier::wprobo_documerge_verify( $captcha_token, $client_ip );
-
-			if ( is_wp_error( $captcha_result ) ) {
-				wp_send_json_error(
-					array(
-						'message' => $captcha_result->get_error_message(),
-					)
-				);
-			}
-		}
-
-		// ── Step 6: Create submission record ────────────────────────────
+			// ── Step 6: Create submission record ────────────────────────────
 
 		global $wpdb;
 
@@ -443,13 +410,10 @@ class WPRobo_DocuMerge_Form_Submission {
 
 		$now = current_time( 'mysql' );
 
-		// Determine payment details from form record.
-		$pay_enabled  = isset( $form->payment_enabled ) && $form->payment_enabled;
-		$pay_amount   = $pay_enabled && isset( $form->payment_amount ) ? floatval( $form->payment_amount ) : 0.00;
-		$pay_currency = $pay_enabled && isset( $form->payment_currency ) && '' !== $form->payment_currency
-			? sanitize_text_field( $form->payment_currency )
-			: get_option( 'wprobo_documerge_stripe_currency', 'USD' );
-		$pay_status   = $pay_enabled ? 'pending' : 'none';
+		// Payment is not available in Lite — always set to none.
+		$pay_amount   = 0.00;
+		$pay_currency = '';
+		$pay_status   = 'none';
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 		$inserted = $wpdb->insert(
@@ -512,45 +476,6 @@ class WPRobo_DocuMerge_Form_Submission {
 			array( '%s' ),
 			array( '%d' )
 		);
-
-		// ── Step 7: Check payment ───────────────────────────────────────
-
-		$payment_enabled = isset( $form->payment_enabled ) && $form->payment_enabled;
-
-		if ( $payment_enabled ) {
-			$old_status = 'processing';
-
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			$wpdb->update(
-				$submissions_table,
-				array(
-					'status'     => 'pending_payment',
-					'updated_at' => current_time( 'mysql' ),
-				),
-				array( 'id' => $submission_id ),
-				array( '%s', '%s' ),
-				array( '%d' )
-			);
-
-			/**
-			 * Fires after a submission record is updated.
-			 *
-			 * @since 1.1.0
-			 *
-			 * @param int    $submission_id  The submission ID.
-			 * @param array  $updated_fields The fields that were updated.
-			 * @param string $old_status     The previous submission status.
-			 */
-			do_action( 'wprobo_documerge_submission_updated', $submission_id, array( 'status' => 'pending_payment' ), $old_status );
-
-			wp_send_json_success(
-				array(
-					'submission_id'   => $submission_id,
-					'payment_required' => true,
-					'message'         => __( 'Payment required to proceed.', 'wprobo-documerge' ),
-				)
-			);
-		}
 
 		// ── Step 8: Generate document ───────────────────────────────────
 
@@ -623,22 +548,7 @@ class WPRobo_DocuMerge_Form_Submission {
 			}
 		}
 
-		// ── Step 10: Send webhook if configured ─────────────────────────
-
-		$form_settings = isset( $form->settings ) ? json_decode( $form->settings, true ) : array();
-		$webhook_url   = isset( $form_settings['webhook_url'] ) ? esc_url_raw( $form_settings['webhook_url'] ) : '';
-
-		if ( ! empty( $webhook_url ) ) {
-			$webhook_sender = new \WPRobo\DocuMerge\Document\WPRobo_DocuMerge_Webhook_Sender();
-			$webhook_sender->wprobo_documerge_send( $submission_id, $form_id, $webhook_url );
-		}
-
-		// ── Step 11: Track analytics completion ────────────────────────
-
-		$analytics = new \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Analytics();
-		$analytics->wprobo_documerge_record_event( $form_id, 'complete' );
-
-		// ── Step 11: Success response ───────────────────────────────────
+		// ── Step 10: Success response ───────────────────────────────────
 
 		$success_message = ! empty( $form->success_message ) ? $form->success_message : __( 'Your document has been generated successfully.', 'wprobo-documerge' );
 

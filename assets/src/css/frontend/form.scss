@@ -1116,8 +1116,7 @@ $transition:    0.2s;
     display: block;
 }
 
-// ── 53. Payment Field (Stripe) ────────────────────────────────────
-@import 'payment';
+// ── 53. Payment Field (Stripe) — Pro only, removed in Lite.
 
 // ── 41a. Form Closed State ───────────────────────────────────
 .wdm-form-closed {

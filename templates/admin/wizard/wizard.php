@@ -122,13 +122,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                     </div>
                 </div>
-                <?php else : ?>
-                <h2 class="wdm-wizard-title"><?php esc_html_e( 'Form Plugin Detection', 'wprobo-documerge' ); ?></h2>
-                <p class="wdm-wizard-subtitle"><?php esc_html_e( 'We scanned your WordPress installation.', 'wprobo-documerge' ); ?></p>
-
-                <div class="wdm-wizard-detect-results" id="wdm-detect-results">
-                    <!-- Populated by JavaScript based on detected_plugins data -->
-                </div>
                 <?php endif; ?>
             </div>
         </div>

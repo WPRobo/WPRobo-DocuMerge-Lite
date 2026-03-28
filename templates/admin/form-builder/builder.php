@@ -545,13 +545,29 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 									<?php esc_html_e( 'Download in browser', 'wprobo-documerge' ); ?>
 								</label>
 								<label class="wdm-checkbox-label">
+									<?php if ( $gate->wprobo_documerge_can( 'email_delivery' ) ) : ?>
 									<input type="checkbox" class="wdm-delivery-method" value="email" <?php checked( in_array( 'email', $decoded_dm, true ) ); ?>>
 									<?php esc_html_e( 'Email to submitter', 'wprobo-documerge' ); ?>
 								</label>
+								<?php else : ?>
+								<label class="wdm-checkbox-label wdm-pro-disabled-toggle">
+									<input type="checkbox" disabled="disabled">
+									<?php esc_html_e( 'Email to submitter', 'wprobo-documerge' ); ?>
+									<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?>
+								</label>
+								<?php endif; ?>
+								<?php if ( $gate->wprobo_documerge_can( 'media_delivery' ) ) : ?>
 								<label class="wdm-checkbox-label">
 									<input type="checkbox" class="wdm-delivery-method" value="media" <?php checked( in_array( 'media', $decoded_dm, true ) ); ?>>
 									<?php esc_html_e( 'Save to Media Library', 'wprobo-documerge' ); ?>
 								</label>
+								<?php else : ?>
+								<label class="wdm-checkbox-label wdm-pro-disabled-toggle">
+									<input type="checkbox" disabled="disabled">
+									<?php esc_html_e( 'Save to Media Library', 'wprobo-documerge' ); ?>
+									<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?>
+								</label>
+								<?php endif; ?>
 							</div>
 							<span class="wdm-description"><?php esc_html_e( 'How the generated document is delivered after submission. Email settings are configured in Settings → Email.', 'wprobo-documerge' ); ?></span>
 						</div>
@@ -688,6 +704,10 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 					<!-- ── Limits Sub-tab ──────────────────────────────────── -->
 					<div class="wdm-settings-subtab-content" data-subtab="limits">
 
+						<?php if ( ! $gate->wprobo_documerge_can( 'entry_limits' ) ) : ?>
+							<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Entry Limits', 'wprobo-documerge' ), esc_html__( 'Limit submissions per form, email, IP address, or user.', 'wprobo-documerge' ) ); ?>
+						<?php else : ?>
+
 						<?php
 						// Re-use $btn_settings if already decoded above, otherwise decode now.
 						if ( ! isset( $btn_settings ) ) {
@@ -776,6 +796,8 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 							<span class="wdm-description"><?php esc_html_e( 'Shown when any limit is reached.', 'wprobo-documerge' ); ?></span>
 						</div>
 
+						<?php endif; // End Pro gate for Limits. ?>
+
 					</div>
 
 					<!-- ── Payment Sub-tab ────────────────────────────────── -->
@@ -857,6 +879,9 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 					<!-- ── Notifications Sub-tab ───────────────────────────── -->
 					<div class="wdm-settings-subtab-content" data-subtab="notifications">
 
+						<?php if ( ! $gate->wprobo_documerge_can( 'webhooks' ) ) : ?>
+							<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Webhooks', 'wprobo-documerge' ), esc_html__( 'Send submission data to external services like Zapier, Make, and n8n.', 'wprobo-documerge' ) ); ?>
+						<?php else : ?>
 						<div class="wdm-field-group">
 							<label for="wdm-webhook-url-field"><?php esc_html_e( 'Webhook URL', 'wprobo-documerge' ); ?></label>
 							<input type="url" id="wdm-webhook-url-field" class="wdm-input"
@@ -864,6 +889,7 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 								   placeholder="https://hooks.zapier.com/hooks/catch/...">
 							<span class="wdm-description"><?php esc_html_e( 'Optional. Sends submission data to this URL on successful submission. Works with Zapier, Make, n8n, etc.', 'wprobo-documerge' ); ?></span>
 						</div>
+						<?php endif; ?>
 
 					</div>
 

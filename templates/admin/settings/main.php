@@ -93,7 +93,14 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <?php $mode = get_option( 'wprobo_documerge_form_mode', 'standalone' ); ?>
                         <div class="wdm-radio-group">
                             <label class="wdm-radio-label"><input type="radio" name="wprobo_documerge_form_mode" value="standalone" <?php checked( $mode, 'standalone' ); ?>> <?php esc_html_e( 'Standalone (built-in form builder)', 'wprobo-documerge' ); ?></label>
+                            <?php
+                            $gate_mode = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
+                            if ( $gate_mode->wprobo_documerge_is_pro() ) :
+                            ?>
                             <label class="wdm-radio-label"><input type="radio" name="wprobo_documerge_form_mode" value="integrated" <?php checked( $mode, 'integrated' ); ?>> <?php esc_html_e( 'Integrated (WPForms / CF7 / Gravity Forms etc.)', 'wprobo-documerge' ); ?></label>
+                            <?php else : ?>
+                            <label class="wdm-radio-label wdm-pro-disabled-toggle"><input type="radio" disabled="disabled"> <?php esc_html_e( 'Integrated (WPForms / CF7 / Gravity Forms etc.)', 'wprobo-documerge' ); ?> <?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?></label>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -406,6 +413,16 @@ if ( ! defined( 'ABSPATH' ) ) {
         <!-- ══════════════ EMAIL ══════════════ -->
         <div class="wdm-settings-panel" data-tab="email">
 
+            <?php
+            $gate = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
+            if ( ! $gate->wprobo_documerge_is_pro() ) {
+                echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+                    __( 'Email Delivery', 'wprobo-documerge' ),
+                    __( 'Customise sender details, email templates, and document delivery emails.', 'wprobo-documerge' )
+                );
+            } else {
+            ?>
+
             <!-- ── Sender Configuration Card ──────────────────────── -->
             <div class="wdm-settings-card">
                 <div class="wdm-settings-card-header">
@@ -485,6 +502,8 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="wdm-settings-actions">
                 <button type="button" class="wdm-btn wdm-btn-primary wdm-settings-save" data-tab="email"><?php esc_html_e( 'Save Email Settings', 'wprobo-documerge' ); ?></button>
             </div>
+
+            <?php } // End Pro gate for Email. ?>
         </div>
 
         <!-- ══════════════ RECAPTCHA ══════════════ -->

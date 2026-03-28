@@ -106,12 +106,30 @@ if ( ! defined( 'ABSPATH' ) ) {
         <!-- ── STEP 2: Detect ──────────────────────────────────── -->
         <div class="wdm-wizard-step" data-step="2">
             <div class="wdm-wizard-step-inner">
+                <?php
+                $gate_wizard = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
+                if ( ! $gate_wizard->wprobo_documerge_is_pro() ) :
+                ?>
+                <h2 class="wdm-wizard-title"><?php esc_html_e( 'Form Builder', 'wprobo-documerge' ); ?></h2>
+                <p class="wdm-wizard-subtitle"><?php esc_html_e( 'DocuMerge Lite uses the built-in form builder.', 'wprobo-documerge' ); ?></p>
+
+                <div class="wdm-wizard-detect-results">
+                    <div class="wdm-detect-card wdm-detect-none">
+                        <span class="wdm-detect-icon dashicons dashicons-edit-large"></span>
+                        <div class="wdm-detect-text">
+                            <strong><?php esc_html_e( 'Built-in Form Builder', 'wprobo-documerge' ); ?></strong>
+                            <p><?php esc_html_e( 'Create forms with our drag-and-drop builder. Upgrade to Pro to integrate with WPForms, Contact Form 7, Gravity Forms, and Fluent Forms.', 'wprobo-documerge' ); ?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php else : ?>
                 <h2 class="wdm-wizard-title"><?php esc_html_e( 'Form Plugin Detection', 'wprobo-documerge' ); ?></h2>
                 <p class="wdm-wizard-subtitle"><?php esc_html_e( 'We scanned your WordPress installation.', 'wprobo-documerge' ); ?></p>
 
                 <div class="wdm-wizard-detect-results" id="wdm-detect-results">
                     <!-- Populated by JavaScript based on detected_plugins data -->
                 </div>
+                <?php endif; ?>
             </div>
         </div>
 

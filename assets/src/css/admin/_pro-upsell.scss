@@ -27,7 +27,7 @@
 // Blurred overlay for entire sections/tabs
 .wdm-pro-overlay {
     position: relative;
-    min-height: 200px;
+    min-height: 240px;
     overflow: hidden;
     border-radius: 10px;
 
@@ -51,7 +51,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 32px;
+    padding: 40px 32px;
 
     .dashicons-lock {
         font-size: 36px;

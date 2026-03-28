@@ -91,7 +91,9 @@ $primary_action = array(
             <span class="wdm-stat-card-title"><?php esc_html_e( 'Submissions', 'wprobo-documerge' ); ?></span>
         </div>
 
-        <?php if ( ! empty( $stats['stripe_active'] ) ) : ?>
+        <?php
+        $gate_dashboard = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
+        if ( $gate_dashboard->wprobo_documerge_is_pro() && ! empty( $stats['stripe_active'] ) ) : ?>
             <div class="wdm-stat-card">
                 <div class="wdm-stat-card-icon"><span class="dashicons dashicons-cart"></span></div>
                 <div class="wdm-stat-card-content">
@@ -149,8 +151,10 @@ $primary_action = array(
     <!-- ── Row 2: Revenue + Form Popularity ───────────────────────── -->
     <?php
     $has_payments = false;
-    foreach ( $chart_data['payments'] as $pd ) {
-        if ( $pd['revenue'] > 0 ) { $has_payments = true; break; }
+    if ( $gate_dashboard->wprobo_documerge_is_pro() ) {
+        foreach ( $chart_data['payments'] as $pd ) {
+            if ( $pd['revenue'] > 0 ) { $has_payments = true; break; }
+        }
     }
     $has_form_stats = ! empty( $chart_data['forms'] );
     ?>

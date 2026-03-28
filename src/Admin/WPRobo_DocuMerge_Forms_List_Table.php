@@ -379,9 +379,8 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 			$this->items = array();
 		}
 
-		// Add derived data: field count, submission count, analytics stats.
+		// Add derived data: field count, submission count.
 		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
-		$analytics         = new WPRobo_DocuMerge_Analytics();
 
 		foreach ( $this->items as &$item ) {
 			// Field count from JSON.
@@ -397,12 +396,11 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 				)
 			);
 
-			// 30-day analytics stats.
-			$form_stats              = $analytics->wprobo_documerge_get_form_stats( $item->id, 30 );
-			$item->stats_views       = isset( $form_stats['views'] ) ? $form_stats['views'] : 0;
-			$item->stats_starts      = isset( $form_stats['starts'] ) ? $form_stats['starts'] : 0;
-			$item->stats_completions = isset( $form_stats['completions'] ) ? $form_stats['completions'] : 0;
-			$item->stats_abandonment = isset( $form_stats['abandonment'] ) ? $form_stats['abandonment'] : 0;
+			// Analytics stats — Pro only.
+			$item->stats_views       = 0;
+			$item->stats_starts      = 0;
+			$item->stats_completions = 0;
+			$item->stats_abandonment = 0;
 		}
 		unset( $item );
 

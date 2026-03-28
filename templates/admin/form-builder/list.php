@@ -93,12 +93,9 @@ $mode_labels = array(
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $wprobo_documerge_analytics = new \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Analytics();
-                ?>
                 <?php foreach ( $forms as $form ) : ?>
                     <?php
-                    $form_stats    = $wprobo_documerge_analytics->wprobo_documerge_get_form_stats( $form->id, 30 );
+                    $form_stats    = array( 'views' => 0, 'starts' => 0, 'completions' => 0, 'abandonment' => 0 );
                     $template_id   = absint( $form->template_id );
                     $template_name = isset( $templates[ $template_id ] )
                         ? $templates[ $template_id ]->name

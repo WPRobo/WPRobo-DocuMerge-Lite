@@ -276,18 +276,9 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 						$field_map           = isset( $btn_settings_int['field_map'] ) ? $btn_settings_int['field_map'] : array();
 						$integration_slug    = ! empty( $form_integration ) ? $form_integration : '';
 
-						// Get available external forms and fields.
-						$integration_manager = \WPRobo\DocuMerge\Integrations\WPRobo_DocuMerge_Integration_Manager::get_instance();
-						$active_integration  = $integration_manager->wprobo_documerge_get_integration( $integration_slug );
-						$external_forms      = array();
-						$external_fields     = array();
-
-						if ( $active_integration && $active_integration->wprobo_documerge_is_active() ) {
-							$external_forms = $active_integration->wprobo_documerge_get_available_forms();
-							if ( $external_form_id > 0 ) {
-								$external_fields = $active_integration->wprobo_documerge_get_form_fields( $external_form_id );
-							}
-						}
+						// Integrations are Pro-only — set empty defaults.
+						$external_forms  = array();
+						$external_fields = array();
 
 						// Get merge tags from the selected template.
 						$int_merge_tags = array();

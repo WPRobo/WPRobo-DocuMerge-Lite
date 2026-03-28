@@ -788,16 +788,12 @@ class WPRobo_DocuMerge_Forms_Page {
             return;
         }
 
-        // Get external fields.
-        $manager     = \WPRobo\DocuMerge\Integrations\WPRobo_DocuMerge_Integration_Manager::get_instance();
-        $integration = $manager->wprobo_documerge_get_integration( $integration_slug );
+        // Integrations are Pro-only.
+        wp_send_json_error( array( 'message' => __( 'Form integrations require DocuMerge Pro.', 'wprobo-documerge' ) ) );
+        return;
 
-        if ( ! $integration || ! $integration->wprobo_documerge_is_active() ) {
-            wp_send_json_error( array( 'message' => __( 'Integration not active.', 'wprobo-documerge' ) ) );
-            return;
-        }
-
-        $external_fields = $integration->wprobo_documerge_get_form_fields( $external_form_id );
+        // phpcs:disable -- Unreachable code kept for Pro compatibility.
+        $external_fields = array();
 
         // Get merge tags from template.
         $merge_tags = array();

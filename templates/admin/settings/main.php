@@ -63,8 +63,17 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <span class="wdm-description"><?php esc_html_e( 'Can be overridden per form.', 'wprobo-documerge' ); ?></span>
                         <div class="wdm-checkbox-group">
                             <label class="wdm-checkbox-label"><input type="checkbox" name="wprobo_documerge_delivery_download" value="1" <?php checked( get_option( 'wprobo_documerge_delivery_download', '1' ), '1' ); ?>> <?php esc_html_e( 'Download in browser', 'wprobo-documerge' ); ?></label>
+                            <?php $settings_gate = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance(); ?>
+                            <?php if ( $settings_gate->wprobo_documerge_can( 'email_delivery' ) ) : ?>
                             <label class="wdm-checkbox-label"><input type="checkbox" name="wprobo_documerge_delivery_email" value="1" <?php checked( get_option( 'wprobo_documerge_delivery_email', '1' ), '1' ); ?>> <?php esc_html_e( 'Email to submitter', 'wprobo-documerge' ); ?></label>
+                            <?php else : ?>
+                            <label class="wdm-checkbox-label wdm-pro-disabled-setting"><input type="checkbox" disabled> <?php esc_html_e( 'Email to submitter', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></label>
+                            <?php endif; ?>
+                            <?php if ( $settings_gate->wprobo_documerge_can( 'media_delivery' ) ) : ?>
                             <label class="wdm-checkbox-label"><input type="checkbox" name="wprobo_documerge_delivery_media" value="1" <?php checked( get_option( 'wprobo_documerge_delivery_media', '0' ), '1' ); ?>> <?php esc_html_e( 'Save to Media Library', 'wprobo-documerge' ); ?></label>
+                            <?php else : ?>
+                            <label class="wdm-checkbox-label wdm-pro-disabled-setting"><input type="checkbox" disabled> <?php esc_html_e( 'Save to Media Library', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></label>
+                            <?php endif; ?>
                         </div>
                     </div>
 

@@ -47,10 +47,12 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 			value="<?php echo esc_attr( $form_title ? $form_title : __( 'Untitled Form', 'wprobo-documerge' ) ); ?>"
 			placeholder="<?php esc_attr_e( 'Form Title', 'wprobo-documerge' ); ?>"
 		>
+		<?php if ( \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_is_pro() ) : ?>
 		<button type="button" class="wdm-btn wdm-btn-secondary" id="wdm-preview-doc" <?php echo $form_id ? '' : 'disabled'; ?>>
 			<span class="dashicons dashicons-visibility"></span>
 			<?php esc_html_e( 'Preview Document', 'wprobo-documerge' ); ?>
 		</button>
+		<?php endif; ?>
 		<button type="button" class="wdm-btn wdm-btn-secondary" id="wdm-create-page" <?php echo $form_id ? '' : 'disabled'; ?>>
 			<span class="dashicons dashicons-admin-page"></span>
 			<?php esc_html_e( 'Create Page', 'wprobo-documerge' ); ?>

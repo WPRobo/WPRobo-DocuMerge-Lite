@@ -231,16 +231,19 @@ class WPRobo_DocuMerge_Setup_Wizard {
 
         // Save settings.
         $settings = get_option( 'wprobo_documerge_settings', array() );
+        if ( ! is_array( $settings ) ) {
+            $settings = array();
+        }
         $settings['output_format']    = $output_format;
         $settings['delivery_method']  = implode( ',', $delivery_methods );
         $settings['delete_docs_days'] = ( 'delete' === $doc_storage ) ? 30 : 0;
         update_option( 'wprobo_documerge_settings', $settings );
 
-        // Save form mode and integration — same options the Settings page uses.
-        if ( ! empty( $integration ) ) {
+        // Save form mode — Lite is always standalone. Integration is Pro-only.
+        $gate = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
+        if ( $gate->wprobo_documerge_is_pro() && ! empty( $integration ) ) {
             update_option( 'wprobo_documerge_form_mode', 'integrated' );
             update_option( 'wprobo_documerge_active_integration', $integration );
-            // Keep legacy option for backward compat.
             update_option( 'wprobo_documerge_default_integration', $integration );
         } else {
             update_option( 'wprobo_documerge_form_mode', 'standalone' );

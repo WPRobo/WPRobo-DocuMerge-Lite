@@ -171,6 +171,7 @@ $primary_action = array(
         </div>
         <?php endif; ?>
 
+        <?php if ( $gate_dashboard->wprobo_documerge_is_pro() ) : ?>
         <div class="wdm-card wdm-chart-card">
             <div class="wdm-card-header">
                 <h2 class="wdm-card-title"><?php esc_html_e( 'Form Popularity', 'wprobo-documerge' ); ?></h2>
@@ -179,6 +180,24 @@ $primary_action = array(
                 <canvas id="wdm-chart-forms" height="220"></canvas>
             </div>
         </div>
+        <?php else : ?>
+        <div class="wdm-card wdm-chart-card">
+            <div class="wdm-card-header">
+                <h2 class="wdm-card-title"><?php esc_html_e( 'Analytics', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></h2>
+            </div>
+            <div class="wdm-card-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;text-align:center;padding:24px;">
+                <div style="display:flex;gap:6px;margin-bottom:16px;">
+                    <?php for ( $b = 0; $b < 5; $b++ ) : ?>
+                    <div style="width:32px;background:linear-gradient(to top,#042157,#0a3d8f);border-radius:4px 4px 0 0;opacity:<?php echo esc_attr( 0.15 + ( $b * 0.12 ) ); ?>;height:<?php echo esc_attr( 30 + ( $b * 25 ) ); ?>px;"></div>
+                    <?php endfor; ?>
+                </div>
+                <p style="color:#6b7280;font-size:13px;margin:0 0 12px;"><?php esc_html_e( 'Form analytics, revenue tracking, and detailed charts.', 'wprobo-documerge' ); ?></p>
+                <a href="<?php echo esc_url( \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_get_upgrade_url() ); ?>" target="_blank" class="wdm-btn-upgrade" style="font-size:12px;padding:6px 16px;">
+                    <?php esc_html_e( 'Upgrade to Pro', 'wprobo-documerge' ); ?>
+                </a>
+            </div>
+        </div>
+        <?php endif; ?>
     </div>
     <?php endif; ?>
 
@@ -456,7 +475,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     <?php endif; ?>
 
-    // ── Horizontal Bar Chart: Form Popularity ────────────────────
+    // ── Horizontal Bar Chart: Form Popularity (Pro only) ─────────
+    <?php if ( $gate_dashboard->wprobo_documerge_is_pro() ) : ?>
     var formStats = <?php echo wp_json_encode( $chart_data['forms'] ); ?>;
 
     if (formStats.length > 0) {
@@ -518,5 +538,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 '<p class="wdm-chart-empty"><?php echo esc_js( __( 'No data yet', 'wprobo-documerge' ) ); ?></p>';
         }
     }
+    <?php endif; // Form Popularity Pro check. ?>
 });
 </script>

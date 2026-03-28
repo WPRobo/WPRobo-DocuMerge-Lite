@@ -106,9 +106,10 @@ class WPRobo_DocuMerge_Admin_Menu {
         $this->wprobo_documerge_capability = apply_filters( 'wprobo_documerge_admin_menu_capability', $this->wprobo_documerge_capability );
 
         // Parent menu — DocuMerge.
+        $menu_label = defined( 'WPROBO_DOCUMERGE_LITE' ) && WPROBO_DOCUMERGE_LITE ? __( 'DocuMerge Lite', 'wprobo-documerge' ) : __( 'DocuMerge', 'wprobo-documerge' );
         add_menu_page(
             __( 'DocuMerge', 'wprobo-documerge' ),
-            __( 'DocuMerge', 'wprobo-documerge' ),
+            $menu_label,
             $this->wprobo_documerge_capability,
             'wprobo-documerge',
             array( $this, 'wprobo_documerge_render_dashboard' ),

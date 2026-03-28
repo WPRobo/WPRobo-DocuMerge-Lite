@@ -27,7 +27,51 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// If Pro is already loaded, bail completely — Pro takes priority.
+// ─── Activation / Deactivation hooks MUST be registered before any bail-out ───
+// Otherwise they never fire when Pro is active (because the early return skips them).
+
+// Activation: deactivate Pro, then run installer.
+register_activation_hook( __FILE__, function() {
+    $pro_plugin = 'wprobo-docu-merge/wprobo-documerge.php';
+    if ( ! function_exists( 'deactivate_plugins' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+    }
+    deactivate_plugins( $pro_plugin, true );
+
+    // Constants may not be set yet during activation, define path manually.
+    $plugin_path = plugin_dir_path( __FILE__ );
+
+    // Load autoloader for installer.
+    spl_autoload_register( function ( $class ) use ( $plugin_path ) {
+        $prefix   = 'WPRobo\\DocuMerge\\';
+        $base_dir = $plugin_path . 'src/';
+        $len      = strlen( $prefix );
+        if ( 0 !== strncmp( $prefix, $class, $len ) ) {
+            return;
+        }
+        $relative_class = substr( $class, $len );
+        $parts          = explode( '\\', $relative_class );
+        $classname      = array_pop( $parts );
+        $subdir         = implode( '/', $parts );
+        $file           = $base_dir . ( $subdir ? $subdir . '/' : '' ) . $classname . '.php';
+        if ( file_exists( $file ) ) {
+            require_once $file;
+        }
+    } );
+
+    if ( class_exists( 'WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Installer' ) ) {
+        \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Installer::wprobo_documerge_activate();
+    }
+} );
+
+// Deactivation.
+register_deactivation_hook( __FILE__, function() {
+    if ( class_exists( 'WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Deactivator' ) ) {
+        \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Deactivator::wprobo_documerge_deactivate();
+    }
+} );
+
+// ─── Now check if Pro is loaded — if so, bail (Pro takes priority at runtime) ───
 if ( defined( 'WPROBO_DOCUMERGE_PRO' ) ) {
     return;
 }
@@ -84,25 +128,9 @@ spl_autoload_register( function ( $class ) {
     }
 } );
 
-// Activation hook — deactivate Pro FIRST, then run installer.
-register_activation_hook( __FILE__, function() {
-    $pro_plugin = 'wprobo-docu-merge/wprobo-documerge.php';
-    if ( ! function_exists( 'deactivate_plugins' ) ) {
-        require_once ABSPATH . 'wp-admin/includes/plugin.php';
-    }
-    deactivate_plugins( $pro_plugin, true );
-    \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Installer::wprobo_documerge_activate();
-} );
-
-// Deactivation hook.
-register_deactivation_hook(
-    __FILE__,
-    array( 'WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Deactivator', 'wprobo_documerge_deactivate' )
-);
-
 // Bootstrap the plugin.
 add_action( 'plugins_loaded', function() {
-    // Final safety check — if Pro somehow loaded after us, don't double-bootstrap.
+    // Final safety — if Pro loaded after us, don't double-bootstrap.
     if ( defined( 'WPROBO_DOCUMERGE_PRO' ) ) {
         return;
     }

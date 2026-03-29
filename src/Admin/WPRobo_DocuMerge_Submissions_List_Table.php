@@ -59,7 +59,6 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 			'form_title'     => __( 'Form', 'wprobo-documerge' ),
 			'submitter_email' => __( 'Email', 'wprobo-documerge' ),
 			'status'         => __( 'Status', 'wprobo-documerge' ),
-			'payment_status' => __( 'Payment', 'wprobo-documerge' ),
 			'documents'      => __( 'Documents', 'wprobo-documerge' ),
 		);
 	}
@@ -146,11 +145,9 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 	 */
 	public function column_status( $item ) {
 		$status_map = array(
-			'completed'       => 'success',
-			'processing'      => 'info',
-			'error'           => 'error',
-			'pending_payment' => 'pending',
-			'payment_failed'  => 'error',
+			'completed'  => 'success',
+			'processing' => 'info',
+			'error'      => 'error',
 		);
 
 		$badge_class  = isset( $status_map[ $item->status ] ) ? $status_map[ $item->status ] : 'info';
@@ -161,35 +158,6 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 			esc_attr( $badge_class ),
 			esc_html( ucwords( $status_label ) )
 		);
-	}
-
-	/**
-	 * Payment column.
-	 *
-	 * @since  1.2.0
-	 * @param  object $item Row data.
-	 * @return string
-	 */
-	public function column_payment_status( $item ) {
-		if ( empty( $item->payment_status ) || 'none' === $item->payment_status ) {
-			return '<span class="wdm-text-muted">' . esc_html__( 'Free', 'wprobo-documerge' ) . '</span>';
-		}
-
-		$currency_symbols = array(
-			'USD' => '$',
-			'GBP' => "\xC2\xA3",
-			'EUR' => "\xE2\x82\xAC",
-			'CAD' => 'C$',
-			'AUD' => 'A$',
-		);
-		$symbol = isset( $currency_symbols[ $item->payment_currency ] ) ? $currency_symbols[ $item->payment_currency ] : $item->payment_currency;
-		$amount = number_format( (float) $item->payment_amount, 2 );
-
-		if ( 'paid' === $item->payment_status ) {
-			return '<span class="wdm-badge wdm-badge-success">' . esc_html( $symbol . $amount ) . '</span>';
-		}
-
-		return '<span class="wdm-badge wdm-badge-pending">' . esc_html( ucfirst( $item->payment_status ) ) . '</span>';
 	}
 
 	/**
@@ -246,6 +214,7 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 		global $wpdb;
 
 		// Get forms for filter dropdown.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$forms = $wpdb->get_results(
 			"SELECT id, title FROM {$wpdb->prefix}wprdm_forms ORDER BY title ASC"
 		);
@@ -274,11 +243,9 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 
 		// Status filter.
 		$statuses = array(
-			'completed'       => __( 'Completed', 'wprobo-documerge' ),
-			'processing'      => __( 'Processing', 'wprobo-documerge' ),
-			'pending_payment' => __( 'Pending Payment', 'wprobo-documerge' ),
-			'error'           => __( 'Error', 'wprobo-documerge' ),
-			'payment_failed'  => __( 'Payment Failed', 'wprobo-documerge' ),
+			'completed'  => __( 'Completed', 'wprobo-documerge' ),
+			'processing' => __( 'Processing', 'wprobo-documerge' ),
+			'error'      => __( 'Error', 'wprobo-documerge' ),
 		);
 
 		echo '<select name="status">';

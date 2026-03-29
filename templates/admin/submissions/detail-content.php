@@ -41,48 +41,15 @@ $meta   = isset( $form_data['meta'] ) ? $form_data['meta'] : array();
             <td>
                 <?php
                 $status_map = array(
-                    'completed'       => 'success',
-                    'processing'      => 'info',
-                    'pending_payment' => 'pending',
-                    'error'           => 'error',
-                    'payment_failed'  => 'error',
+                    'completed'  => 'success',
+                    'processing' => 'info',
+                    'error'      => 'error',
                 );
                 $badge = isset( $status_map[ $submission->status ] ) ? $status_map[ $submission->status ] : 'info';
                 ?>
                 <span class="wdm-badge wdm-badge-<?php echo esc_attr( $badge ); ?>">
                     <?php echo esc_html( ucwords( str_replace( '_', ' ', $submission->status ) ) ); ?>
                 </span>
-            </td>
-        </tr>
-        <tr>
-            <td><strong><?php esc_html_e( 'Payment', 'wprobo-documerge' ); ?></strong></td>
-            <td>
-                <?php if ( 'none' !== $submission->payment_status ) : ?>
-                    <?php if ( (float) $submission->payment_amount > 0 ) : ?>
-                        <span class="wdm-payment-amount-display"><?php echo esc_html( strtoupper( $submission->payment_currency ) . ' ' . number_format( (float) $submission->payment_amount, 2 ) ); ?></span>
-                        <span class="wdm-payment-sep">&mdash;</span>
-                    <?php endif; ?>
-                    <div class="wdm-payment-status-edit" style="display:inline-flex;align-items:center;gap:6px;">
-                        <?php
-                        $payment_statuses = array(
-                            'pending'  => __( 'Pending', 'wprobo-documerge' ),
-                            'paid'     => __( 'Paid', 'wprobo-documerge' ),
-                            'failed'   => __( 'Failed', 'wprobo-documerge' ),
-                            'refunded' => __( 'Refunded', 'wprobo-documerge' ),
-                        );
-                        ?>
-                        <select class="wdm-payment-status-select" data-submission-id="<?php echo absint( $submission->id ); ?>" style="font-size:12px;padding:3px 6px;border-radius:4px;border:1px solid #dde5f0;">
-                            <?php foreach ( $payment_statuses as $ps_value => $ps_label ) : ?>
-                                <option value="<?php echo esc_attr( $ps_value ); ?>" <?php selected( $submission->payment_status, $ps_value ); ?>><?php echo esc_html( $ps_label ); ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <button type="button" class="wdm-btn wdm-btn-sm wdm-update-payment-status" data-submission-id="<?php echo absint( $submission->id ); ?>" style="padding:3px 10px;font-size:11px;">
-                            <?php esc_html_e( 'Update', 'wprobo-documerge' ); ?>
-                        </button>
-                    </div>
-                <?php else : ?>
-                    <span class="wdm-badge wdm-badge-info"><?php esc_html_e( 'Free', 'wprobo-documerge' ); ?></span>
-                <?php endif; ?>
             </td>
         </tr>
         <tr>

@@ -43,30 +43,30 @@
          * @type  {Object}
          */
         typeLabels: {
-            text:        'Text',
-            textarea:    'Textarea',
-            email:       'Email',
-            phone:       'Phone',
-            number:      'Number',
-            date:        'Date',
-            dropdown:    'Dropdown',
-            radio:       'Radio',
-            checkbox:    'Checkbox',
-            file_upload: 'File Upload',
-            address:     'Address',
-            name:        'Name',
-            hidden:      'Hidden',
-            html:             'HTML Block',
-            section_divider:  'Section Divider',
-            url:              'Website',
-            ip_address:       'IP Address',
-            tracking:         'Tracking',
-            signature:        'Signature',
-            payment:          'Payment',
-            captcha:          'CAPTCHA',
-            password:         'Password',
-            rating:           'Rating',
-            repeater:         'Repeater'
+            text:        (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_text) || 'Text',
+            textarea:    (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_textarea) || 'Textarea',
+            email:       (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_email) || 'Email',
+            phone:       (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_phone) || 'Phone',
+            number:      (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_number) || 'Number',
+            date:        (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_date) || 'Date',
+            dropdown:    (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_dropdown) || 'Dropdown',
+            radio:       (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_radio) || 'Radio',
+            checkbox:    (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_checkbox) || 'Checkbox',
+            file_upload: (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_file_upload) || 'File Upload',
+            address:     (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_address) || 'Address',
+            name:        (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_name) || 'Name',
+            hidden:      (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_hidden) || 'Hidden',
+            html:             (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_html) || 'HTML Block',
+            section_divider:  (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_section_divider) || 'Section Divider',
+            url:              (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_url) || 'Website',
+            ip_address:       (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_ip_address) || 'IP Address',
+            tracking:         (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_tracking) || 'Tracking',
+            signature:        (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_signature) || 'Signature',
+            payment:          (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_payment) || 'Payment',
+            captcha:          (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_captcha) || 'CAPTCHA',
+            password:         (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_password) || 'Password',
+            rating:           (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_rating) || 'Rating',
+            repeater:         (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n.field_type_repeater) || 'Repeater'
         },
 
         /**
@@ -223,11 +223,11 @@
                 e.preventDefault();
                 var formId = $('#wdm-form-id').val();
                 if ( ! formId || formId === '0' ) {
-                    self.showNotice('error', 'Please save the form first.');
+                    self.showNotice('error', wprobo_documerge_vars.i18n.save_form_first || 'Please save the form first.');
                     return;
                 }
 
-                var formTitle = $.trim($('#wdm-form-title').val()) || 'DocuMerge Form';
+                var formTitle = $.trim($('#wdm-form-title').val()) || (wprobo_documerge_vars.i18n.documerge_form || 'DocuMerge Form');
                 var $btn = $(this);
                 $btn.prop('disabled', true).addClass('wdm-loading');
 
@@ -243,15 +243,15 @@
                     success: function(response) {
                         $btn.prop('disabled', false).removeClass('wdm-loading');
                         if ( response.success && response.data.edit_url ) {
-                            self.showNotice('success', 'Page created! Opening in new tab...');
+                            self.showNotice('success', wprobo_documerge_vars.i18n.page_created || 'Page created! Opening in new tab...');
                             window.open(response.data.edit_url, '_blank');
                         } else {
-                            self.showNotice('error', response.data ? response.data.message : 'Failed to create page.');
+                            self.showNotice('error', response.data ? response.data.message : (wprobo_documerge_vars.i18n.failed_create_page || 'Failed to create page.'));
                         }
                     },
                     error: function() {
                         $btn.prop('disabled', false).removeClass('wdm-loading');
-                        self.showNotice('error', 'Network error.');
+                        self.showNotice('error', wprobo_documerge_vars.i18n.network_error_retry || 'Network error.');
                     }
                 });
             });
@@ -275,11 +275,11 @@
                 var $mapWrap  = $('#wdm-field-map-wrap');
 
                 if ( ! extFormId ) {
-                    $mapWrap.html('<p class="wdm-text-muted">Select an external form to see field mapping.</p>');
+                    $mapWrap.html('<p class="wdm-text-muted">' + $('<span>').text(wprobo_documerge_vars.i18n.select_external_form || 'Select an external form to see field mapping.').html() + '</p>');
                     return;
                 }
 
-                $mapWrap.html('<p class="wdm-text-muted">Loading fields...</p>');
+                $mapWrap.html('<p class="wdm-text-muted">' + $('<span>').text(wprobo_documerge_vars.i18n.loading_fields || 'Loading fields...').html() + '</p>');
 
                 $.ajax({
                     url:  wprobo_documerge_vars.ajax_url,
@@ -295,11 +295,11 @@
                         if ( response.success && response.data.html ) {
                             $mapWrap.html(response.data.html);
                         } else {
-                            $mapWrap.html('<p class="wdm-text-muted">No fields found.</p>');
+                            $mapWrap.html('<p class="wdm-text-muted">' + $('<span>').text(wprobo_documerge_vars.i18n.no_fields_found || 'No fields found.').html() + '</p>');
                         }
                     },
                     error: function() {
-                        $mapWrap.html('<p class="wdm-text-muted">Failed to load fields.</p>');
+                        $mapWrap.html('<p class="wdm-text-muted">' + $('<span>').text(wprobo_documerge_vars.i18n.failed_load_fields || 'Failed to load fields.').html() + '</p>');
                     }
                 });
             });
@@ -476,7 +476,7 @@
 
             // Singleton fields — only one allowed per form.
             if ( this.isSingletonField(type) && this.hasFieldType(type) ) {
-                this.showNotice('error', this.typeLabels[type] + ' field can only be added once per form.');
+                this.showNotice('error', this.typeLabels[type] + ' ' + (wprobo_documerge_vars.i18n.singleton_limit || 'field can only be added once per form.'));
                 return;
             }
 
@@ -575,7 +575,7 @@
 
             // Singleton fields — only one allowed per form.
             if ( this.isSingletonField(type) && this.hasFieldType(type) ) {
-                this.showNotice('error', this.typeLabels[type] + ' field can only be added once per form.');
+                this.showNotice('error', this.typeLabels[type] + ' ' + (wprobo_documerge_vars.i18n.singleton_limit || 'field can only be added once per form.'));
                 return;
             }
 
@@ -688,9 +688,9 @@
 
                         // Tab buttons.
                         '<div class="wdm-field-tabs">' +
-                            '<button type="button" class="wdm-field-tab wdm-field-tab-active" data-tab="general">General</button>' +
-                            '<button type="button" class="wdm-field-tab" data-tab="validation">Validation</button>' +
-                            '<button type="button" class="wdm-field-tab" data-tab="appearance">Appearance</button>' +
+                            '<button type="button" class="wdm-field-tab wdm-field-tab-active" data-tab="general">' + (wprobo_documerge_vars.i18n.general || 'General') + '</button>' +
+                            '<button type="button" class="wdm-field-tab" data-tab="validation">' + (wprobo_documerge_vars.i18n.validation || 'Validation') + '</button>' +
+                            '<button type="button" class="wdm-field-tab" data-tab="appearance">' + (wprobo_documerge_vars.i18n.appearance || 'Appearance') + '</button>' +
                         '</div>' +
 
                         // ── Tab 1: General ──────────────────────────
@@ -699,147 +699,147 @@
             // IP Address fields: show Label + Merge Tag only.
             if ( field.type === 'ip_address' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Label (admin reference)').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.label_admin_reference || 'Label (admin reference)').html() + '</label>' +
                                 '<input type="text" data-setting="label" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.label).html() + '">' +
-                                '<span class="wdm-description">For admin reference only. IP is captured automatically.</span>' +
+                                '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.admin_reference_desc || 'For admin reference only. IP is captured automatically.').html() + '</span>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Merge Tag').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.merge_tag || 'Merge Tag').html() + '</label>' +
                                 '<input type="text" class="wdm-input wdm-merge-tag-display" value="' + $('<span>').text(mergeTag).html() + '" readonly>' +
                             '</div>';
 
             // Tracking fields: show Label, Merge Tag, and tracking option checkboxes.
             } else if ( field.type === 'tracking' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Label (admin reference)').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.label_admin_reference || 'Label (admin reference)').html() + '</label>' +
                                 '<input type="text" data-setting="label" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.label).html() + '">' +
-                                '<span class="wdm-description">For admin reference only. Not shown on the frontend.</span>' +
+                                '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.not_shown_frontend || 'For admin reference only. Not shown on the frontend.').html() + '</span>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Merge Tag').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.merge_tag || 'Merge Tag').html() + '</label>' +
                                 '<input type="text" class="wdm-input wdm-merge-tag-display" value="' + $('<span>').text(mergeTag).html() + '" readonly>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label><input type="checkbox" data-setting="track_utms" class="wdm-builder-setting-input"' + (field.track_utms !== false ? ' checked' : '') + '> Track UTM Parameters</label>' +
-                                '<span class="wdm-description">Captures utm_source, utm_medium, utm_campaign, utm_content, utm_term</span>' +
+                                '<label><input type="checkbox" data-setting="track_utms" class="wdm-builder-setting-input"' + (field.track_utms !== false ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.track_utm || 'Track UTM Parameters').html() + '</label>' +
+                                '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.track_utm_desc || 'Captures utm_source, utm_medium, utm_campaign, utm_content, utm_term').html() + '</span>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label><input type="checkbox" data-setting="track_referrer" class="wdm-builder-setting-input"' + (field.track_referrer !== false ? ' checked' : '') + '> Track Referrer URL</label>' +
+                                '<label><input type="checkbox" data-setting="track_referrer" class="wdm-builder-setting-input"' + (field.track_referrer !== false ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.track_referrer || 'Track Referrer URL').html() + '</label>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label><input type="checkbox" data-setting="track_landing_page" class="wdm-builder-setting-input"' + (field.track_landing_page !== false ? ' checked' : '') + '> Track Landing Page URL</label>' +
+                                '<label><input type="checkbox" data-setting="track_landing_page" class="wdm-builder-setting-input"' + (field.track_landing_page !== false ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.track_landing || 'Track Landing Page URL').html() + '</label>' +
                             '</div>';
 
             // Hidden fields: show Label + Merge Tag only (no placeholder, help text, required, width).
             } else if ( field.type === 'hidden' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Label (admin reference)').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.label_admin_reference || 'Label (admin reference)').html() + '</label>' +
                                 '<input type="text" data-setting="label" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.label).html() + '">' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Merge Tag').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.merge_tag || 'Merge Tag').html() + '</label>' +
                                 '<input type="text" class="wdm-input wdm-merge-tag-display" value="' + $('<span>').text(mergeTag).html() + '" readonly>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>Default Value</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.default_value || 'Default Value').html() + '</label>' +
                                 '<input type="text" data-setting="default_value" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.default_value || '').html() + '">' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>Dynamic Value</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_value || 'Dynamic Value').html() + '</label>' +
                                 '<select data-setting="dynamic_value" class="wdm-builder-setting-input wdm-select">' +
-                                    '<option value="none"' + (field.dynamic_value === 'none' ? ' selected' : '') + '>None (use default)</option>' +
-                                    '<option value="user_id"' + (field.dynamic_value === 'user_id' ? ' selected' : '') + '>Current User ID</option>' +
-                                    '<option value="user_email"' + (field.dynamic_value === 'user_email' ? ' selected' : '') + '>Current User Email</option>' +
-                                    '<option value="user_name"' + (field.dynamic_value === 'user_name' ? ' selected' : '') + '>Current User Name</option>' +
-                                    '<option value="page_url"' + (field.dynamic_value === 'page_url' ? ' selected' : '') + '>Current Page URL</option>' +
-                                    '<option value="page_title"' + (field.dynamic_value === 'page_title' ? ' selected' : '') + '>Page Title</option>' +
-                                    '<option value="referrer"' + (field.dynamic_value === 'referrer' ? ' selected' : '') + '>Referrer URL</option>' +
-                                    '<option value="custom"' + (field.dynamic_value === 'custom' ? ' selected' : '') + '>Custom Value</option>' +
+                                    '<option value="none"' + (field.dynamic_value === 'none' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_none || 'None (use default)').html() + '</option>' +
+                                    '<option value="user_id"' + (field.dynamic_value === 'user_id' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_user_id || 'Current User ID').html() + '</option>' +
+                                    '<option value="user_email"' + (field.dynamic_value === 'user_email' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_user_email || 'Current User Email').html() + '</option>' +
+                                    '<option value="user_name"' + (field.dynamic_value === 'user_name' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_user_name || 'Current User Name').html() + '</option>' +
+                                    '<option value="page_url"' + (field.dynamic_value === 'page_url' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_page_url || 'Current Page URL').html() + '</option>' +
+                                    '<option value="page_title"' + (field.dynamic_value === 'page_title' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_page_title || 'Page Title').html() + '</option>' +
+                                    '<option value="referrer"' + (field.dynamic_value === 'referrer' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_referrer || 'Referrer URL').html() + '</option>' +
+                                    '<option value="custom"' + (field.dynamic_value === 'custom' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.dynamic_custom || 'Custom Value').html() + '</option>' +
                                 '</select>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>Custom Value</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.custom_value || 'Custom Value').html() + '</label>' +
                                 '<input type="text" data-setting="custom_value" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.custom_value || '').html() + '">' +
                             '</div>';
 
             // HTML block: show Label (admin reference) + HTML content only.
             } else if ( field.type === 'html' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Label (admin reference)').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.label_admin_reference || 'Label (admin reference)').html() + '</label>' +
                                 '<input type="text" data-setting="label" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.label).html() + '">' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>HTML Content</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.html_content || 'HTML Content').html() + '</label>' +
                                 '<textarea data-setting="html_content" class="wdm-builder-setting-input wdm-textarea" rows="6">' + $('<span>').text(field.html_content || '<p>Add your content here.</p>').html() + '</textarea>' +
-                                '<span class="wdm-description">Supports HTML: headings, paragraphs, lists, links, images.</span>' +
+                                '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.html_content_desc || 'Supports HTML: headings, paragraphs, lists, links, images.').html() + '</span>' +
                             '</div>';
 
             // Section Divider: custom General tab — title, alignment, style.
             } else if ( field.type === 'section_divider' ) {
                 var sel = function(current, val) { return current === val ? ' selected' : ''; };
                 html += '<div class="wdm-builder-field-setting">' +
-                                '<label>Title Text</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.title_text || 'Title Text').html() + '</label>' +
                                 '<input type="text" data-setting="label" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.label).html() + '">' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label><input type="checkbox" data-setting="show_title" class="wdm-builder-setting-input"' + (field.show_title !== false ? ' checked' : '') + '> Show Title</label>' +
+                                '<label><input type="checkbox" data-setting="show_title" class="wdm-builder-setting-input"' + (field.show_title !== false ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.show_title || 'Show Title').html() + '</label>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>Title Alignment</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.title_alignment || 'Title Alignment').html() + '</label>' +
                                 '<select data-setting="title_alignment" class="wdm-builder-setting-input wdm-select">' +
-                                    '<option value="left"' + sel(field.title_alignment, 'left') + '>Left</option>' +
-                                    '<option value="center"' + sel(field.title_alignment, 'center') + '>Center</option>' +
-                                    '<option value="right"' + sel(field.title_alignment, 'right') + '>Right</option>' +
+                                    '<option value="left"' + sel(field.title_alignment, 'left') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.align_left || 'Left').html() + '</option>' +
+                                    '<option value="center"' + sel(field.title_alignment, 'center') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.align_center || 'Center').html() + '</option>' +
+                                    '<option value="right"' + sel(field.title_alignment, 'right') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.align_right || 'Right').html() + '</option>' +
                                 '</select>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>Divider Style</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.divider_style || 'Divider Style').html() + '</label>' +
                                 '<select data-setting="divider_style" class="wdm-builder-setting-input wdm-select">' +
-                                    '<option value="line"' + sel(field.divider_style, 'line') + '>Solid Line</option>' +
-                                    '<option value="dashed"' + sel(field.divider_style, 'dashed') + '>Dashed</option>' +
-                                    '<option value="dotted"' + sel(field.divider_style, 'dotted') + '>Dotted</option>' +
-                                    '<option value="double"' + sel(field.divider_style, 'double') + '>Double</option>' +
-                                    '<option value="none"' + sel(field.divider_style, 'none') + '>No Line</option>' +
+                                    '<option value="line"' + sel(field.divider_style, 'line') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.divider_solid || 'Solid Line').html() + '</option>' +
+                                    '<option value="dashed"' + sel(field.divider_style, 'dashed') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.divider_dashed || 'Dashed').html() + '</option>' +
+                                    '<option value="dotted"' + sel(field.divider_style, 'dotted') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.divider_dotted || 'Dotted').html() + '</option>' +
+                                    '<option value="double"' + sel(field.divider_style, 'double') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.divider_double || 'Double').html() + '</option>' +
+                                    '<option value="none"' + sel(field.divider_style, 'none') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.divider_none || 'No Line').html() + '</option>' +
                                 '</select>' +
                             '</div>';
 
             // All other field types: standard General tab fields.
             } else {
                 html += '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Label').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.label || 'Label').html() + '</label>' +
                                 '<input type="text" data-setting="label" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.label).html() + '">' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>Label Position</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.label_position || 'Label Position').html() + '</label>' +
                                 '<select data-setting="label_position" class="wdm-builder-setting-input wdm-select">' +
-                                    '<option value="top"' + (field.label_position === 'top' ? ' selected' : '') + '>Above field</option>' +
-                                    '<option value="bottom"' + (field.label_position === 'bottom' ? ' selected' : '') + '>Below field</option>' +
-                                    '<option value="hidden"' + (field.label_position === 'hidden' ? ' selected' : '') + '>Hidden (screen reader only)</option>' +
+                                    '<option value="top"' + (field.label_position === 'top' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.label_above_field || 'Above field').html() + '</option>' +
+                                    '<option value="bottom"' + (field.label_position === 'bottom' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.label_below_field || 'Below field').html() + '</option>' +
+                                    '<option value="hidden"' + (field.label_position === 'hidden' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.label_hidden_sr || 'Hidden (screen reader only)').html() + '</option>' +
                                 '</select>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Placeholder').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.placeholder || 'Placeholder').html() + '</label>' +
                                 '<input type="text" data-setting="placeholder" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.placeholder).html() + '">' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Merge Tag').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.merge_tag || 'Merge Tag').html() + '</label>' +
                                 '<input type="text" class="wdm-input wdm-merge-tag-display" value="' + $('<span>').text(mergeTag).html() + '" readonly>' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Help Text').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.help_text || 'Help Text').html() + '</label>' +
                                 '<input type="text" data-setting="help_text" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.help_text).html() + '">' +
                             '</div>' +
                             '<div class="wdm-builder-field-setting">';
 
-                html += '<label><input type="checkbox" data-setting="required" class="wdm-builder-setting-input"' + checkedAttr + '> ' + $('<span>').text('Required').html() + '</label>';
+                html += '<label><input type="checkbox" data-setting="required" class="wdm-builder-setting-input"' + checkedAttr + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.required || 'Required').html() + '</label>';
 
                 html += '</div>' +
                             '<div class="wdm-builder-field-setting">' +
-                                '<label>' + $('<span>').text('Width').html() + '</label>' +
+                                '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.width || 'Width').html() + '</label>' +
                                 '<div class="wdm-width-selector">' +
-                                    '<label><input type="radio" name="width_' + field.id + '" data-setting="width" value="full" class="wdm-builder-setting-input"' + (field.width === 'full' ? ' checked' : '') + '> ' + $('<span>').text('Full').html() + '</label>' +
-                                    '<label><input type="radio" name="width_' + field.id + '" data-setting="width" value="half" class="wdm-builder-setting-input"' + (field.width === 'half' ? ' checked' : '') + '> ' + $('<span>').text('Half').html() + '</label>' +
-                                    '<label><input type="radio" name="width_' + field.id + '" data-setting="width" value="third" class="wdm-builder-setting-input"' + (field.width === 'third' ? ' checked' : '') + '> ' + $('<span>').text('Third').html() + '</label>' +
+                                    '<label><input type="radio" name="width_' + field.id + '" data-setting="width" value="full" class="wdm-builder-setting-input"' + (field.width === 'full' ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.width_full || 'Full').html() + '</label>' +
+                                    '<label><input type="radio" name="width_' + field.id + '" data-setting="width" value="half" class="wdm-builder-setting-input"' + (field.width === 'half' ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.width_half || 'Half').html() + '</label>' +
+                                    '<label><input type="radio" name="width_' + field.id + '" data-setting="width" value="third" class="wdm-builder-setting-input"' + (field.width === 'third' ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.width_third || 'Third').html() + '</label>' +
                                 '</div>' +
                             '</div>';
             }
@@ -859,7 +859,7 @@
                 ];
 
                 html += '<div class="wdm-builder-field-setting">' +
-                            '<label>Date Format</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.date_format || 'Date Format').html() + '</label>' +
                             '<select data-setting="date_format" class="wdm-builder-setting-input wdm-select">';
 
                 $.each(dateFormats, function(i, fmt) {
@@ -870,7 +870,7 @@
                 });
 
                 html += '</select>' +
-                        '<span class="wdm-description">How the date appears in the form and document.</span>' +
+                        '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.date_format_desc || 'How the date appears in the form and document.').html() + '</span>' +
                     '</div>';
             }
 
@@ -878,7 +878,7 @@
             if ( field.type === 'dropdown' || field.type === 'radio' || field.type === 'checkbox' ) {
                 var options = field.options || [];
                 html += '<div class="wdm-builder-field-setting wdm-options-manager">' +
-                            '<label>Options</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.options_label || 'Options').html() + '</label>' +
                             '<div class="wdm-options-list">';
 
                 $.each(options, function(i, option) {
@@ -891,7 +891,7 @@
                 });
 
                 html += '</div>' +
-                        '<button type="button" class="wdm-add-option wdm-btn wdm-btn-sm">+ Add Option</button>' +
+                        '<button type="button" class="wdm-add-option wdm-btn wdm-btn-sm">' + $('<span>').text(wprobo_documerge_vars.i18n.add_option || '+ Add Option').html() + '</button>' +
                     '</div>';
 
                 // Searchable toggle — dropdown only.
@@ -899,9 +899,9 @@
                     var searchChecked = field.searchable ? ' checked' : '';
                     html += '<div class="wdm-builder-field-setting">' +
                                 '<label><input type="checkbox" data-setting="searchable" class="wdm-builder-setting-input"' + searchChecked + '> ' +
-                                $('<span>').text('Enable search (users can type to filter options)').html() +
+                                $('<span>').text(wprobo_documerge_vars.i18n.enable_search || 'Enable search (users can type to filter options)').html() +
                                 '</label>' +
-                                '<span class="wdm-description">Recommended for dropdowns with many options.</span>' +
+                                '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.enable_search_desc || 'Recommended for dropdowns with many options.').html() + '</span>' +
                             '</div>';
                 }
             }
@@ -909,29 +909,29 @@
             // File Upload field settings (inside General tab).
             if ( field.type === 'file_upload' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                            '<label>Allowed File Types</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.allowed_file_types || 'Allowed File Types').html() + '</label>' +
                             '<input type="text" data-setting="allowed_types" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.allowed_types || 'jpg,jpeg,png,gif,pdf,doc,docx').html() + '" placeholder="jpg,png,pdf,docx">' +
-                            '<span class="wdm-description">Comma-separated file extensions</span>' +
+                            '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.allowed_file_types_desc || 'Comma-separated file extensions').html() + '</span>' +
                         '</div>' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label>Max File Size (MB)</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.max_file_size || 'Max File Size (MB)').html() + '</label>' +
                             '<input type="number" data-setting="max_file_size" class="wdm-builder-setting-input wdm-input wdm-input-small" value="' + (field.max_file_size || 5) + '" min="1" max="50">' +
                         '</div>' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label><input type="checkbox" data-setting="multiple" class="wdm-builder-setting-input"' + (field.multiple ? ' checked' : '') + '> Allow multiple files</label>' +
+                            '<label><input type="checkbox" data-setting="multiple" class="wdm-builder-setting-input"' + (field.multiple ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.allow_multiple_files || 'Allow multiple files').html() + '</label>' +
                         '</div>';
             }
 
             // Address field settings (inside General tab).
             if ( field.type === 'address' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                            '<label><input type="checkbox" data-setting="show_line2" class="wdm-builder-setting-input"' + (field.show_line2 !== false ? ' checked' : '') + '> Show Address Line 2</label>' +
+                            '<label><input type="checkbox" data-setting="show_line2" class="wdm-builder-setting-input"' + (field.show_line2 !== false ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.show_address_line2 || 'Show Address Line 2').html() + '</label>' +
                         '</div>' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label><input type="checkbox" data-setting="show_country" class="wdm-builder-setting-input"' + (field.show_country !== false ? ' checked' : '') + '> Show Country field</label>' +
+                            '<label><input type="checkbox" data-setting="show_country" class="wdm-builder-setting-input"' + (field.show_country !== false ? ' checked' : '') + '> ' + $('<span>').text(wprobo_documerge_vars.i18n.show_country_field || 'Show Country field').html() + '</label>' +
                         '</div>' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label>Default Country</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.default_country || 'Default Country').html() + '</label>' +
                             '<input type="text" data-setting="default_country" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.default_country || '').html() + '" placeholder="e.g. United Kingdom">' +
                         '</div>';
             }
@@ -939,11 +939,11 @@
             // Name field settings (inside General tab).
             if ( field.type === 'name' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                            '<label>Name Format</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.name_format || 'Name Format').html() + '</label>' +
                             '<select data-setting="name_format" class="wdm-builder-setting-input wdm-select">' +
-                                '<option value="first_last"' + (field.name_format === 'first_last' ? ' selected' : '') + '>First + Last</option>' +
-                                '<option value="first_middle_last"' + (field.name_format === 'first_middle_last' ? ' selected' : '') + '>First + Middle + Last</option>' +
-                                '<option value="title_first_last"' + (field.name_format === 'title_first_last' ? ' selected' : '') + '>Title + First + Last</option>' +
+                                '<option value="first_last"' + (field.name_format === 'first_last' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.name_first_last || 'First + Last').html() + '</option>' +
+                                '<option value="first_middle_last"' + (field.name_format === 'first_middle_last' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.name_first_middle_last || 'First + Middle + Last').html() + '</option>' +
+                                '<option value="title_first_last"' + (field.name_format === 'title_first_last' ? ' selected' : '') + '>' + $('<span>').text(wprobo_documerge_vars.i18n.name_title_first_last || 'Title + First + Last').html() + '</option>' +
                             '</select>' +
                         '</div>';
             }
@@ -962,22 +962,22 @@
 
             html += '<div class="wdm-field-tab-content" data-tab="validation">' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label>' + $('<span>').text('Custom Error Message').html() + '</label>' +
-                            '<input type="text" data-setting="error_message" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(errorMessage).html() + '" placeholder="Leave blank for default">' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.custom_error_message || 'Custom Error Message').html() + '</label>' +
+                            '<input type="text" data-setting="error_message" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(errorMessage).html() + '" placeholder="' + $('<span>').text(wprobo_documerge_vars.i18n.leave_blank_default || 'Leave blank for default').html() + '">' +
                         '</div>';
 
             // Number-specific validation fields.
             if ( field.type === 'number' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                            '<label>' + $('<span>').text('Min Value').html() + '</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.min_value || 'Min Value').html() + '</label>' +
                             '<input type="number" data-setting="min_value" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(minValue).html() + '">' +
                         '</div>' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label>' + $('<span>').text('Max Value').html() + '</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.max_value || 'Max Value').html() + '</label>' +
                             '<input type="number" data-setting="max_value" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(maxValue).html() + '">' +
                         '</div>' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label>' + $('<span>').text('Step').html() + '</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.step || 'Step').html() + '</label>' +
                             '<input type="number" data-setting="step_value" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(stepVal).html() + '" placeholder="e.g. 1, 0.01">' +
                         '</div>';
             }
@@ -985,11 +985,11 @@
             // Text-specific validation fields.
             if ( field.type === 'text' || field.type === 'textarea' || field.type === 'email' || field.type === 'phone' || field.type === 'url' ) {
                 html += '<div class="wdm-builder-field-setting">' +
-                            '<label>' + $('<span>').text('Min Length').html() + '</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.min_length || 'Min Length').html() + '</label>' +
                             '<input type="number" data-setting="min_length" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(minLength).html() + '">' +
                         '</div>' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label>' + $('<span>').text('Max Length').html() + '</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.max_length || 'Max Length').html() + '</label>' +
                             '<input type="number" data-setting="max_length" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(maxLength).html() + '">' +
                         '</div>';
             }
@@ -1001,14 +1001,14 @@
             // ── Tab 4: Appearance ──────────────────────────
             html += '<div class="wdm-field-tab-content" data-tab="appearance">' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label>CSS Class</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.css_class || 'CSS Class').html() + '</label>' +
                             '<input type="text" data-setting="css_class" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.css_class || '').html() + '" placeholder="e.g. my-custom-field">' +
-                            '<span class="wdm-description">Add custom CSS class(es). Separate multiple with spaces.</span>' +
+                            '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.css_class_desc || 'Add custom CSS class(es). Separate multiple with spaces.').html() + '</span>' +
                         '</div>' +
                         '<div class="wdm-builder-field-setting">' +
-                            '<label>CSS ID</label>' +
+                            '<label>' + $('<span>').text(wprobo_documerge_vars.i18n.css_id || 'CSS ID').html() + '</label>' +
                             '<input type="text" data-setting="css_id" class="wdm-builder-setting-input wdm-input" value="' + $('<span>').text(field.css_id || '').html() + '" placeholder="e.g. my-field-id">' +
-                            '<span class="wdm-description">Optional unique HTML ID for this field.</span>' +
+                            '<span class="wdm-description">' + $('<span>').text(wprobo_documerge_vars.i18n.css_id_desc || 'Optional unique HTML ID for this field.').html() + '</span>' +
                         '</div>' +
                     '</div>';
 
@@ -1047,7 +1047,7 @@
          * @param {jQuery} $btn The clicked delete button.
          */
         deleteField: function($btn) {
-            if ( ! window.confirm('Are you sure you want to remove this field?') ) {
+            if ( ! window.confirm(wprobo_documerge_vars.i18n.confirm_remove_field || 'Are you sure you want to remove this field?') ) {
                 return;
             }
 
@@ -1259,8 +1259,8 @@
             var settings = JSON.stringify(settingsObj);
 
             // Validate title.
-            if ( ! title || title === 'Untitled Form' ) {
-                self.showNotice('error', 'Please enter a form title.');
+            if ( ! title || title === (wprobo_documerge_vars.i18n.untitled_form || 'Untitled Form') ) {
+                self.showNotice('error', wprobo_documerge_vars.i18n.enter_form_title || 'Please enter a form title.');
                 return;
             }
 
@@ -1318,12 +1318,12 @@
                         self.showNotice('error',
                             response.data && response.data.message
                                 ? response.data.message
-                                : 'An error occurred while saving the form.'
+                                : (wprobo_documerge_vars.i18n.save_error || 'An error occurred while saving the form.')
                         );
                     }
                 },
                 error: function() {
-                    self.showNotice('error', 'Network error. Please try again.');
+                    self.showNotice('error', wprobo_documerge_vars.i18n.network_error_retry || 'Network error. Please try again.');
                 },
                 complete: function() {
                     $btn.prop('disabled', false).removeClass('wdm-loading');
@@ -1345,7 +1345,7 @@
             var formId = $('#wdm-form-id').val();
 
             if ( ! formId || formId === '0' ) {
-                self.showNotice('error', 'Please save the form first.');
+                self.showNotice('error', wprobo_documerge_vars.i18n.save_form_first || 'Please save the form first.');
                 return;
             }
 
@@ -1366,12 +1366,12 @@
                     if ( response.success && response.data.url ) {
                         window.open(response.data.url, '_blank');
                     } else {
-                        self.showNotice('error', response.data ? response.data.message : 'Preview failed.');
+                        self.showNotice('error', response.data ? response.data.message : (wprobo_documerge_vars.i18n.preview_failed || 'Preview failed.'));
                     }
                 },
                 error: function() {
                     $btn.prop('disabled', false).removeClass('wdm-loading');
-                    self.showNotice('error', 'Network error. Please try again.');
+                    self.showNotice('error', wprobo_documerge_vars.i18n.network_error_retry || 'Network error. Please try again.');
                 }
             });
         },
@@ -1424,7 +1424,7 @@
             var defaults = $.extend({
                 id:            'field_0',
                 type:          'text',
-                label:         'Untitled',
+                label:         wprobo_documerge_vars.i18n.untitled || 'Untitled',
                 name:          '',
                 placeholder:   '',
                 help_text:     '',
@@ -1475,7 +1475,7 @@
             document.execCommand('copy');
             $temp.remove();
 
-            this.showToast('Copied!', 'success');
+            this.showToast(wprobo_documerge_vars.i18n.copied || 'Copied!', 'success');
         },
 
         /**
@@ -1488,7 +1488,7 @@
             var self   = this;
             var formId = $btn.data('id');
 
-            if ( ! window.confirm('Are you sure you want to delete this form? This cannot be undone.') ) {
+            if ( ! window.confirm(wprobo_documerge_vars.i18n.confirm_delete_form || 'Are you sure you want to delete this form? This cannot be undone.') ) {
                 return;
             }
 
@@ -1514,18 +1514,18 @@
                         self.showNotice('success',
                             response.data && response.data.message
                                 ? response.data.message
-                                : 'Form deleted.'
+                                : (wprobo_documerge_vars.i18n.form_deleted || 'Form deleted.')
                         );
                     } else {
                         self.showNotice('error',
                             response.data && response.data.message
                                 ? response.data.message
-                                : 'An error occurred.'
+                                : (wprobo_documerge_vars.i18n.an_error_occurred || 'An error occurred.')
                         );
                     }
                 },
                 error: function() {
-                    self.showNotice('error', 'Network error. Please try again.');
+                    self.showNotice('error', wprobo_documerge_vars.i18n.network_error_retry || 'Network error. Please try again.');
                 },
                 complete: function() {
                     $btn.prop('disabled', false).removeClass('wdm-loading');

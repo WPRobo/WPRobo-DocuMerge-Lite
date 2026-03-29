@@ -153,14 +153,14 @@
                         if ( response.success ) {
                             $btn.text(wprobo_documerge_vars.i18n.saved || 'Saved!');
                             setTimeout(function() {
-                                $btn.text(wprobo_documerge_vars.i18n.save_note || 'Save Note');
+                                $btn.text((wprobo_documerge_vars.i18n.save_note || 'Save Note'));
                             }, 2000);
                         } else {
-                            $btn.text(wprobo_documerge_vars.i18n.save_note || 'Save Note');
+                            $btn.text((wprobo_documerge_vars.i18n.save_note || 'Save Note'));
                         }
                     },
                     error: function() {
-                        $btn.prop('disabled', false).text(wprobo_documerge_vars.i18n.save_note || 'Save Note');
+                        $btn.prop('disabled', false).text((wprobo_documerge_vars.i18n.save_note || 'Save Note'));
                     }
                 });
             });
@@ -282,24 +282,24 @@
 
             switch ( paymentStatus ) {
                 case 'paid':
-                    label = 'Paid ' + $('<span>').text(sub.currency_symbol || '').html() + $('<span>').text(sub.payment_amount || '').html();
+                    label = (wprobo_documerge_vars.i18n.paid || 'Paid') + ' ' + $('<span>').text(sub.currency_symbol || '').html() + $('<span>').text(sub.payment_amount || '').html();
                     cls   = 'success';
                     break;
                 case 'none':
                 case 'free':
-                    label = 'Free';
+                    label = wprobo_documerge_vars.i18n.status_free || 'Free';
                     cls   = 'info';
                     break;
                 case 'pending':
-                    label = 'Pending';
+                    label = wprobo_documerge_vars.i18n.status_pending || 'Pending';
                     cls   = 'pending';
                     break;
                 case 'failed':
-                    label = 'Failed';
+                    label = wprobo_documerge_vars.i18n.status_failed || 'Failed';
                     cls   = 'error';
                     break;
                 case 'refunded':
-                    label = 'Refunded';
+                    label = wprobo_documerge_vars.i18n.status_refunded || 'Refunded';
                     cls   = 'pending';
                     break;
                 default:
@@ -362,13 +362,13 @@
             var startItem = ((current - 1) * perPage) + 1;
             var endItem   = Math.min(current * perPage, total);
 
-            var html = '<span class="wdm-pagination-info">Showing ' + startItem + '&ndash;' + endItem + ' of ' + total + '</span>';
+            var html = '<span class="wdm-pagination-info">' + (wprobo_documerge_vars.i18n.showing || 'Showing') + ' ' + startItem + '&ndash;' + endItem + ' ' + (wprobo_documerge_vars.i18n.of || 'of') + ' ' + total + '</span>';
 
             html += '<span class="wdm-pagination-buttons">';
 
             // Previous button.
             if ( current > 1 ) {
-                html += '<button type="button" class="wdm-btn wdm-btn-sm wdm-pagination-btn" data-page="' + (current - 1) + '">&laquo; Prev</button>';
+                html += '<button type="button" class="wdm-btn wdm-btn-sm wdm-pagination-btn" data-page="' + (current - 1) + '">&laquo; ' + (wprobo_documerge_vars.i18n.prev || 'Prev') + '</button>';
             }
 
             // Numbered page buttons.
@@ -382,7 +382,7 @@
 
             // Next button.
             if ( current < totalPages ) {
-                html += '<button type="button" class="wdm-btn wdm-btn-sm wdm-pagination-btn" data-page="' + (current + 1) + '">Next &raquo;</button>';
+                html += '<button type="button" class="wdm-btn wdm-btn-sm wdm-pagination-btn" data-page="' + (current + 1) + '">' + (wprobo_documerge_vars.i18n.next || 'Next') + ' &raquo;</button>';
             }
 
             html += '</span>';
@@ -441,7 +441,7 @@
                 },
                 beforeSend: function() {
                     $('#wdm-detail-body').html('<div class="wdm-loading-panel"><span class="spinner is-active"></span></div>');
-                    $('#wdm-detail-title').text('Submission #' + id);
+                    $('#wdm-detail-title').text((wprobo_documerge_vars.i18n.submission_prefix || 'Submission #') + id);
                     $('#wdm-submission-panel').addClass('wdm-panel-open').data('submission-id', id);
                     $('#wdm-overlay').show();
                 },
@@ -451,7 +451,7 @@
                     } else {
                         $('#wdm-detail-body').html(
                             '<p class="wdm-error">' +
-                                (response.data && response.data.message ? response.data.message : 'Error loading submission.') +
+                                (response.data && response.data.message ? response.data.message : (wprobo_documerge_vars.i18n.error_loading_submission || 'Error loading submission.')) +
                             '</p>'
                         );
                     }
@@ -481,7 +481,7 @@
                 },
                 beforeSend: function() {
                     $('#wdm-detail-body').html('<div class="wdm-loading-panel"><span class="spinner is-active"></span></div>');
-                    $('#wdm-detail-title').text('Submission #' + id);
+                    $('#wdm-detail-title').text((wprobo_documerge_vars.i18n.submission_prefix || 'Submission #') + id);
                     $('#wdm-submission-panel').addClass('wdm-panel-open').data('submission-id', id);
                     $('#wdm-overlay').show();
                 },
@@ -527,11 +527,11 @@
             });
 
             if ( ids.length === 0 ) {
-                self.showNotice('error', wprobo_documerge_vars.i18n.select_submissions || 'Select submissions to delete');
+                self.showNotice('error', wprobo_documerge_vars.i18n.select_submissions_delete || 'Select submissions to delete');
                 return;
             }
 
-            if ( ! confirm('Delete ' + ids.length + ' selected submissions?') ) {
+            if ( ! confirm((wprobo_documerge_vars.i18n.delete_selected_confirm || 'Delete %d selected submissions?').replace('%d', ids.length)) ) {
                 return;
             }
 
@@ -577,7 +577,7 @@
                 return;
             }
 
-            if ( ! confirm('Delete this submission?') ) {
+            if ( ! confirm(wprobo_documerge_vars.i18n.delete_this_submission || 'Delete this submission?') ) {
                 return;
             }
 

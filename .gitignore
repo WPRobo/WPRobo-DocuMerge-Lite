@@ -1,5 +1,6 @@
 /vendor/
 /node_modules/
+/production/
 .DS_Store
 Thumbs.db
 *.log

@@ -314,8 +314,11 @@ if ( ! defined( 'ABSPATH' ) ) {
                 <div class="wdm-settings-card-body">
                     <?php
                     global $wpdb;
+                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
                     $ie_tpl_count  = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_templates" );
+                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
                     $ie_form_count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_forms" );
+                    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
                     $ie_sub_count  = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions" );
 
                     ?>
@@ -450,8 +453,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
             <?php
             global $wpdb;
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
             $sub_count  = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions" );
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
             $form_count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_forms" );
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
             $tpl_count  = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_templates" );
             ?>
 

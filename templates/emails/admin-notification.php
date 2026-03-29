@@ -68,21 +68,6 @@ ob_start();
 		</tr>
 		<tr>
 			<td style="padding: 6px 0; color: #6b7280; font-weight: 600; vertical-align: top;">
-				<?php esc_html_e( 'Payment', 'wprobo-documerge' ); ?>
-			</td>
-			<td style="padding: 6px 0;">
-				<?php
-				if ( isset( $submission->payment_status ) && 'none' !== $submission->payment_status && (float) $submission->payment_amount > 0 ) {
-					echo '<strong>' . esc_html( strtoupper( $submission->payment_currency ) . ' ' . number_format( (float) $submission->payment_amount, 2 ) ) . '</strong>';
-					echo ' — ' . esc_html( ucfirst( $submission->payment_status ) );
-				} else {
-					esc_html_e( 'Free', 'wprobo-documerge' );
-				}
-				?>
-			</td>
-		</tr>
-		<tr>
-			<td style="padding: 6px 0; color: #6b7280; font-weight: 600; vertical-align: top;">
 				<?php esc_html_e( 'Submitter', 'wprobo-documerge' ); ?>
 			</td>
 			<td style="padding: 6px 0;">

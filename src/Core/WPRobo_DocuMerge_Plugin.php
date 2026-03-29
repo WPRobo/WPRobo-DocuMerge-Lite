@@ -101,6 +101,7 @@ class WPRobo_DocuMerge_Plugin {
         // Pass forms list to block editor with extended details.
         if ( is_admin() ) {
             global $wpdb;
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
             $forms = $wpdb->get_results(
                 "SELECT f.id, f.title, f.fields, t.name AS template_name
                  FROM {$wpdb->prefix}wprdm_forms f
@@ -253,15 +254,17 @@ class WPRobo_DocuMerge_Plugin {
         }
         $upgrade_url = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_get_upgrade_url();
         ?>
-        <div class="wdm-lite-upgrade-banner" style="background:linear-gradient(135deg,#042157,#0a3d8f);color:#fff;padding:14px 20px;border-radius:8px;margin:15px 22px 15px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
-            <div style="display:flex;align-items:center;gap:12px;">
-                <span class="dashicons dashicons-star-filled" style="font-size:24px;width:24px;height:24px;color:#fbbf24;"></span>
+        <div class="wdm-lite-upgrade-banner">
+            <div class="wdm-lite-upgrade-banner-content">
+                <span class="dashicons dashicons-star-filled wdm-lite-upgrade-banner-icon"></span>
                 <div>
-                    <strong style="font-size:14px;"><?php esc_html_e( 'Upgrade to DocuMerge Pro', 'wprobo-documerge' ); ?></strong>
-                    <p style="margin:2px 0 0;font-size:13px;opacity:0.85;"><?php esc_html_e( 'Unlock Stripe payments, signature fields, multi-step forms, conditional logic, email delivery, and 20+ more features.', 'wprobo-documerge' ); ?></p>
+                    <strong class="wdm-lite-upgrade-banner-title"><?php esc_html_e( 'Upgrade to DocuMerge Pro', 'wprobo-documerge' ); ?></strong>
+                    <p class="wdm-lite-upgrade-banner-desc"><?php esc_html_e( 'Unlock Stripe payments, signature fields, multi-step forms, conditional logic, email delivery, and 20+ more features.', 'wprobo-documerge' ); ?></p>
                 </div>
             </div>
-            <a href="<?php echo esc_url( $upgrade_url ); ?>" target="_blank" rel="noopener noreferrer" style="background:#fbbf24;color:#042157;padding:8px 20px;border-radius:6px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;"><?php esc_html_e( 'Upgrade Now', 'wprobo-documerge' ); ?></a>
+            <a href="<?php echo esc_url( $upgrade_url ); ?>" target="_blank" rel="noopener noreferrer" class="wdm-lite-upgrade-banner-btn">
+                <?php esc_html_e( 'Upgrade Now', 'wprobo-documerge' ); ?>
+            </a>
         </div>
         <?php
     }

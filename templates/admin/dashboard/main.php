@@ -56,9 +56,12 @@ $primary_action = array(
     // Calculate success rate for the 4th card.
     global $wpdb;
     $month_start          = gmdate( 'Y-m-01 00:00:00' );
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $total_this_month     = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions WHERE created_at >= %s", $month_start ) );
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $completed_this_month = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions WHERE status = 'completed' AND created_at >= %s", $month_start ) );
     $success_rate         = $total_this_month > 0 ? round( ( $completed_this_month / $total_this_month ) * 100 ) : 0;
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     $error_count          = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions WHERE status = 'error' AND created_at >= %s", $month_start ) );
     ?>
 

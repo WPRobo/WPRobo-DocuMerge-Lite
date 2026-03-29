@@ -419,19 +419,6 @@ class WPRobo_DocuMerge_Forms_Page {
 
         $delivery_methods_sanitized = array_map( 'sanitize_key', $delivery_methods_decoded );
 
-        // Payment fields.
-        $enable_payment = isset( $_POST['enable_payment'] )
-            ? sanitize_key( wp_unslash( $_POST['enable_payment'] ) )
-            : '';
-
-        $payment_amount = isset( $_POST['payment_amount'] )
-            ? sanitize_text_field( wp_unslash( $_POST['payment_amount'] ) )
-            : '';
-
-        $payment_currency = isset( $_POST['payment_currency'] )
-            ? sanitize_text_field( wp_unslash( $_POST['payment_currency'] ) )
-            : '';
-
         // Mode and integration.
         $mode = isset( $_POST['mode'] )
             ? sanitize_key( wp_unslash( $_POST['mode'] ) )
@@ -451,26 +438,19 @@ class WPRobo_DocuMerge_Forms_Page {
             ? sanitize_textarea_field( wp_unslash( $_POST['success_message'] ) )
             : '';
 
-        // Multi-step toggle.
-        $multistep_enabled = isset( $_POST['multistep'] ) ? absint( $_POST['multistep'] ) : 0;
-
         // Build data array.
         $data = array(
-            'id'                => $id,
-            'title'             => $title,
-            'template_id'       => $template_id,
-            'fields'            => $fields_sanitized,
-            'settings'          => $settings_sanitized,
-            'output_format'     => $output_format,
-            'delivery_methods'  => wp_json_encode( $delivery_methods_sanitized ),
-            'submit_label'      => $submit_label,
-            'success_message'   => $success_message,
-            'payment_enabled'   => $enable_payment,
-            'payment_amount'    => $payment_amount,
-            'payment_currency'  => $payment_currency,
-            'mode'              => $mode,
-            'integration'       => $integration,
-            'multistep_enabled' => $multistep_enabled,
+            'id'               => $id,
+            'title'            => $title,
+            'template_id'      => $template_id,
+            'fields'           => $fields_sanitized,
+            'settings'         => $settings_sanitized,
+            'output_format'    => $output_format,
+            'delivery_methods' => wp_json_encode( $delivery_methods_sanitized ),
+            'submit_label'     => $submit_label,
+            'success_message'  => $success_message,
+            'mode'             => $mode,
+            'integration'      => $integration,
         );
 
         $form_builder = new WPRobo_DocuMerge_Form_Builder();

@@ -80,16 +80,6 @@ ob_start();
 				<?php echo esc_html( $form_title ); ?>
 			</td>
 		</tr>
-		<?php if ( isset( $submission->payment_status ) && 'none' !== $submission->payment_status && (float) $submission->payment_amount > 0 ) : ?>
-		<tr>
-			<td style="padding: 6px 0; color: #6b7280; font-weight: 600; vertical-align: top;">
-				<?php esc_html_e( 'Amount Paid', 'wprobo-documerge' ); ?>
-			</td>
-			<td style="padding: 6px 0; font-weight: 700;">
-				<?php echo esc_html( strtoupper( $submission->payment_currency ) . ' ' . number_format( (float) $submission->payment_amount, 2 ) ); ?>
-			</td>
-		</tr>
-		<?php endif; ?>
 	</table>
 </div>
 

@@ -76,7 +76,7 @@
                 '<div class="wdm-notice wdm-notice-' + type + '" role="alert">' +
                     '<span class="wdm-notice-icon dashicons ' + (icons[type] || icons.success) + '"></span>' +
                     '<span class="wdm-notice-text">' + $('<div>').text(message).html() + '</span>' +
-                    '<button class="wdm-notice-dismiss" aria-label="Dismiss">&times;</button>' +
+                    '<button class="wdm-notice-dismiss" aria-label="' + (wprobo_documerge_vars.i18n.dismiss || 'Dismiss') + '">&times;</button>' +
                 '</div>'
             );
             $('#wdm-notices').html($notice);

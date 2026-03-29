@@ -50,10 +50,8 @@ $primary_action = array(
         <select id="wdm-filter-status" class="wdm-select">
             <option value=""><?php esc_html_e( 'All Statuses', 'wprobo-documerge' ); ?></option>
             <option value="completed"><?php esc_html_e( 'Completed', 'wprobo-documerge' ); ?></option>
-            <option value="pending_payment"><?php esc_html_e( 'Pending Payment', 'wprobo-documerge' ); ?></option>
             <option value="processing"><?php esc_html_e( 'Processing', 'wprobo-documerge' ); ?></option>
             <option value="error"><?php esc_html_e( 'Error', 'wprobo-documerge' ); ?></option>
-            <option value="payment_failed"><?php esc_html_e( 'Payment Failed', 'wprobo-documerge' ); ?></option>
         </select>
 
         <input type="text" id="wdm-filter-from" class="wdm-datepicker wdm-input" placeholder="<?php esc_attr_e( 'From date', 'wprobo-documerge' ); ?>">
@@ -74,7 +72,6 @@ $primary_action = array(
                 <th><?php esc_html_e( 'Form', 'wprobo-documerge' ); ?></th>
                 <th><?php esc_html_e( 'Email', 'wprobo-documerge' ); ?></th>
                 <th><?php esc_html_e( 'Status', 'wprobo-documerge' ); ?></th>
-                <th><?php esc_html_e( 'Payment', 'wprobo-documerge' ); ?></th>
                 <th><?php esc_html_e( 'Documents', 'wprobo-documerge' ); ?></th>
             </tr>
         </thead>

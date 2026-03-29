@@ -94,15 +94,16 @@
         getError: function(input) {
             var iti = this.instances[input.id];
             if (!iti) { return ''; }
+            var i18n = (typeof wprobo_documerge_vars !== 'undefined' && wprobo_documerge_vars.i18n) ? wprobo_documerge_vars.i18n : {};
             var errorMap = [
-                'Invalid number',
-                'Invalid country code',
-                'Too short',
-                'Too long',
-                'Invalid number'
+                i18n.phone_invalid || 'Invalid number',
+                i18n.phone_invalid_country || 'Invalid country code',
+                i18n.phone_too_short || 'Too short',
+                i18n.phone_too_long || 'Too long',
+                i18n.phone_invalid || 'Invalid number'
             ];
             var errorCode = iti.getValidationError();
-            return errorMap[errorCode] || 'Invalid phone number';
+            return errorMap[errorCode] || (i18n.phone_invalid_number || 'Invalid phone number');
         }
     };
 

@@ -76,6 +76,7 @@ class WPRobo_DocuMerge_Dashboard_Page {
         $wprobo_documerge_templates = get_transient( 'wprobo_documerge_templates_count' );
 
         if ( false === $wprobo_documerge_templates ) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
             $wprobo_documerge_templates = (int) $wpdb->get_var(
                 "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_templates"
             );
@@ -86,6 +87,7 @@ class WPRobo_DocuMerge_Dashboard_Page {
         $wprobo_documerge_forms = get_transient( 'wprobo_documerge_forms_count' );
 
         if ( false === $wprobo_documerge_forms ) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
             $wprobo_documerge_forms = (int) $wpdb->get_var(
                 "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_forms"
             );
@@ -137,8 +139,7 @@ class WPRobo_DocuMerge_Dashboard_Page {
 
         $wprobo_documerge_results = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT s.id, s.submitter_email, s.status, s.payment_status,
-                        s.payment_amount, s.payment_currency, s.doc_path_pdf,
+                "SELECT s.id, s.submitter_email, s.status, s.doc_path_pdf,
                         s.doc_path_docx, s.created_at,
                         f.title AS form_title,
                         t.name AS template_name
@@ -171,26 +172,35 @@ class WPRobo_DocuMerge_Dashboard_Page {
         global $wpdb;
         $table = $wpdb->prefix . 'wprdm_submissions';
 
-        // Last 7 days submissions count per day.
+        // Get all 7 days in one query.
+        $seven_days_ago = gmdate( 'Y-m-d', strtotime( '-6 days' ) );
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $daily_counts = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT DATE(created_at) as day, COUNT(*) as count FROM {$table} WHERE created_at >= %s GROUP BY DATE(created_at)",
+                $seven_days_ago . ' 00:00:00'
+            ),
+            ARRAY_A
+        );
+        $count_map = array();
+        if ( is_array( $daily_counts ) ) {
+            foreach ( $daily_counts as $row ) {
+                $count_map[ $row['day'] ] = (int) $row['count'];
+            }
+        }
+
         $daily_data = array();
         for ( $i = 6; $i >= 0; $i-- ) {
             $date  = gmdate( 'Y-m-d', strtotime( "-{$i} days" ) );
             $label = gmdate( 'M j', strtotime( "-{$i} days" ) );
-
-            $count = (int) $wpdb->get_var(
-                $wpdb->prepare(
-                    "SELECT COUNT(*) FROM {$table} WHERE DATE(created_at) = %s",
-                    $date
-                )
-            );
-
             $daily_data[] = array(
                 'label' => $label,
-                'count' => $count,
+                'count' => isset( $count_map[ $date ] ) ? $count_map[ $date ] : 0,
             );
         }
 
         // Status breakdown (pie chart).
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
         $statuses = $wpdb->get_results(
             "SELECT status, COUNT(*) as count FROM {$table} GROUP BY status",
             ARRAY_A

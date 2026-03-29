@@ -16,10 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Decode settings with defaults.
 // $submit_label and $classes are set by the renderer before this template is included.
-$submit_label    = isset( $submit_label ) ? $submit_label : ( ! empty( $settings['submit_label'] ) ? $settings['submit_label'] : __( 'Submit', 'wprobo-documerge' ) );
-$success_message = ! empty( $settings['success_message'] ) ? $settings['success_message'] : '';
-$step_labels     = ! empty( $settings['multistep_labels'] ) ? $settings['multistep_labels'] : array( 'Step 1', 'Step 2', 'Step 3' );
-$classes         = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
+$submit_label       = isset( $submit_label ) ? $submit_label : ( ! empty( $settings['submit_label'] ) ? $settings['submit_label'] : __( 'Submit', 'wprobo-documerge' ) );
+$success_message    = ! empty( $settings['success_message'] ) ? $settings['success_message'] : '';
+$step_labels        = ! empty( $settings['multistep_labels'] ) ? $settings['multistep_labels'] : array( 'Step 1', 'Step 2', 'Step 3' );
+$classes            = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
+$multistep_enabled  = isset( $form->multistep_enabled ) ? absint( $form->multistep_enabled ) : 0;
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="wdm-form-<?php echo absint( $form_id ); ?>" data-form-id="<?php echo absint( $form_id ); ?>">
 	<form class="wdm-form" id="wdm-form-el-<?php echo absint( $form_id ); ?>" method="post" novalidate>
@@ -34,7 +35,7 @@ $classes         = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
 			<input type="text" name="wdm_trap" id="wdm-trap-<?php echo absint( $form_id ); ?>" tabindex="-1" autocomplete="off" value="">
 		</div>
 
-		<?php if ( $form->multistep_enabled ) : ?>
+		<?php if ( $multistep_enabled ) : ?>
 			<!-- Multi-step progress -->
 			<div class="wdm-multistep-progress">
 				<div class="wdm-progress-bar">
@@ -57,7 +58,7 @@ $classes         = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
 			foreach ( $fields as $field ) :
 				$step = isset( $field['step'] ) ? (int) $field['step'] : 1;
 
-				if ( $form->multistep_enabled && $step !== $current_step ) :
+				if ( $multistep_enabled && $step !== $current_step ) :
 					if ( $current_step > 0 ) :
 						?>
 						</div><!-- close previous step -->
@@ -75,14 +76,14 @@ $classes         = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
 
 			endforeach;
 
-			if ( $form->multistep_enabled && $current_step > 0 ) :
+			if ( $multistep_enabled && $current_step > 0 ) :
 				?>
 				</div><!-- close last step -->
 			<?php endif; ?>
 		</div>
 
 		<!-- Navigation for multi-step -->
-		<?php if ( $form->multistep_enabled ) : ?>
+		<?php if ( $multistep_enabled ) : ?>
 			<div class="wdm-form-nav">
 				<button type="button" class="wdm-btn wdm-step-back wdm-step-back-btn" style="display:none;">
 					<span class="dashicons dashicons-arrow-left-alt2"></span>
@@ -153,7 +154,7 @@ $classes         = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
 
 		$btn_inline_style = implode( ';', $btn_inline_parts );
 		?>
-		<div class="wdm-form-submit" style="text-align:<?php echo esc_attr( $submit_text_align ); ?>;<?php if ( $form->multistep_enabled ) : ?>display:none;<?php endif; ?>">
+		<div class="wdm-form-submit" style="text-align:<?php echo esc_attr( $submit_text_align ); ?>;<?php if ( $multistep_enabled ) : ?>display:none;<?php endif; ?>">
 			<button type="submit" class="<?php echo esc_attr( implode( ' ', $btn_classes ) ); ?>" id="wdm-submit-<?php echo absint( $form_id ); ?>" style="<?php echo esc_attr( $btn_inline_style ); ?>">
 				<span class="wdm-submit-text"><?php echo esc_html( $submit_label ); ?></span>
 				<span class="wdm-submit-spinner" style="display:none;">

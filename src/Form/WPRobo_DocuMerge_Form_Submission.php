@@ -397,28 +397,20 @@ class WPRobo_DocuMerge_Form_Submission {
 
 		$now = current_time( 'mysql' );
 
-		// Payment is not available in Lite — always set to none.
-		$pay_amount   = 0.00;
-		$pay_currency = '';
-		$pay_status   = 'none';
-
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 		$inserted = $wpdb->insert(
 			$submissions_table,
 			array(
-				'form_id'          => $form_id,
-				'template_id'      => $template_id,
-				'submitter_email'  => $submitter_email,
-				'form_data'        => $form_data,
-				'status'           => 'processing',
-				'payment_status'   => $pay_status,
-				'payment_amount'   => $pay_amount,
-				'payment_currency' => $pay_currency,
-				'ip_address'       => $client_ip,
-				'created_at'       => $now,
-				'updated_at'       => $now,
+				'form_id'         => $form_id,
+				'template_id'     => $template_id,
+				'submitter_email' => $submitter_email,
+				'form_data'       => $form_data,
+				'status'          => 'processing',
+				'ip_address'      => $client_ip,
+				'created_at'      => $now,
+				'updated_at'      => $now,
 			),
-			array( '%d', '%d', '%s', '%s', '%s', '%s', '%f', '%s', '%s', '%s', '%s' )
+			array( '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%s' )
 		);
 
 		if ( false === $inserted ) {

@@ -111,11 +111,6 @@ class WPRobo_DocuMerge_Installer {
             settings            longtext              NOT NULL,
             output_format       varchar(10)           NOT NULL DEFAULT 'pdf',
             delivery_methods    varchar(200)          NOT NULL DEFAULT 'download',
-            payment_enabled     tinyint(1)            NOT NULL DEFAULT 0,
-            payment_amount      decimal(10,2)         NOT NULL DEFAULT 0.00,
-            payment_currency    varchar(3)            NOT NULL DEFAULT 'USD',
-            captcha_type        varchar(20)           NOT NULL DEFAULT 'none',
-            multistep_enabled   tinyint(1)            NOT NULL DEFAULT 0,
             submit_label        varchar(200)          NOT NULL DEFAULT 'Submit',
             success_message     text                  NOT NULL,
             redirect_url        varchar(500)          NOT NULL DEFAULT '',
@@ -136,10 +131,6 @@ class WPRobo_DocuMerge_Installer {
             doc_path_docx       varchar(500)          NOT NULL DEFAULT '',
             doc_path_pdf        varchar(500)          NOT NULL DEFAULT '',
             status              varchar(30)           NOT NULL DEFAULT 'processing',
-            payment_status      varchar(30)           NOT NULL DEFAULT 'none',
-            payment_amount      decimal(10,2)         NOT NULL DEFAULT 0.00,
-            payment_currency    varchar(3)            NOT NULL DEFAULT '',
-            stripe_intent_id    varchar(200)          NOT NULL DEFAULT '',
             error_log           text                  NOT NULL,
             retry_count         tinyint(3)            NOT NULL DEFAULT 0,
             delivery_status     varchar(30)           NOT NULL DEFAULT 'pending',
@@ -150,7 +141,6 @@ class WPRobo_DocuMerge_Installer {
             PRIMARY KEY  (id),
             KEY form_id (form_id),
             KEY status (status),
-            KEY payment_status (payment_status),
             KEY created_at (created_at)
         ) {$charset_collate};";
         dbDelta( $sql );

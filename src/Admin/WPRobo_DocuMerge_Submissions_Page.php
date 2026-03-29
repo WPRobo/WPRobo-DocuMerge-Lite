@@ -393,19 +393,14 @@ class WPRobo_DocuMerge_Submissions_Page {
 
         // Add derived fields the JS expects.
         $status_labels = array(
-            'completed'       => __( 'Completed', 'wprobo-documerge' ),
-            'processing'      => __( 'Processing', 'wprobo-documerge' ),
-            'pending_payment' => __( 'Pending Payment', 'wprobo-documerge' ),
-            'error'           => __( 'Error', 'wprobo-documerge' ),
-            'payment_failed'  => __( 'Payment Failed', 'wprobo-documerge' ),
+            'completed'  => __( 'Completed', 'wprobo-documerge' ),
+            'processing' => __( 'Processing', 'wprobo-documerge' ),
+            'error'      => __( 'Error', 'wprobo-documerge' ),
         );
 
-        $currency_symbols = array( 'USD' => '$', 'GBP' => "\xC2\xA3", 'EUR' => "\xE2\x82\xAC", 'CAD' => 'C$', 'AUD' => 'A$' );
-
         foreach ( $submissions as $sub ) {
-            $sub->date_formatted  = date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $sub->created_at ) );
-            $sub->status_label    = isset( $status_labels[ $sub->status ] ) ? $status_labels[ $sub->status ] : ucfirst( $sub->status );
-            $sub->currency_symbol = isset( $currency_symbols[ $sub->payment_currency ] ) ? $currency_symbols[ $sub->payment_currency ] : $sub->payment_currency;
+            $sub->date_formatted = date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $sub->created_at ) );
+            $sub->status_label   = isset( $status_labels[ $sub->status ] ) ? $status_labels[ $sub->status ] : ucfirst( $sub->status );
         }
 
         wp_send_json_success(
@@ -650,10 +645,6 @@ class WPRobo_DocuMerge_Submissions_Page {
                 __( 'Form', 'wprobo-documerge' ),
                 __( 'Email', 'wprobo-documerge' ),
                 __( 'Status', 'wprobo-documerge' ),
-                __( 'Payment Status', 'wprobo-documerge' ),
-                __( 'Amount', 'wprobo-documerge' ),
-                __( 'Currency', 'wprobo-documerge' ),
-                __( 'Stripe ID', 'wprobo-documerge' ),
                 __( 'Delivery Status', 'wprobo-documerge' ),
             )
         );
@@ -666,12 +657,8 @@ class WPRobo_DocuMerge_Submissions_Page {
                     $row->id,
                     $row->created_at,
                     $row->form_title,
-                    isset( $row->email ) ? $row->email : '',
+                    isset( $row->submitter_email ) ? $row->submitter_email : '',
                     $row->status,
-                    isset( $row->payment_status ) ? $row->payment_status : '',
-                    isset( $row->payment_amount ) ? $row->payment_amount : '',
-                    isset( $row->payment_currency ) ? $row->payment_currency : '',
-                    isset( $row->stripe_payment_id ) ? $row->stripe_payment_id : '',
                     isset( $row->delivery_status ) ? $row->delivery_status : '',
                 )
             );

@@ -52,6 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<span class="dashicons dashicons-upload"></span>
 				<p class="wdm-dropzone-text"><?php esc_html_e( 'Drag & drop your .docx file here, or click to browse', 'wprobo-documerge-lite' ); ?></p>
 				<p class="wdm-dropzone-hint"><?php esc_html_e( 'Maximum file size: 10 MB', 'wprobo-documerge-lite' ); ?></p>
+				<span class="wdm-btn wdm-btn-secondary wdm-btn-sm wdm-dropzone-browse"><?php esc_html_e( 'Choose File', 'wprobo-documerge-lite' ); ?></span>
 				<input type="file" id="wdm-template-file" accept=".docx" class="wdm-dropzone-input">
 			</div>
 		</div>

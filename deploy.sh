@@ -187,6 +187,18 @@ find "$BUILD_DIR" -name ".md" -delete 2>/dev/null || true
 
 # Remove Composer dev files from vendor/.
 if [ -d "$BUILD_DIR/vendor" ]; then
+    find "$BUILD_DIR/vendor" -name "*.sh" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "*.phar" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "*.phar.pubkey*" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "Makefile" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "*.yml" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "*.xml" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "*.md" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "*.neon" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "*.neon.dist" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "*.dist" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name ".php-cs-fixer*" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -type d -name "dist" -exec rm -rf {} + 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "phpunit.xml*" -delete 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "CHANGELOG*" -delete 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "CONTRIBUTING*" -delete 2>/dev/null || true

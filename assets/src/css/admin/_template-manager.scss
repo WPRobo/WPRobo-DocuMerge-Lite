@@ -325,6 +325,14 @@
     pointer-events: none; // Click handled by parent .wdm-dropzone
 }
 
+.wdm-panel-notices {
+    padding: 0 20px;
+
+    .wdm-notice {
+        margin: 12px 0 0;
+    }
+}
+
 .wdm-dropzone-error-msg {
     color: $wdm-error;
     font-size: 13px;

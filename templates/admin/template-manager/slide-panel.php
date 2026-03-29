@@ -27,6 +27,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</button>
 	</div>
 
+	<!-- ── Panel Notices ───────────────────────────────────────── -->
+	<div class="wdm-panel-notices" id="wdm-panel-notices"></div>
+
 	<!-- ── Panel Body ──────────────────────────────────────────── -->
 	<div class="wdm-slide-panel-body">
 

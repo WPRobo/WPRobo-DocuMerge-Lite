@@ -584,7 +584,9 @@
          * @param {string} message The notice message text.
          */
         showNotice: function(type, message) {
-            var $container = $('#wdm-notices');
+            // Show inside panel if panel is open, otherwise main page.
+            var $panel = $('#wdm-panel-notices');
+            var $container = ($panel.length && $panel.is(':visible')) ? $panel : $('#wdm-notices');
             var iconClass  = type === 'success' ? 'dashicons-yes-alt' : 'dashicons-warning';
 
             var $notice = $(
@@ -595,11 +597,16 @@
                 '</div>'
             );
 
-            $container.append($notice);
+            $container.html($notice);
 
-            $('html, body').animate({
-                scrollTop: $container.offset().top - 50
-            }, 300);
+            // Scroll inside panel or page.
+            if ($container.attr('id') === 'wdm-panel-notices') {
+                $container.closest('.wdm-slide-panel').scrollTop(0);
+            } else {
+                $('html, body').animate({
+                    scrollTop: $container.offset().top - 50
+                }, 300);
+            }
 
             setTimeout(function() {
                 $notice.fadeOut(300, function() {

@@ -145,6 +145,112 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 		$download_url = $download_result;
 
+		// ── Email delivery (Pro only — hooks available for extensions) ───
+		$email_sent = false;
+		$form_id    = absint( $submission->form_id );
+
+		if ( in_array( 'email', $delivery_methods, true ) && ! empty( $submission->submitter_email ) ) {
+
+			$to          = sanitize_email( $submission->submitter_email );
+			$subject     = sprintf(
+				/* translators: %s: site name */
+				__( 'Your document is ready — %s', 'wprobo-documerge' ),
+				get_bloginfo( 'name' )
+			);
+			$body        = '';
+			$attachments = array();
+
+			/**
+			 * Filters the email recipient(s) for document delivery.
+			 *
+			 * Allows adding CC/BCC recipients or changing the delivery
+			 * address dynamically based on submission or form context.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string|array $to            Email address(es).
+			 * @param int          $submission_id The submission ID.
+			 * @param int          $form_id       The form ID.
+			 */
+			$to = apply_filters( 'wprobo_documerge_email_recipients', $to, $submission_id, $form_id );
+
+			/**
+			 * Filters the email subject for document delivery.
+			 *
+			 * Allows customizing the email subject per form or submission.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $subject       The email subject.
+			 * @param int    $submission_id The submission ID.
+			 * @param int    $form_id       The form ID.
+			 */
+			$subject = apply_filters( 'wprobo_documerge_email_subject', $subject, $submission_id, $form_id );
+
+			/**
+			 * Filters the email HTML body for document delivery.
+			 *
+			 * Allows customizing email content, adding branding, or
+			 * inserting dynamic content. Essential for white-label solutions.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $body          The email HTML body.
+			 * @param int    $submission_id The submission ID.
+			 * @param int    $form_id       The form ID.
+			 */
+			$body = apply_filters( 'wprobo_documerge_email_body', $body, $submission_id, $form_id );
+
+			/**
+			 * Filters the email attachments for document delivery.
+			 *
+			 * Allows adding extra attachments (terms of service, additional
+			 * documents) or removing the generated document from the email.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param array $attachments   Array of file paths to attach.
+			 * @param int   $submission_id The submission ID.
+			 */
+			$attachments = apply_filters( 'wprobo_documerge_email_attachments', $attachments, $submission_id );
+
+			/**
+			 * Fires before an email is sent with the generated document.
+			 *
+			 * Allows logging, external notification, or blocking email
+			 * delivery. Useful for integrating with external email services.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $to            Recipient email address.
+			 * @param string $subject       Email subject.
+			 * @param string $body          Email HTML body.
+			 * @param array  $attachments   File paths to attach.
+			 * @param int    $submission_id The submission ID.
+			 */
+			do_action( 'wprobo_documerge_before_email_send', $to, $subject, $body, $attachments, $submission_id );
+
+			// Email sending is a Pro feature — the hooks above allow
+			// Pro or third-party extensions to implement email delivery.
+			$sent = false;
+
+			/**
+			 * Fires after an email send attempt.
+			 *
+			 * Allows tracking delivery success/failure in external systems.
+			 * Essential for email deliverability monitoring.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param bool   $sent          Whether wp_mail() returned true.
+			 * @param string $to            Recipient email address.
+			 * @param int    $submission_id The submission ID.
+			 */
+			do_action( 'wprobo_documerge_after_email_send', $sent, $to, $submission_id );
+
+			$email_sent = $sent;
+		}
+
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->update(
 			$submissions_table,
@@ -165,11 +271,11 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		 * @param int   $submission_id The submission ID.
 		 * @param array $results       Associative array with 'download' and 'email' boolean statuses.
 		 */
-		do_action( 'wprobo_documerge_document_delivered', $submission_id, array( 'download' => true, 'email' => false ) );
+		do_action( 'wprobo_documerge_document_delivered', $submission_id, array( 'download' => true, 'email' => $email_sent ) );
 
 		return array(
 			'download_url' => $download_url,
-			'email_sent'   => false,
+			'email_sent'   => $email_sent,
 		);
 	}
 
@@ -227,7 +333,23 @@ class WPRobo_DocuMerge_Delivery_Engine {
 			home_url( '/' )
 		);
 
-		return esc_url_raw( $download_url );
+		$download_url = esc_url_raw( $download_url );
+
+		/**
+		 * Filters the document download URL.
+		 *
+		 * Allows overriding the download URL for CDN delivery, signed URLs,
+		 * or custom access control mechanisms.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $download_url  The download URL.
+		 * @param int    $submission_id The submission ID.
+		 * @param string $format        The document format ('pdf' or 'docx').
+		 */
+		$download_url = apply_filters( 'wprobo_documerge_download_url', $download_url, $submission_id, 'pdf' );
+
+		return $download_url;
 	}
 
 	/**

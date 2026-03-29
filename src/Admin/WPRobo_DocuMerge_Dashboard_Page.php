@@ -112,7 +112,7 @@ class WPRobo_DocuMerge_Dashboard_Page {
         // --- Stripe active check (disabled in Lite) ---
         $wprobo_documerge_stripe_active = false;
 
-        return array(
+        $stats = array(
             'templates'         => (int) $wprobo_documerge_templates,
             'forms'             => (int) $wprobo_documerge_forms,
             'submissions'       => $wprobo_documerge_submissions,
@@ -121,6 +121,18 @@ class WPRobo_DocuMerge_Dashboard_Page {
             'stripe_active'     => $wprobo_documerge_stripe_active,
             'month_label'       => gmdate( 'F Y' ),
         );
+
+        /**
+         * Filters the dashboard statistics array.
+         *
+         * Allows adding custom stat cards or modifying dashboard values.
+         * Useful for add-ons that track additional metrics.
+         *
+         * @since 1.0.0
+         *
+         * @param array $stats The stats array with keys: templates, forms, submissions, etc.
+         */
+        return apply_filters( 'wprobo_documerge_admin_dashboard_stats', $stats );
     }
 
     /**

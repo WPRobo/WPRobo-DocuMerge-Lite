@@ -316,6 +316,32 @@ class WPRobo_DocuMerge_Settings_Page {
             : '';
         update_option( 'wprobo_documerge_notification_email', $notification_email );
 
+        /**
+         * Fires after plugin settings are saved.
+         *
+         * Allows triggering cache busting, external sync, or logging
+         * after settings change. Important for sites using object caching.
+         *
+         * @since 1.0.0
+         *
+         * @param string $tab      The settings tab that was saved.
+         * @param array  $settings The saved settings data.
+         */
+        do_action( 'wprobo_documerge_settings_saved', 'general', array(
+            'output_format'      => $output_format,
+            'delivery_download'  => $delivery_download,
+            'delivery_email'     => $delivery_email,
+            'delivery_media'     => $delivery_media,
+            'expiry_hours'       => $expiry_hours,
+            'form_mode'          => $form_mode,
+            'active_integration' => $active_integration,
+            'date_format'        => $date_format,
+            'time_format'        => $time_format,
+            'notify_submission'  => $notify_submission,
+            'notify_error'       => $notify_error,
+            'notification_email' => $notification_email,
+        ) );
+
         wp_send_json_success( array( 'message' => __( 'General settings saved.', 'wprobo-documerge' ) ) );
     }
 
@@ -355,6 +381,14 @@ class WPRobo_DocuMerge_Settings_Page {
         // Uninstall data removal.
         $uninstall_data = isset( $_POST['wprobo_documerge_uninstall_data'] ) ? '1' : '0';
         update_option( 'wprobo_documerge_uninstall_data', $uninstall_data );
+
+        /** This action is documented in src/Admin/WPRobo_DocuMerge_Settings_Page.php */
+        do_action( 'wprobo_documerge_settings_saved', 'advanced', array(
+            'auto_delete_days'   => $auto_delete_days,
+            'log_retention_days' => $log_retention_days,
+            'debug_logging'      => $debug_logging,
+            'uninstall_data'     => $uninstall_data,
+        ) );
 
         wp_send_json_success( array( 'message' => __( 'Advanced settings saved.', 'wprobo-documerge' ) ) );
     }

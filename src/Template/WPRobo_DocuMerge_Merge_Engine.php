@@ -113,6 +113,20 @@ class WPRobo_DocuMerge_Merge_Engine {
             'site_url'     => home_url(),
         );
 
+        /**
+         * Filters the system-level merge tags added to every document.
+         *
+         * Allows adding custom auto-populated tags like {order_number},
+         * {invoice_id}, or {custom_date}. Developers frequently need
+         * custom system-level merge tags beyond the built-in set.
+         *
+         * @since 1.0.0
+         *
+         * @param array $system_tags Key-value pairs of system tag => value.
+         * @param array $field_data  The user-supplied field data for context.
+         */
+        $system_tags = apply_filters( 'wprobo_documerge_system_tags', $system_tags, $field_data );
+
         foreach ( $system_tags as $tag => $value ) {
             $escaped = htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
             $template_processor->setValue( $tag, $escaped );
@@ -143,7 +157,7 @@ class WPRobo_DocuMerge_Merge_Engine {
             }
 
             // Apply modifiers to the value.
-            $value = $this->wprobo_documerge_apply_modifier( (string) $value, $modifier );
+            $value = $this->wprobo_documerge_apply_modifier( (string) $value, $modifier, $raw_tag );
 
             // XML-escape the value for safe insertion into DOCX XML.
             $escaped_value = htmlspecialchars( (string) $value, ENT_QUOTES, 'UTF-8' );
@@ -195,7 +209,7 @@ class WPRobo_DocuMerge_Merge_Engine {
             $modifier   = $matches[2];
             $value      = isset( $field_data[ $field_name ] ) ? (string) $field_data[ $field_name ] : '';
 
-            $value = $this->wprobo_documerge_apply_modifier( $value, $modifier );
+            $value = $this->wprobo_documerge_apply_modifier( $value, $modifier, $field_name );
 
             return htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
 
@@ -220,11 +234,12 @@ class WPRobo_DocuMerge_Merge_Engine {
      * or unrecognised.
      *
      * @since  1.3.0
-     * @param  string $value    The raw field value.
-     * @param  string $modifier The modifier string (e.g. "upper", "format:d M Y").
+     * @param  string $value      The raw field value.
+     * @param  string $modifier   The modifier string (e.g. "upper", "format:d M Y").
+     * @param  string $field_name Optional. The merge tag field name for filter context.
      * @return string The modified value.
      */
-    public function wprobo_documerge_apply_modifier( $value, $modifier ) {
+    public function wprobo_documerge_apply_modifier( $value, $modifier, $field_name = '' ) {
 
         $modifier = trim( $modifier );
 
@@ -253,9 +268,24 @@ class WPRobo_DocuMerge_Merge_Engine {
             $timestamp     = strtotime( $value );
 
             if ( false !== $timestamp ) {
-                return gmdate( $format_string, $timestamp );
+                $value = gmdate( $format_string, $timestamp );
             }
         }
+
+        /**
+         * Filters a merge tag value after a modifier is applied.
+         *
+         * Allows custom modifiers beyond the built-in upper/lower/format/ucfirst/ucwords.
+         * For example, a developer could add a 'currency' modifier:
+         * `{price|currency}` for custom currency formatting.
+         *
+         * @since 1.0.0
+         *
+         * @param string $value      The modified value.
+         * @param string $modifier   The modifier name (e.g., 'upper', 'currency').
+         * @param string $field_name The merge tag field name.
+         */
+        $value = apply_filters( 'wprobo_documerge_modifier_value', $value, $modifier, $field_name );
 
         return $value;
     }

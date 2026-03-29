@@ -45,6 +45,20 @@ class WPRobo_DocuMerge_Template_Scanner {
      * @return array|WP_Error Array of clean tag names on success, WP_Error on failure.
      */
     public function wprobo_documerge_scan_docx( $file_path ) {
+
+        /**
+         * Fires before a DOCX template is scanned for merge tags.
+         *
+         * Allows developers to log, validate, or pre-process the DOCX file
+         * before tag scanning begins. Useful for checking file integrity
+         * or custom preprocessing.
+         *
+         * @since 1.0.0
+         *
+         * @param string $file_path Absolute path to the DOCX file.
+         */
+        do_action( 'wprobo_documerge_before_template_scan', $file_path );
+
         if ( empty( $file_path ) || ! file_exists( $file_path ) ) {
             return new WP_Error(
                 'wprobo_documerge_file_not_found',

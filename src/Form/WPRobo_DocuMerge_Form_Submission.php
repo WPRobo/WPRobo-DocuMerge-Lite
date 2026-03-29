@@ -542,6 +542,24 @@ class WPRobo_DocuMerge_Form_Submission {
 		 */
 		$success_message = apply_filters( 'wprobo_documerge_success_message', $success_message, $submission_id, $form_id );
 
+		// Build document paths from the generation result for the completion hook.
+		$document_paths = is_array( $result ) ? $result : array( 'docx' => '', 'pdf' => '' );
+
+		/**
+		 * Fires after a submission is fully complete — form saved, document generated, and delivered.
+		 *
+		 * This single hook fires only when the entire pipeline succeeded: the submission
+		 * was created, the document was generated, and delivery completed without error.
+		 * Useful for CRM integrations, notifications, or analytics.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param int   $submission_id  The submission ID.
+		 * @param int   $form_id        The form ID.
+		 * @param array $document_paths Array with 'docx' and 'pdf' keys containing file paths.
+		 */
+		do_action( 'wprobo_documerge_after_submission_complete', $submission_id, $form_id, $document_paths );
+
 		wp_send_json_success(
 			array(
 				'submission_id'  => $submission_id,

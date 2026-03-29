@@ -302,6 +302,30 @@ class WPRobo_DocuMerge_Document_Generator {
 		}
 		// 'both' — keep both files as-is.
 
+		// ── Filter output paths before saving ────────────────────────────
+
+		if ( ! empty( $final_docx ) ) {
+			/**
+			 * Filters the output path for a generated document.
+			 *
+			 * Allows overriding where generated documents are stored. Needed
+			 * for custom storage backends (S3, Google Cloud Storage) or
+			 * multisite configurations.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $path          Absolute file path for the generated document.
+			 * @param int    $submission_id The submission ID.
+			 * @param string $format        The document format ('pdf' or 'docx').
+			 */
+			$final_docx = apply_filters( 'wprobo_documerge_document_output_path', $final_docx, $submission_id, 'docx' );
+		}
+
+		if ( ! empty( $final_pdf ) ) {
+			/** This filter is documented in src/Document/WPRobo_DocuMerge_Document_Generator.php */
+			$final_pdf = apply_filters( 'wprobo_documerge_document_output_path', $final_pdf, $submission_id, 'pdf' );
+		}
+
 		// ── Update submission with file paths ────────────────────────────
 		$this->wprobo_documerge_update_submission_paths( $submission_id, $final_docx, $final_pdf );
 

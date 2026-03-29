@@ -137,6 +137,23 @@ class WPRobo_DocuMerge_Form_Builder {
 
 		$now = current_time( 'mysql' );
 
+		// Determine the form ID (0 for new forms).
+		$form_id = ! empty( $data['id'] ) ? absint( $data['id'] ) : 0;
+
+		/**
+		 * Fires before a form configuration is saved to the database.
+		 *
+		 * Allows validation or modification of form configuration before
+		 * it is persisted. Useful for enforcing custom business rules
+		 * on form structure.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $data    The form data array being saved.
+		 * @param int   $form_id The form ID (0 for new forms).
+		 */
+		do_action( 'wprobo_documerge_before_form_save', $data, $form_id );
+
 		if ( ! empty( $data['id'] ) && absint( $data['id'] ) > 0 ) {
 			// Update existing form.
 			$id               = absint( $data['id'] );

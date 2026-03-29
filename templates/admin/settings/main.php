@@ -33,6 +33,27 @@ if ( ! defined( 'ABSPATH' ) ) {
             <button type="button" class="wdm-settings-tab" data-tab="advanced"><?php esc_html_e( 'Advanced', 'wprobo-documerge' ); ?></button>
             <button type="button" class="wdm-settings-tab" data-tab="importexport"><?php esc_html_e( 'Import / Export', 'wprobo-documerge' ); ?></button>
             <button type="button" class="wdm-settings-tab wdm-tab-danger" data-tab="dangerzone"><?php esc_html_e( 'Danger Zone', 'wprobo-documerge' ); ?></button>
+            <?php
+            /**
+             * Filters the settings page tabs array.
+             *
+             * Allows add-ons to register custom settings tabs. Each entry
+             * should be a slug => label pair. The add-on is responsible for
+             * rendering the corresponding panel content.
+             *
+             * @since 1.0.0
+             *
+             * @param array $tabs Array of tab slug => label pairs.
+             */
+            $extra_tabs = apply_filters( 'wprobo_documerge_settings_tabs', array() );
+            foreach ( $extra_tabs as $tab_slug => $tab_label ) {
+                printf(
+                    '<button type="button" class="wdm-settings-tab" data-tab="%s">%s</button>',
+                    esc_attr( $tab_slug ),
+                    esc_html( $tab_label )
+                );
+            }
+            ?>
         </div>
 
         <!-- ══════════════ GENERAL ══════════════ -->

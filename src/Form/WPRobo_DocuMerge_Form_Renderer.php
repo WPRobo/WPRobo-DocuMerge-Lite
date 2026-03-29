@@ -109,6 +109,20 @@ class WPRobo_DocuMerge_Form_Renderer {
 		}
 
 		/**
+		 * Filters the form fields array before rendering.
+		 *
+		 * Allows reordering, removing, or injecting fields dynamically
+		 * before rendering. Enables context-aware forms (e.g., different
+		 * fields for logged-in users).
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $fields  Array of field configuration objects.
+		 * @param int   $form_id The form ID.
+		 */
+		$fields = apply_filters( 'wprobo_documerge_form_fields_before_render', $fields, $form_id );
+
+		/**
 		 * Filters the form settings before rendering.
 		 *
 		 * Allows modification of the decoded form settings array

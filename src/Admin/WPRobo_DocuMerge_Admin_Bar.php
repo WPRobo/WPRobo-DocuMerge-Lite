@@ -58,7 +58,7 @@ class WPRobo_DocuMerge_Admin_Bar {
 		// Parent node.
 		$wp_admin_bar->add_node(
 			array(
-				'id'    => 'wprobo-documerge-lite',
+				'id'    => 'wprobo-documerge',
 				'title' => '<span class="ab-icon dashicons dashicons-media-document" style="font-family:dashicons;font-size:18px;line-height:1.6;"></span>' . esc_html__( 'DocuMerge', 'wprobo-documerge-lite' ),
 				'href'  => admin_url( 'admin.php?page=wprobo-documerge' ),
 			)
@@ -68,7 +68,7 @@ class WPRobo_DocuMerge_Admin_Bar {
 		$wp_admin_bar->add_node(
 			array(
 				'id'     => 'wprobo-documerge-dashboard',
-				'parent' => 'wprobo-documerge-lite',
+				'parent' => 'wprobo-documerge',
 				'title'  => esc_html__( 'Dashboard', 'wprobo-documerge-lite' ),
 				'href'   => admin_url( 'admin.php?page=wprobo-documerge' ),
 			)
@@ -78,7 +78,7 @@ class WPRobo_DocuMerge_Admin_Bar {
 		$wp_admin_bar->add_node(
 			array(
 				'id'     => 'wprobo-documerge-forms',
-				'parent' => 'wprobo-documerge-lite',
+				'parent' => 'wprobo-documerge',
 				'title'  => esc_html__( 'Forms', 'wprobo-documerge-lite' ),
 				'href'   => admin_url( 'admin.php?page=wprobo-documerge-forms' ),
 			)
@@ -88,7 +88,7 @@ class WPRobo_DocuMerge_Admin_Bar {
 		$wp_admin_bar->add_node(
 			array(
 				'id'     => 'wprobo-documerge-templates',
-				'parent' => 'wprobo-documerge-lite',
+				'parent' => 'wprobo-documerge',
 				'title'  => esc_html__( 'Templates', 'wprobo-documerge-lite' ),
 				'href'   => admin_url( 'admin.php?page=wprobo-documerge-templates' ),
 			)
@@ -98,7 +98,7 @@ class WPRobo_DocuMerge_Admin_Bar {
 		$wp_admin_bar->add_node(
 			array(
 				'id'     => 'wprobo-documerge-submissions',
-				'parent' => 'wprobo-documerge-lite',
+				'parent' => 'wprobo-documerge',
 				'title'  => esc_html__( 'Submissions', 'wprobo-documerge-lite' ),
 				'href'   => admin_url( 'admin.php?page=wprobo-documerge-submissions' ),
 			)
@@ -108,7 +108,7 @@ class WPRobo_DocuMerge_Admin_Bar {
 		$wp_admin_bar->add_node(
 			array(
 				'id'     => 'wprobo-documerge-settings',
-				'parent' => 'wprobo-documerge-lite',
+				'parent' => 'wprobo-documerge',
 				'title'  => esc_html__( 'Settings', 'wprobo-documerge-lite' ),
 				'href'   => admin_url( 'admin.php?page=wprobo-documerge-settings' ),
 			)
@@ -125,7 +125,7 @@ class WPRobo_DocuMerge_Admin_Bar {
 				$wp_admin_bar->add_node(
 					array(
 						'id'     => 'wprobo-documerge-separator',
-						'parent' => 'wprobo-documerge-lite',
+						'parent' => 'wprobo-documerge',
 						'title'  => '<hr style="margin:4px 0;border:0;border-top:1px solid rgba(255,255,255,0.2);">',
 					)
 				);
@@ -133,7 +133,7 @@ class WPRobo_DocuMerge_Admin_Bar {
 				$wp_admin_bar->add_node(
 					array(
 						'id'     => 'wprobo-documerge-edit-form',
-						'parent' => 'wprobo-documerge-lite',
+						'parent' => 'wprobo-documerge',
 						'title'  => esc_html__( 'Edit This Form', 'wprobo-documerge-lite' ),
 						'href'   => admin_url( 'admin.php?page=wprobo-documerge-forms&action=edit&id=' . absint( $form_id ) ),
 						'meta'   => array(

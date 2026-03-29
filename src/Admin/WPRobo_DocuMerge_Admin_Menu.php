@@ -111,7 +111,7 @@ class WPRobo_DocuMerge_Admin_Menu {
 			__( 'DocuMerge', 'wprobo-documerge-lite' ),
 			$menu_label,
 			$this->wprobo_documerge_capability,
-			'wprobo-documerge-lite',
+			'wprobo-documerge',
 			array( $this, 'wprobo_documerge_render_dashboard' ),
 			$this->wprobo_documerge_icon,
 			30
@@ -119,17 +119,17 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Dashboard (replaces default parent duplicate).
 		add_submenu_page(
-			'wprobo-documerge-lite',
+			'wprobo-documerge',
 			__( 'Dashboard', 'wprobo-documerge-lite' ),
 			__( 'Dashboard', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
-			'wprobo-documerge-lite',
+			'wprobo-documerge',
 			array( $this, 'wprobo_documerge_render_dashboard' )
 		);
 
 		// Submenu — Templates.
 		add_submenu_page(
-			'wprobo-documerge-lite',
+			'wprobo-documerge',
 			__( 'Templates', 'wprobo-documerge-lite' ),
 			__( 'Templates', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
@@ -139,7 +139,7 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Forms (with screen options for WP_List_Table).
 		$forms_hook = add_submenu_page(
-			'wprobo-documerge-lite',
+			'wprobo-documerge',
 			__( 'Forms', 'wprobo-documerge-lite' ),
 			__( 'Forms', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
@@ -152,7 +152,7 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Submissions (with screen options for WP_List_Table).
 		$submissions_hook = add_submenu_page(
-			'wprobo-documerge-lite',
+			'wprobo-documerge',
 			__( 'Submissions', 'wprobo-documerge-lite' ),
 			__( 'Submissions', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
@@ -165,7 +165,7 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Settings.
 		add_submenu_page(
-			'wprobo-documerge-lite',
+			'wprobo-documerge',
 			__( 'Settings', 'wprobo-documerge-lite' ),
 			__( 'Settings', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
@@ -175,7 +175,7 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Help & Support.
 		add_submenu_page(
-			'wprobo-documerge-lite',
+			'wprobo-documerge',
 			__( 'Help & Support', 'wprobo-documerge-lite' ),
 			__( 'Help & Support', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,

@@ -482,7 +482,7 @@ class WPRobo_DocuMerge_Settings_Page {
 		}
 
 		$payload = array(
-			'plugin'      => 'wprobo-documerge-lite',
+			'plugin'      => 'wprobo-documerge',
 			'version'     => defined( 'WPROBO_DOCUMERGE_VERSION' ) ? WPROBO_DOCUMERGE_VERSION : '1.0.0',
 			'exported_at' => gmdate( 'c' ),
 			'site_url'    => get_site_url(),
@@ -532,7 +532,7 @@ class WPRobo_DocuMerge_Settings_Page {
 		}
 
 		// Validate structure.
-		if ( ! isset( $data['plugin'] ) || 'wprobo-documerge-lite' !== $data['plugin'] ) {
+		if ( ! isset( $data['plugin'] ) || 'wprobo-documerge' !== $data['plugin'] ) {
 			wp_send_json_error( array( 'message' => __( 'This file is not a valid DocuMerge export.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}

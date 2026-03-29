@@ -1293,7 +1293,7 @@
                 },
                 success: function(response) {
                     if ( response.success ) {
-                        var formId = response.data && response.data.id ? response.data.id : $('#wdm-form-id').val();
+                        var formId = response.data && (response.data.form_id || response.data.id) ? (response.data.form_id || response.data.id) : $('#wdm-form-id').val();
 
                         // Detect which tab is currently active.
                         var activeTab = 'fields';

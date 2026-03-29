@@ -12,7 +12,7 @@
 // ── Notices ──────────────────────────────────────────────────────
 .wdm-notice {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
     padding: 12px 16px;
     border-radius: $wdm-radius;
@@ -22,7 +22,10 @@
 
     .dashicons {
         flex-shrink: 0;
-        margin-top: -1px;
+    }
+
+    .wdm-notice-message {
+        flex: 1;
     }
 }
 

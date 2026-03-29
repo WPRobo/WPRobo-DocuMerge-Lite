@@ -172,8 +172,6 @@ class WPRobo_DocuMerge_Plugin {
      * @since 1.0.0
      */
     private function wprobo_documerge_register_hooks() {
-        $gate = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
-
         // Delivery Engine — handles public download URLs and cron hooks (runs on all requests).
         $delivery = new \WPRobo\DocuMerge\Document\WPRobo_DocuMerge_Delivery_Engine();
         $delivery->wprobo_documerge_init_hooks();
@@ -234,9 +232,7 @@ class WPRobo_DocuMerge_Plugin {
         }
 
         // Show Pro upgrade banner on admin pages.
-        if ( ! $gate->wprobo_documerge_is_pro() ) {
-            add_action( 'admin_notices', array( $this, 'wprobo_documerge_lite_admin_notice' ) );
-        }
+        add_action( 'admin_notices', array( $this, 'wprobo_documerge_lite_admin_notice' ) );
     }
 
     /**
@@ -255,8 +251,7 @@ class WPRobo_DocuMerge_Plugin {
         if ( get_user_meta( get_current_user_id(), 'wprobo_documerge_lite_notice_dismissed', true ) ) {
             return;
         }
-        $gate        = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
-        $upgrade_url = $gate->wprobo_documerge_get_upgrade_url();
+        $upgrade_url = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_get_upgrade_url();
         ?>
         <div class="wdm-lite-upgrade-banner" style="background:linear-gradient(135deg,#042157,#0a3d8f);color:#fff;padding:14px 20px;border-radius:8px;margin:15px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
             <div style="display:flex;align-items:center;gap:12px;">

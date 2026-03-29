@@ -106,10 +106,6 @@ if ( ! defined( 'ABSPATH' ) ) {
         <!-- ── STEP 2: Detect ──────────────────────────────────── -->
         <div class="wdm-wizard-step" data-step="2">
             <div class="wdm-wizard-step-inner">
-                <?php
-                $gate_wizard = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
-                if ( ! $gate_wizard->wprobo_documerge_is_pro() ) :
-                ?>
                 <h2 class="wdm-wizard-title"><?php esc_html_e( 'Form Builder', 'wprobo-documerge' ); ?></h2>
                 <p class="wdm-wizard-subtitle"><?php esc_html_e( 'DocuMerge Lite uses the built-in form builder.', 'wprobo-documerge' ); ?></p>
 
@@ -122,7 +118,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                         </div>
                     </div>
                 </div>
-                <?php endif; ?>
             </div>
         </div>
 

@@ -58,17 +58,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <span class="wdm-description"><?php esc_html_e( 'Can be overridden per form.', 'wprobo-documerge' ); ?></span>
                         <div class="wdm-checkbox-group">
                             <label class="wdm-checkbox-label"><input type="checkbox" name="wprobo_documerge_delivery_download" value="1" <?php checked( get_option( 'wprobo_documerge_delivery_download', '1' ), '1' ); ?>> <?php esc_html_e( 'Download in browser', 'wprobo-documerge' ); ?></label>
-                            <?php $settings_gate = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance(); ?>
-                            <?php if ( $settings_gate->wprobo_documerge_can( 'email_delivery' ) ) : ?>
-                            <label class="wdm-checkbox-label"><input type="checkbox" name="wprobo_documerge_delivery_email" value="1" <?php checked( get_option( 'wprobo_documerge_delivery_email', '1' ), '1' ); ?>> <?php esc_html_e( 'Email to submitter', 'wprobo-documerge' ); ?></label>
-                            <?php else : ?>
                             <label class="wdm-checkbox-label wdm-pro-disabled-setting"><input type="checkbox" disabled> <?php esc_html_e( 'Email to submitter', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></label>
-                            <?php endif; ?>
-                            <?php if ( $settings_gate->wprobo_documerge_can( 'media_delivery' ) ) : ?>
-                            <label class="wdm-checkbox-label"><input type="checkbox" name="wprobo_documerge_delivery_media" value="1" <?php checked( get_option( 'wprobo_documerge_delivery_media', '0' ), '1' ); ?>> <?php esc_html_e( 'Save to Media Library', 'wprobo-documerge' ); ?></label>
-                            <?php else : ?>
                             <label class="wdm-checkbox-label wdm-pro-disabled-setting"><input type="checkbox" disabled> <?php esc_html_e( 'Save to Media Library', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></label>
-                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -97,14 +88,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         <?php $mode = get_option( 'wprobo_documerge_form_mode', 'standalone' ); ?>
                         <div class="wdm-radio-group">
                             <label class="wdm-radio-label"><input type="radio" name="wprobo_documerge_form_mode" value="standalone" <?php checked( $mode, 'standalone' ); ?>> <?php esc_html_e( 'Standalone (built-in form builder)', 'wprobo-documerge' ); ?></label>
-                            <?php
-                            $gate_mode = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
-                            if ( $gate_mode->wprobo_documerge_is_pro() ) :
-                            ?>
-                            <label class="wdm-radio-label"><input type="radio" name="wprobo_documerge_form_mode" value="integrated" <?php checked( $mode, 'integrated' ); ?>> <?php esc_html_e( 'Integrated (WPForms / CF7 / Gravity Forms etc.)', 'wprobo-documerge' ); ?></label>
-                            <?php else : ?>
                             <label class="wdm-radio-label wdm-pro-disabled-toggle"><input type="radio" disabled="disabled"> <?php esc_html_e( 'Integrated (WPForms / CF7 / Gravity Forms etc.)', 'wprobo-documerge' ); ?> <?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?></label>
-                            <?php endif; ?>
                         </div>
                     </div>
 

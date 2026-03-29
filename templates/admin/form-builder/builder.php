@@ -47,12 +47,6 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 			value="<?php echo esc_attr( $form_title ? $form_title : __( 'Untitled Form', 'wprobo-documerge' ) ); ?>"
 			placeholder="<?php esc_attr_e( 'Form Title', 'wprobo-documerge' ); ?>"
 		>
-		<?php if ( \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_is_pro() ) : ?>
-		<button type="button" class="wdm-btn wdm-btn-secondary" id="wdm-preview-doc" <?php echo $form_id ? '' : 'disabled'; ?>>
-			<span class="dashicons dashicons-visibility"></span>
-			<?php esc_html_e( 'Preview Document', 'wprobo-documerge' ); ?>
-		</button>
-		<?php endif; ?>
 		<button type="button" class="wdm-btn wdm-btn-secondary" id="wdm-create-page" <?php echo $form_id ? '' : 'disabled'; ?>>
 			<span class="dashicons dashicons-admin-page"></span>
 			<?php esc_html_e( 'Create Page', 'wprobo-documerge' ); ?>
@@ -87,7 +81,6 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 
 		<?php if ( 'integrated' !== $form_mode ) : ?>
 		<!-- ── LEFT PANEL: Field Types (standalone mode only) ──── -->
-		<?php $gate = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance(); ?>
 		<div class="wdm-builder-sidebar">
 
 			<h3><?php esc_html_e( 'Basic Fields', 'wprobo-documerge' ); ?></h3>
@@ -460,30 +453,16 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 									<input type="checkbox" class="wdm-delivery-method" value="download" <?php checked( in_array( 'download', $decoded_dm, true ) ); ?>>
 									<?php esc_html_e( 'Download in browser', 'wprobo-documerge' ); ?>
 								</label>
-								<label class="wdm-checkbox-label">
-									<?php if ( $gate->wprobo_documerge_can( 'email_delivery' ) ) : ?>
-									<input type="checkbox" class="wdm-delivery-method" value="email" <?php checked( in_array( 'email', $decoded_dm, true ) ); ?>>
-									<?php esc_html_e( 'Email to submitter', 'wprobo-documerge' ); ?>
-								</label>
-								<?php else : ?>
 								<label class="wdm-checkbox-label wdm-pro-disabled-toggle">
 									<input type="checkbox" disabled="disabled">
 									<?php esc_html_e( 'Email to submitter', 'wprobo-documerge' ); ?>
 									<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?>
 								</label>
-								<?php endif; ?>
-								<?php if ( $gate->wprobo_documerge_can( 'media_delivery' ) ) : ?>
-								<label class="wdm-checkbox-label">
-									<input type="checkbox" class="wdm-delivery-method" value="media" <?php checked( in_array( 'media', $decoded_dm, true ) ); ?>>
-									<?php esc_html_e( 'Save to Media Library', 'wprobo-documerge' ); ?>
-								</label>
-								<?php else : ?>
 								<label class="wdm-checkbox-label wdm-pro-disabled-toggle">
 									<input type="checkbox" disabled="disabled">
 									<?php esc_html_e( 'Save to Media Library', 'wprobo-documerge' ); ?>
 									<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?>
 								</label>
-								<?php endif; ?>
 							</div>
 							<span class="wdm-description"><?php esc_html_e( 'How the generated document is delivered after submission. Email settings are configured in Settings → Email.', 'wprobo-documerge' ); ?></span>
 						</div>
@@ -612,99 +591,7 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 					<!-- ── Limits Sub-tab ──────────────────────────────────── -->
 					<div class="wdm-settings-subtab-content" data-subtab="limits">
 
-						<?php if ( ! $gate->wprobo_documerge_can( 'entry_limits' ) ) : ?>
-							<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Entry Limits', 'wprobo-documerge' ), esc_html__( 'Limit submissions per form, email, IP address, or user.', 'wprobo-documerge' ) ); ?>
-						<?php else : ?>
-
-						<?php
-						// Re-use $btn_settings if already decoded above, otherwise decode now.
-						if ( ! isset( $btn_settings ) ) {
-							$btn_settings = ! empty( $form ) && ! empty( $form->settings ) ? json_decode( $form->settings, true ) : array();
-						}
-						$limit_per_email   = isset( $btn_settings['limit_per_email'] ) ? absint( $btn_settings['limit_per_email'] ) : 0;
-						$limit_email_field = isset( $btn_settings['limit_email_field'] ) ? $btn_settings['limit_email_field'] : '';
-						$limit_per_ip      = isset( $btn_settings['limit_per_ip'] ) ? absint( $btn_settings['limit_per_ip'] ) : 0;
-						$limit_per_user    = isset( $btn_settings['limit_per_user'] ) ? absint( $btn_settings['limit_per_user'] ) : 0;
-
-						// Get email fields for the dropdown.
-						$email_fields = array();
-						if ( ! empty( $form_fields ) ) {
-							$decoded_fields = json_decode( $form_fields, true );
-							if ( is_array( $decoded_fields ) ) {
-								foreach ( $decoded_fields as $f ) {
-									if ( isset( $f['type'] ) && 'email' === $f['type'] && ! empty( $f['name'] ) ) {
-										$email_fields[] = $f;
-									}
-								}
-							}
-						}
-						?>
-
-						<div class="wdm-field-group">
-							<label for="wdm-entry-limit"><?php esc_html_e( 'Total Entry Limit', 'wprobo-documerge' ); ?></label>
-							<div class="wdm-input-row">
-								<input type="number" id="wdm-entry-limit" class="wdm-input wdm-input-small"
-									   value="<?php echo esc_attr( isset( $btn_settings['entry_limit'] ) ? $btn_settings['entry_limit'] : '' ); ?>"
-									   min="0" placeholder="0">
-								<span class="wdm-input-suffix"><?php esc_html_e( 'total (0 = unlimited)', 'wprobo-documerge' ); ?></span>
-							</div>
-						</div>
-
-						<div class="wdm-field-group">
-							<label for="wdm-limit-per-email"><?php esc_html_e( 'Limit Per Email', 'wprobo-documerge' ); ?></label>
-							<div class="wdm-input-row">
-								<input type="number" id="wdm-limit-per-email" class="wdm-input wdm-input-small"
-									   value="<?php echo esc_attr( $limit_per_email ); ?>"
-									   min="0" placeholder="0">
-								<span class="wdm-input-suffix"><?php esc_html_e( 'per email (0 = unlimited)', 'wprobo-documerge' ); ?></span>
-							</div>
-							<?php if ( ! empty( $email_fields ) ) : ?>
-								<div style="margin-top:8px;">
-									<label for="wdm-limit-email-field"><?php esc_html_e( 'Email Field', 'wprobo-documerge' ); ?></label>
-									<select id="wdm-limit-email-field" class="wdm-select">
-										<?php foreach ( $email_fields as $ef ) : ?>
-											<option value="<?php echo esc_attr( $ef['name'] ); ?>" <?php selected( $limit_email_field, $ef['name'] ); ?>>
-												<?php echo esc_html( $ef['label'] . ' (' . $ef['name'] . ')' ); ?>
-											</option>
-										<?php endforeach; ?>
-									</select>
-								</div>
-							<?php else : ?>
-								<span class="wdm-description"><?php esc_html_e( 'Add an email field to your form to use this limit.', 'wprobo-documerge' ); ?></span>
-							<?php endif; ?>
-						</div>
-
-						<div class="wdm-field-group">
-							<label for="wdm-limit-per-ip"><?php esc_html_e( 'Limit Per IP Address', 'wprobo-documerge' ); ?></label>
-							<div class="wdm-input-row">
-								<input type="number" id="wdm-limit-per-ip" class="wdm-input wdm-input-small"
-									   value="<?php echo esc_attr( $limit_per_ip ); ?>"
-									   min="0" placeholder="0">
-								<span class="wdm-input-suffix"><?php esc_html_e( 'per IP (0 = unlimited)', 'wprobo-documerge' ); ?></span>
-							</div>
-							<span class="wdm-description"><?php esc_html_e( 'Limits how many times the same IP can submit this form.', 'wprobo-documerge' ); ?></span>
-						</div>
-
-						<div class="wdm-field-group">
-							<label for="wdm-limit-per-user"><?php esc_html_e( 'Limit Per User (Logged-in)', 'wprobo-documerge' ); ?></label>
-							<div class="wdm-input-row">
-								<input type="number" id="wdm-limit-per-user" class="wdm-input wdm-input-small"
-									   value="<?php echo esc_attr( $limit_per_user ); ?>"
-									   min="0" placeholder="0">
-								<span class="wdm-input-suffix"><?php esc_html_e( 'per user (0 = unlimited)', 'wprobo-documerge' ); ?></span>
-							</div>
-							<span class="wdm-description"><?php esc_html_e( 'Only applies to logged-in users. Guests are not affected.', 'wprobo-documerge' ); ?></span>
-						</div>
-
-						<div class="wdm-field-group">
-							<label for="wdm-closed-message"><?php esc_html_e( 'Closed / Limit Message', 'wprobo-documerge' ); ?></label>
-							<input type="text" id="wdm-closed-message" class="wdm-input"
-								   value="<?php echo esc_attr( isset( $btn_settings['closed_message'] ) ? $btn_settings['closed_message'] : '' ); ?>"
-								   placeholder="<?php esc_attr_e( 'This form is no longer accepting submissions.', 'wprobo-documerge' ); ?>">
-							<span class="wdm-description"><?php esc_html_e( 'Shown when any limit is reached.', 'wprobo-documerge' ); ?></span>
-						</div>
-
-						<?php endif; // End Pro gate for Limits. ?>
+						<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Entry Limits', 'wprobo-documerge' ), esc_html__( 'Limit submissions per form, email, IP address, or user.', 'wprobo-documerge' ) ); ?>
 
 					</div>
 
@@ -723,17 +610,7 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 					<!-- ── Notifications Sub-tab ───────────────────────────── -->
 					<div class="wdm-settings-subtab-content" data-subtab="notifications">
 
-						<?php if ( ! $gate->wprobo_documerge_can( 'webhooks' ) ) : ?>
-							<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Webhooks', 'wprobo-documerge' ), esc_html__( 'Send submission data to external services like Zapier, Make, and n8n.', 'wprobo-documerge' ) ); ?>
-						<?php else : ?>
-						<div class="wdm-field-group">
-							<label for="wdm-webhook-url-field"><?php esc_html_e( 'Webhook URL', 'wprobo-documerge' ); ?></label>
-							<input type="url" id="wdm-webhook-url-field" class="wdm-input"
-								   value="<?php echo esc_attr( isset( $btn_settings['webhook_url'] ) ? $btn_settings['webhook_url'] : '' ); ?>"
-								   placeholder="https://hooks.zapier.com/hooks/catch/...">
-							<span class="wdm-description"><?php esc_html_e( 'Optional. Sends submission data to this URL on successful submission. Works with Zapier, Make, n8n, etc.', 'wprobo-documerge' ); ?></span>
-						</div>
-						<?php endif; ?>
+						<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Webhooks', 'wprobo-documerge' ), esc_html__( 'Send submission data to external services like Zapier, Make, and n8n.', 'wprobo-documerge' ) ); ?>
 
 					</div>
 

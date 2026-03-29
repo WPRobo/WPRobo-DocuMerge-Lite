@@ -91,36 +91,23 @@ $primary_action = array(
             <span class="wdm-stat-card-title"><?php esc_html_e( 'Submissions', 'wprobo-documerge' ); ?></span>
         </div>
 
-        <?php
-        $gate_dashboard = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance();
-        if ( $gate_dashboard->wprobo_documerge_is_pro() && ! empty( $stats['stripe_active'] ) ) : ?>
-            <div class="wdm-stat-card">
-                <div class="wdm-stat-card-icon"><span class="dashicons dashicons-cart"></span></div>
-                <div class="wdm-stat-card-content">
-                    <span class="wdm-stat-value"><?php echo esc_html( '$' . $stats['revenue_formatted'] ); ?></span>
-                    <span class="wdm-stat-label"><?php esc_html_e( 'This Month', 'wprobo-documerge' ); ?></span>
-                </div>
-                <span class="wdm-stat-card-title"><?php esc_html_e( 'Revenue', 'wprobo-documerge' ); ?></span>
+        <div class="wdm-stat-card">
+            <div class="wdm-stat-card-icon"><span class="dashicons dashicons-yes-alt"></span></div>
+            <div class="wdm-stat-card-content">
+                <span class="wdm-stat-value"><?php echo esc_html( $success_rate . '%' ); ?></span>
+                <span class="wdm-stat-label">
+                    <?php
+                    if ( $error_count > 0 ) {
+                        /* translators: %d: number of errors */
+                        printf( esc_html__( '%d error(s)', 'wprobo-documerge' ), $error_count );
+                    } else {
+                        esc_html_e( 'This Month', 'wprobo-documerge' );
+                    }
+                    ?>
+                </span>
             </div>
-        <?php else : ?>
-            <div class="wdm-stat-card">
-                <div class="wdm-stat-card-icon"><span class="dashicons dashicons-yes-alt"></span></div>
-                <div class="wdm-stat-card-content">
-                    <span class="wdm-stat-value"><?php echo esc_html( $success_rate . '%' ); ?></span>
-                    <span class="wdm-stat-label">
-                        <?php
-                        if ( $error_count > 0 ) {
-                            /* translators: %d: number of errors */
-                            printf( esc_html__( '%d error(s)', 'wprobo-documerge' ), $error_count );
-                        } else {
-                            esc_html_e( 'This Month', 'wprobo-documerge' );
-                        }
-                        ?>
-                    </span>
-                </div>
-                <span class="wdm-stat-card-title"><?php esc_html_e( 'Success Rate', 'wprobo-documerge' ); ?></span>
-            </div>
-        <?php endif; ?>
+            <span class="wdm-stat-card-title"><?php esc_html_e( 'Success Rate', 'wprobo-documerge' ); ?></span>
+        </div>
     </div>
 
     <!-- ── Charts Row ──────────────────────────────────────────── -->
@@ -148,26 +135,8 @@ $primary_action = array(
 
     </div>
 
-    <!-- ── Row 2: Revenue + Form Popularity ───────────────────────── -->
-    <?php
-    $has_payments = false;
-    if ( $gate_dashboard->wprobo_documerge_is_pro() ) {
-        foreach ( $chart_data['payments'] as $pd ) {
-            if ( $pd['revenue'] > 0 ) { $has_payments = true; break; }
-        }
-    }
-    ?>
+    <!-- ── Row 2: Pro Feature Teasers ─────────────────────────────── -->
     <div class="wdm-charts-row">
-        <?php if ( $gate_dashboard->wprobo_documerge_is_pro() && $has_payments ) : ?>
-        <div class="wdm-card wdm-chart-card">
-            <div class="wdm-card-header">
-                <h2 class="wdm-card-title"><?php esc_html_e( 'Revenue (Last 7 Days)', 'wprobo-documerge' ); ?></h2>
-            </div>
-            <div class="wdm-card-body">
-                <canvas id="wdm-chart-payments" height="220"></canvas>
-            </div>
-        </div>
-        <?php elseif ( ! $gate_dashboard->wprobo_documerge_is_pro() ) : ?>
         <div class="wdm-card wdm-chart-card">
             <div class="wdm-card-header">
                 <h2 class="wdm-card-title"><?php esc_html_e( 'Revenue', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></h2>
@@ -185,23 +154,12 @@ $primary_action = array(
                     <?php endforeach; ?>
                 </div>
                 <p style="color:#6b7280;font-size:13px;margin:0 0 12px;"><?php esc_html_e( 'Track payments and revenue with Stripe integration.', 'wprobo-documerge' ); ?></p>
-                <a href="<?php echo esc_url( $gate_dashboard->wprobo_documerge_get_upgrade_url() ); ?>" target="_blank" class="wdm-btn-upgrade" style="font-size:12px;padding:6px 16px;">
+                <a href="<?php echo esc_url( \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_get_upgrade_url() ); ?>" target="_blank" class="wdm-btn-upgrade" style="font-size:12px;padding:6px 16px;">
                     <?php esc_html_e( 'Upgrade to Pro', 'wprobo-documerge' ); ?>
                 </a>
             </div>
         </div>
-        <?php endif; ?>
 
-        <?php if ( $gate_dashboard->wprobo_documerge_is_pro() ) : ?>
-        <div class="wdm-card wdm-chart-card">
-            <div class="wdm-card-header">
-                <h2 class="wdm-card-title"><?php esc_html_e( 'Form Popularity', 'wprobo-documerge' ); ?></h2>
-            </div>
-            <div class="wdm-card-body">
-                <canvas id="wdm-chart-forms" height="220"></canvas>
-            </div>
-        </div>
-        <?php else : ?>
         <div class="wdm-card wdm-chart-card">
             <div class="wdm-card-header">
                 <h2 class="wdm-card-title"><?php esc_html_e( 'Analytics', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></h2>
@@ -218,7 +176,6 @@ $primary_action = array(
                 </a>
             </div>
         </div>
-        <?php endif; ?>
     </div>
 
     <!-- ── Recent Submissions ────────────────────────────────────── -->
@@ -440,124 +397,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('wdm-chart-status').parentNode.innerHTML =
             '<p style="text-align:center;color:#6b7280;padding:40px 0;">No submissions yet</p>';
     }
-    // ── Payment Revenue Chart (Bar) ──────────────────────────────
-    <?php if ( $has_payments ) : ?>
-    var paymentData = <?php echo wp_json_encode( $chart_data['payments'] ); ?>;
-    var payLabels   = paymentData.map(function(d) { return d.label; });
-    var payValues   = paymentData.map(function(d) { return d.revenue; });
 
-    new Chart(document.getElementById('wdm-chart-payments'), {
-        type: 'bar',
-        data: {
-            labels: payLabels,
-            datasets: [{
-                label: '<?php echo esc_js( __( 'Revenue', 'wprobo-documerge' ) ); ?>',
-                data: payValues,
-                backgroundColor: green + '33',
-                borderColor: green,
-                borderWidth: 2,
-                borderRadius: 6,
-                hoverBackgroundColor: green + '66'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: {
-                    backgroundColor: blue,
-                    padding: 10,
-                    cornerRadius: 6,
-                    callbacks: {
-                        label: function(ctx) {
-                            return '<?php echo esc_js( get_option( 'wprobo_documerge_stripe_currency', 'USD' ) ); ?> ' + ctx.parsed.y.toFixed(2);
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(v) { return '<?php echo esc_js( get_option( 'wprobo_documerge_stripe_currency', 'USD' ) ); ?> ' + v.toFixed(0); },
-                        font: { size: 11 },
-                        color: '#6b7280'
-                    },
-                    grid: { color: '#f0f4fa' }
-                },
-                x: {
-                    ticks: { font: { size: 11 }, color: '#6b7280' },
-                    grid: { display: false }
-                }
-            }
-        }
-    });
-    <?php endif; ?>
-
-    // ── Horizontal Bar Chart: Form Popularity (Pro only) ─────────
-    <?php if ( $gate_dashboard->wprobo_documerge_is_pro() ) : ?>
-    var formStats = <?php echo wp_json_encode( $chart_data['forms'] ); ?>;
-
-    if (formStats.length > 0) {
-        var formLabels = formStats.map(function(f) {
-            var t = f.title || '<?php echo esc_js( __( '(Untitled)', 'wprobo-documerge' ) ); ?>';
-            return t.length > 25 ? t.substring(0, 22) + '...' : t;
-        });
-        var formCounts = formStats.map(function(f) { return parseInt(f.count, 10); });
-
-        new Chart(document.getElementById('wdm-chart-forms'), {
-            type: 'bar',
-            data: {
-                labels: formLabels,
-                datasets: [{
-                    label: '<?php echo esc_js( __( 'Submissions', 'wprobo-documerge' ) ); ?>',
-                    data: formCounts,
-                    backgroundColor: blue + '33',
-                    borderColor: blue,
-                    borderWidth: 2,
-                    borderRadius: 6,
-                    hoverBackgroundColor: blue + '66'
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: blue,
-                        titleFont: { size: 13, weight: '600' },
-                        bodyFont: { size: 12 },
-                        padding: 10,
-                        cornerRadius: 6
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1,
-                            font: { size: 11 },
-                            color: '#6b7280'
-                        },
-                        grid: { color: '#f0f4fa' }
-                    },
-                    y: {
-                        ticks: { font: { size: 12 }, color: '#6b7280' },
-                        grid: { display: false }
-                    }
-                }
-            }
-        });
-    } else {
-        var formsCanvas = document.getElementById('wdm-chart-forms');
-        if (formsCanvas) {
-            formsCanvas.parentNode.innerHTML =
-                '<p class="wdm-chart-empty"><?php echo esc_js( __( 'No data yet', 'wprobo-documerge' ) ); ?></p>';
-        }
-    }
-    <?php endif; // Form Popularity Pro check. ?>
 });
 </script>

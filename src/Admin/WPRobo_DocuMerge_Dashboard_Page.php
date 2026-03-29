@@ -196,26 +196,9 @@ class WPRobo_DocuMerge_Dashboard_Page {
             ARRAY_A
         );
 
-        // Form popularity (bar chart — top 5 forms).
-        $forms_table = $wpdb->prefix . 'wprdm_forms';
-        $form_stats  = $wpdb->get_results(
-            "SELECT f.title, COUNT(s.id) as count
-             FROM {$table} s
-             LEFT JOIN {$forms_table} f ON s.form_id = f.id
-             GROUP BY s.form_id
-             ORDER BY count DESC
-             LIMIT 5",
-            ARRAY_A
-        );
-
-        // Payment revenue (disabled in Lite).
-        $payment_data = array();
-
         return array(
             'daily'    => $daily_data,
             'statuses' => $statuses ? $statuses : array(),
-            'forms'    => $form_stats ? $form_stats : array(),
-            'payments' => $payment_data,
         );
     }
 }

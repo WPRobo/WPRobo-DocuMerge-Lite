@@ -107,7 +107,7 @@ fi
 echo "[3/8] Creating production directory..."
 
 PROD_DIR="$PLUGIN_DIR/production"
-BUILD_DIR="$PROD_DIR/wprobo-docu-merge"
+BUILD_DIR="$PROD_DIR/wprobo-docu-merge-lite"
 ZIP_NAME="wpr-documerge-${VERSION}.zip"
 
 # Clean previous build.
@@ -331,7 +331,7 @@ fi
 echo "[8/8] Creating ZIP: $ZIP_NAME"
 
 cd "$PROD_DIR"
-zip -r -q "$ZIP_NAME" "wprobo-docu-merge/"
+zip -r -q "$ZIP_NAME" "wprobo-docu-merge-lite/"
 
 # Get ZIP size.
 ZIP_SIZE=$(du -h "$PROD_DIR/$ZIP_NAME" | cut -f1)

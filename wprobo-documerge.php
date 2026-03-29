@@ -117,7 +117,12 @@ if ( ! defined( 'WPROBO_DOCUMERGE_TEMP_DIR' ) ) {
 	define( 'WPROBO_DOCUMERGE_TEMP_DIR', WP_CONTENT_DIR . '/uploads/documerge-temp/' );
 }
 
-// Custom PSR-4 autoloader — no Composer vendor/ needed for Lite.
+// Composer autoloader — loads PHPWord, mPDF, and other vendor dependencies.
+if ( file_exists( WPROBO_DOCUMERGE_PATH . 'vendor/autoload.php' ) ) {
+	require_once WPROBO_DOCUMERGE_PATH . 'vendor/autoload.php';
+}
+
+// Custom PSR-4 autoloader for plugin classes (src/).
 spl_autoload_register(
 	function ( $fqcn ) {
 		$prefix   = 'WPRobo\\DocuMerge\\';

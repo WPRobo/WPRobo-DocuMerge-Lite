@@ -190,13 +190,48 @@ if [ -d "$BUILD_DIR/vendor" ]; then
     find "$BUILD_DIR/vendor" -name "phpunit.xml*" -delete 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "CHANGELOG*" -delete 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "CONTRIBUTING*" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "README*" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "LICENSE*" -not -name "LICENSE" -delete 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name ".travis.yml" -delete 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name ".github" -type d -exec rm -rf {} + 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "tests" -type d -exec rm -rf {} + 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "test" -type d -exec rm -rf {} + 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "docs" -type d -exec rm -rf {} + 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "doc" -type d -exec rm -rf {} + 2>/dev/null || true
     find "$BUILD_DIR/vendor" -name "examples" -type d -exec rm -rf {} + 2>/dev/null || true
     echo "   Cleaned: vendor/ dev files (tests, docs, examples)"
+
+    # ── Slim down mPDF fonts (87MB → ~3MB) ───────────────────
+    # mPDF ships 83 font files for CJK, ancient scripts, etc.
+    # Keep only DejaVu (core Latin/European) + FreeSans/FreeSerif (extended).
+    # Users who need CJK can install the mpdf/mpdf-fonts package.
+    MPDF_FONTS="$BUILD_DIR/vendor/mpdf/mpdf/ttfonts"
+    if [ -d "$MPDF_FONTS" ]; then
+        FONTS_BEFORE=$(du -sh "$MPDF_FONTS" | cut -f1)
+
+        # Keep only DejaVu (covers Latin, Cyrillic, Greek — 3.5MB total):
+        KEEP_PATTERN="DejaVu"
+
+        # Move keepers to a temp dir, nuke the rest, move back.
+        TMPFONTS="$BUILD_DIR/_tmpfonts"
+        mkdir -p "$TMPFONTS"
+        for f in "$MPDF_FONTS"/*; do
+            fname=$(basename "$f")
+            if echo "$fname" | grep -qE "$KEEP_PATTERN"; then
+                mv "$f" "$TMPFONTS/"
+            fi
+        done
+        rm -rf "$MPDF_FONTS"
+        mv "$TMPFONTS" "$MPDF_FONTS"
+
+        FONTS_AFTER=$(du -sh "$MPDF_FONTS" | cut -f1)
+        FONT_COUNT=$(ls "$MPDF_FONTS" | wc -l | tr -d ' ')
+        echo "   Fonts: $FONTS_BEFORE → $FONTS_AFTER ($FONT_COUNT files kept)"
+    fi
+
+    # Remove mPDF data files not needed for basic PDF generation.
+    rm -rf "$BUILD_DIR/vendor/mpdf/mpdf/data/collations" 2>/dev/null || true
+    rm -rf "$BUILD_DIR/vendor/mpdf/mpdf/data/codepages" 2>/dev/null || true
 fi
 
 echo "   Cleaned: .DS_Store, Thumbs.db, .gitkeep, *.log"

@@ -157,7 +157,7 @@ class WPRobo_DocuMerge_Assets {
             );
         }
 
-        // Settings JS + Select2 + CodeMirror — only on settings page.
+        // Settings JS + Select2 — only on settings page.
         if ( strpos( $hook, 'wprobo-documerge-settings' ) !== false ) {
             wp_enqueue_script(
                 'wprobo-documerge-settings',
@@ -178,52 +178,6 @@ class WPRobo_DocuMerge_Assets {
                 WPROBO_DOCUMERGE_URL . 'assets/vendor/select2/select2.min.js',
                 array( 'jquery' ),
                 '4.1.0',
-                true
-            );
-            wp_enqueue_style(
-                'wprobo-documerge-codemirror',
-                'https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.css',
-                array(),
-                '5.65.16'
-            );
-            wp_enqueue_style(
-                'wprobo-documerge-codemirror-theme',
-                'https://cdn.jsdelivr.net/npm/codemirror@5.65.16/theme/material-darker.min.css',
-                array( 'wprobo-documerge-codemirror' ),
-                '5.65.16'
-            );
-            wp_enqueue_script(
-                'wprobo-documerge-codemirror',
-                'https://cdn.jsdelivr.net/npm/codemirror@5.65.16/lib/codemirror.min.js',
-                array(),
-                '5.65.16',
-                true
-            );
-            wp_enqueue_script(
-                'wprobo-documerge-codemirror-css',
-                'https://cdn.jsdelivr.net/npm/codemirror@5.65.16/mode/css/css.min.js',
-                array( 'wprobo-documerge-codemirror' ),
-                '5.65.16',
-                true
-            );
-            wp_enqueue_script(
-                'wprobo-documerge-codemirror-hint',
-                'https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/hint/show-hint.min.js',
-                array( 'wprobo-documerge-codemirror' ),
-                '5.65.16',
-                true
-            );
-            wp_enqueue_style(
-                'wprobo-documerge-codemirror-hint-css',
-                'https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/hint/show-hint.min.css',
-                array( 'wprobo-documerge-codemirror' ),
-                '5.65.16'
-            );
-            wp_enqueue_script(
-                'wprobo-documerge-codemirror-csshint',
-                'https://cdn.jsdelivr.net/npm/codemirror@5.65.16/addon/hint/css-hint.min.js',
-                array( 'wprobo-documerge-codemirror', 'wprobo-documerge-codemirror-hint' ),
-                '5.65.16',
                 true
             );
         }

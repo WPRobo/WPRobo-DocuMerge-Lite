@@ -27,7 +27,6 @@
          */
         tabActions: {
             general:   'wprobo_documerge_save_general',
-            email:     'wprobo_documerge_save_email',
             advanced:  'wprobo_documerge_save_advanced'
         },
 
@@ -325,11 +324,6 @@
                 action: action,
                 nonce:  wprobo_documerge_vars.settings_nonce
             };
-
-            // Sync TinyMCE content to textarea before collecting email tab data.
-            if ( 'email' === tab && typeof tinyMCE !== 'undefined' && tinyMCE.get('wprobo_documerge_email_body_template') ) {
-                tinyMCE.get('wprobo_documerge_email_body_template').save();
-            }
 
             // Collect all inputs from the panel (skip inputs inside hidden containers).
             $panel.find(':input').each(function() {

@@ -19,7 +19,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 global $wpdb;
 
 // 1. Drop custom DB tables.
-$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wprdm_analytics" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wprdm_submissions" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wprdm_forms" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wprdm_templates" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery

@@ -139,7 +139,6 @@ class WPRobo_DocuMerge_Help_Page {
             'php_version'      => PHP_VERSION,
             'phpword_version'  => $phpword_version,
             'mpdf_version'     => $mpdf_version,
-            'stripe_mode'      => get_option( 'wprobo_documerge_stripe_mode', 'test' ),
             'detected_plugins' => ! empty( $detected_plugins )
                 ? implode( ', ', array_map( function( $p ) {
                     return $p['name'] . ( ! empty( $p['version'] ) ? ' v' . $p['version'] : '' );

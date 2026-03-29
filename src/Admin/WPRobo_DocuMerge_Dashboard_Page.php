@@ -104,19 +104,11 @@ class WPRobo_DocuMerge_Dashboard_Page {
             )
         );
 
-        // --- Revenue this month ---
-        $wprobo_documerge_revenue = (float) $wpdb->get_var(
-            $wpdb->prepare(
-                "SELECT COALESCE( SUM( payment_amount ), 0 ) FROM {$wpdb->prefix}wprdm_submissions WHERE payment_status = %s AND created_at >= %s",
-                'paid',
-                $wprobo_documerge_month_start
-            )
-        );
+        // --- Revenue (disabled in Lite) ---
+        $wprobo_documerge_revenue = 0.00;
 
-        // --- Stripe active check ---
-        $wprobo_documerge_stripe_live = get_option( 'wprobo_documerge_stripe_live_secret_key', '' );
-        $wprobo_documerge_stripe_test = get_option( 'wprobo_documerge_stripe_test_secret_key', '' );
-        $wprobo_documerge_stripe_active = ! empty( $wprobo_documerge_stripe_live ) || ! empty( $wprobo_documerge_stripe_test );
+        // --- Stripe active check (disabled in Lite) ---
+        $wprobo_documerge_stripe_active = false;
 
         return array(
             'templates'         => (int) $wprobo_documerge_templates,
@@ -216,24 +208,8 @@ class WPRobo_DocuMerge_Dashboard_Page {
             ARRAY_A
         );
 
-        // Payment revenue last 7 days.
+        // Payment revenue (disabled in Lite).
         $payment_data = array();
-        for ( $i = 6; $i >= 0; $i-- ) {
-            $date  = gmdate( 'Y-m-d', strtotime( "-{$i} days" ) );
-            $label = gmdate( 'M j', strtotime( "-{$i} days" ) );
-
-            $revenue = (float) $wpdb->get_var(
-                $wpdb->prepare(
-                    "SELECT COALESCE(SUM(payment_amount), 0) FROM {$table} WHERE DATE(created_at) = %s AND payment_status = 'paid'",
-                    $date
-                )
-            );
-
-            $payment_data[] = array(
-                'label'   => $label,
-                'revenue' => round( $revenue, 2 ),
-            );
-        }
 
         return array(
             'daily'    => $daily_data,

@@ -25,11 +25,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <div class="wdm-settings-tabs">
             <button type="button" class="wdm-settings-tab wdm-tab-active" data-tab="general"><?php esc_html_e( 'General', 'wprobo-documerge' ); ?></button>
-            <button type="button" class="wdm-settings-tab" data-tab="stripe"><?php esc_html_e( 'Stripe', 'wprobo-documerge' ); ?></button>
-            <button type="button" class="wdm-settings-tab" data-tab="email"><?php esc_html_e( 'Email', 'wprobo-documerge' ); ?></button>
-            <button type="button" class="wdm-settings-tab" data-tab="captcha"><?php esc_html_e( 'reCAPTCHA', 'wprobo-documerge' ); ?></button>
-            <button type="button" class="wdm-settings-tab" data-tab="styles"><?php esc_html_e( 'Styles', 'wprobo-documerge' ); ?></button>
-            <button type="button" class="wdm-settings-tab" data-tab="customcss"><?php esc_html_e( 'Custom CSS', 'wprobo-documerge' ); ?></button>
             <button type="button" class="wdm-settings-tab" data-tab="advanced"><?php esc_html_e( 'Advanced', 'wprobo-documerge' ); ?></button>
             <button type="button" class="wdm-settings-tab" data-tab="importexport"><?php esc_html_e( 'Import / Export', 'wprobo-documerge' ); ?></button>
             <button type="button" class="wdm-settings-tab wdm-tab-danger" data-tab="dangerzone"><?php esc_html_e( 'Danger Zone', 'wprobo-documerge' ); ?></button>
@@ -193,38 +188,6 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         </div>
 
-        <!-- ══════════════ STRIPE ══════════════ -->
-        <div class="wdm-settings-panel" data-tab="stripe">
-
-            <?php
-            echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
-                    __( 'Stripe Payments', 'wprobo-documerge' ),
-                    __( 'Accept payments before delivering documents. Supports test & live mode.', 'wprobo-documerge' )
-                );
-            ?>
-        </div>
-
-        <!-- ══════════════ EMAIL ══════════════ -->
-        <div class="wdm-settings-panel" data-tab="email">
-
-            <?php
-            echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
-                    __( 'Email Delivery', 'wprobo-documerge' ),
-                    __( 'Customise sender details, email templates, and document delivery emails.', 'wprobo-documerge' )
-                );
-            ?>
-        </div>
-
-        <!-- ══════════════ RECAPTCHA ══════════════ -->
-        <div class="wdm-settings-panel" data-tab="captcha">
-            <?php
-            echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
-                    __( 'CAPTCHA / Spam Protection', 'wprobo-documerge' ),
-                    __( 'Protect your forms with Google reCAPTCHA v2, v3, or hCaptcha.', 'wprobo-documerge' )
-                );
-            ?>
-        </div>
-
         <!-- ══════════════ ADVANCED ══════════════ -->
         <div class="wdm-settings-panel" data-tab="advanced">
 
@@ -305,27 +268,6 @@ if ( ! defined( 'ABSPATH' ) ) {
             </div>
         </div>
 
-        <!-- ══════════════ STYLES ══════════════ -->
-        <div class="wdm-settings-panel" data-tab="styles">
-            <?php
-            echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
-                    __( 'Form Styles', 'wprobo-documerge' ),
-                    __( 'Customise colours, fonts, spacing, and the overall look of your frontend forms.', 'wprobo-documerge' )
-                );
-            ?>
-        </div>
-
-        <!-- ══════════════ CUSTOM CSS ══════════════ -->
-        <div class="wdm-settings-panel" data-tab="customcss">
-            <?php
-            echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
-                    __( 'Custom CSS', 'wprobo-documerge' ),
-                    __( 'Add your own CSS to fully customise the appearance of frontend forms.', 'wprobo-documerge' )
-                );
-            ?>
-
-        </div>
-
         <!-- ══════════════ IMPORT / EXPORT ══════════════ -->
         <div class="wdm-settings-panel" data-tab="importexport">
 
@@ -347,8 +289,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                     $ie_form_count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_forms" );
                     $ie_sub_count  = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions" );
 
-                    $ie_analytics_exists = ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $wpdb->prefix . 'wprdm_analytics' ) ) !== null );
-                    $ie_analytics_count  = $ie_analytics_exists ? (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_analytics" ) : 0;
                     ?>
                     <div class="wdm-export-options">
                         <label class="wdm-checkbox-label">
@@ -385,18 +325,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <input type="checkbox" class="wdm-export-checkbox" value="settings" checked>
                             <?php esc_html_e( 'Settings', 'wprobo-documerge' ); ?>
                         </label>
-                        <?php if ( $ie_analytics_exists ) : ?>
-                        <label class="wdm-checkbox-label">
-                            <input type="checkbox" class="wdm-export-checkbox" value="analytics" checked>
-                            <?php
-                            printf(
-                                /* translators: %s: number of analytics records */
-                                esc_html__( 'Analytics (%s)', 'wprobo-documerge' ),
-                                esc_html( number_format_i18n( $ie_analytics_count ) )
-                            );
-                            ?>
-                        </label>
-                        <?php endif; ?>
                     </div>
                     <div class="wdm-export-actions">
                         <button type="button" class="wdm-btn wdm-btn-primary" id="wdm-export-selected">
@@ -558,13 +486,6 @@ if ( ! defined( 'ABSPATH' ) ) {
                             <p><?php esc_html_e( 'Resets General, Stripe, Email, reCAPTCHA, Styles, and Custom CSS to defaults. Data is not affected.', 'wprobo-documerge' ); ?></p>
                         </div>
                         <button type="button" class="wdm-btn wdm-btn-danger wdm-danger-action" data-action="reset_settings"><?php esc_html_e( 'Reset', 'wprobo-documerge' ); ?></button>
-                    </div>
-                    <div class="wdm-danger-card">
-                        <div class="wdm-danger-card-info">
-                            <h4><?php esc_html_e( 'Reset Analytics', 'wprobo-documerge' ); ?></h4>
-                            <p><?php esc_html_e( 'Clears all form analytics (views, starts, completions). Dashboard and form stats reset to zero.', 'wprobo-documerge' ); ?></p>
-                        </div>
-                        <button type="button" class="wdm-btn wdm-btn-danger wdm-danger-action" data-action="reset_analytics"><?php esc_html_e( 'Reset', 'wprobo-documerge' ); ?></button>
                     </div>
                     <div class="wdm-danger-card wdm-danger-card-critical" style="border-bottom:none;">
                         <div class="wdm-danger-card-info">

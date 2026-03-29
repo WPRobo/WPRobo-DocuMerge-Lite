@@ -14,8 +14,6 @@
 
 namespace WPRobo\DocuMerge\Admin;
 
-use WPRobo\DocuMerge\Helpers\WPRobo_DocuMerge_Encryptor;
-
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -38,12 +36,7 @@ class WPRobo_DocuMerge_Settings_Page {
      */
     public function wprobo_documerge_init_hooks() {
         add_action( 'wp_ajax_wprobo_documerge_save_general',  array( $this, 'wprobo_documerge_ajax_save_general' ) );
-        add_action( 'wp_ajax_wprobo_documerge_save_stripe',   array( $this, 'wprobo_documerge_ajax_save_stripe' ) );
-        add_action( 'wp_ajax_wprobo_documerge_save_email',    array( $this, 'wprobo_documerge_ajax_save_email' ) );
-        add_action( 'wp_ajax_wprobo_documerge_save_captcha',  array( $this, 'wprobo_documerge_ajax_save_captcha' ) );
         add_action( 'wp_ajax_wprobo_documerge_save_advanced', array( $this, 'wprobo_documerge_ajax_save_advanced' ) );
-        add_action( 'wp_ajax_wprobo_documerge_save_styles',   array( $this, 'wprobo_documerge_ajax_save_styles' ) );
-        add_action( 'wp_ajax_wprobo_documerge_save_customcss', array( $this, 'wprobo_documerge_ajax_save_customcss' ) );
         add_action( 'wp_ajax_wprobo_documerge_reset_wizard',  array( $this, 'wprobo_documerge_ajax_reset_wizard' ) );
         add_action( 'wp_ajax_wprobo_documerge_danger_zone',   array( $this, 'wprobo_documerge_ajax_danger_zone' ) );
         add_action( 'wp_ajax_wprobo_documerge_export_data',   array( $this, 'wprobo_documerge_ajax_export_data' ) );
@@ -132,11 +125,6 @@ class WPRobo_DocuMerge_Settings_Page {
                 wp_send_json_success( array( 'message' => __( 'All settings reset to defaults.', 'wprobo-documerge' ) ) );
                 break;
 
-            case 'reset_analytics':
-                $wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_analytics" );
-                wp_send_json_success( array( 'message' => __( 'Analytics data cleared.', 'wprobo-documerge' ) ) );
-                break;
-
             case 'factory_reset':
                 // Delete all document files.
                 $docs_dir = $upload_dir['basedir'] . '/documerge-docs/';
@@ -153,7 +141,6 @@ class WPRobo_DocuMerge_Settings_Page {
                 $wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_submissions" );
                 $wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_forms" );
                 $wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_templates" );
-                $wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_analytics" );
 
                 // Delete all plugin options.
                 $all_options = $wpdb->get_col(
@@ -306,199 +293,6 @@ class WPRobo_DocuMerge_Settings_Page {
         wp_send_json_success( array( 'message' => __( 'General settings saved.', 'wprobo-documerge' ) ) );
     }
 
-    /**
-     * AJAX handler — save Stripe tab settings.
-     *
-     * Saves Stripe mode, currency, and encrypts all API keys
-     * before storing them in the database.
-     *
-     * @since 1.0.0
-     */
-    public function wprobo_documerge_ajax_save_stripe() {
-        check_ajax_referer( 'wprobo_documerge_settings', 'nonce' );
-
-        if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
-            return;
-        }
-
-        // Stripe mode.
-        $stripe_mode   = isset( $_POST['wprobo_documerge_stripe_mode'] )
-            ? sanitize_key( wp_unslash( $_POST['wprobo_documerge_stripe_mode'] ) )
-            : 'test';
-        $allowed_modes = array( 'test', 'live' );
-        if ( ! in_array( $stripe_mode, $allowed_modes, true ) ) {
-            $stripe_mode = 'test';
-        }
-        update_option( 'wprobo_documerge_stripe_mode', $stripe_mode );
-
-        // Stripe currency.
-        $stripe_currency = isset( $_POST['wprobo_documerge_stripe_currency'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_stripe_currency'] ) )
-            : 'usd';
-        update_option( 'wprobo_documerge_stripe_currency', $stripe_currency );
-
-        // Encrypted Stripe keys.
-        $encrypted_keys = array(
-            'wprobo_documerge_stripe_test_publishable_key',
-            'wprobo_documerge_stripe_test_secret_key',
-            'wprobo_documerge_stripe_live_publishable_key',
-            'wprobo_documerge_stripe_live_secret_key',
-            'wprobo_documerge_stripe_webhook_secret',
-        );
-
-        foreach ( $encrypted_keys as $key_name ) {
-            if ( isset( $_POST[ $key_name ] ) ) {
-                $raw_value = sanitize_text_field( wp_unslash( $_POST[ $key_name ] ) );
-                // Only update if a value was actually entered — empty means "keep existing".
-                if ( '' !== $raw_value ) {
-                    $encrypted_value = WPRobo_DocuMerge_Encryptor::wprobo_documerge_encrypt( $raw_value );
-                    update_option( $key_name, $encrypted_value );
-                }
-            }
-        }
-
-        // Card display options.
-        $card_layout = isset( $_POST['wprobo_documerge_stripe_card_layout'] )
-            ? sanitize_key( wp_unslash( $_POST['wprobo_documerge_stripe_card_layout'] ) )
-            : 'single';
-        if ( ! in_array( $card_layout, array( 'single', 'multi' ), true ) ) {
-            $card_layout = 'single';
-        }
-        update_option( 'wprobo_documerge_stripe_card_layout', $card_layout );
-
-        $hide_postal = isset( $_POST['wprobo_documerge_stripe_hide_postal'] )
-            ? sanitize_key( wp_unslash( $_POST['wprobo_documerge_stripe_hide_postal'] ) )
-            : '0';
-        update_option( 'wprobo_documerge_stripe_hide_postal', $hide_postal );
-
-        wp_send_json_success( array( 'message' => __( 'Stripe settings saved.', 'wprobo-documerge' ) ) );
-    }
-
-    /**
-     * AJAX handler — save Email tab settings.
-     *
-     * Saves sender name, sender email, reply-to address,
-     * attachment preference, and maximum attachment size.
-     *
-     * @since 1.0.0
-     */
-    public function wprobo_documerge_ajax_save_email() {
-        check_ajax_referer( 'wprobo_documerge_settings', 'nonce' );
-
-        if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
-            return;
-        }
-
-        // From name.
-        $from_name = isset( $_POST['wprobo_documerge_email_from_name'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_email_from_name'] ) )
-            : '';
-        update_option( 'wprobo_documerge_email_from_name', $from_name );
-
-        // From email.
-        $from_email = isset( $_POST['wprobo_documerge_email_from'] )
-            ? sanitize_email( wp_unslash( $_POST['wprobo_documerge_email_from'] ) )
-            : '';
-        update_option( 'wprobo_documerge_email_from', $from_email );
-
-        // Reply-to email.
-        $reply_to = isset( $_POST['wprobo_documerge_email_reply_to'] )
-            ? sanitize_email( wp_unslash( $_POST['wprobo_documerge_email_reply_to'] ) )
-            : '';
-        update_option( 'wprobo_documerge_email_reply_to', $reply_to );
-
-        // Attach document.
-        $attach_doc = isset( $_POST['wprobo_documerge_email_attach_doc'] ) ? '1' : '0';
-        update_option( 'wprobo_documerge_email_attach_doc', $attach_doc );
-
-        // Max attachment size (MB).
-        $max_attach_size = isset( $_POST['wprobo_documerge_email_max_attach_size'] )
-            ? absint( wp_unslash( $_POST['wprobo_documerge_email_max_attach_size'] ) )
-            : 10;
-        update_option( 'wprobo_documerge_email_max_attach_size', $max_attach_size );
-
-        // Email subject template.
-        $subject_template = isset( $_POST['wprobo_documerge_email_subject_template'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_email_subject_template'] ) )
-            : '';
-        update_option( 'wprobo_documerge_email_subject_template', $subject_template );
-
-        // Email body template (allows safe HTML).
-        $body_template = isset( $_POST['wprobo_documerge_email_body_template'] )
-            ? wp_kses_post( wp_unslash( $_POST['wprobo_documerge_email_body_template'] ) )
-            : '';
-        update_option( 'wprobo_documerge_email_body_template', $body_template );
-
-        wp_send_json_success( array( 'message' => __( 'Email settings saved.', 'wprobo-documerge' ) ) );
-    }
-
-    /**
-     * AJAX handler — save reCAPTCHA / hCaptcha tab settings.
-     *
-     * Saves captcha type selection, site keys, secret keys,
-     * and reCAPTCHA v3 threshold.
-     *
-     * @since 1.0.0
-     */
-    public function wprobo_documerge_ajax_save_captcha() {
-        check_ajax_referer( 'wprobo_documerge_settings', 'nonce' );
-
-        if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
-            return;
-        }
-
-        // Captcha type.
-        $captcha_type   = isset( $_POST['wprobo_documerge_captcha_type'] )
-            ? sanitize_key( wp_unslash( $_POST['wprobo_documerge_captcha_type'] ) )
-            : 'recaptcha_v2';
-        $allowed_types  = array( 'recaptcha_v2', 'recaptcha_v3', 'hcaptcha' );
-        if ( ! in_array( $captcha_type, $allowed_types, true ) ) {
-            $captcha_type = 'recaptcha_v2';
-        }
-        update_option( 'wprobo_documerge_captcha_type', $captcha_type );
-
-        // reCAPTCHA v2 keys.
-        $v2_site_key = isset( $_POST['wprobo_documerge_recaptcha_v2_site_key'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_recaptcha_v2_site_key'] ) )
-            : '';
-        $v2_secret_key = isset( $_POST['wprobo_documerge_recaptcha_v2_secret_key'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_recaptcha_v2_secret_key'] ) )
-            : '';
-        update_option( 'wprobo_documerge_recaptcha_v2_site_key', $v2_site_key );
-        update_option( 'wprobo_documerge_recaptcha_v2_secret_key', $v2_secret_key );
-
-        // reCAPTCHA v3 keys.
-        $v3_site_key = isset( $_POST['wprobo_documerge_recaptcha_v3_site_key'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_recaptcha_v3_site_key'] ) )
-            : '';
-        $v3_secret_key = isset( $_POST['wprobo_documerge_recaptcha_v3_secret_key'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_recaptcha_v3_secret_key'] ) )
-            : '';
-        update_option( 'wprobo_documerge_recaptcha_v3_site_key', $v3_site_key );
-        update_option( 'wprobo_documerge_recaptcha_v3_secret_key', $v3_secret_key );
-
-        // reCAPTCHA v3 threshold (clamped between 0.0 and 1.0).
-        $v3_threshold = isset( $_POST['wprobo_documerge_recaptcha_v3_threshold'] )
-            ? floatval( wp_unslash( $_POST['wprobo_documerge_recaptcha_v3_threshold'] ) )
-            : 0.5;
-        $v3_threshold = max( 0.0, min( 1.0, $v3_threshold ) );
-        update_option( 'wprobo_documerge_recaptcha_v3_threshold', $v3_threshold );
-
-        // hCaptcha keys.
-        $hcaptcha_site_key = isset( $_POST['wprobo_documerge_hcaptcha_site_key'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_hcaptcha_site_key'] ) )
-            : '';
-        $hcaptcha_secret_key = isset( $_POST['wprobo_documerge_hcaptcha_secret_key'] )
-            ? sanitize_text_field( wp_unslash( $_POST['wprobo_documerge_hcaptcha_secret_key'] ) )
-            : '';
-        update_option( 'wprobo_documerge_hcaptcha_site_key', $hcaptcha_site_key );
-        update_option( 'wprobo_documerge_hcaptcha_secret_key', $hcaptcha_secret_key );
-
-        wp_send_json_success( array( 'message' => __( 'CAPTCHA settings saved.', 'wprobo-documerge' ) ) );
-    }
 
     /**
      * AJAX handler — save Advanced tab settings.
@@ -540,94 +334,6 @@ class WPRobo_DocuMerge_Settings_Page {
     }
 
     /**
-     * AJAX handler — save Styles tab settings.
-     *
-     * Collects all style options from the Styles tab and saves
-     * them as a single JSON option for frontend CSS generation.
-     *
-     * @since 1.5.0
-     */
-    public function wprobo_documerge_ajax_save_styles() {
-        check_ajax_referer( 'wprobo_documerge_settings', 'nonce' );
-
-        if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
-            return;
-        }
-
-        $styles     = array();
-        $style_keys = array(
-            'form_bg',
-            'form_border_color',
-            'form_border_width',
-            'form_border_radius',
-            'form_padding',
-            'form_shadow',
-            'form_shadow_color',
-            'label_size',
-            'label_weight',
-            'label_color',
-            'label_margin',
-            'input_bg',
-            'input_border_color',
-            'input_border_width',
-            'input_border_radius',
-            'input_padding',
-            'input_font_size',
-            'input_color',
-            'input_focus_color',
-            'input_placeholder_color',
-            'btn_bg',
-            'btn_color',
-            'btn_hover_bg',
-            'btn_hover_color',
-            'btn_radius',
-            'btn_font_size',
-            'btn_padding_v',
-            'btn_padding_h',
-            'error_color',
-            'error_border_color',
-            'success_color',
-            'form_max_width',
-            'form_font_family',
-        );
-
-        foreach ( $style_keys as $key ) {
-            $post_key = 'wprobo_documerge_style_' . $key;
-            if ( isset( $_POST[ $post_key ] ) ) {
-                $styles[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) );
-            }
-        }
-
-        update_option( 'wprobo_documerge_form_styles', wp_json_encode( $styles ) );
-
-        wp_send_json_success( array( 'message' => __( 'Styles saved.', 'wprobo-documerge' ) ) );
-    }
-
-    /**
-     * AJAX handler — save Custom CSS tab settings.
-     *
-     * Saves custom frontend CSS.
-     *
-     * @since 1.1.0
-     */
-    public function wprobo_documerge_ajax_save_customcss() {
-        check_ajax_referer( 'wprobo_documerge_settings', 'nonce' );
-
-        if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
-            return;
-        }
-
-        $custom_css = isset( $_POST['wprobo_documerge_custom_css'] )
-            ? wp_strip_all_tags( wp_unslash( $_POST['wprobo_documerge_custom_css'] ) )
-            : '';
-        update_option( 'wprobo_documerge_custom_css', $custom_css );
-
-        wp_send_json_success( array( 'message' => __( 'Custom CSS saved.', 'wprobo-documerge' ) ) );
-    }
-
-    /**
      * AJAX handler — export plugin data as JSON.
      *
      * Collects the requested data types (templates, forms, submissions,
@@ -651,7 +357,7 @@ class WPRobo_DocuMerge_Settings_Page {
             return;
         }
 
-        $allowed_types = array( 'templates', 'forms', 'submissions', 'settings', 'analytics' );
+        $allowed_types = array( 'templates', 'forms', 'submissions', 'settings' );
         $types         = array_intersect( $types, $allowed_types );
 
         if ( empty( $types ) ) {
@@ -697,19 +403,6 @@ class WPRobo_DocuMerge_Settings_Page {
                 $settings[ $row['option_name'] ] = $row['option_value'];
             }
             $export_data['settings'] = $settings;
-        }
-
-        // Analytics.
-        if ( in_array( 'analytics', $types, true ) ) {
-            $table_exists = ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $wpdb->prefix . 'wprdm_analytics' ) ) !== null );
-            if ( $table_exists ) {
-                $export_data['analytics'] = $wpdb->get_results(
-                    "SELECT * FROM {$wpdb->prefix}wprdm_analytics ORDER BY id ASC",
-                    ARRAY_A
-                );
-            } else {
-                $export_data['analytics'] = array();
-            }
         }
 
         $payload = array(
@@ -775,7 +468,7 @@ class WPRobo_DocuMerge_Settings_Page {
             $mode = 'merge';
         }
 
-        $allowed_types = array( 'templates', 'forms', 'submissions', 'settings', 'analytics' );
+        $allowed_types = array( 'templates', 'forms', 'submissions', 'settings' );
         $types         = array_intersect( $types, $allowed_types );
 
         if ( empty( $types ) ) {
@@ -835,20 +528,6 @@ class WPRobo_DocuMerge_Settings_Page {
                 $settings_count++;
             }
             $results['settings'] = $settings_count;
-        }
-
-        // Analytics.
-        if ( in_array( 'analytics', $types, true ) && isset( $data['data']['analytics'] ) && is_array( $data['data']['analytics'] ) ) {
-            $table_exists = ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $wpdb->prefix . 'wprdm_analytics' ) ) !== null );
-            if ( $table_exists ) {
-                $results['analytics'] = $this->wprobo_documerge_import_table_rows(
-                    $wpdb->prefix . 'wprdm_analytics',
-                    $data['data']['analytics'],
-                    $mode
-                );
-            } else {
-                $results['analytics'] = 0;
-            }
         }
 
         // Bust caches.

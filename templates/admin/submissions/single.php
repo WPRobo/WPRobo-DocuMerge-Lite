@@ -222,12 +222,6 @@ $badge = isset( $status_map[ $submission->status ] ) ? $status_map[ $submission-
 							</span>
 						</div>
 						<?php endif; ?>
-						<?php if ( ! empty( $submission->stripe_intent_id ) ) : ?>
-						<div class="wdm-meta-item">
-							<span class="wdm-meta-label"><?php esc_html_e( 'Stripe ID', 'wprobo-documerge' ); ?></span>
-							<span class="wdm-meta-value"><code style="font-size:11px;"><?php echo esc_html( $submission->stripe_intent_id ); ?></code></span>
-						</div>
-						<?php endif; ?>
 						<?php if ( isset( $submission->delivery_status ) && ! empty( $submission->delivery_status ) ) : ?>
 						<div class="wdm-meta-item">
 							<span class="wdm-meta-label"><?php esc_html_e( 'Delivery', 'wprobo-documerge' ); ?></span>

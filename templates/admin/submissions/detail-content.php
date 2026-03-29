@@ -85,12 +85,6 @@ $meta   = isset( $form_data['meta'] ) ? $form_data['meta'] : array();
                 <?php endif; ?>
             </td>
         </tr>
-        <?php if ( ! empty( $submission->stripe_intent_id ) ) : ?>
-        <tr>
-            <td><strong><?php esc_html_e( 'Stripe ID', 'wprobo-documerge' ); ?></strong></td>
-            <td><code><?php echo esc_html( $submission->stripe_intent_id ); ?></code></td>
-        </tr>
-        <?php endif; ?>
         <tr>
             <td><strong><?php esc_html_e( 'Email', 'wprobo-documerge' ); ?></strong></td>
             <td><?php echo esc_html( $submission->submitter_email ?: '—' ); ?></td>

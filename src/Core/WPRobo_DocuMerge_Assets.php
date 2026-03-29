@@ -82,7 +82,7 @@ class WPRobo_DocuMerge_Assets {
 	public function wprobo_documerge_enqueue_admin_assets( $hook ) {
 
 		// Only load on plugin pages.
-		if ( strpos( $hook, 'wprobo-documerge-lite' ) === false ) {
+		if ( strpos( $hook, 'wprobo-documerge' ) === false ) {
 			return;
 		}
 

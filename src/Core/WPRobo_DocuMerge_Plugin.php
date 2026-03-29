@@ -251,7 +251,7 @@ class WPRobo_DocuMerge_Plugin {
 	 */
 	public function wprobo_documerge_lite_admin_notice() {
 		$screen = get_current_screen();
-		if ( ! $screen || strpos( $screen->id, 'wprobo-documerge-lite' ) === false ) {
+		if ( ! $screen || strpos( $screen->id, 'wprobo-documerge' ) === false ) {
 			return;
 		}
 		// Only show once per session (dismiss with user meta).

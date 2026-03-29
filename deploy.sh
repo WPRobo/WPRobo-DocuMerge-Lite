@@ -12,12 +12,14 @@
 #   production/wpr-documerge-{version}.zip
 #
 # What's INCLUDED:
-#   - All PHP source files (src/, templates/, emails/, blocks/)
+#   - All PHP source files (src/, templates/, blocks/)
 #   - Compiled CSS + JS (assets/css/, assets/js/)
 #   - Vendor JS libraries (assets/vendor/)
+#   - Composer PHP dependencies (vendor/ — PHPWord, mPDF)
 #   - Images (assets/images/)
+#   - Screenshots (screenshot-*.png)
 #   - Languages (.pot file)
-#   - readme.txt, uninstall.php, composer.json
+#   - readme.txt, uninstall.php
 #   - Main plugin file (wprobo-documerge.php)
 #
 # What's EXCLUDED:
@@ -26,13 +28,14 @@
 #   - Git files (.git/, .gitignore)
 #   - GitHub workflows (.github/)
 #   - Documentation (docs/)
-#   - Dev config (package.json, package-lock.json, .editorconfig)
+#   - Dev config (package.json, package-lock.json, composer.json,
+#     composer.lock, .editorconfig)
 #   - Deploy script itself (deploy.sh)
 #   - Dist ignore (.distignore)
-#   - Markdown files (*.md) except readme.txt
+#   - Markdown files (*.md)
 #   - OS files (.DS_Store, Thumbs.db)
 #   - Log files (*.log)
-#   - Temp/test files
+#   - Production directory (production/)
 #
 
 set -e
@@ -54,28 +57,73 @@ echo "  WPRobo DocuMerge Lite — Build v${VERSION}"
 echo "=========================================="
 echo ""
 
-# ── Create production directory ────────────────────────────────
+# ── Step 1: Install Composer dependencies ─────────────────────
+echo "[1/8] Installing Composer dependencies..."
+
+if command -v composer &> /dev/null; then
+    cd "$PLUGIN_DIR"
+    if [ -f "composer.json" ]; then
+        composer install --no-dev --optimize-autoloader --no-interaction --quiet 2>&1
+        echo "   Composer: installed (production only, no dev)"
+    else
+        echo "   WARNING: No composer.json found. Skipping."
+    fi
+else
+    echo "   WARNING: Composer not found. Checking for existing vendor/..."
+    if [ ! -d "$PLUGIN_DIR/vendor" ]; then
+        echo "   ERROR: No vendor/ directory and Composer not available."
+        echo "   Install Composer: https://getcomposer.org/download/"
+        echo "   Or run: composer install --no-dev"
+        exit 1
+    fi
+    echo "   Using existing vendor/ directory."
+fi
+
+# ── Step 2: Build CSS + JS assets ─────────────────────────────
+echo "[2/8] Building assets..."
+
+if command -v npx &> /dev/null; then
+    cd "$PLUGIN_DIR"
+
+    # Compile SCSS.
+    npx sass assets/src/css/admin/main.scss:assets/css/admin/main.min.css --style=compressed --no-source-map 2>/dev/null
+    npx sass assets/src/css/frontend/form.scss:assets/css/frontend/form.min.css --style=compressed --no-source-map 2>/dev/null
+    echo "   CSS: compiled (admin + frontend)"
+
+    # Minify JS.
+    for jsfile in assets/src/js/admin/*.js assets/src/js/frontend/*.js; do
+        if [ -f "$jsfile" ]; then
+            basename=$(basename "$jsfile" .js)
+            subdir=$(echo "$jsfile" | grep -o 'admin\|frontend')
+            npx terser "$jsfile" -o "assets/js/$subdir/$basename.min.js" -c -m 2>/dev/null
+        fi
+    done
+    echo "   JS: minified (all source files)"
+else
+    echo "   WARNING: npx not found. Using existing compiled assets."
+fi
+
+# ── Step 3: Create production directory ────────────────────────
+echo "[3/8] Creating production directory..."
+
 PROD_DIR="$PLUGIN_DIR/production"
 BUILD_DIR="$PROD_DIR/wprobo-docu-merge"
 ZIP_NAME="wpr-documerge-${VERSION}.zip"
 
 # Clean previous build.
 if [ -d "$PROD_DIR" ]; then
-    echo "[1/6] Cleaning previous build..."
     rm -rf "$PROD_DIR"
 fi
 
 mkdir -p "$BUILD_DIR"
-echo "[1/6] Created production directory."
 
-# ── Copy production files ──────────────────────────────────────
-echo "[2/6] Copying production files..."
+# ── Step 4: Copy production files ──────────────────────────────
+echo "[4/8] Copying production files..."
 
-# Main plugin file.
+# Main plugin files.
 cp "$PLUGIN_DIR/wprobo-documerge.php" "$BUILD_DIR/"
 cp "$PLUGIN_DIR/uninstall.php" "$BUILD_DIR/"
 cp "$PLUGIN_DIR/readme.txt" "$BUILD_DIR/"
-cp "$PLUGIN_DIR/composer.json" "$BUILD_DIR/"
 
 # PHP source.
 cp -R "$PLUGIN_DIR/src" "$BUILD_DIR/"
@@ -88,13 +136,13 @@ if [ -d "$PLUGIN_DIR/blocks" ]; then
     cp -R "$PLUGIN_DIR/blocks" "$BUILD_DIR/"
 fi
 
-# Compiled assets (CSS + JS only, not source).
+# Compiled assets (CSS + JS only, not SCSS source).
 mkdir -p "$BUILD_DIR/assets/css"
 mkdir -p "$BUILD_DIR/assets/js"
 cp -R "$PLUGIN_DIR/assets/css/" "$BUILD_DIR/assets/css/"
 cp -R "$PLUGIN_DIR/assets/js/" "$BUILD_DIR/assets/js/"
 
-# Vendor JS libraries.
+# Vendor JS libraries (Select2, Flatpickr, intl-tel-input).
 if [ -d "$PLUGIN_DIR/assets/vendor" ]; then
     cp -R "$PLUGIN_DIR/assets/vendor" "$BUILD_DIR/assets/"
 fi
@@ -104,34 +152,57 @@ if [ -d "$PLUGIN_DIR/assets/images" ]; then
     cp -R "$PLUGIN_DIR/assets/images" "$BUILD_DIR/assets/"
 fi
 
+# Composer PHP vendor (PHPWord, mPDF).
+if [ -d "$PLUGIN_DIR/vendor" ]; then
+    cp -R "$PLUGIN_DIR/vendor" "$BUILD_DIR/"
+    echo "   vendor/: copied (PHPWord + mPDF)"
+else
+    echo "   WARNING: No vendor/ directory. Document generation will not work!"
+fi
+
 # Languages.
 if [ -d "$PLUGIN_DIR/languages" ]; then
     cp -R "$PLUGIN_DIR/languages" "$BUILD_DIR/"
 fi
 
-# Emails.
-if [ -d "$PLUGIN_DIR/emails" ]; then
-    cp -R "$PLUGIN_DIR/emails" "$BUILD_DIR/"
-fi
+# Screenshots (WordPress.org reads from plugin root).
+for ss in "$PLUGIN_DIR"/screenshot-*.png "$PLUGIN_DIR"/screenshot-*.jpg; do
+    if [ -f "$ss" ]; then
+        cp "$ss" "$BUILD_DIR/"
+    fi
+done
 
-echo "   Copied: src/, templates/, blocks/, assets/, languages/, emails/"
+echo "   Copied: src/, templates/, blocks/, assets/, vendor/, languages/"
 
-# ── Remove dev artifacts from copied files ─────────────────────
-echo "[3/6] Cleaning dev artifacts..."
+# ── Step 5: Clean dev artifacts ────────────────────────────────
+echo "[5/8] Cleaning dev artifacts..."
 
-# Remove any .DS_Store, Thumbs.db, desktop.ini.
+# Remove OS files.
 find "$BUILD_DIR" -name ".DS_Store" -delete 2>/dev/null || true
 find "$BUILD_DIR" -name "Thumbs.db" -delete 2>/dev/null || true
 find "$BUILD_DIR" -name "desktop.ini" -delete 2>/dev/null || true
 find "$BUILD_DIR" -name "*.log" -delete 2>/dev/null || true
-
-# Remove any .gitkeep files.
 find "$BUILD_DIR" -name ".gitkeep" -delete 2>/dev/null || true
+find "$BUILD_DIR" -name ".md" -delete 2>/dev/null || true
+
+# Remove Composer dev files from vendor/.
+if [ -d "$BUILD_DIR/vendor" ]; then
+    find "$BUILD_DIR/vendor" -name "phpunit.xml*" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "CHANGELOG*" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "CONTRIBUTING*" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name ".travis.yml" -delete 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name ".github" -type d -exec rm -rf {} + 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "tests" -type d -exec rm -rf {} + 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "test" -type d -exec rm -rf {} + 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "docs" -type d -exec rm -rf {} + 2>/dev/null || true
+    find "$BUILD_DIR/vendor" -name "examples" -type d -exec rm -rf {} + 2>/dev/null || true
+    echo "   Cleaned: vendor/ dev files (tests, docs, examples)"
+fi
 
 echo "   Cleaned: .DS_Store, Thumbs.db, .gitkeep, *.log"
 
-# ── Verify critical files exist ────────────────────────────────
-echo "[4/6] Verifying build..."
+# ── Step 6: Verify critical files ─────────────────────────────
+echo "[6/8] Verifying build..."
 
 ERRORS=0
 
@@ -167,6 +238,8 @@ check_file "assets/js/admin/main.min.js"
 check_file "assets/js/admin/form-builder.min.js"
 check_file "assets/js/admin/settings.min.js"
 check_file "assets/js/frontend/form-renderer.min.js"
+check_dir "vendor"
+check_file "vendor/autoload.php"
 
 if [ $ERRORS -gt 0 ]; then
     echo ""
@@ -178,8 +251,8 @@ fi
 FILE_COUNT=$(find "$BUILD_DIR" -type f | wc -l | tr -d ' ')
 echo "   Verified: $FILE_COUNT files in build."
 
-# ── Verify NO dev files leaked ─────────────────────────────────
-echo "[5/6] Checking for dev file leaks..."
+# ── Step 7: Verify NO dev files leaked ─────────────────────────
+echo "[7/8] Checking for dev file leaks..."
 
 LEAKS=0
 
@@ -192,6 +265,8 @@ check_no_file() {
 
 check_no_file "package.json"
 check_no_file "package-lock.json"
+check_no_file "composer.json"
+check_no_file "composer.lock"
 check_no_file ".gitignore"
 check_no_file ".distignore"
 check_no_file ".editorconfig"
@@ -202,24 +277,22 @@ check_no_file ".git"
 check_no_file ".github"
 check_no_file "assets/src"
 
-# Check for any .md files (except readme.txt which is not .md).
+# Check for any .md files.
 MD_FILES=$(find "$BUILD_DIR" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 if [ "$MD_FILES" -gt 0 ]; then
     echo "   LEAK: Found $MD_FILES .md file(s) in build!"
-    find "$BUILD_DIR" -name "*.md" -exec echo "         {}" \;
+    find "$BUILD_DIR" -name "*.md" -delete 2>/dev/null || true
     LEAKS=$((LEAKS + 1))
 fi
 
 if [ $LEAKS -gt 0 ]; then
-    echo ""
-    echo "WARNING: $LEAKS dev file leak(s) detected. Cleaning..."
-    find "$BUILD_DIR" -name "*.md" -delete 2>/dev/null || true
+    echo "   WARNING: $LEAKS leak(s) cleaned."
+else
+    echo "   No dev files in production build."
 fi
 
-echo "   No dev files in production build."
-
-# ── Create ZIP ─────────────────────────────────────────────────
-echo "[6/6] Creating ZIP: $ZIP_NAME"
+# ── Step 8: Create ZIP ─────────────────────────────────────────
+echo "[8/8] Creating ZIP: $ZIP_NAME"
 
 cd "$PROD_DIR"
 zip -r -q "$ZIP_NAME" "wprobo-docu-merge/"
@@ -238,5 +311,8 @@ echo "  ZIP:      production/$ZIP_NAME"
 echo "  Size:     $ZIP_SIZE"
 echo "  Files:    $FILE_COUNT"
 echo ""
-echo "  Ready for WordPress.org submission."
+echo "  Next steps:"
+echo "  1. Test the ZIP on a fresh WordPress install"
+echo "  2. Submit at: https://wordpress.org/plugins/developers/add/"
+echo "  3. Validate readme: https://wordpress.org/plugins/developers/readme-validator/"
 echo "=========================================="

@@ -234,6 +234,12 @@ class WPRobo_DocuMerge_Plugin {
 
 		// Show Pro upgrade banner on admin pages.
 		add_action( 'admin_notices', array( $this, 'wprobo_documerge_lite_admin_notice' ) );
+
+		// Dev-only: seed demo data when ?seed_demo=1 on a DocuMerge admin page.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( is_admin() && isset( $_GET['seed_demo'] ) && '1' === $_GET['seed_demo'] ) {
+			add_action( 'admin_init', array( $this, 'wprobo_documerge_run_seeder' ) );
+		}
 	}
 
 	/**
@@ -306,5 +312,33 @@ class WPRobo_DocuMerge_Plugin {
 		);
 
 		return array_merge( $plugin_links, $links );
+	}
+
+	/**
+	 * Run the demo data seeder script (dev-only).
+	 *
+	 * Triggered by ?seed_demo=1 on any admin page.
+	 * The seeder file is excluded from production builds.
+	 *
+	 * @since  1.0.0
+	 * @return void
+	 */
+	public function wprobo_documerge_run_seeder() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$seeder_path = WPROBO_DOCUMERGE_PATH . 'scripts/seed-demo-data.php';
+
+		if ( ! file_exists( $seeder_path ) ) {
+			wp_die(
+				esc_html__( 'Seeder script not found. This feature is only available in the development version.', 'wprobo-documerge' ),
+				esc_html__( 'DocuMerge Seeder', 'wprobo-documerge' ),
+				array( 'back_link' => true )
+			);
+		}
+
+		include $seeder_path;
+		exit;
 	}
 }

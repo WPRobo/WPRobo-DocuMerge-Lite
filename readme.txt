@@ -125,13 +125,20 @@ Yes. The frontend form output uses its own namespaced CSS classes that do not co
 
 == Screenshots ==
 
-1. Setup Wizard — guided first-run configuration
-2. Template Manager — upload and manage DOCX templates with merge tags
-3. Form Builder — drag-and-drop form builder with field types
-4. Merge Tag Mapper — visually map template tags to form fields
-5. Submissions Archive — view all submissions with document download links
-6. Frontend Form — clean form output for site visitors
-7. Generated Document — example of a completed PDF output
+1. Dashboard — overview with stat cards, submission trends chart, and status breakdown doughnut
+2. Template Manager — manage DOCX templates with merge tags, output format, and linked forms
+3. Upload Template — slide-in panel with drag-and-drop DOCX upload and output format selection
+4. Forms List — all forms with template, field count, submission count, shortcode, and mode columns
+5. Form Builder — drag-and-drop fields with free field types and locked Pro fields (PRO badges)
+6. Form Settings — template selection, output format, delivery methods with Pro upgrade prompts
+7. Submissions Archive — filterable list with status badges, form names, and PDF download links
+8. Submission Detail — full submitted data, admin notes, tracking info, and document download
+9. Settings General — document output format, delivery method, and download link expiry
+10. Settings General (cont.) — form mode configuration with Pro integration option and admin notifications
+11. Settings Advanced — storage cleanup, debug logging, developer options, and setup wizard re-run
+12. Import / Export — side-by-side export checkboxes and drag-and-drop JSON import
+13. Danger Zone — selective data deletion for submissions, forms, templates, and documents
+14. Danger Zone (cont.) — settings reset and full factory reset with confirmation
 
 == Changelog ==
 

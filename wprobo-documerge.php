@@ -13,6 +13,7 @@
  * Description:       Automate document generation from form submissions. Upload Word/DOCX templates, collect data via forms, and deliver personalised documents automatically. <a href="https://wprobo.com/plugins/wprobo-documerge/?utm_source=lite&utm_medium=plugin&utm_campaign=upgrade">Upgrade to Pro</a> for signature fields, Stripe payments, conditional logic, and more.
  * Version:           1.0.0
  * Requires at least: 6.0
+ * Tested up to:      6.8
  * Requires PHP:      7.4
  * Author:            Ali Shan
  * Author URI:        https://wprobo.com

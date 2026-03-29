@@ -131,10 +131,7 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 			<div class="wdm-field-type-grid">
 				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-art', __( 'Signature', 'wprobo-documerge' ) ); ?>
 				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-money-alt', __( 'Payment', 'wprobo-documerge' ) ); ?>
-				<button type="button" class="wdm-field-type-btn" data-type="captcha">
-					<span class="dashicons dashicons-shield"></span>
-					<?php esc_html_e( 'CAPTCHA', 'wprobo-documerge' ); ?>
-				</button>
+				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-shield', __( 'CAPTCHA', 'wprobo-documerge' ) ); ?>
 			</div>
 
 			<h3><?php esc_html_e( 'Advanced Fields', 'wprobo-documerge' ); ?></h3>

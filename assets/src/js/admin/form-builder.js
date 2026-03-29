@@ -60,8 +60,25 @@
             section_divider:  'Section Divider',
             url:              'Website',
             ip_address:       'IP Address',
-            tracking:         'Tracking'
+            tracking:         'Tracking',
+            signature:        'Signature',
+            payment:          'Payment',
+            captcha:          'CAPTCHA',
+            password:         'Password',
+            rating:           'Rating',
+            repeater:         'Repeater'
         },
+
+        /**
+         * Field types that are Pro-only.
+         *
+         * Forms created in Pro may contain these fields; in Lite
+         * they are rendered read-only with a PRO badge.
+         *
+         * @since 1.0.0
+         * @type  {Array}
+         */
+        proFieldTypes: ['signature', 'payment', 'captcha', 'file_upload', 'repeater', 'rating', 'address', 'name', 'hidden', 'html', 'section_divider', 'password'],
 
         /**
          * Initialize the form builder module.
@@ -301,7 +318,9 @@
             // Click field label to open settings (same as edit button).
             $(document).on('click', '.wdm-field-label-preview', function(e) {
                 e.preventDefault();
-                $(this).closest('.wdm-field-card').find('.wdm-field-card-settings').slideToggle(200);
+                var $card = $(this).closest('.wdm-field-card');
+                if ($card.hasClass('wdm-field-card-pro')) { return; }
+                $card.find('.wdm-field-card-settings').slideToggle(200);
             });
 
             // Field settings tab switching.
@@ -453,6 +472,7 @@
         addFieldAtIndex: function(e, $btn, index) {
             var type = $btn.data('type');
             if ($btn.prop('disabled')) { return; }
+            if (this.proFieldTypes.indexOf(type) !== -1) { return; }
 
             // Singleton fields — only one allowed per form.
             if ( this.isSingletonField(type) && this.hasFieldType(type) ) {
@@ -548,6 +568,11 @@
                 return;
             }
 
+            // Pro field types cannot be added in Lite.
+            if ( this.proFieldTypes.indexOf(type) !== -1 ) {
+                return;
+            }
+
             // Singleton fields — only one allowed per form.
             if ( this.isSingletonField(type) && this.hasFieldType(type) ) {
                 this.showNotice('error', this.typeLabels[type] + ' field can only be added once per form.');
@@ -631,6 +656,22 @@
             var typeLabel   = this.typeLabels[field.type] || field.type;
             var mergeTag    = '{' + field.name + '}';
             var checkedAttr = field.required ? ' checked' : '';
+            var isPro       = this.proFieldTypes.indexOf(field.type) !== -1;
+
+            // Pro field types: render read-only card with PRO badge, no settings panel.
+            if (isPro) {
+                var proHtml = '' +
+                    '<div class="wdm-field-card wdm-field-card-pro" data-field-id="' + field.id + '" data-field-type="' + field.type + '">' +
+                        '<div class="wdm-field-card-header">' +
+                            '<span class="wdm-field-drag-handle dashicons dashicons-menu"></span>' +
+                            '<span class="wdm-field-type-badge">' + $('<span>').text(typeLabel).html() + '</span>' +
+                            '<span class="wdm-field-label-preview">' + $('<span>').text(field.label).html() + '</span>' +
+                            '<span class="wdm-pro-badge" style="margin-left:auto;">PRO</span>' +
+                            '<span class="dashicons dashicons-lock" style="color:#6b7280;margin-left:4px;"></span>' +
+                        '</div>' +
+                    '</div>';
+                return proHtml;
+            }
 
             var html = '' +
                 '<div class="wdm-field-card" data-field-id="' + field.id + '" data-field-type="' + field.type + '">' +
@@ -986,6 +1027,12 @@
          */
         toggleFieldSettings: function($btn) {
             var $card     = $btn.closest('.wdm-field-card');
+
+            // Pro fields cannot be edited in Lite.
+            if ($card.hasClass('wdm-field-card-pro')) {
+                return;
+            }
+
             var $settings = $card.find('.wdm-field-card-settings');
 
             $settings.slideToggle(200);

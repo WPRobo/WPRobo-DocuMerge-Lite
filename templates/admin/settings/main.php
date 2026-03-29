@@ -25,6 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <div class="wdm-settings-tabs">
             <button type="button" class="wdm-settings-tab wdm-tab-active" data-tab="general"><?php esc_html_e( 'General', 'wprobo-documerge' ); ?></button>
+            <button type="button" class="wdm-settings-tab" data-tab="stripe"><?php esc_html_e( 'Stripe', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></button>
+            <button type="button" class="wdm-settings-tab" data-tab="email"><?php esc_html_e( 'Email', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></button>
+            <button type="button" class="wdm-settings-tab" data-tab="recaptcha"><?php esc_html_e( 'reCAPTCHA', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></button>
+            <button type="button" class="wdm-settings-tab" data-tab="styles"><?php esc_html_e( 'Styles', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></button>
+            <button type="button" class="wdm-settings-tab" data-tab="customcss"><?php esc_html_e( 'Custom CSS', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></button>
             <button type="button" class="wdm-settings-tab" data-tab="advanced"><?php esc_html_e( 'Advanced', 'wprobo-documerge' ); ?></button>
             <button type="button" class="wdm-settings-tab" data-tab="importexport"><?php esc_html_e( 'Import / Export', 'wprobo-documerge' ); ?></button>
             <button type="button" class="wdm-settings-tab wdm-tab-danger" data-tab="dangerzone"><?php esc_html_e( 'Danger Zone', 'wprobo-documerge' ); ?></button>
@@ -170,6 +175,46 @@ if ( ! defined( 'ABSPATH' ) ) {
             <div class="wdm-settings-actions">
                 <button type="button" class="wdm-btn wdm-btn-primary wdm-settings-save" data-tab="general"><?php esc_html_e( 'Save General Settings', 'wprobo-documerge' ); ?></button>
             </div>
+        </div>
+
+        <!-- ══════════════ STRIPE (PRO) ══════════════ -->
+        <div class="wdm-settings-panel" data-tab="stripe">
+            <?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+                __( 'Stripe Payments', 'wprobo-documerge' ),
+                __( 'Accept payments before delivering documents. Supports test and live mode with full Stripe integration.', 'wprobo-documerge' )
+            ); ?>
+        </div>
+
+        <!-- ══════════════ EMAIL (PRO) ══════════════ -->
+        <div class="wdm-settings-panel" data-tab="email">
+            <?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+                __( 'Email Delivery', 'wprobo-documerge' ),
+                __( 'Send generated documents via email with customizable templates, sender details, and attachment settings.', 'wprobo-documerge' )
+            ); ?>
+        </div>
+
+        <!-- ══════════════ RECAPTCHA (PRO) ══════════════ -->
+        <div class="wdm-settings-panel" data-tab="recaptcha">
+            <?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+                __( 'CAPTCHA / Spam Protection', 'wprobo-documerge' ),
+                __( 'Protect your forms with Google reCAPTCHA v2, v3, or hCaptcha integration.', 'wprobo-documerge' )
+            ); ?>
+        </div>
+
+        <!-- ══════════════ STYLES (PRO) ══════════════ -->
+        <div class="wdm-settings-panel" data-tab="styles">
+            <?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+                __( 'Form Styles', 'wprobo-documerge' ),
+                __( 'Customize form appearance — colors, fonts, spacing, borders, and button styles with a visual designer.', 'wprobo-documerge' )
+            ); ?>
+        </div>
+
+        <!-- ══════════════ CUSTOM CSS (PRO) ══════════════ -->
+        <div class="wdm-settings-panel" data-tab="customcss">
+            <?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+                __( 'Custom CSS', 'wprobo-documerge' ),
+                __( 'Add custom CSS to fully control the look of your forms with a syntax-highlighted code editor.', 'wprobo-documerge' )
+            ); ?>
         </div>
 
         <!-- ══════════════ ADVANCED ══════════════ -->

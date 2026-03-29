@@ -253,7 +253,7 @@ class WPRobo_DocuMerge_Plugin {
         }
         $upgrade_url = \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_get_upgrade_url();
         ?>
-        <div class="wdm-lite-upgrade-banner" style="background:linear-gradient(135deg,#042157,#0a3d8f);color:#fff;padding:14px 20px;border-radius:8px;margin:15px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+        <div class="wdm-lite-upgrade-banner" style="background:linear-gradient(135deg,#042157,#0a3d8f);color:#fff;padding:14px 20px;border-radius:8px;margin:15px 22px 15px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;">
             <div style="display:flex;align-items:center;gap:12px;">
                 <span class="dashicons dashicons-star-filled" style="font-size:24px;width:24px;height:24px;color:#fbbf24;"></span>
                 <div>

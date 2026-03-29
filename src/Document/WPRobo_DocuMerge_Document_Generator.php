@@ -70,9 +70,9 @@ class WPRobo_DocuMerge_Document_Generator {
 	 * @param WPRobo_DocuMerge_Logger|null           $logger         Optional logger.
 	 */
 	public function __construct( $docx_processor = null, $pdf_converter = null, $logger = null ) {
-		$this->wprobo_documerge_docx_processor = $docx_processor ?: new WPRobo_DocuMerge_Docx_Processor();
-		$this->wprobo_documerge_pdf_converter  = $pdf_converter  ?: new WPRobo_DocuMerge_Pdf_Converter();
-		$this->wprobo_documerge_logger         = $logger         ?: new WPRobo_DocuMerge_Logger();
+		$this->wprobo_documerge_docx_processor = $docx_processor ? $docx_processor : new WPRobo_DocuMerge_Docx_Processor();
+		$this->wprobo_documerge_pdf_converter  = $pdf_converter ? $pdf_converter : new WPRobo_DocuMerge_Pdf_Converter();
+		$this->wprobo_documerge_logger         = $logger ? $logger : new WPRobo_DocuMerge_Logger();
 	}
 
 	/**

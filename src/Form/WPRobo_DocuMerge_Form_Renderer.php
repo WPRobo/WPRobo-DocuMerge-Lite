@@ -271,10 +271,10 @@ class WPRobo_DocuMerge_Form_Renderer {
 		// Apply smart placeholders for fields without a custom placeholder.
 		$field_html = $this->wprobo_documerge_apply_smart_placeholders( $field_html, $field );
 
-		$width     = isset( $field['width'] ) ? $field['width'] : 'full';
-		$name      = isset( $field['name'] ) ? $field['name'] : '';
-		$type      = isset( $field['type'] ) ? $field['type'] : '';
-		$id        = isset( $field['id'] ) ? $field['id'] : '';
+		$width = isset( $field['width'] ) ? $field['width'] : 'full';
+		$name  = isset( $field['name'] ) ? $field['name'] : '';
+		$type  = isset( $field['type'] ) ? $field['type'] : '';
+		$id    = isset( $field['id'] ) ? $field['id'] : '';
 
 		$css_class = isset( $field['css_class'] ) && '' !== $field['css_class'] ? ' ' . esc_attr( $field['css_class'] ) : '';
 		$css_id    = isset( $field['css_id'] ) && '' !== $field['css_id'] ? $field['css_id'] : '';
@@ -285,7 +285,7 @@ class WPRobo_DocuMerge_Form_Renderer {
 			$css_class .= ' wdm-field-display-only';
 		}
 
-		$html  = '<div class="wdm-field-group wdm-field-width-' . esc_attr( $width ) . $css_class . '"';
+		$html = '<div class="wdm-field-group wdm-field-width-' . esc_attr( $width ) . $css_class . '"';
 		if ( '' !== $css_id ) {
 			$html .= ' id="' . esc_attr( $css_id ) . '"';
 		}
@@ -295,7 +295,7 @@ class WPRobo_DocuMerge_Form_Renderer {
 
 		if ( ! empty( $field['conditions'] ) && is_array( $field['conditions'] ) ) {
 			$conditions_json = wp_json_encode( $field['conditions'] );
-			$html .= ' data-conditions="' . esc_attr( $conditions_json ) . '"';
+			$html           .= ' data-conditions="' . esc_attr( $conditions_json ) . '"';
 		}
 
 		if ( ! empty( $field['error_message'] ) ) {
@@ -490,7 +490,7 @@ class WPRobo_DocuMerge_Form_Renderer {
 				'manrope'      => array( 'Manrope', 'Manrope:wght@400;500;600;700' ),
 				'spacegrotesk' => array( 'Space Grotesk', 'Space+Grotesk:wght@400;500;600;700' ),
 			);
-			$fkey = $s['form_font_family'];
+			$fkey         = $s['form_font_family'];
 			if ( isset( $google_fonts[ $fkey ] ) ) {
 				$form_rules .= 'font-family:"' . $google_fonts[ $fkey ][0] . '", sans-serif;';
 				// Enqueue Google Font stylesheet.

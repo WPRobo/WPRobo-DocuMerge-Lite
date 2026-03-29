@@ -384,7 +384,7 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 
 		foreach ( $this->items as &$item ) {
 			// Field count from JSON.
-			$fields_arr       = json_decode( isset( $item->fields ) ? $item->fields : '[]', true );
+			$fields_arr        = json_decode( isset( $item->fields ) ? $item->fields : '[]', true );
 			$item->field_count = is_array( $fields_arr ) ? count( $fields_arr ) : 0;
 
 			// Submission count.

@@ -63,16 +63,16 @@ class WPRobo_DocuMerge_Field_Number {
 	 */
 	public function wprobo_documerge_get_default_config() {
 		$config = array(
-			'id'          => '',
-			'type'        => 'number',
-			'label'       => 'Number',
-			'name'        => '',
-			'placeholder' => '',
-			'help_text'   => '',
-			'required'    => false,
-			'width'       => 'full',
-			'min_value'   => '',
-			'max_value'   => '',
+			'id'            => '',
+			'type'          => 'number',
+			'label'         => 'Number',
+			'name'          => '',
+			'placeholder'   => '',
+			'help_text'     => '',
+			'required'      => false,
+			'width'         => 'full',
+			'min_value'     => '',
+			'max_value'     => '',
 			'step'          => 1,
 			'error_message' => '',
 			'conditions'    => array(),
@@ -93,14 +93,14 @@ class WPRobo_DocuMerge_Field_Number {
 	public function wprobo_documerge_render_admin_settings( $field_data ) {
 		$field_data = wp_parse_args( $field_data, $this->wprobo_documerge_get_default_config() );
 
-		$id          = esc_attr( $field_data['id'] );
-		$label       = esc_attr( $field_data['label'] );
-		$placeholder = esc_attr( $field_data['placeholder'] );
-		$help_text   = esc_attr( $field_data['help_text'] );
-		$required    = ! empty( $field_data['required'] ) ? 'checked' : '';
-		$width       = esc_attr( $field_data['width'] );
-		$min_value   = esc_attr( $field_data['min_value'] );
-		$max_value   = esc_attr( $field_data['max_value'] );
+		$id            = esc_attr( $field_data['id'] );
+		$label         = esc_attr( $field_data['label'] );
+		$placeholder   = esc_attr( $field_data['placeholder'] );
+		$help_text     = esc_attr( $field_data['help_text'] );
+		$required      = ! empty( $field_data['required'] ) ? 'checked' : '';
+		$width         = esc_attr( $field_data['width'] );
+		$min_value     = esc_attr( $field_data['min_value'] );
+		$max_value     = esc_attr( $field_data['max_value'] );
 		$step          = esc_attr( $field_data['step'] );
 		$error_message = esc_attr( $field_data['error_message'] );
 
@@ -191,7 +191,7 @@ class WPRobo_DocuMerge_Field_Number {
 		$min_attr    = '' !== $field_data['min_value'] ? 'min="' . esc_attr( $field_data['min_value'] ) . '"' : '';
 		$max_attr    = '' !== $field_data['max_value'] ? 'max="' . esc_attr( $field_data['max_value'] ) . '"' : '';
 
-		$html = '<div class="wdm-field-group" data-field-type="number">';
+		$html  = '<div class="wdm-field-group" data-field-type="number">';
 		$html .= '<label for="wdm-field-' . $id . '">' . $label;
 		if ( ! empty( $field_data['required'] ) ) {
 			$html .= ' <span class="wdm-required">*</span>';

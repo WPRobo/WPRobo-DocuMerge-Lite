@@ -16,11 +16,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Decode settings with defaults.
 // $submit_label and $classes are set by the renderer before this template is included.
-$submit_label       = isset( $submit_label ) ? $submit_label : ( ! empty( $settings['submit_label'] ) ? $settings['submit_label'] : __( 'Submit', 'wprobo-documerge' ) );
-$success_message    = ! empty( $settings['success_message'] ) ? $settings['success_message'] : '';
-$step_labels        = ! empty( $settings['multistep_labels'] ) ? $settings['multistep_labels'] : array( 'Step 1', 'Step 2', 'Step 3' );
-$classes            = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
-$multistep_enabled  = isset( $form->multistep_enabled ) ? absint( $form->multistep_enabled ) : 0;
+$submit_label      = isset( $submit_label ) ? $submit_label : ( ! empty( $settings['submit_label'] ) ? $settings['submit_label'] : __( 'Submit', 'wprobo-documerge' ) );
+$success_message   = ! empty( $settings['success_message'] ) ? $settings['success_message'] : '';
+$step_labels       = ! empty( $settings['multistep_labels'] ) ? $settings['multistep_labels'] : array( 'Step 1', 'Step 2', 'Step 3' );
+$classes           = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
+$multistep_enabled = isset( $form->multistep_enabled ) ? absint( $form->multistep_enabled ) : 0;
 ?>
 <div class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" id="wdm-form-<?php echo absint( $form_id ); ?>" data-form-id="<?php echo absint( $form_id ); ?>">
 	<form class="wdm-form" id="wdm-form-el-<?php echo absint( $form_id ); ?>" method="post" novalidate>
@@ -67,7 +67,7 @@ $multistep_enabled  = isset( $form->multistep_enabled ) ? absint( $form->multist
 					$current_step = $step;
 					?>
 					<div class="wdm-step<?php echo 1 === $step ? ' wdm-step-active' : ''; ?>" data-step="<?php echo absint( $step ); ?>">
-				<?php
+					<?php
 				endif;
 
 				// Render field via FormRenderer.
@@ -110,7 +110,7 @@ $multistep_enabled  = isset( $form->multistep_enabled ) ? absint( $form->multist
 		$btn_hover_text = ! empty( $settings['btn_hover_text'] ) ? $settings['btn_hover_text'] : '#ffffff';
 
 		// Build submit wrapper alignment.
-		$submit_align_map = array(
+		$submit_align_map  = array(
 			'left'   => 'left',
 			'center' => 'center',
 			'right'  => 'right',
@@ -139,7 +139,7 @@ $multistep_enabled  = isset( $form->multistep_enabled ) ? absint( $form->multist
 		}
 
 		// Use CSS custom properties for all colors so hover can override inline specificity.
-		$btn_inline_parts = array();
+		$btn_inline_parts   = array();
 		$btn_inline_parts[] = '--wdm-btn-bg:' . esc_attr( $btn_bg_color );
 		$btn_inline_parts[] = '--wdm-btn-text:' . esc_attr( $btn_text_color );
 		$btn_inline_parts[] = '--wdm-btn-hover-bg:' . esc_attr( $btn_hover_bg );
@@ -154,7 +154,11 @@ $multistep_enabled  = isset( $form->multistep_enabled ) ? absint( $form->multist
 
 		$btn_inline_style = implode( ';', $btn_inline_parts );
 		?>
-		<div class="wdm-form-submit" style="text-align:<?php echo esc_attr( $submit_text_align ); ?>;<?php if ( $multistep_enabled ) : ?>display:none;<?php endif; ?>">
+		<div class="wdm-form-submit" style="text-align:<?php echo esc_attr( $submit_text_align ); ?>;
+		<?php
+		if ( $multistep_enabled ) :
+			?>
+			display:none;<?php endif; ?>">
 			<button type="submit" class="<?php echo esc_attr( implode( ' ', $btn_classes ) ); ?>" id="wdm-submit-<?php echo absint( $form_id ); ?>" style="<?php echo esc_attr( $btn_inline_style ); ?>">
 				<span class="wdm-submit-text"><?php echo esc_html( $submit_label ); ?></span>
 				<span class="wdm-submit-spinner" style="display:none;">

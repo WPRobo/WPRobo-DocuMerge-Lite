@@ -89,4 +89,4 @@ ob_start();
 <?php
 $email_content = ob_get_clean();
 
-include __DIR__ . '/base.php';
+require __DIR__ . '/base.php';

@@ -63,14 +63,14 @@ class WPRobo_DocuMerge_Field_Text {
 	 */
 	public function wprobo_documerge_get_default_config() {
 		$config = array(
-			'id'          => '',
-			'type'        => 'text',
-			'label'       => 'Text Field',
-			'name'        => '',
-			'placeholder' => '',
-			'help_text'   => '',
-			'required'    => false,
-			'width'       => 'full',
+			'id'            => '',
+			'type'          => 'text',
+			'label'         => 'Text Field',
+			'name'          => '',
+			'placeholder'   => '',
+			'help_text'     => '',
+			'required'      => false,
+			'width'         => 'full',
 			'min_length'    => '',
 			'max_length'    => '',
 			'error_message' => '',
@@ -99,12 +99,12 @@ class WPRobo_DocuMerge_Field_Text {
 	public function wprobo_documerge_render_admin_settings( $field_data ) {
 		$field_data = wp_parse_args( $field_data, $this->wprobo_documerge_get_default_config() );
 
-		$id          = esc_attr( $field_data['id'] );
-		$label       = esc_attr( $field_data['label'] );
-		$placeholder = esc_attr( $field_data['placeholder'] );
-		$help_text   = esc_attr( $field_data['help_text'] );
-		$required    = ! empty( $field_data['required'] ) ? 'checked' : '';
-		$width       = esc_attr( $field_data['width'] );
+		$id            = esc_attr( $field_data['id'] );
+		$label         = esc_attr( $field_data['label'] );
+		$placeholder   = esc_attr( $field_data['placeholder'] );
+		$help_text     = esc_attr( $field_data['help_text'] );
+		$required      = ! empty( $field_data['required'] ) ? 'checked' : '';
+		$width         = esc_attr( $field_data['width'] );
 		$min_length    = esc_attr( $field_data['min_length'] );
 		$max_length    = esc_attr( $field_data['max_length'] );
 		$error_message = esc_attr( $field_data['error_message'] );
@@ -189,7 +189,7 @@ class WPRobo_DocuMerge_Field_Text {
 		$min_length  = ! empty( $field_data['min_length'] ) ? 'minlength="' . esc_attr( $field_data['min_length'] ) . '"' : '';
 		$value_attr  = esc_attr( $value );
 
-		$html = '<div class="wdm-field-group" data-field-type="text">';
+		$html  = '<div class="wdm-field-group" data-field-type="text">';
 		$html .= '<label for="wdm-field-' . $id . '">' . $label;
 		if ( ! empty( $field_data['required'] ) ) {
 			$html .= ' <span class="wdm-required">*</span>';

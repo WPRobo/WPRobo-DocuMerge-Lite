@@ -165,7 +165,7 @@ class WPRobo_DocuMerge_Field_Url {
 		$required    = ! empty( $field_data['required'] ) ? 'required' : '';
 		$value_attr  = esc_attr( $value );
 
-		$html = '<div class="wdm-field-group" data-field-type="url">';
+		$html  = '<div class="wdm-field-group" data-field-type="url">';
 		$html .= '<label for="wdm-field-' . $id . '">' . $label;
 		if ( ! empty( $field_data['required'] ) ) {
 			$html .= ' <span class="wdm-required">*</span>';

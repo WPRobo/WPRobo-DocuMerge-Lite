@@ -23,14 +23,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Extract form data for pre-population.
-$form_id         = isset( $form->id ) ? absint( $form->id ) : 0;
-$form_title      = isset( $form->title ) ? $form->title : '';
-$form_template   = isset( $form->template_id ) ? absint( $form->template_id ) : 0;
-$form_fields     = isset( $form->fields ) ? $form->fields : '[]';
-$form_output     = isset( $form->output_format ) ? $form->output_format : 'pdf';
-$form_submit     = isset( $form->submit_label ) ? $form->submit_label : '';
-$form_success    = isset( $form->success_message ) ? $form->success_message : '';
-$form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_enabled ) : ( isset( $form->multistep ) ? absint( $form->multistep ) : 0 );
+$form_id        = isset( $form->id ) ? absint( $form->id ) : 0;
+$form_title     = isset( $form->title ) ? $form->title : '';
+$form_template  = isset( $form->template_id ) ? absint( $form->template_id ) : 0;
+$form_fields    = isset( $form->fields ) ? $form->fields : '[]';
+$form_output    = isset( $form->output_format ) ? $form->output_format : 'pdf';
+$form_submit    = isset( $form->submit_label ) ? $form->submit_label : '';
+$form_success   = isset( $form->success_message ) ? $form->success_message : '';
+$form_multistep = isset( $form->multistep_enabled ) ? absint( $form->multistep_enabled ) : ( isset( $form->multistep ) ? absint( $form->multistep ) : 0 );
 ?>
 <div class="wdm-admin-wrap">
 
@@ -187,7 +187,7 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 					<?php
 					$int_plugin_name = '';
 					if ( ! empty( $form_integration ) ) {
-						$int_names = array(
+						$int_names       = array(
 							'wpforms' => 'WPForms',
 							'cf7'     => 'Contact Form 7',
 							'gravity' => 'Gravity Forms',
@@ -208,8 +208,8 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 						</h3>
 						<p>
 							<?php
-							/* translators: %s: form plugin name */
 							printf(
+								/* translators: %s: form plugin name */
 								esc_html__( 'This form is running in integrated mode. Form fields are built and managed inside %s — not here in DocuMerge.', 'wprobo-documerge' ),
 								esc_html( $int_plugin_name )
 							);
@@ -261,10 +261,10 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 					<?php
 					// ── Integration Configuration (stays above sub-tabs) ──────
 					if ( 'integrated' === $form_mode ) :
-						$btn_settings_int    = ! empty( $form ) && ! empty( $form->settings ) ? json_decode( $form->settings, true ) : array();
-						$external_form_id    = isset( $btn_settings_int['external_form_id'] ) ? absint( $btn_settings_int['external_form_id'] ) : 0;
-						$field_map           = isset( $btn_settings_int['field_map'] ) ? $btn_settings_int['field_map'] : array();
-						$integration_slug    = ! empty( $form_integration ) ? $form_integration : '';
+						$btn_settings_int = ! empty( $form ) && ! empty( $form->settings ) ? json_decode( $form->settings, true ) : array();
+						$external_form_id = isset( $btn_settings_int['external_form_id'] ) ? absint( $btn_settings_int['external_form_id'] ) : 0;
+						$field_map        = isset( $btn_settings_int['field_map'] ) ? $btn_settings_int['field_map'] : array();
+						$integration_slug = ! empty( $form_integration ) ? $form_integration : '';
 
 						// Integrations are Pro-only — set empty defaults.
 						$external_forms  = array();
@@ -285,7 +285,7 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 
 						// Integration label for UI.
 						$integration_label = $active_integration ? $active_integration->wprobo_documerge_get_name() : ucfirst( $integration_slug );
-					?>
+						?>
 
 					<div class="wdm-integration-config-section">
 						<h4 class="wdm-section-heading">
@@ -353,7 +353,7 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 												continue;
 											}
 											$mapped_to = isset( $field_map[ $tag ] ) ? $field_map[ $tag ] : '';
-										?>
+											?>
 											<tr class="wdm-field-map-row">
 												<td><code>{<?php echo esc_html( $tag ); ?>}</code></td>
 												<td>&rarr;</td>
@@ -477,8 +477,8 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 						<div class="wdm-field-group">
 							<?php
 							echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_disabled_toggle(
-									__( 'Enable multi-step form', 'wprobo-documerge' )
-								);
+								__( 'Enable multi-step form', 'wprobo-documerge' )
+							);
 							?>
 							<span class="wdm-description">
 								<?php esc_html_e( 'Split your form into multiple steps. Drag fields between steps on the Fields tab.', 'wprobo-documerge' ); ?>
@@ -502,16 +502,16 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 						</div>
 
 						<?php
-						$btn_settings = ! empty( $form ) && ! empty( $form->settings ) ? json_decode( $form->settings, true ) : array();
-						$btn_width    = isset( $btn_settings['btn_width'] ) ? $btn_settings['btn_width'] : 'auto';
-						$btn_align    = isset( $btn_settings['btn_align'] ) ? $btn_settings['btn_align'] : 'right';
-						$btn_style    = isset( $btn_settings['btn_style'] ) ? $btn_settings['btn_style'] : 'filled';
-						$btn_size     = isset( $btn_settings['btn_size'] ) ? $btn_settings['btn_size'] : 'medium';
-						$btn_radius   = isset( $btn_settings['btn_radius'] ) ? $btn_settings['btn_radius'] : '6';
-						$btn_bg_color      = isset( $btn_settings['btn_bg_color'] ) ? $btn_settings['btn_bg_color'] : '#042157';
-						$btn_text_color    = isset( $btn_settings['btn_text_color'] ) ? $btn_settings['btn_text_color'] : '#ffffff';
-						$btn_hover_bg      = isset( $btn_settings['btn_hover_bg'] ) ? $btn_settings['btn_hover_bg'] : '#0a3d8f';
-						$btn_hover_text    = isset( $btn_settings['btn_hover_text'] ) ? $btn_settings['btn_hover_text'] : '#ffffff';
+						$btn_settings   = ! empty( $form ) && ! empty( $form->settings ) ? json_decode( $form->settings, true ) : array();
+						$btn_width      = isset( $btn_settings['btn_width'] ) ? $btn_settings['btn_width'] : 'auto';
+						$btn_align      = isset( $btn_settings['btn_align'] ) ? $btn_settings['btn_align'] : 'right';
+						$btn_style      = isset( $btn_settings['btn_style'] ) ? $btn_settings['btn_style'] : 'filled';
+						$btn_size       = isset( $btn_settings['btn_size'] ) ? $btn_settings['btn_size'] : 'medium';
+						$btn_radius     = isset( $btn_settings['btn_radius'] ) ? $btn_settings['btn_radius'] : '6';
+						$btn_bg_color   = isset( $btn_settings['btn_bg_color'] ) ? $btn_settings['btn_bg_color'] : '#042157';
+						$btn_text_color = isset( $btn_settings['btn_text_color'] ) ? $btn_settings['btn_text_color'] : '#ffffff';
+						$btn_hover_bg   = isset( $btn_settings['btn_hover_bg'] ) ? $btn_settings['btn_hover_bg'] : '#0a3d8f';
+						$btn_hover_text = isset( $btn_settings['btn_hover_text'] ) ? $btn_settings['btn_hover_text'] : '#ffffff';
 						?>
 
 						<div class="wdm-field-group">
@@ -597,9 +597,9 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 
 						<?php
 						echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
-								__( 'Payment Settings', 'wprobo-documerge' ),
-								__( 'Require Stripe payment before delivering documents. Configure amount, currency, and more.', 'wprobo-documerge' )
-							);
+							__( 'Payment Settings', 'wprobo-documerge' ),
+							__( 'Require Stripe payment before delivering documents. Configure amount, currency, and more.', 'wprobo-documerge' )
+						);
 						?>
 
 					</div>
@@ -626,7 +626,7 @@ $form_multistep  = isset( $form->multistep_enabled ) ? absint( $form->multistep_
 	<?php
 	$form_settings_decoded = ! empty( $form ) && ! empty( $form->settings ) ? json_decode( $form->settings, true ) : array();
 	if ( ! empty( $form_settings_decoded ) ) :
-	?>
+		?>
 	var wprobo_documerge_form_settings = <?php echo wp_json_encode( $form_settings_decoded ); ?>;
 	<?php endif; ?>
 </script>

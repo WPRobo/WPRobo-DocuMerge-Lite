@@ -15,7 +15,7 @@ namespace WPRobo\DocuMerge\Core;
 
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 /**
@@ -28,17 +28,17 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class WPRobo_DocuMerge_Deactivator {
 
-    /**
-     * Run on plugin deactivation.
-     *
-     * Clears all scheduled cron hooks to prevent orphaned events.
-     *
-     * @since 1.0.0
-     */
-    public static function wprobo_documerge_deactivate() {
-        wp_clear_scheduled_hook( 'wprobo_documerge_cleanup_temp_files' );
-        wp_clear_scheduled_hook( 'wprobo_documerge_cleanup_log_files' );
-        wp_clear_scheduled_hook( 'wprobo_documerge_retry_failed_emails' );
-        wp_clear_scheduled_hook( 'wprobo_documerge_cleanup_expired_tokens' );
-    }
+	/**
+	 * Run on plugin deactivation.
+	 *
+	 * Clears all scheduled cron hooks to prevent orphaned events.
+	 *
+	 * @since 1.0.0
+	 */
+	public static function wprobo_documerge_deactivate() {
+		wp_clear_scheduled_hook( 'wprobo_documerge_cleanup_temp_files' );
+		wp_clear_scheduled_hook( 'wprobo_documerge_cleanup_log_files' );
+		wp_clear_scheduled_hook( 'wprobo_documerge_retry_failed_emails' );
+		wp_clear_scheduled_hook( 'wprobo_documerge_cleanup_expired_tokens' );
+	}
 }

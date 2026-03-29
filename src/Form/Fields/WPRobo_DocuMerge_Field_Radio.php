@@ -63,14 +63,14 @@ class WPRobo_DocuMerge_Field_Radio {
 	 */
 	public function wprobo_documerge_get_default_config() {
 		$config = array(
-			'id'          => '',
-			'type'        => 'radio',
-			'label'       => 'Radio Buttons',
-			'name'        => '',
-			'placeholder' => '',
-			'help_text'   => '',
-			'required'    => false,
-			'width'       => 'full',
+			'id'            => '',
+			'type'          => 'radio',
+			'label'         => 'Radio Buttons',
+			'name'          => '',
+			'placeholder'   => '',
+			'help_text'     => '',
+			'required'      => false,
+			'width'         => 'full',
 			'options'       => array(
 				array(
 					'label' => 'Option 1',
@@ -96,14 +96,14 @@ class WPRobo_DocuMerge_Field_Radio {
 	public function wprobo_documerge_render_admin_settings( $field_data ) {
 		$field_data = wp_parse_args( $field_data, $this->wprobo_documerge_get_default_config() );
 
-		$id        = esc_attr( $field_data['id'] );
-		$label     = esc_attr( $field_data['label'] );
-		$help_text = esc_attr( $field_data['help_text'] );
+		$id            = esc_attr( $field_data['id'] );
+		$label         = esc_attr( $field_data['label'] );
+		$help_text     = esc_attr( $field_data['help_text'] );
 		$required      = ! empty( $field_data['required'] ) ? 'checked' : '';
 		$width         = esc_attr( $field_data['width'] );
 		$error_message = esc_attr( $field_data['error_message'] );
 		$raw_opts      = isset( $field_data['options'] ) ? $field_data['options'] : array();
-		$options   = is_array( $raw_opts ) ? $raw_opts : ( is_string( $raw_opts ) ? (array) json_decode( $raw_opts, true ) : array() );
+		$options       = is_array( $raw_opts ) ? $raw_opts : ( is_string( $raw_opts ) ? (array) json_decode( $raw_opts, true ) : array() );
 
 		$html = '';
 
@@ -193,7 +193,7 @@ class WPRobo_DocuMerge_Field_Radio {
 		$raw_opts  = isset( $field_data['options'] ) ? $field_data['options'] : array();
 		$options   = is_array( $raw_opts ) ? $raw_opts : ( is_string( $raw_opts ) ? (array) json_decode( $raw_opts, true ) : array() );
 
-		$html = '<div class="wdm-field-group">';
+		$html  = '<div class="wdm-field-group">';
 		$html .= '<label>' . $label;
 		if ( ! empty( $field_data['required'] ) ) {
 			$html .= ' <span class="wdm-required">*</span>';

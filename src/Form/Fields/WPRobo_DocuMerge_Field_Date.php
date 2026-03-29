@@ -63,21 +63,21 @@ class WPRobo_DocuMerge_Field_Date {
 	 */
 	public function wprobo_documerge_get_default_config() {
 		$config = array(
-			'id'               => '',
-			'type'             => 'date',
-			'label'            => 'Date',
-			'name'             => '',
-			'placeholder'      => '',
-			'help_text'        => '',
-			'required'         => false,
-			'width'            => 'full',
-			'date_format'      => 'Y-m-d',
-			'min_date'         => '',
-			'max_date'         => '',
-			'disable_past'     => false,
+			'id'                => '',
+			'type'              => 'date',
+			'label'             => 'Date',
+			'name'              => '',
+			'placeholder'       => '',
+			'help_text'         => '',
+			'required'          => false,
+			'width'             => 'full',
+			'date_format'       => 'Y-m-d',
+			'min_date'          => '',
+			'max_date'          => '',
+			'disable_past'      => false,
 			'max_future_months' => '',
-			'error_message'    => '',
-			'conditions'       => array(),
+			'error_message'     => '',
+			'conditions'        => array(),
 		);
 
 		/** This filter is documented in src/Form/Fields/WPRobo_DocuMerge_Field_Text.php */
@@ -135,10 +135,10 @@ class WPRobo_DocuMerge_Field_Date {
 		// Date Format.
 		$today_preview = wp_date( 'Y-m-d' );
 		$date_formats  = array(
-			'Y-m-d' => wp_date( 'Y-m-d' ),
-			'd/m/Y' => wp_date( 'd/m/Y' ),
-			'm/d/Y' => wp_date( 'm/d/Y' ),
-			'd-m-Y' => wp_date( 'd-m-Y' ),
+			'Y-m-d'  => wp_date( 'Y-m-d' ),
+			'd/m/Y'  => wp_date( 'd/m/Y' ),
+			'm/d/Y'  => wp_date( 'm/d/Y' ),
+			'd-m-Y'  => wp_date( 'd-m-Y' ),
 			'F j, Y' => wp_date( 'F j, Y' ),
 		);
 
@@ -165,18 +165,18 @@ class WPRobo_DocuMerge_Field_Date {
 
 		// Disable past dates.
 		$disable_past_checked = ! empty( $field_data['disable_past'] ) ? 'checked' : '';
-		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label><input type="checkbox" data-setting="disable_past" class="wdm-builder-setting-input" ' . $disable_past_checked . '> ';
-		$html .= esc_html__( 'Disable past dates (today is the earliest)', 'wprobo-documerge' ) . '</label>';
-		$html .= '</div>';
+		$html                .= '<div class="wdm-builder-field-setting">';
+		$html                .= '<label><input type="checkbox" data-setting="disable_past" class="wdm-builder-setting-input" ' . $disable_past_checked . '> ';
+		$html                .= esc_html__( 'Disable past dates (today is the earliest)', 'wprobo-documerge' ) . '</label>';
+		$html                .= '</div>';
 
 		// Max future months.
 		$max_future_months = esc_attr( isset( $field_data['max_future_months'] ) ? $field_data['max_future_months'] : '' );
-		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Max Future Months', 'wprobo-documerge' ) . '</label>';
-		$html .= '<input type="number" data-setting="max_future_months" class="wdm-builder-setting-input wdm-input" value="' . $max_future_months . '" placeholder="' . esc_attr__( 'e.g. 6 (leave blank for unlimited)', 'wprobo-documerge' ) . '" min="0">';
-		$html .= '<span class="wdm-description">' . esc_html__( 'How many months ahead users can select. 0 or blank = unlimited.', 'wprobo-documerge' ) . '</span>';
-		$html .= '</div>';
+		$html             .= '<div class="wdm-builder-field-setting">';
+		$html             .= '<label>' . esc_html__( 'Max Future Months', 'wprobo-documerge' ) . '</label>';
+		$html             .= '<input type="number" data-setting="max_future_months" class="wdm-builder-setting-input wdm-input" value="' . $max_future_months . '" placeholder="' . esc_attr__( 'e.g. 6 (leave blank for unlimited)', 'wprobo-documerge' ) . '" min="0">';
+		$html             .= '<span class="wdm-description">' . esc_html__( 'How many months ahead users can select. 0 or blank = unlimited.', 'wprobo-documerge' ) . '</span>';
+		$html             .= '</div>';
 
 		// Custom Error Message.
 		$html .= '<div class="wdm-builder-field-setting">';
@@ -229,12 +229,12 @@ class WPRobo_DocuMerge_Field_Date {
 			'M j, Y' => 'Mar 25, 2026',
 			'j F Y'  => '25 March 2026',
 		);
-		$format_hint = isset( $format_examples[ $date_format ] ) ? $format_examples[ $date_format ] : wp_date( $date_format );
+		$format_hint     = isset( $format_examples[ $date_format ] ) ? $format_examples[ $date_format ] : wp_date( $date_format );
 
 		// Use the format example as placeholder if no custom placeholder is set.
 		$placeholder = ! empty( $field_data['placeholder'] ) ? esc_attr( $field_data['placeholder'] ) : esc_attr( $format_hint );
 
-		$html = '<div class="wdm-field-group" data-field-type="date">';
+		$html  = '<div class="wdm-field-group" data-field-type="date">';
 		$html .= '<label for="wdm-field-' . $id . '">' . $label;
 		if ( ! empty( $field_data['required'] ) ) {
 			$html .= ' <span class="wdm-required">*</span>';
@@ -294,8 +294,8 @@ class WPRobo_DocuMerge_Field_Date {
 	 * @return true|\WP_Error
 	 */
 	public function wprobo_documerge_validate( $value, $field_data ) {
-		$field_data    = wp_parse_args( $field_data, $this->wprobo_documerge_get_default_config() );
-		$custom_error  = ! empty( $field_data['error_message'] ) ? $field_data['error_message'] : '';
+		$field_data   = wp_parse_args( $field_data, $this->wprobo_documerge_get_default_config() );
+		$custom_error = ! empty( $field_data['error_message'] ) ? $field_data['error_message'] : '';
 
 		if ( ! empty( $field_data['required'] ) && '' === trim( $value ) ) {
 			return new \WP_Error(

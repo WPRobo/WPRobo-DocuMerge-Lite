@@ -54,12 +54,12 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 	 */
 	public function get_columns() {
 		return array(
-			'cb'             => '<input type="checkbox" />',
-			'created_at'     => __( 'Date', 'wprobo-documerge' ),
-			'form_title'     => __( 'Form', 'wprobo-documerge' ),
+			'cb'              => '<input type="checkbox" />',
+			'created_at'      => __( 'Date', 'wprobo-documerge' ),
+			'form_title'      => __( 'Form', 'wprobo-documerge' ),
 			'submitter_email' => __( 'Email', 'wprobo-documerge' ),
-			'status'         => __( 'Status', 'wprobo-documerge' ),
-			'documents'      => __( 'Documents', 'wprobo-documerge' ),
+			'status'          => __( 'Status', 'wprobo-documerge' ),
+			'documents'       => __( 'Documents', 'wprobo-documerge' ),
 		);
 	}
 
@@ -220,7 +220,7 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 		);
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$current_form   = isset( $_GET['form_id'] ) ? absint( $_GET['form_id'] ) : 0;
+		$current_form = isset( $_GET['form_id'] ) ? absint( $_GET['form_id'] ) : 0;
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$current_status = isset( $_GET['status'] ) ? sanitize_key( wp_unslash( $_GET['status'] ) ) : '';
 

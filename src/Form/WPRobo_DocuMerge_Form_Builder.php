@@ -156,7 +156,7 @@ class WPRobo_DocuMerge_Form_Builder {
 
 		if ( ! empty( $data['id'] ) && absint( $data['id'] ) > 0 ) {
 			// Update existing form.
-			$id               = absint( $data['id'] );
+			$id                 = absint( $data['id'] );
 			$data['updated_at'] = $now;
 			unset( $data['id'] );
 
@@ -308,7 +308,7 @@ class WPRobo_DocuMerge_Form_Builder {
 		/* translators: %s: original form title */
 		$data['title'] = sprintf( __( 'Copy of %s', 'wprobo-documerge' ), $form->title );
 
-		$now               = current_time( 'mysql' );
+		$now                = current_time( 'mysql' );
 		$data['created_at'] = $now;
 		$data['updated_at'] = $now;
 

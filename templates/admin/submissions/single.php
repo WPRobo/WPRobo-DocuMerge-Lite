@@ -26,7 +26,7 @@ $status_map = array(
 	'processing' => 'info',
 	'error'      => 'error',
 );
-$badge = isset( $status_map[ $submission->status ] ) ? $status_map[ $submission->status ] : 'info';
+$badge      = isset( $status_map[ $submission->status ] ) ? $status_map[ $submission->status ] : 'info';
 ?>
 <div class="wdm-admin-wrap">
 
@@ -140,7 +140,7 @@ $badge = isset( $status_map[ $submission->status ] ) ? $status_map[ $submission-
 				</div>
 				<div class="wdm-settings-card-body">
 					<textarea class="wdm-input wdm-textarea wdm-admin-notes" id="wdm-admin-note-<?php echo absint( $submission->id ); ?>"
-							  rows="4" placeholder="<?php esc_attr_e( 'Add internal notes about this submission...', 'wprobo-documerge' ); ?>"><?php echo esc_textarea( isset( $submission->admin_notes ) ? $submission->admin_notes : '' ); ?></textarea>
+								rows="4" placeholder="<?php esc_attr_e( 'Add internal notes about this submission...', 'wprobo-documerge' ); ?>"><?php echo esc_textarea( isset( $submission->admin_notes ) ? $submission->admin_notes : '' ); ?></textarea>
 					<button type="button" class="wdm-btn wdm-btn-primary wdm-save-note" data-id="<?php echo absint( $submission->id ); ?>" style="margin-top:10px;">
 						<?php esc_html_e( 'Save Note', 'wprobo-documerge' ); ?>
 					</button>

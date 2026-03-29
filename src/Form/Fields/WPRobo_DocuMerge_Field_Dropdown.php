@@ -63,14 +63,14 @@ class WPRobo_DocuMerge_Field_Dropdown {
 	 */
 	public function wprobo_documerge_get_default_config() {
 		$config = array(
-			'id'          => '',
-			'type'        => 'dropdown',
-			'label'       => 'Dropdown',
-			'name'        => '',
-			'placeholder' => '',
-			'help_text'   => '',
-			'required'    => false,
-			'width'       => 'full',
+			'id'            => '',
+			'type'          => 'dropdown',
+			'label'         => 'Dropdown',
+			'name'          => '',
+			'placeholder'   => '',
+			'help_text'     => '',
+			'required'      => false,
+			'width'         => 'full',
 			'options'       => array(
 				array(
 					'label' => 'Option 1',
@@ -97,15 +97,15 @@ class WPRobo_DocuMerge_Field_Dropdown {
 	public function wprobo_documerge_render_admin_settings( $field_data ) {
 		$field_data = wp_parse_args( $field_data, $this->wprobo_documerge_get_default_config() );
 
-		$id          = esc_attr( $field_data['id'] );
-		$label       = esc_attr( $field_data['label'] );
-		$placeholder = esc_attr( $field_data['placeholder'] );
-		$help_text   = esc_attr( $field_data['help_text'] );
+		$id            = esc_attr( $field_data['id'] );
+		$label         = esc_attr( $field_data['label'] );
+		$placeholder   = esc_attr( $field_data['placeholder'] );
+		$help_text     = esc_attr( $field_data['help_text'] );
 		$required      = ! empty( $field_data['required'] ) ? 'checked' : '';
 		$width         = esc_attr( $field_data['width'] );
 		$error_message = esc_attr( $field_data['error_message'] );
 		$raw_opts      = isset( $field_data['options'] ) ? $field_data['options'] : array();
-		$options     = is_array( $raw_opts ) ? $raw_opts : ( is_string( $raw_opts ) ? (array) json_decode( $raw_opts, true ) : array() );
+		$options       = is_array( $raw_opts ) ? $raw_opts : ( is_string( $raw_opts ) ? (array) json_decode( $raw_opts, true ) : array() );
 
 		$html = '';
 
@@ -135,11 +135,11 @@ class WPRobo_DocuMerge_Field_Dropdown {
 
 		// Searchable dropdown.
 		$searchable_checked = ! empty( $field_data['searchable'] ) ? 'checked' : '';
-		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label><input type="checkbox" data-setting="searchable" class="wdm-builder-setting-input" ' . $searchable_checked . '> ';
-		$html .= esc_html__( 'Enable search (users can type to filter options)', 'wprobo-documerge' ) . '</label>';
-		$html .= '<span class="wdm-description">' . esc_html__( 'Recommended for dropdowns with many options.', 'wprobo-documerge' ) . '</span>';
-		$html .= '</div>';
+		$html              .= '<div class="wdm-builder-field-setting">';
+		$html              .= '<label><input type="checkbox" data-setting="searchable" class="wdm-builder-setting-input" ' . $searchable_checked . '> ';
+		$html              .= esc_html__( 'Enable search (users can type to filter options)', 'wprobo-documerge' ) . '</label>';
+		$html              .= '<span class="wdm-description">' . esc_html__( 'Recommended for dropdowns with many options.', 'wprobo-documerge' ) . '</span>';
+		$html              .= '</div>';
 
 		// Custom Error Message.
 		$html .= '<div class="wdm-builder-field-setting">';
@@ -205,16 +205,16 @@ class WPRobo_DocuMerge_Field_Dropdown {
 		$raw_opts    = isset( $field_data['options'] ) ? $field_data['options'] : array();
 		$options     = is_array( $raw_opts ) ? $raw_opts : ( is_string( $raw_opts ) ? (array) json_decode( $raw_opts, true ) : array() );
 
-		$html = '<div class="wdm-field-group">';
+		$html  = '<div class="wdm-field-group">';
 		$html .= '<label for="wdm-field-' . $name . '">' . $label;
 		if ( ! empty( $field_data['required'] ) ) {
 			$html .= ' <span class="wdm-required">*</span>';
 		}
-		$html .= '</label>';
+		$html         .= '</label>';
 		$is_searchable = ! empty( $field_data['searchable'] );
 		$select_class  = $is_searchable ? 'wdm-select wdm-select2' : 'wdm-select';
-		$html .= '<select id="wdm-field-' . $name . '" name="' . $name . '" class="' . esc_attr( $select_class ) . '"' . ( $is_searchable ? ' data-searchable="1"' : '' ) . ' ' . $required . '>';
-		$html .= '<option value="">' . $placeholder . '</option>';
+		$html         .= '<select id="wdm-field-' . $name . '" name="' . $name . '" class="' . esc_attr( $select_class ) . '"' . ( $is_searchable ? ' data-searchable="1"' : '' ) . ' ' . $required . '>';
+		$html         .= '<option value="">' . $placeholder . '</option>';
 
 		foreach ( $options as $option ) {
 			if ( ! is_array( $option ) ) {

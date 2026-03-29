@@ -189,7 +189,7 @@ class WPRobo_DocuMerge_Field_Textarea {
 		$rows        = absint( $field_data['rows'] );
 		$value_esc   = esc_textarea( $value );
 
-		$html = '<div class="wdm-field-group" data-field-type="textarea">';
+		$html  = '<div class="wdm-field-group" data-field-type="textarea">';
 		$html .= '<label for="wdm-field-' . $id . '">' . $label;
 		if ( ! empty( $field_data['required'] ) ) {
 			$html .= ' <span class="wdm-required">*</span>';

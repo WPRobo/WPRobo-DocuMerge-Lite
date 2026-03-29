@@ -206,9 +206,9 @@ class WPRobo_DocuMerge_Field_Checkbox {
 		$name      = esc_attr( $field_data['name'] );
 		$label     = esc_html( $field_data['label'] );
 		$help_text = esc_html( $field_data['help_text'] );
-		$raw_opts = isset( $field_data['options'] ) ? $field_data['options'] : array();
+		$raw_opts  = isset( $field_data['options'] ) ? $field_data['options'] : array();
 		if ( is_string( $raw_opts ) ) {
-			$decoded = json_decode( $raw_opts, true );
+			$decoded  = json_decode( $raw_opts, true );
 			$raw_opts = is_array( $decoded ) ? $decoded : array();
 		}
 		$options = is_array( $raw_opts ) ? $raw_opts : array();
@@ -222,7 +222,7 @@ class WPRobo_DocuMerge_Field_Checkbox {
 			$selected_values = array();
 		}
 
-		$html = '<div class="wdm-field-group">';
+		$html  = '<div class="wdm-field-group">';
 		$html .= '<label>' . $label;
 		if ( ! empty( $field_data['required'] ) ) {
 			$html .= ' <span class="wdm-required">*</span>';

@@ -24,119 +24,132 @@
 
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
 // ─── Activation / Deactivation hooks MUST be registered before any bail-out ───
 // Otherwise they never fire when Pro is active (because the early return skips them).
 
 // Activation: deactivate Pro, then run installer.
-register_activation_hook( __FILE__, function() {
-    $pro_plugin = 'wprobo-docu-merge/wprobo-documerge.php';
-    if ( ! function_exists( 'deactivate_plugins' ) ) {
-        require_once ABSPATH . 'wp-admin/includes/plugin.php';
-    }
-    deactivate_plugins( $pro_plugin, true );
+register_activation_hook(
+	__FILE__,
+	function () {
+		$pro_plugin = 'wprobo-docu-merge/wprobo-documerge.php';
+		if ( ! function_exists( 'deactivate_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		deactivate_plugins( $pro_plugin, true );
 
-    // Constants may not be set yet during activation, define path manually.
-    $plugin_path = plugin_dir_path( __FILE__ );
+		// Constants may not be set yet during activation, define path manually.
+		$plugin_path = plugin_dir_path( __FILE__ );
 
-    // Load autoloader for installer.
-    spl_autoload_register( function ( $class ) use ( $plugin_path ) {
-        $prefix   = 'WPRobo\\DocuMerge\\';
-        $base_dir = $plugin_path . 'src/';
-        $len      = strlen( $prefix );
-        if ( 0 !== strncmp( $prefix, $class, $len ) ) {
-            return;
-        }
-        $relative_class = substr( $class, $len );
-        $parts          = explode( '\\', $relative_class );
-        $classname      = array_pop( $parts );
-        $subdir         = implode( '/', $parts );
-        $file           = $base_dir . ( $subdir ? $subdir . '/' : '' ) . $classname . '.php';
-        if ( file_exists( $file ) ) {
-            require_once $file;
-        }
-    } );
+		// Load autoloader for installer.
+		spl_autoload_register(
+			function ( $fqcn ) use ( $plugin_path ) {
+				$prefix   = 'WPRobo\\DocuMerge\\';
+				$base_dir = $plugin_path . 'src/';
+				$len      = strlen( $prefix );
+				if ( 0 !== strncmp( $prefix, $fqcn, $len ) ) {
+						return;
+				}
+				$relative_class = substr( $fqcn, $len );
+				$parts          = explode( '\\', $relative_class );
+				$classname      = array_pop( $parts );
+				$subdir         = implode( '/', $parts );
+				$file           = $base_dir . ( $subdir ? $subdir . '/' : '' ) . $classname . '.php';
+				if ( file_exists( $file ) ) {
+					require_once $file;
+				}
+			}
+		);
 
-    if ( class_exists( 'WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Installer' ) ) {
-        \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Installer::wprobo_documerge_activate();
-    }
-} );
+		if ( class_exists( 'WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Installer' ) ) {
+			\WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Installer::wprobo_documerge_activate();
+		}
+	}
+);
 
 // Deactivation.
-register_deactivation_hook( __FILE__, function() {
-    if ( class_exists( 'WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Deactivator' ) ) {
-        \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Deactivator::wprobo_documerge_deactivate();
-    }
-} );
+register_deactivation_hook(
+	__FILE__,
+	function () {
+		if ( class_exists( 'WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Deactivator' ) ) {
+			\WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Deactivator::wprobo_documerge_deactivate();
+		}
+	}
+);
 
 // ─── Check if Pro is actually active (not just in memory from this request) ───
 $wprobo_active_plugins = (array) get_option( 'active_plugins', array() );
 if ( in_array( 'wprobo-docu-merge/wprobo-documerge.php', $wprobo_active_plugins, true ) ) {
-    return;
+	return;
 }
 
 // Lite marker.
 if ( ! defined( 'WPROBO_DOCUMERGE_LITE' ) ) {
-    define( 'WPROBO_DOCUMERGE_LITE', true );
+	define( 'WPROBO_DOCUMERGE_LITE', true );
 }
 
 // All constants guarded to prevent collisions during Lite/Pro switch.
 if ( ! defined( 'WPROBO_DOCUMERGE_VERSION' ) ) {
-    define( 'WPROBO_DOCUMERGE_VERSION', '1.0.0' );
+	define( 'WPROBO_DOCUMERGE_VERSION', '1.0.0' );
 }
 if ( ! defined( 'WPROBO_DOCUMERGE_DB_VERSION' ) ) {
-    define( 'WPROBO_DOCUMERGE_DB_VERSION', '1.0.0' );
+	define( 'WPROBO_DOCUMERGE_DB_VERSION', '1.0.0' );
 }
 if ( ! defined( 'WPROBO_DOCUMERGE_FILE' ) ) {
-    define( 'WPROBO_DOCUMERGE_FILE', __FILE__ );
+	define( 'WPROBO_DOCUMERGE_FILE', __FILE__ );
 }
 if ( ! defined( 'WPROBO_DOCUMERGE_PATH' ) ) {
-    define( 'WPROBO_DOCUMERGE_PATH', plugin_dir_path( __FILE__ ) );
+	define( 'WPROBO_DOCUMERGE_PATH', plugin_dir_path( __FILE__ ) );
 }
 if ( ! defined( 'WPROBO_DOCUMERGE_URL' ) ) {
-    define( 'WPROBO_DOCUMERGE_URL', plugin_dir_url( __FILE__ ) );
+	define( 'WPROBO_DOCUMERGE_URL', plugin_dir_url( __FILE__ ) );
 }
 if ( ! defined( 'WPROBO_DOCUMERGE_BASENAME' ) ) {
-    define( 'WPROBO_DOCUMERGE_BASENAME', plugin_basename( __FILE__ ) );
+	define( 'WPROBO_DOCUMERGE_BASENAME', plugin_basename( __FILE__ ) );
 }
 if ( ! defined( 'WPROBO_DOCUMERGE_DOCS_DIR' ) ) {
-    define( 'WPROBO_DOCUMERGE_DOCS_DIR', WP_CONTENT_DIR . '/uploads/documerge-docs/' );
+	define( 'WPROBO_DOCUMERGE_DOCS_DIR', WP_CONTENT_DIR . '/uploads/documerge-docs/' );
 }
 if ( ! defined( 'WPROBO_DOCUMERGE_TEMP_DIR' ) ) {
-    define( 'WPROBO_DOCUMERGE_TEMP_DIR', WP_CONTENT_DIR . '/uploads/documerge-temp/' );
+	define( 'WPROBO_DOCUMERGE_TEMP_DIR', WP_CONTENT_DIR . '/uploads/documerge-temp/' );
 }
 
 // Custom PSR-4 autoloader — no Composer vendor/ needed for Lite.
-spl_autoload_register( function ( $class ) {
-    $prefix   = 'WPRobo\\DocuMerge\\';
-    $base_dir = WPROBO_DOCUMERGE_PATH . 'src/';
-    $len      = strlen( $prefix );
+spl_autoload_register(
+	function ( $fqcn ) {
+		$prefix   = 'WPRobo\\DocuMerge\\';
+		$base_dir = WPROBO_DOCUMERGE_PATH . 'src/';
+		$len      = strlen( $prefix );
 
-    if ( 0 !== strncmp( $prefix, $class, $len ) ) {
-        return;
-    }
+		if ( 0 !== strncmp( $prefix, $fqcn, $len ) ) {
+				return;
+		}
 
-    $relative_class = substr( $class, $len );
-    $parts          = explode( '\\', $relative_class );
-    $classname      = array_pop( $parts );
-    $subdir         = implode( '/', $parts );
-    $file           = $base_dir . ( $subdir ? $subdir . '/' : '' ) . $classname . '.php';
+		$relative_class = substr( $fqcn, $len );
+		$parts          = explode( '\\', $relative_class );
+		$classname      = array_pop( $parts );
+		$subdir         = implode( '/', $parts );
+		$file           = $base_dir . ( $subdir ? $subdir . '/' : '' ) . $classname . '.php';
 
-    if ( file_exists( $file ) ) {
-        require_once $file;
-    }
-} );
+		if ( file_exists( $file ) ) {
+			require_once $file;
+		}
+	}
+);
 
 // Bootstrap the plugin.
-add_action( 'plugins_loaded', function() {
-    // Check if Pro is actually active (not just loaded in memory from this request).
-    // During activation, Pro may have been deactivated but its constants remain in memory.
-    $active_plugins = (array) get_option( 'active_plugins', array() );
-    $pro_is_active  = in_array( 'wprobo-docu-merge/wprobo-documerge.php', $active_plugins, true );
-    if ( $pro_is_active ) {
-        return;
-    }
-    \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Plugin::get_instance()->wprobo_documerge_run();
-} );
+add_action(
+	'plugins_loaded',
+	function () {
+		// Check if Pro is actually active (not just loaded in memory from this request).
+		// During activation, Pro may have been deactivated but its constants remain in memory.
+		$active_plugins = (array) get_option( 'active_plugins', array() );
+		$pro_is_active  = in_array( 'wprobo-docu-merge/wprobo-documerge.php', $active_plugins, true );
+		if ( $pro_is_active ) {
+			return;
+		}
+		\WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Plugin::get_instance()->wprobo_documerge_run();
+	}
+);

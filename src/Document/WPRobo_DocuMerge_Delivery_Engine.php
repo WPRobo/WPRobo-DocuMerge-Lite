@@ -151,8 +151,8 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 		if ( in_array( 'email', $delivery_methods, true ) && ! empty( $submission->submitter_email ) ) {
 
-			$to          = sanitize_email( $submission->submitter_email );
-			$subject     = sprintf(
+			$to      = sanitize_email( $submission->submitter_email );
+			$subject = sprintf(
 				/* translators: %s: site name */
 				__( 'Your document is ready — %s', 'wprobo-documerge' ),
 				get_bloginfo( 'name' )
@@ -271,7 +271,14 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		 * @param int   $submission_id The submission ID.
 		 * @param array $results       Associative array with 'download' and 'email' boolean statuses.
 		 */
-		do_action( 'wprobo_documerge_document_delivered', $submission_id, array( 'download' => true, 'email' => $email_sent ) );
+		do_action(
+			'wprobo_documerge_document_delivered',
+			$submission_id,
+			array(
+				'download' => true,
+				'email'    => $email_sent,
+			)
+		);
 
 		return array(
 			'download_url' => $download_url,
@@ -423,7 +430,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		delete_option( $option_key );
 
 		// Determine MIME type.
-		$mime_types = array(
+		$mime_types   = array(
 			'pdf'  => 'application/pdf',
 			'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 		);
@@ -537,7 +544,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce already verified above.
 		$submission_id = isset( $_GET['submission_id'] ) ? absint( wp_unslash( $_GET['submission_id'] ) ) : 0;
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$format        = isset( $_GET['format'] ) ? sanitize_key( wp_unslash( $_GET['format'] ) ) : 'pdf';
+		$format = isset( $_GET['format'] ) ? sanitize_key( wp_unslash( $_GET['format'] ) ) : 'pdf';
 
 		if ( ! $submission_id ) {
 			wp_die(
@@ -573,7 +580,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 			);
 		}
 
-		$mime_types = array(
+		$mime_types   = array(
 			'pdf'  => 'application/pdf',
 			'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 		);

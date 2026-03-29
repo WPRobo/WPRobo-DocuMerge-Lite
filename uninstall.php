@@ -13,7 +13,7 @@
 
 // Only run if WordPress initiated the uninstall.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-    exit;
+	exit;
 }
 
 global $wpdb;
@@ -25,11 +25,11 @@ $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wprdm_templates" ); // phpcs:
 
 // 2. Delete all plugin options.
 $options = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
-    "SELECT option_name FROM {$wpdb->options}
+	"SELECT option_name FROM {$wpdb->options}
      WHERE option_name LIKE 'wprobo_documerge_%'"
 );
 foreach ( $options as $option ) {
-    delete_option( $option );
+	delete_option( $option );
 }
 
 // 3. Delete all generated document files.
@@ -45,19 +45,19 @@ $logs_dir   = $upload_dir['basedir'] . '/documerge-logs/';
  * @param string $dir Absolute path to directory.
  */
 function wprobo_documerge_delete_directory( $dir ) {
-    if ( ! is_dir( $dir ) ) {
-        return;
-    }
-    $files = array_diff( scandir( $dir ), array( '.', '..' ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions
-    foreach ( $files as $file ) {
-        $path = $dir . DIRECTORY_SEPARATOR . $file;
-        if ( is_dir( $path ) ) {
-            wprobo_documerge_delete_directory( $path );
-        } else {
-            unlink( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-        }
-    }
-    rmdir( $dir ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	if ( ! is_dir( $dir ) ) {
+		return;
+	}
+	$files = array_diff( scandir( $dir ), array( '.', '..' ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions
+	foreach ( $files as $file ) {
+		$path = $dir . DIRECTORY_SEPARATOR . $file;
+		if ( is_dir( $path ) ) {
+			wprobo_documerge_delete_directory( $path );
+		} else {
+			unlink( $path ); // phpcs:ignore WordPress.WP.AlternativeFunctions
+		}
+	}
+	rmdir( $dir ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 }
 
 wprobo_documerge_delete_directory( $docs_dir );

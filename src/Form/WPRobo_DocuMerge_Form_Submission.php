@@ -100,8 +100,8 @@ class WPRobo_DocuMerge_Form_Submission {
 		}
 
 		// Rate limiting by IP address.
-		$client_ip      = $this->wprobo_documerge_get_client_ip();
-		$rate_limit_key = 'wprobo_documerge_ratelimit_' . md5( $client_ip );
+		$client_ip        = $this->wprobo_documerge_get_client_ip();
+		$rate_limit_key   = 'wprobo_documerge_ratelimit_' . md5( $client_ip );
 		$submission_count = (int) get_transient( $rate_limit_key );
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified above.
@@ -375,8 +375,8 @@ class WPRobo_DocuMerge_Form_Submission {
 		$submitted_at = gmdate( 'Y-m-d\TH:i:s\Z' );
 
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Already sanitized above.
-		$page_url  = isset( $post_data['page_url'] ) ? esc_url_raw( $post_data['page_url'] ) : '';
-		$referrer  = isset( $post_data['referrer'] ) ? esc_url_raw( $post_data['referrer'] ) : '';
+		$page_url   = isset( $post_data['page_url'] ) ? esc_url_raw( $post_data['page_url'] ) : '';
+		$referrer   = isset( $post_data['referrer'] ) ? esc_url_raw( $post_data['referrer'] ) : '';
 		$user_agent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
 
 		$form_data = wp_json_encode(
@@ -510,7 +510,7 @@ class WPRobo_DocuMerge_Form_Submission {
 
 		// ── Step 9: Deliver document ────────────────────────────────────
 
-		$delivery     = new WPRobo_DocuMerge_Delivery_Engine();
+		$delivery       = new WPRobo_DocuMerge_Delivery_Engine();
 		$deliver_result = $delivery->wprobo_documerge_deliver( $submission_id );
 
 		$download_url = '';
@@ -543,7 +543,10 @@ class WPRobo_DocuMerge_Form_Submission {
 		$success_message = apply_filters( 'wprobo_documerge_success_message', $success_message, $submission_id, $form_id );
 
 		// Build document paths from the generation result for the completion hook.
-		$document_paths = is_array( $result ) ? $result : array( 'docx' => '', 'pdf' => '' );
+		$document_paths = is_array( $result ) ? $result : array(
+			'docx' => '',
+			'pdf'  => '',
+		);
 
 		/**
 		 * Fires after a submission is fully complete — form saved, document generated, and delivered.
@@ -562,12 +565,12 @@ class WPRobo_DocuMerge_Form_Submission {
 
 		wp_send_json_success(
 			array(
-				'submission_id'  => $submission_id,
-				'download_url'   => $download_url,
-				'submitter_name' => $submitter_name,
+				'submission_id'   => $submission_id,
+				'download_url'    => $download_url,
+				'submitter_name'  => $submitter_name,
 				'submitter_email' => $submitter_email,
-				'email_sent'     => $email_sent,
-				'message'        => sanitize_text_field( $success_message ),
+				'email_sent'      => $email_sent,
+				'message'         => sanitize_text_field( $success_message ),
 			)
 		);
 	}

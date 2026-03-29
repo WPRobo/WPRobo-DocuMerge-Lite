@@ -61,7 +61,7 @@ class WPRobo_DocuMerge_Forms_Page {
 		add_screen_option(
 			'per_page',
 			array(
-				'label'   => __( 'Forms per page', 'wprobo-documerge' ),
+				'label'   => __( 'Forms per page', 'wprobo-documerge-lite' ),
 				'default' => 20,
 				'option'  => 'wprobo_documerge_forms_per_page',
 			)
@@ -97,7 +97,7 @@ class WPRobo_DocuMerge_Forms_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -105,7 +105,7 @@ class WPRobo_DocuMerge_Forms_Page {
 		$form_title = isset( $_POST['form_title'] ) ? sanitize_text_field( wp_unslash( $_POST['form_title'] ) ) : '';
 
 		if ( ! $form_id ) {
-			wp_send_json_error( array( 'message' => __( 'Invalid form ID.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Invalid form ID.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -133,7 +133,7 @@ class WPRobo_DocuMerge_Forms_Page {
 				'page_id'  => $page_id,
 				'edit_url' => get_edit_post_link( $page_id, 'raw' ),
 				'view_url' => get_permalink( $page_id ),
-				'message'  => __( 'Page created as draft.', 'wprobo-documerge' ),
+				'message'  => __( 'Page created as draft.', 'wprobo-documerge-lite' ),
 			)
 		);
 	}
@@ -153,7 +153,7 @@ class WPRobo_DocuMerge_Forms_Page {
 	 */
 	public function wprobo_documerge_render() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to access this page.', 'wprobo-documerge' ) );
+			wp_die( esc_html__( 'You do not have permission to access this page.', 'wprobo-documerge-lite' ) );
 		}
 
 		// Determine if we should show the builder instead of the list.
@@ -175,11 +175,11 @@ class WPRobo_DocuMerge_Forms_Page {
 		$this->wprobo_documerge_list_table->prepare_items();
 
 		// Page header variables.
-		$page_title     = __( 'Forms', 'wprobo-documerge' );
-		$page_subtitle  = __( 'Build and manage your document collection forms', 'wprobo-documerge' );
+		$page_title     = __( 'Forms', 'wprobo-documerge-lite' );
+		$page_subtitle  = __( 'Build and manage your document collection forms', 'wprobo-documerge-lite' );
 		$primary_action = array(
 			'url'   => admin_url( 'admin.php?page=wprobo-documerge-forms&action=new' ),
-			'label' => __( 'Create Form', 'wprobo-documerge' ),
+			'label' => __( 'Create Form', 'wprobo-documerge-lite' ),
 			'icon'  => 'dashicons-plus-alt2',
 		);
 
@@ -193,7 +193,7 @@ class WPRobo_DocuMerge_Forms_Page {
 					<input type="hidden" name="page" value="wprobo-documerge-forms" />
 
 					<?php
-					$this->wprobo_documerge_list_table->search_box( __( 'Search forms', 'wprobo-documerge' ), 'wdm-form-search' );
+					$this->wprobo_documerge_list_table->search_box( __( 'Search forms', 'wprobo-documerge-lite' ), 'wdm-form-search' );
 					$this->wprobo_documerge_list_table->display();
 					?>
 				</form>
@@ -294,14 +294,14 @@ class WPRobo_DocuMerge_Forms_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
 		$form_id = isset( $_POST['form_id'] ) ? absint( $_POST['form_id'] ) : 0;
 
 		if ( ! $form_id ) {
-			wp_send_json_error( array( 'message' => __( 'Invalid form ID.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Invalid form ID.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -313,7 +313,7 @@ class WPRobo_DocuMerge_Forms_Page {
 			return;
 		}
 
-		wp_send_json_success( array( 'message' => __( 'Form deleted successfully.', 'wprobo-documerge' ) ) );
+		wp_send_json_success( array( 'message' => __( 'Form deleted successfully.', 'wprobo-documerge-lite' ) ) );
 	}
 
 	/**
@@ -331,7 +331,7 @@ class WPRobo_DocuMerge_Forms_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -344,7 +344,7 @@ class WPRobo_DocuMerge_Forms_Page {
 			: '';
 
 		if ( empty( $title ) ) {
-			wp_send_json_error( array( 'message' => __( 'Form title is required.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Form title is required.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -506,14 +506,14 @@ class WPRobo_DocuMerge_Forms_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
 		$form_id = isset( $_POST['form_id'] ) ? absint( $_POST['form_id'] ) : 0;
 
 		if ( ! $form_id ) {
-			wp_send_json_error( array( 'message' => __( 'Form ID is required.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Form ID is required.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -522,13 +522,13 @@ class WPRobo_DocuMerge_Forms_Page {
 		$form         = $form_builder->wprobo_documerge_get_form( $form_id );
 
 		if ( ! $form ) {
-			wp_send_json_error( array( 'message' => __( 'Form not found.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Form not found.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
 		$template_id = absint( $form->template_id );
 		if ( ! $template_id ) {
-			wp_send_json_error( array( 'message' => __( 'No template assigned to this form.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'No template assigned to this form.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -537,7 +537,7 @@ class WPRobo_DocuMerge_Forms_Page {
 		$template         = $template_manager->wprobo_documerge_get_template( $template_id );
 
 		if ( ! $template || empty( $template->file_path ) || ! file_exists( $template->file_path ) ) {
-			wp_send_json_error( array( 'message' => __( 'Template file not found.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Template file not found.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -708,18 +708,18 @@ class WPRobo_DocuMerge_Forms_Page {
 		$nonce = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
 
 		if ( ! wp_verify_nonce( $nonce, 'wprobo_documerge_preview' ) ) {
-			wp_die( esc_html__( 'Invalid nonce.', 'wprobo-documerge' ) );
+			wp_die( esc_html__( 'Invalid nonce.', 'wprobo-documerge-lite' ) );
 		}
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'Permission denied.', 'wprobo-documerge' ) );
+			wp_die( esc_html__( 'Permission denied.', 'wprobo-documerge-lite' ) );
 		}
 
         // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Verified above.
 		$file = isset( $_GET['file'] ) ? sanitize_file_name( wp_unslash( $_GET['file'] ) ) : '';
 
 		if ( empty( $file ) ) {
-			wp_die( esc_html__( 'File not specified.', 'wprobo-documerge' ) );
+			wp_die( esc_html__( 'File not specified.', 'wprobo-documerge-lite' ) );
 		}
 
 		// Look in both temp and docs directories.
@@ -743,7 +743,7 @@ class WPRobo_DocuMerge_Forms_Page {
 		}
 
 		if ( empty( $found ) ) {
-			wp_die( esc_html__( 'File not found.', 'wprobo-documerge' ) );
+			wp_die( esc_html__( 'File not found.', 'wprobo-documerge-lite' ) );
 		}
 
 		$ext          = strtolower( pathinfo( $found, PATHINFO_EXTENSION ) );
@@ -769,7 +769,7 @@ class WPRobo_DocuMerge_Forms_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -778,12 +778,12 @@ class WPRobo_DocuMerge_Forms_Page {
 		$template_id      = isset( $_POST['template_id'] ) ? absint( $_POST['template_id'] ) : 0;
 
 		if ( ! $external_form_id || empty( $integration_slug ) ) {
-			wp_send_json_error( array( 'message' => __( 'Missing parameters.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Missing parameters.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
 		// Integrations are Pro-only.
-		wp_send_json_error( array( 'message' => __( 'Form integrations require DocuMerge Pro.', 'wprobo-documerge' ) ) );
+		wp_send_json_error( array( 'message' => __( 'Form integrations require DocuMerge Pro.', 'wprobo-documerge-lite' ) ) );
 		return;
 
         // phpcs:disable -- Unreachable code kept for Pro compatibility.
@@ -803,12 +803,12 @@ class WPRobo_DocuMerge_Forms_Page {
         }
 
         if ( empty( $merge_tags ) ) {
-            wp_send_json_success( array( 'html' => '<p class="wdm-text-muted">' . esc_html__( 'Select a template first to see merge tags for mapping.', 'wprobo-documerge' ) . '</p>' ) );
+            wp_send_json_success( array( 'html' => '<p class="wdm-text-muted">' . esc_html__( 'Select a template first to see merge tags for mapping.', 'wprobo-documerge-lite' ) . '</p>' ) );
             return;
         }
 
         if ( empty( $external_fields ) ) {
-            wp_send_json_success( array( 'html' => '<p class="wdm-text-muted">' . esc_html__( 'No fields found in the selected form.', 'wprobo-documerge' ) . '</p>' ) );
+            wp_send_json_success( array( 'html' => '<p class="wdm-text-muted">' . esc_html__( 'No fields found in the selected form.', 'wprobo-documerge-lite' ) . '</p>' ) );
             return;
         }
 
@@ -816,15 +816,15 @@ class WPRobo_DocuMerge_Forms_Page {
         $integration_label = $integration->wprobo_documerge_get_name();
         $system_tags       = array( 'current_date', 'current_time', 'site_name' );
 
-        $html  = '<label>' . esc_html__( 'Field Mapping', 'wprobo-documerge' ) . '</label>';
+        $html  = '<label>' . esc_html__( 'Field Mapping', 'wprobo-documerge-lite' ) . '</label>';
         $html .= '<span class="wdm-description" style="margin-bottom:12px;display:block;">';
-        $html .= esc_html__( 'Map each template merge tag to a field from your external form.', 'wprobo-documerge' );
+        $html .= esc_html__( 'Map each template merge tag to a field from your external form.', 'wprobo-documerge-lite' );
         $html .= '</span>';
         $html .= '<table class="wdm-field-map-table"><thead><tr>';
-        $html .= '<th>' . esc_html__( 'Template Merge Tag', 'wprobo-documerge' ) . '</th>';
+        $html .= '<th>' . esc_html__( 'Template Merge Tag', 'wprobo-documerge-lite' ) . '</th>';
         $html .= '<th>&rarr;</th>';
         /* translators: %s: integration name */
-        $html .= '<th>' . esc_html( sprintf( __( '%s Field', 'wprobo-documerge' ), $integration_label ) ) . '</th>';
+        $html .= '<th>' . esc_html( sprintf( __( '%s Field', 'wprobo-documerge-lite' ), $integration_label ) ) . '</th>';
         $html .= '</tr></thead><tbody>';
 
         foreach ( $merge_tags as $tag ) {
@@ -835,7 +835,7 @@ class WPRobo_DocuMerge_Forms_Page {
             $html .= '<td><code>{' . esc_html( $tag ) . '}</code></td>';
             $html .= '<td>&rarr;</td>';
             $html .= '<td><select class="wdm-field-map-select wdm-select" data-merge-tag="' . esc_attr( $tag ) . '">';
-            $html .= '<option value="">' . esc_html__( '— Not mapped —', 'wprobo-documerge' ) . '</option>';
+            $html .= '<option value="">' . esc_html__( '— Not mapped —', 'wprobo-documerge-lite' ) . '</option>';
             foreach ( $external_fields as $ef ) {
                 $html .= '<option value="' . esc_attr( $ef['key'] ) . '">' . esc_html( $ef['label'] . ' (' . $ef['type'] . ')' ) . '</option>';
             }

@@ -67,7 +67,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		add_screen_option(
 			'per_page',
 			array(
-				'label'   => __( 'Submissions per page', 'wprobo-documerge' ),
+				'label'   => __( 'Submissions per page', 'wprobo-documerge-lite' ),
 				'default' => 10,
 				'option'  => 'wprobo_documerge_submissions_per_page',
 			)
@@ -87,7 +87,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 	 */
 	public function wprobo_documerge_render() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to access this page.', 'wprobo-documerge' ) );
+			wp_die( esc_html__( 'You do not have permission to access this page.', 'wprobo-documerge-lite' ) );
 		}
 
 		// Single submission view.
@@ -108,8 +108,8 @@ class WPRobo_DocuMerge_Submissions_Page {
 		$this->wprobo_documerge_list_table->prepare_items();
 
 		// Page header variables.
-		$page_title    = __( 'Submissions', 'wprobo-documerge' );
-		$page_subtitle = __( 'All form submissions and generated documents', 'wprobo-documerge' );
+		$page_title    = __( 'Submissions', 'wprobo-documerge-lite' );
+		$page_subtitle = __( 'All form submissions and generated documents', 'wprobo-documerge-lite' );
 
 		?>
 		<div class="wdm-admin-wrap">
@@ -124,7 +124,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 					<input type="hidden" name="page" value="wprobo-documerge-submissions" />
 
 					<?php
-					$this->wprobo_documerge_list_table->search_box( __( 'Search submissions', 'wprobo-documerge' ), 'wdm-submission-search' );
+					$this->wprobo_documerge_list_table->search_box( __( 'Search submissions', 'wprobo-documerge-lite' ), 'wdm-submission-search' );
 					$this->wprobo_documerge_list_table->display();
 					?>
 				</form>
@@ -239,7 +239,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		);
 
 		if ( ! $submission ) {
-			echo '<div class="wdm-admin-wrap"><div class="wdm-notice wdm-notice-error"><span class="wdm-notice-icon dashicons dashicons-warning"></span><span class="wdm-notice-text">' . esc_html__( 'Submission not found.', 'wprobo-documerge' ) . '</span></div></div>';
+			echo '<div class="wdm-admin-wrap"><div class="wdm-notice wdm-notice-error"><span class="wdm-notice-icon dashicons dashicons-warning"></span><span class="wdm-notice-text">' . esc_html__( 'Submission not found.', 'wprobo-documerge-lite' ) . '</span></div></div>';
 			return;
 		}
 
@@ -263,7 +263,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -271,7 +271,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		$note = isset( $_POST['note'] ) ? sanitize_textarea_field( wp_unslash( $_POST['note'] ) ) : '';
 
 		if ( ! $id ) {
-			wp_send_json_error( array( 'message' => __( 'Invalid submission ID.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Invalid submission ID.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -288,7 +288,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 			array( '%d' )
 		);
 
-		wp_send_json_success( array( 'message' => __( 'Note saved.', 'wprobo-documerge' ) ) );
+		wp_send_json_success( array( 'message' => __( 'Note saved.', 'wprobo-documerge-lite' ) ) );
 	}
 
 	/**
@@ -306,7 +306,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -393,9 +393,9 @@ class WPRobo_DocuMerge_Submissions_Page {
 
 		// Add derived fields the JS expects.
 		$status_labels = array(
-			'completed'  => __( 'Completed', 'wprobo-documerge' ),
-			'processing' => __( 'Processing', 'wprobo-documerge' ),
-			'error'      => __( 'Error', 'wprobo-documerge' ),
+			'completed'  => __( 'Completed', 'wprobo-documerge-lite' ),
+			'processing' => __( 'Processing', 'wprobo-documerge-lite' ),
+			'error'      => __( 'Error', 'wprobo-documerge-lite' ),
 		);
 
 		foreach ( $submissions as $sub ) {
@@ -427,14 +427,14 @@ class WPRobo_DocuMerge_Submissions_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
 		$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
 
 		if ( 0 === $id ) {
-			wp_send_json_error( array( 'message' => __( 'Invalid submission ID.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Invalid submission ID.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -457,7 +457,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		);
 
 		if ( null === $submission ) {
-			wp_send_json_error( array( 'message' => __( 'Submission not found.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Submission not found.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -490,7 +490,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -499,7 +499,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		$ids     = array_filter( $ids );
 
 		if ( empty( $ids ) ) {
-			wp_send_json_error( array( 'message' => __( 'No valid submission IDs provided.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'No valid submission IDs provided.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -564,7 +564,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 		check_ajax_referer( 'wprobo_documerge_admin', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -640,12 +640,12 @@ class WPRobo_DocuMerge_Submissions_Page {
 		fputcsv(
 			$output,
 			array(
-				__( 'ID', 'wprobo-documerge' ),
-				__( 'Date', 'wprobo-documerge' ),
-				__( 'Form', 'wprobo-documerge' ),
-				__( 'Email', 'wprobo-documerge' ),
-				__( 'Status', 'wprobo-documerge' ),
-				__( 'Delivery Status', 'wprobo-documerge' ),
+				__( 'ID', 'wprobo-documerge-lite' ),
+				__( 'Date', 'wprobo-documerge-lite' ),
+				__( 'Form', 'wprobo-documerge-lite' ),
+				__( 'Email', 'wprobo-documerge-lite' ),
+				__( 'Status', 'wprobo-documerge-lite' ),
+				__( 'Delivery Status', 'wprobo-documerge-lite' ),
 			)
 		);
 

@@ -12,6 +12,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -115,10 +117,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</a>
 			</p>
 			<p style="margin: 4px 0; color: #6b7280; font-size: 13px;">
-				<?php esc_html_e( 'Powered by WPRobo DocuMerge', 'wprobo-documerge' ); ?>
+				<?php esc_html_e( 'Powered by WPRobo DocuMerge', 'wprobo-documerge-lite' ); ?>
 			</p>
 		</div>
 
 	</div>
 </body>
 </html>
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

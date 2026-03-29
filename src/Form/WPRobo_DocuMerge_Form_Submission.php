@@ -94,7 +94,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		if ( isset( $_POST['wdm_trap'] ) && '' !== sanitize_text_field( wp_unslash( $_POST['wdm_trap'] ) ) ) {
 			wp_send_json_success(
 				array(
-					'message' => __( 'Form submitted successfully.', 'wprobo-documerge' ),
+					'message' => __( 'Form submitted successfully.', 'wprobo-documerge-lite' ),
 				)
 			);
 		}
@@ -121,7 +121,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		if ( $submission_count >= $max_submissions ) {
 			wp_send_json_error(
 				array(
-					'message' => __( 'Too many submissions. Please try again later.', 'wprobo-documerge' ),
+					'message' => __( 'Too many submissions. Please try again later.', 'wprobo-documerge-lite' ),
 				)
 			);
 		}
@@ -148,7 +148,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		if ( null === $form ) {
 			wp_send_json_error(
 				array(
-					'message' => __( 'Form not found.', 'wprobo-documerge' ),
+					'message' => __( 'Form not found.', 'wprobo-documerge-lite' ),
 				)
 			);
 		}
@@ -161,7 +161,7 @@ class WPRobo_DocuMerge_Form_Submission {
 
 		$closed_message = ! empty( $form_settings['closed_message'] )
 			? $form_settings['closed_message']
-			: __( 'This form is no longer accepting submissions.', 'wprobo-documerge' );
+			: __( 'This form is no longer accepting submissions.', 'wprobo-documerge-lite' );
 
 		global $wpdb;
 		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
@@ -197,7 +197,7 @@ class WPRobo_DocuMerge_Form_Submission {
 				);
 				if ( $email_count >= $limit_per_email ) {
 					/* translators: %d: max submissions allowed per email */
-					$msg = sprintf( __( 'You have already submitted this form %d time(s) with this email address.', 'wprobo-documerge' ), $limit_per_email );
+					$msg = sprintf( __( 'You have already submitted this form %d time(s) with this email address.', 'wprobo-documerge-lite' ), $limit_per_email );
 					wp_send_json_error( array( 'message' => $msg ) );
 					return;
 				}
@@ -218,7 +218,7 @@ class WPRobo_DocuMerge_Form_Submission {
 				);
 				if ( $ip_count >= $limit_per_ip ) {
 					/* translators: %d: max submissions allowed per IP */
-					$msg = sprintf( __( 'You have already submitted this form %d time(s).', 'wprobo-documerge' ), $limit_per_ip );
+					$msg = sprintf( __( 'You have already submitted this form %d time(s).', 'wprobo-documerge-lite' ), $limit_per_ip );
 					wp_send_json_error( array( 'message' => $msg ) );
 					return;
 				}
@@ -240,7 +240,7 @@ class WPRobo_DocuMerge_Form_Submission {
 			);
 			if ( $user_count >= $limit_per_user ) {
 				/* translators: %d: max submissions allowed per user */
-				$msg = sprintf( __( 'You have already submitted this form %d time(s).', 'wprobo-documerge' ), $limit_per_user );
+				$msg = sprintf( __( 'You have already submitted this form %d time(s).', 'wprobo-documerge-lite' ), $limit_per_user );
 				wp_send_json_error( array( 'message' => $msg ) );
 				return;
 			}
@@ -290,7 +290,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		if ( ! empty( $field_errors ) ) {
 			wp_send_json_error(
 				array(
-					'message'      => __( 'Please correct the errors below.', 'wprobo-documerge' ),
+					'message'      => __( 'Please correct the errors below.', 'wprobo-documerge-lite' ),
 					'field_errors' => $field_errors,
 				)
 			);
@@ -346,7 +346,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		 */
 		$valid = apply_filters( 'wprobo_documerge_validate_submission', true, $sanitized_values, $form_id );
 		if ( false === $valid ) {
-			wp_send_json_error( array( 'message' => __( 'Submission rejected.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Submission rejected.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -425,7 +425,7 @@ class WPRobo_DocuMerge_Form_Submission {
 
 			wp_send_json_error(
 				array(
-					'message' => __( 'An error occurred while saving your submission. Please try again.', 'wprobo-documerge' ),
+					'message' => __( 'An error occurred while saving your submission. Please try again.', 'wprobo-documerge-lite' ),
 				)
 			);
 		}
@@ -492,10 +492,10 @@ class WPRobo_DocuMerge_Form_Submission {
 			wp_mail(
 				get_option( 'admin_email' ),
 				/* translators: %d: submission ID */
-				sprintf( __( '[DocuMerge] Document generation failed for submission #%d', 'wprobo-documerge' ), $submission_id ),
+				sprintf( __( '[DocuMerge] Document generation failed for submission #%d', 'wprobo-documerge-lite' ), $submission_id ),
 				/* translators: 1: submission ID, 2: error message */
 				sprintf(
-					__( "Document generation failed for submission #%1\$d.\n\nError: %2\$s", 'wprobo-documerge' ),
+					__( "Document generation failed for submission #%1\$d.\n\nError: %2\$s", 'wprobo-documerge-lite' ),
 					$submission_id,
 					$result->get_error_message()
 				)
@@ -503,7 +503,7 @@ class WPRobo_DocuMerge_Form_Submission {
 
 			wp_send_json_error(
 				array(
-					'message' => __( 'An error occurred while generating your document. Please try again or contact support.', 'wprobo-documerge' ),
+					'message' => __( 'An error occurred while generating your document. Please try again or contact support.', 'wprobo-documerge-lite' ),
 				)
 			);
 		}
@@ -529,7 +529,7 @@ class WPRobo_DocuMerge_Form_Submission {
 
 		// ── Step 10: Success response ───────────────────────────────────
 
-		$success_message = ! empty( $form->success_message ) ? $form->success_message : __( 'Your document has been generated successfully.', 'wprobo-documerge' );
+		$success_message = ! empty( $form->success_message ) ? $form->success_message : __( 'Your document has been generated successfully.', 'wprobo-documerge-lite' );
 
 		/**
 		 * Filters the success message returned after a submission is processed.

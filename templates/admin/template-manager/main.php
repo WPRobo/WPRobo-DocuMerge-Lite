@@ -20,12 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 // Page header variables.
-$page_title     = __( 'Document Templates', 'wprobo-documerge' );
-$page_subtitle  = __( 'Manage your Word/DOCX document templates', 'wprobo-documerge' );
+$page_title     = __( 'Document Templates', 'wprobo-documerge-lite' );
+$page_subtitle  = __( 'Manage your Word/DOCX document templates', 'wprobo-documerge-lite' );
 $primary_action = array(
 	'url'   => '#',
-	'label' => __( 'Upload Template', 'wprobo-documerge' ),
+	'label' => __( 'Upload Template', 'wprobo-documerge-lite' ),
 	'icon'  => 'dashicons-upload',
 	'id'    => 'wdm-upload-template-btn',
 );
@@ -39,11 +41,11 @@ $primary_action = array(
 		<!-- ── Empty State ─────────────────────────────────────────── -->
 		<div class="wdm-empty-state">
 			<span class="dashicons dashicons-media-document"></span>
-			<h3><?php esc_html_e( 'No templates yet', 'wprobo-documerge' ); ?></h3>
-			<p><?php esc_html_e( 'Upload your first document template to get started.', 'wprobo-documerge' ); ?></p>
+			<h3><?php esc_html_e( 'No templates yet', 'wprobo-documerge-lite' ); ?></h3>
+			<p><?php esc_html_e( 'Upload your first document template to get started.', 'wprobo-documerge-lite' ); ?></p>
 			<button type="button" class="wdm-btn wdm-btn-primary wdm-template-upload-btn">
 				<span class="dashicons dashicons-upload"></span>
-				<?php esc_html_e( 'Upload Template', 'wprobo-documerge' ); ?>
+				<?php esc_html_e( 'Upload Template', 'wprobo-documerge-lite' ); ?>
 			</button>
 		</div>
 
@@ -61,9 +63,9 @@ $primary_action = array(
 
 				// Build format badge label.
 				$format_labels = array(
-					'pdf'  => __( 'PDF', 'wprobo-documerge' ),
-					'docx' => __( 'DOCX', 'wprobo-documerge' ),
-					'both' => __( 'Both', 'wprobo-documerge' ),
+					'pdf'  => __( 'PDF', 'wprobo-documerge-lite' ),
+					'docx' => __( 'DOCX', 'wprobo-documerge-lite' ),
+					'both' => __( 'Both', 'wprobo-documerge-lite' ),
 				);
 				$format_label  = isset( $format_labels[ $output_fmt ] ) ? $format_labels[ $output_fmt ] : esc_html( $output_fmt );
 				?>
@@ -86,7 +88,7 @@ $primary_action = array(
 
 					<!-- Merge Tags -->
 					<div class="wdm-template-card-tags">
-						<span class="wdm-template-meta-label"><?php esc_html_e( 'Tags', 'wprobo-documerge' ); ?></span>
+						<span class="wdm-template-meta-label"><?php esc_html_e( 'Tags', 'wprobo-documerge-lite' ); ?></span>
 						<div class="wdm-template-tag-pills">
 							<?php
 							$tags_to_show = array_slice( $template->tags_array, 0, 5 );
@@ -96,18 +98,18 @@ $primary_action = array(
 							<?php endforeach; ?>
 							<?php if ( $tag_count > 5 ) : ?>
 								<button type="button" class="wdm-tag-more" data-tags="<?php echo esc_attr( wp_json_encode( $template->tags_array ) ); ?>">
-									+<?php echo esc_html( $tag_count - 5 ); ?> <?php esc_html_e( 'more', 'wprobo-documerge' ); ?>
+									+<?php echo esc_html( $tag_count - 5 ); ?> <?php esc_html_e( 'more', 'wprobo-documerge-lite' ); ?>
 								</button>
 							<?php endif; ?>
 							<?php if ( 0 === $tag_count ) : ?>
-								<span class="wdm-text-muted"><?php esc_html_e( 'No tags detected', 'wprobo-documerge' ); ?></span>
+								<span class="wdm-text-muted"><?php esc_html_e( 'No tags detected', 'wprobo-documerge-lite' ); ?></span>
 							<?php endif; ?>
 						</div>
 					</div>
 
 					<!-- Linked Forms -->
 					<div class="wdm-template-card-forms">
-						<span class="wdm-template-meta-label"><?php esc_html_e( 'Forms', 'wprobo-documerge' ); ?></span>
+						<span class="wdm-template-meta-label"><?php esc_html_e( 'Forms', 'wprobo-documerge-lite' ); ?></span>
 						<?php if ( ! empty( $template->linked_forms ) ) : ?>
 							<div class="wdm-template-form-links">
 								<?php foreach ( $template->linked_forms as $linked_form ) : ?>
@@ -117,18 +119,18 @@ $primary_action = array(
 								<?php endforeach; ?>
 							</div>
 						<?php else : ?>
-							<span class="wdm-text-muted"><?php esc_html_e( 'Not used in any form', 'wprobo-documerge' ); ?></span>
+							<span class="wdm-text-muted"><?php esc_html_e( 'Not used in any form', 'wprobo-documerge-lite' ); ?></span>
 						<?php endif; ?>
 					</div>
 
 					<div class="wdm-template-card-actions">
 						<button type="button" class="wdm-btn wdm-btn-sm wdm-template-edit" data-id="<?php echo esc_attr( $template->id ); ?>">
 							<span class="dashicons dashicons-edit"></span>
-							<?php esc_html_e( 'Edit', 'wprobo-documerge' ); ?>
+							<?php esc_html_e( 'Edit', 'wprobo-documerge-lite' ); ?>
 						</button>
 						<button type="button" class="wdm-btn wdm-btn-sm wdm-btn-danger wdm-template-delete" data-id="<?php echo esc_attr( $template->id ); ?>">
 							<span class="dashicons dashicons-trash"></span>
-							<?php esc_html_e( 'Delete', 'wprobo-documerge' ); ?>
+							<?php esc_html_e( 'Delete', 'wprobo-documerge-lite' ); ?>
 						</button>
 					</div>
 
@@ -147,3 +149,5 @@ require WPROBO_DOCUMERGE_PATH . 'templates/admin/template-manager/slide-panel.ph
 ?>
 
 <div class="wdm-overlay" id="wdm-overlay"></div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

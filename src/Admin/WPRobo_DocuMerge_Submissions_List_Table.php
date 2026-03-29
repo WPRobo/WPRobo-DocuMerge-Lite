@@ -55,11 +55,11 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 	public function get_columns() {
 		return array(
 			'cb'              => '<input type="checkbox" />',
-			'created_at'      => __( 'Date', 'wprobo-documerge' ),
-			'form_title'      => __( 'Form', 'wprobo-documerge' ),
-			'submitter_email' => __( 'Email', 'wprobo-documerge' ),
-			'status'          => __( 'Status', 'wprobo-documerge' ),
-			'documents'       => __( 'Documents', 'wprobo-documerge' ),
+			'created_at'      => __( 'Date', 'wprobo-documerge-lite' ),
+			'form_title'      => __( 'Form', 'wprobo-documerge-lite' ),
+			'submitter_email' => __( 'Email', 'wprobo-documerge-lite' ),
+			'status'          => __( 'Status', 'wprobo-documerge-lite' ),
+			'documents'       => __( 'Documents', 'wprobo-documerge-lite' ),
 		);
 	}
 
@@ -120,7 +120,7 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 	 * @return string
 	 */
 	public function column_form_title( $item ) {
-		$title = ! empty( $item->form_title ) ? $item->form_title : __( 'Unknown', 'wprobo-documerge' );
+		$title = ! empty( $item->form_title ) ? $item->form_title : __( 'Unknown', 'wprobo-documerge-lite' );
 		return esc_html( $title );
 	}
 
@@ -195,7 +195,7 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 	 */
 	public function get_bulk_actions() {
 		return array(
-			'delete' => __( 'Delete', 'wprobo-documerge' ),
+			'delete' => __( 'Delete', 'wprobo-documerge-lite' ),
 		);
 	}
 
@@ -228,7 +228,7 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 
 		// Form filter.
 		echo '<select name="form_id">';
-		echo '<option value="">' . esc_html__( 'All Forms', 'wprobo-documerge' ) . '</option>';
+		echo '<option value="">' . esc_html__( 'All Forms', 'wprobo-documerge-lite' ) . '</option>';
 		if ( ! empty( $forms ) ) {
 			foreach ( $forms as $form ) {
 				printf(
@@ -243,13 +243,13 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 
 		// Status filter.
 		$statuses = array(
-			'completed'  => __( 'Completed', 'wprobo-documerge' ),
-			'processing' => __( 'Processing', 'wprobo-documerge' ),
-			'error'      => __( 'Error', 'wprobo-documerge' ),
+			'completed'  => __( 'Completed', 'wprobo-documerge-lite' ),
+			'processing' => __( 'Processing', 'wprobo-documerge-lite' ),
+			'error'      => __( 'Error', 'wprobo-documerge-lite' ),
 		);
 
 		echo '<select name="status">';
-		echo '<option value="">' . esc_html__( 'All Statuses', 'wprobo-documerge' ) . '</option>';
+		echo '<option value="">' . esc_html__( 'All Statuses', 'wprobo-documerge-lite' ) . '</option>';
 		foreach ( $statuses as $value => $label ) {
 			printf(
 				'<option value="%s"%s>%s</option>',
@@ -260,12 +260,12 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 		}
 		echo '</select>';
 
-		submit_button( __( 'Filter', 'wprobo-documerge' ), '', 'filter_action', false );
+		submit_button( __( 'Filter', 'wprobo-documerge-lite' ), '', 'filter_action', false );
 
 		// Export CSV button.
 		echo '<a href="' . esc_url( wp_nonce_url( admin_url( 'admin-ajax.php?action=wprobo_documerge_export_submissions&form_id=' . $current_form . '&status=' . $current_status ), 'wprobo_documerge_admin', 'nonce' ) ) . '" class="button wdm-export-csv-btn">';
 		echo '<span class="dashicons dashicons-download" style="vertical-align:middle;margin-top:-2px;"></span> ';
-		echo esc_html__( 'Export CSV', 'wprobo-documerge' );
+		echo esc_html__( 'Export CSV', 'wprobo-documerge-lite' );
 		echo '</a>';
 
 		echo '</div>';
@@ -280,8 +280,8 @@ class WPRobo_DocuMerge_Submissions_List_Table extends \WP_List_Table {
 	public function no_items() {
 		echo '<div class="wdm-empty-state" style="padding:40px 20px;">';
 		echo '<span class="dashicons dashicons-email-alt"></span>';
-		echo '<h3>' . esc_html__( 'No submissions found', 'wprobo-documerge' ) . '</h3>';
-		echo '<p>' . esc_html__( 'Submissions will appear here once visitors submit your forms.', 'wprobo-documerge' ) . '</p>';
+		echo '<h3>' . esc_html__( 'No submissions found', 'wprobo-documerge-lite' ) . '</h3>';
+		echo '<p>' . esc_html__( 'Submissions will appear here once visitors submit your forms.', 'wprobo-documerge-lite' ) . '</p>';
 		echo '</div>';
 	}
 

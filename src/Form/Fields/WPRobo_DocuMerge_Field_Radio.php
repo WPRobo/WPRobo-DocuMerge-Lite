@@ -40,7 +40,7 @@ class WPRobo_DocuMerge_Field_Radio {
 	 * @return string
 	 */
 	public function wprobo_documerge_get_label() {
-		return __( 'Radio Buttons', 'wprobo-documerge' );
+		return __( 'Radio Buttons', 'wprobo-documerge-lite' );
 	}
 
 	/**
@@ -109,48 +109,48 @@ class WPRobo_DocuMerge_Field_Radio {
 
 		// Label.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="label" class="wdm-builder-setting-input" value="' . $label . '">';
 		$html .= '</div>';
 
 		// Placeholder.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Placeholder', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Placeholder', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="placeholder" class="wdm-builder-setting-input" value="' . esc_attr( $field_data['placeholder'] ) . '">';
 		$html .= '</div>';
 
 		// Help Text.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Help Text', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Help Text', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="help_text" class="wdm-builder-setting-input" value="' . $help_text . '">';
 		$html .= '</div>';
 
 		// Required.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Required', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Required', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="checkbox" data-setting="required" class="wdm-builder-setting-input" ' . $required . '>';
 		$html .= '</div>';
 
 		// Custom Error Message.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Custom Error Message', 'wprobo-documerge' ) . '</label>';
-		$html .= '<input type="text" data-setting="error_message" class="wdm-builder-setting-input wdm-input" value="' . $error_message . '" placeholder="' . esc_attr__( 'Leave blank for default', 'wprobo-documerge' ) . '">';
-		$html .= '<span class="wdm-description">' . esc_html__( 'Optional. Shown when validation fails.', 'wprobo-documerge' ) . '</span>';
+		$html .= '<label>' . esc_html__( 'Custom Error Message', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<input type="text" data-setting="error_message" class="wdm-builder-setting-input wdm-input" value="' . $error_message . '" placeholder="' . esc_attr__( 'Leave blank for default', 'wprobo-documerge-lite' ) . '">';
+		$html .= '<span class="wdm-description">' . esc_html__( 'Optional. Shown when validation fails.', 'wprobo-documerge-lite' ) . '</span>';
 		$html .= '</div>';
 
 		// Width.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Width', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Width', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<div class="wdm-width-selector">';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="full"' . checked( $width, 'full', false ) . '> ' . esc_html__( 'Full', 'wprobo-documerge' ) . '</label>';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="half"' . checked( $width, 'half', false ) . '> ' . esc_html__( 'Half', 'wprobo-documerge' ) . '</label>';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="third"' . checked( $width, 'third', false ) . '> ' . esc_html__( 'Third', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="full"' . checked( $width, 'full', false ) . '> ' . esc_html__( 'Full', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="half"' . checked( $width, 'half', false ) . '> ' . esc_html__( 'Half', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="third"' . checked( $width, 'third', false ) . '> ' . esc_html__( 'Third', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '</div>';
 		$html .= '</div>';
 
 		// Options List.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Options', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Options', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<div class="wdm-options-list">';
 
 		foreach ( $options as $index => $option ) {
@@ -162,14 +162,14 @@ class WPRobo_DocuMerge_Field_Radio {
 
 			$html .= '<div class="wdm-option-row" data-index="' . esc_attr( $index ) . '">';
 			$html .= '<span class="wdm-option-drag dashicons dashicons-menu"></span>';
-			$html .= '<input type="text" data-setting="option_label" class="wdm-input" placeholder="' . esc_attr__( 'Label', 'wprobo-documerge' ) . '" value="' . $opt_label . '">';
-			$html .= '<input type="text" data-setting="option_value" class="wdm-input" placeholder="' . esc_attr__( 'Value', 'wprobo-documerge' ) . '" value="' . $opt_value . '">';
+			$html .= '<input type="text" data-setting="option_label" class="wdm-input" placeholder="' . esc_attr__( 'Label', 'wprobo-documerge-lite' ) . '" value="' . $opt_label . '">';
+			$html .= '<input type="text" data-setting="option_value" class="wdm-input" placeholder="' . esc_attr__( 'Value', 'wprobo-documerge-lite' ) . '" value="' . $opt_value . '">';
 			$html .= '<button type="button" class="wdm-option-remove"><span class="dashicons dashicons-no-alt"></span></button>';
 			$html .= '</div>';
 		}
 
 		$html .= '</div>';
-		$html .= '<button type="button" class="wdm-add-option">' . esc_html__( '+ Add Option', 'wprobo-documerge' ) . '</button>';
+		$html .= '<button type="button" class="wdm-add-option">' . esc_html__( '+ Add Option', 'wprobo-documerge-lite' ) . '</button>';
 		$html .= '</div>';
 
 		return $html;
@@ -277,7 +277,7 @@ class WPRobo_DocuMerge_Field_Radio {
 				'' !== $custom_error
 					? esc_html( $custom_error )
 					/* translators: %s: field label */
-					: sprintf( __( '%s is required.', 'wprobo-documerge' ), $field_data['label'] )
+					: sprintf( __( '%s is required.', 'wprobo-documerge-lite' ), $field_data['label'] )
 			);
 		}
 
@@ -291,7 +291,7 @@ class WPRobo_DocuMerge_Field_Radio {
 					'' !== $custom_error
 						? esc_html( $custom_error )
 						/* translators: %s: field label */
-						: sprintf( __( '%s has an invalid selection.', 'wprobo-documerge' ), $field_data['label'] )
+						: sprintf( __( '%s has an invalid selection.', 'wprobo-documerge-lite' ), $field_data['label'] )
 				);
 			}
 		}

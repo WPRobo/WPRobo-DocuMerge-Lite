@@ -47,7 +47,7 @@ class WPRobo_DocuMerge_Field_Tracking {
 	 * @return string
 	 */
 	public function wprobo_documerge_get_label() {
-		return __( 'Tracking Parameters', 'wprobo-documerge' );
+		return __( 'Tracking Parameters', 'wprobo-documerge-lite' );
 	}
 
 	/**
@@ -102,28 +102,28 @@ class WPRobo_DocuMerge_Field_Tracking {
 
 		// Label (admin reference only).
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="label" class="wdm-builder-setting-input" value="' . $label . '">';
-		$html .= '<span class="wdm-description">' . esc_html__( 'For admin reference only. Not shown on the frontend.', 'wprobo-documerge' ) . '</span>';
+		$html .= '<span class="wdm-description">' . esc_html__( 'For admin reference only. Not shown on the frontend.', 'wprobo-documerge-lite' ) . '</span>';
 		$html .= '</div>';
 
 		// Track UTMs.
 		$html .= '<div class="wdm-builder-field-setting">';
 		$html .= '<label><input type="checkbox" data-setting="track_utms" class="wdm-builder-setting-input"' . ( ! empty( $field_data['track_utms'] ) ? ' checked' : '' ) . '> ';
-		$html .= esc_html__( 'Track UTM Parameters', 'wprobo-documerge' ) . '</label>';
-		$html .= '<span class="wdm-description">' . esc_html__( 'Captures utm_source, utm_medium, utm_campaign, utm_content, utm_term.', 'wprobo-documerge' ) . '</span>';
+		$html .= esc_html__( 'Track UTM Parameters', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<span class="wdm-description">' . esc_html__( 'Captures utm_source, utm_medium, utm_campaign, utm_content, utm_term.', 'wprobo-documerge-lite' ) . '</span>';
 		$html .= '</div>';
 
 		// Track Referrer.
 		$html .= '<div class="wdm-builder-field-setting">';
 		$html .= '<label><input type="checkbox" data-setting="track_referrer" class="wdm-builder-setting-input"' . ( ! empty( $field_data['track_referrer'] ) ? ' checked' : '' ) . '> ';
-		$html .= esc_html__( 'Track Referrer URL', 'wprobo-documerge' ) . '</label>';
+		$html .= esc_html__( 'Track Referrer URL', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '</div>';
 
 		// Track Landing Page.
 		$html .= '<div class="wdm-builder-field-setting">';
 		$html .= '<label><input type="checkbox" data-setting="track_landing_page" class="wdm-builder-setting-input"' . ( ! empty( $field_data['track_landing_page'] ) ? ' checked' : '' ) . '> ';
-		$html .= esc_html__( 'Track Landing Page URL', 'wprobo-documerge' ) . '</label>';
+		$html .= esc_html__( 'Track Landing Page URL', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '</div>';
 
 		return $html;

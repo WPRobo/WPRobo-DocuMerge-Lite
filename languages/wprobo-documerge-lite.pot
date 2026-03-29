@@ -6,7 +6,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-29 14:33+0000\n"
+"POT-Creation-Date: 2026-03-29 19:10+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -14,35 +14,35 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:61, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:109, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:111
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:62, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:109, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:111
 msgid "DocuMerge"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:69, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:123, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:124
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:72, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:123, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:124
 msgid "Dashboard"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:77, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:143, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:144, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:174, ../src/Core/WPRobo_DocuMerge_Assets.php:139, ../src/Core/WPRobo_DocuMerge_Plugin.php:305, ../templates/admin/dashboard/main.php:85, ../templates/admin/form-builder/list.php:26, ../templates/admin/template-manager/main.php:110
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:82, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:143, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:144, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:178, ../src/Core/WPRobo_DocuMerge_Assets.php:139, ../src/Core/WPRobo_DocuMerge_Plugin.php:311, ../templates/admin/dashboard/main.php:87, ../templates/admin/form-builder/list.php:28, ../templates/admin/template-manager/main.php:112
 msgid "Forms"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:85, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:133, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:134, ../src/Core/WPRobo_DocuMerge_Assets.php:138, ../templates/admin/dashboard/main.php:76
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:92, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:133, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:134, ../src/Core/WPRobo_DocuMerge_Assets.php:138, ../templates/admin/dashboard/main.php:78
 msgid "Templates"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:93, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:156, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:157, ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:66, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:111, ../src/Core/WPRobo_DocuMerge_Assets.php:140, ../templates/admin/dashboard/main.php:45, ../templates/admin/dashboard/main.php:94, ../templates/admin/dashboard/main.php:298, ../templates/admin/form-builder/list.php:86, ../templates/admin/submissions/main.php:23
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:102, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:156, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:157, ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:66, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:111, ../src/Core/WPRobo_DocuMerge_Assets.php:140, ../templates/admin/dashboard/main.php:47, ../templates/admin/dashboard/main.php:96, ../templates/admin/dashboard/main.php:301, ../templates/admin/form-builder/list.php:112, ../templates/admin/submissions/main.php:25
 msgid "Submissions"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:101, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:169, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:170, ../src/Core/WPRobo_DocuMerge_Assets.php:141, ../src/Core/WPRobo_DocuMerge_Plugin.php:304, ../templates/admin/dashboard/main.php:48, ../templates/admin/form-builder/builder.php:179, ../templates/admin/form-builder/builder.php:176, ../templates/admin/settings/main.php:18, ../templates/admin/settings/main.php:358
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:112, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:169, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:170, ../src/Core/WPRobo_DocuMerge_Assets.php:141, ../src/Core/WPRobo_DocuMerge_Plugin.php:310, ../templates/admin/dashboard/main.php:50, ../templates/admin/form-builder/builder.php:181, ../templates/admin/form-builder/builder.php:178, ../templates/admin/settings/main.php:20, ../templates/admin/settings/main.php:405
 msgid "Settings"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:122
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:137
 msgid "Edit This Form"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:125
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Bar.php:140
 msgid "Edit the DocuMerge form on this page"
 msgstr ""
 
@@ -50,71 +50,71 @@ msgstr ""
 msgid "DocuMerge Lite"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:179, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:180, ../templates/admin/help/main.php:22
+#: ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:179, ../src/Admin/WPRobo_DocuMerge_Admin_Menu.php:180, ../templates/admin/help/main.php:24
 msgid "Help & Support"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:62, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:643, ../templates/admin/form-builder/list.php:74, ../templates/admin/submissions/single.php:164
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:62, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:643, ../templates/admin/form-builder/list.php:88, ../templates/admin/submissions/single.php:166
 msgid "ID"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:63, ../src/Core/WPRobo_DocuMerge_Assets.php:158, ../templates/admin/form-builder/builder.php:141, ../templates/admin/form-builder/list.php:80
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:63, ../src/Core/WPRobo_DocuMerge_Assets.php:158, ../templates/admin/form-builder/builder.php:143, ../templates/admin/form-builder/list.php:106
 msgid "Name"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:64, ../templates/admin/form-builder/builder.php:414, ../templates/admin/form-builder/list.php:84, ../templates/admin/submissions/detail-content.php:36, ../templates/admin/submissions/single.php:172
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:64, ../templates/admin/form-builder/builder.php:416, ../templates/admin/form-builder/list.php:110, ../templates/admin/submissions/detail-content.php:38, ../templates/admin/submissions/single.php:174
 msgid "Template"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:65, ../templates/admin/form-builder/builder.php:178, ../templates/admin/form-builder/builder.php:175, ../templates/admin/form-builder/list.php:85
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:65, ../templates/admin/form-builder/builder.php:180, ../templates/admin/form-builder/builder.php:177, ../templates/admin/form-builder/list.php:111
 msgid "Fields"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:67, ../templates/admin/form-builder/list.php:87
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:67, ../templates/admin/form-builder/list.php:113
 msgid "Views"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:68, ../templates/admin/form-builder/list.php:88
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:68, ../templates/admin/form-builder/list.php:114
 msgid "Starts"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:69, ../templates/admin/form-builder/list.php:89
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:69, ../templates/admin/form-builder/list.php:115
 msgid "Completions"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:70, ../templates/admin/form-builder/list.php:90
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:70, ../templates/admin/form-builder/list.php:116
 msgid "Shortcode"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:71, ../templates/admin/form-builder/list.php:91
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:71, ../templates/admin/form-builder/list.php:117
 msgid "Mode"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:133, ../templates/admin/form-builder/list.php:163, ../templates/admin/template-manager/main.php:127
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:133, ../templates/admin/form-builder/list.php:194, ../templates/admin/template-manager/main.php:129
 msgid "Edit"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:138, ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:285, ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:198, ../templates/admin/form-builder/list.php:167, ../templates/admin/settings/main.php:480, ../templates/admin/settings/main.php:488, ../templates/admin/settings/main.php:496, ../templates/admin/settings/main.php:503, ../templates/admin/template-manager/main.php:131
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:138, ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:285, ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:198, ../templates/admin/form-builder/list.php:198, ../templates/admin/settings/main.php:527, ../templates/admin/settings/main.php:535, ../templates/admin/settings/main.php:543, ../templates/admin/settings/main.php:550, ../templates/admin/template-manager/main.php:133
 msgid "Delete"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:160, ../templates/admin/form-builder/list.php:125
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:160, ../templates/admin/form-builder/list.php:156
 msgid "None"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:229, ../templates/admin/form-builder/list.php:143
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:229, ../templates/admin/form-builder/list.php:174
 msgid "Abandonment rate"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:230, ../templates/admin/form-builder/list.php:143
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:230, ../templates/admin/form-builder/list.php:174
 msgid "drop"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:248, ../templates/admin/form-builder/list.php:149
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:248, ../templates/admin/form-builder/list.php:180
 msgid "Copy"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:265, ../templates/admin/form-builder/list.php:36
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:265, ../templates/admin/form-builder/list.php:38
 msgid "Standalone"
 msgstr ""
 
@@ -122,27 +122,27 @@ msgstr ""
 msgid "Integrated"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:267, ../templates/admin/form-builder/list.php:37
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:267, ../templates/admin/form-builder/list.php:39
 msgid "WPForms"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:268, ../templates/admin/form-builder/list.php:38
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:268, ../templates/admin/form-builder/list.php:40
 msgid "Gravity Forms"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:269, ../templates/admin/form-builder/list.php:39
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:269, ../templates/admin/form-builder/list.php:41
 msgid "Contact Form 7"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:298, ../templates/admin/form-builder/list.php:51
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:298, ../templates/admin/form-builder/list.php:53
 msgid "No forms yet"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:299, ../templates/admin/form-builder/list.php:52
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:299, ../templates/admin/form-builder/list.php:54
 msgid "Create your first form to start collecting submissions."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:301, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:178, ../templates/admin/form-builder/list.php:30, ../templates/admin/form-builder/list.php:55
+#: ../src/Admin/WPRobo_DocuMerge_Forms_List_Table.php:301, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:182, ../templates/admin/form-builder/list.php:32, ../templates/admin/form-builder/list.php:57
 msgid "Create Form"
 msgstr ""
 
@@ -150,100 +150,100 @@ msgstr ""
 msgid "Forms per page"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:100, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:293, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:330, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:505, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:701, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:758, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:56, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:213, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:253, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:335, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:375, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:469, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:266, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:309, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:430, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:493, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:567, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:115, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:227, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:316, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:373, ../src/Wizard/WPRobo_DocuMerge_Setup_Wizard.php:203
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:100, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:297, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:334, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:509, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:715, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:772, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:56, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:213, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:253, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:365, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:417, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:513, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:266, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:309, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:430, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:493, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:567, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:115, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:229, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:318, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:377, ../src/Wizard/WPRobo_DocuMerge_Setup_Wizard.php:203
 msgid "Permission denied."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:108, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:300, ../src/Form/WPRobo_DocuMerge_Form_Builder.php:213
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:108, ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:304, ../src/Form/WPRobo_DocuMerge_Form_Builder.php:230
 msgid "Invalid form ID."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:133
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:136
 msgid "Page created as draft."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:152, ../src/Admin/WPRobo_DocuMerge_Help_Page.php:42, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:235, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:90, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:64, ../src/Wizard/WPRobo_DocuMerge_Setup_Wizard.php:188
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:156, ../src/Admin/WPRobo_DocuMerge_Help_Page.php:42, ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:235, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:90, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:64, ../src/Wizard/WPRobo_DocuMerge_Setup_Wizard.php:188
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:175, ../templates/admin/form-builder/list.php:27
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:179, ../templates/admin/form-builder/list.php:29
 msgid "Build and manage your document collection forms"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:192
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:196
 msgid "Search forms"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:312
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:316
 msgid "Form deleted successfully."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:343
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:347
 msgid "Form title is required."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:512
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:516
 msgid "Form ID is required."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:521, ../src/Form/WPRobo_DocuMerge_Form_Builder.php:284, ../src/Form/WPRobo_DocuMerge_Form_Submission.php:151
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:525, ../src/Form/WPRobo_DocuMerge_Form_Builder.php:301, ../src/Form/WPRobo_DocuMerge_Form_Submission.php:151
 msgid "Form not found."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:527
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:531
 msgid "No template assigned to this form."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:536
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:540
 msgid "Template file not found."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:697
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:711
 msgid "Invalid nonce."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:708
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:722
 msgid "File not specified."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:732
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:746
 msgid "File not found."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:767
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:781
 msgid "Missing parameters."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:772
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:786
 msgid "Form integrations require DocuMerge Pro."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:792
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:806
 msgid "Select a template first to see merge tags for mapping."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:797
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:811
 msgid "No fields found in the selected form."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:805, ../templates/admin/form-builder/builder.php:331
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:819, ../templates/admin/form-builder/builder.php:333
 msgid "Field Mapping"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:807, ../templates/admin/form-builder/builder.php:333
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:821, ../templates/admin/form-builder/builder.php:335
 msgid "Map each template merge tag to a field from your external form."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:810, ../templates/admin/form-builder/builder.php:338
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:824, ../templates/admin/form-builder/builder.php:340
 msgid "Template Merge Tag"
 msgstr ""
 
 #. translators: %s: integration name
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:813, ../templates/admin/form-builder/builder.php:343
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:827, ../templates/admin/form-builder/builder.php:345
 msgid "%s Field"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:824, ../templates/admin/form-builder/builder.php:362
+#: ../src/Admin/WPRobo_DocuMerge_Forms_Page.php:838, ../templates/admin/form-builder/builder.php:364
 msgid "— Not mapped —"
 msgstr ""
 
@@ -251,7 +251,7 @@ msgstr ""
 msgid "Not installed"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Help_Page.php:146
+#: ../src/Admin/WPRobo_DocuMerge_Help_Page.php:152
 msgid "None detected"
 msgstr ""
 
@@ -259,7 +259,7 @@ msgstr ""
 msgid "PRO"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Pro_Upsell.php:57, ../templates/admin/dashboard/main.php:161, ../templates/admin/dashboard/main.php:178
+#: ../src/Admin/WPRobo_DocuMerge_Pro_Upsell.php:57, ../templates/admin/dashboard/main.php:164, ../templates/admin/dashboard/main.php:181
 msgid "Upgrade to Pro"
 msgstr ""
 
@@ -295,95 +295,95 @@ msgstr ""
 msgid "Unknown action."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:319
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:349
 msgid "General settings saved."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:359
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:401
 msgid "Advanced settings saved."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:382
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:424
 msgid "No data types selected for export."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:390
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:432
 msgid "Invalid data types selected."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:479
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:523
 msgid "No import data received."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:486
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:530
 msgid "Invalid JSON file. Could not parse the data."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:492, ../src/Core/WPRobo_DocuMerge_Assets.php:131
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:536, ../src/Core/WPRobo_DocuMerge_Assets.php:131
 msgid "This file is not a valid DocuMerge export."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:497, ../src/Core/WPRobo_DocuMerge_Assets.php:132
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:541, ../src/Core/WPRobo_DocuMerge_Assets.php:132
 msgid "Export file contains no data."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:509
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:553
 msgid "No data types selected for import."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:584
+#: ../src/Admin/WPRobo_DocuMerge_Settings_Page.php:629
 msgid "Import completed successfully."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:58, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:644, ../src/Core/WPRobo_DocuMerge_Assets.php:152, ../src/Form/Fields/WPRobo_DocuMerge_Field_Date.php:43, ../templates/emails/admin-notification.php:55, ../templates/admin/dashboard/main.php:206, ../templates/admin/form-builder/builder.php:110, ../templates/admin/submissions/detail-content.php:28, ../templates/admin/submissions/main.php:71
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:58, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:644, ../src/Core/WPRobo_DocuMerge_Assets.php:152, ../src/Form/Fields/WPRobo_DocuMerge_Field_Date.php:43, ../templates/emails/admin-notification.php:57, ../templates/admin/dashboard/main.php:209, ../templates/admin/form-builder/builder.php:112, ../templates/admin/submissions/detail-content.php:30, ../templates/admin/submissions/main.php:73
 msgid "Date"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:59, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:645, ../templates/emails/admin-notification.php:63, ../templates/emails/document-delivery.php:77, ../templates/admin/dashboard/main.php:207, ../templates/admin/submissions/detail-content.php:32, ../templates/admin/submissions/main.php:72, ../templates/admin/submissions/single.php:168
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:59, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:645, ../templates/emails/admin-notification.php:65, ../templates/emails/document-delivery.php:79, ../templates/admin/dashboard/main.php:210, ../templates/admin/submissions/detail-content.php:34, ../templates/admin/submissions/main.php:74, ../templates/admin/submissions/single.php:170
 msgid "Form"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:60, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:646, ../src/Core/WPRobo_DocuMerge_Assets.php:149, ../src/Form/Fields/WPRobo_DocuMerge_Field_Email.php:43, ../templates/admin/dashboard/main.php:208, ../templates/admin/form-builder/builder.php:98, ../templates/admin/settings/main.php:29, ../templates/admin/submissions/detail-content.php:56, ../templates/admin/submissions/main.php:73, ../templates/admin/submissions/single.php:176
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:60, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:646, ../src/Core/WPRobo_DocuMerge_Assets.php:149, ../src/Form/Fields/WPRobo_DocuMerge_Field_Email.php:43, ../templates/admin/dashboard/main.php:211, ../templates/admin/form-builder/builder.php:100, ../templates/admin/settings/main.php:31, ../templates/admin/submissions/detail-content.php:58, ../templates/admin/submissions/main.php:75, ../templates/admin/submissions/single.php:178
 msgid "Email"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:61, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:647, ../templates/admin/dashboard/main.php:209, ../templates/admin/submissions/detail-content.php:40, ../templates/admin/submissions/main.php:74
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:61, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:647, ../templates/admin/dashboard/main.php:212, ../templates/admin/submissions/detail-content.php:42, ../templates/admin/submissions/main.php:76
 msgid "Status"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:62, ../templates/admin/submissions/detail-content.php:90, ../templates/admin/submissions/main.php:75
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:62, ../templates/admin/submissions/detail-content.php:92, ../templates/admin/submissions/main.php:77
 msgid "Documents"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:123, ../templates/admin/form-builder/list.php:102
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:123, ../templates/admin/form-builder/list.php:133
 msgid "Unknown"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:231, ../templates/admin/submissions/main.php:40
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:231, ../templates/admin/submissions/main.php:42
 msgid "All Forms"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:246, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:396, ../templates/admin/submissions/main.php:52
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:246, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:396, ../templates/admin/submissions/main.php:54
 msgid "Completed"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:247, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:397, ../templates/admin/submissions/main.php:53
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:247, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:397, ../templates/admin/submissions/main.php:55
 msgid "Processing"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:248, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:398, ../templates/admin/submissions/main.php:54
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:248, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:398, ../templates/admin/submissions/main.php:56
 msgid "Error"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:252, ../templates/admin/submissions/main.php:51
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:252, ../templates/admin/submissions/main.php:53
 msgid "All Statuses"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:263, ../templates/admin/submissions/main.php:61
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:263, ../templates/admin/submissions/main.php:63
 msgid "Filter"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:268, ../templates/admin/submissions/main.php:27
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_List_Table.php:268, ../templates/admin/submissions/main.php:29
 msgid "Export CSV"
 msgstr ""
 
@@ -399,7 +399,7 @@ msgstr ""
 msgid "Submissions per page"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:112, ../templates/admin/submissions/main.php:24
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:112, ../templates/admin/submissions/main.php:26
 msgid "All form submissions and generated documents"
 msgstr ""
 
@@ -407,11 +407,11 @@ msgstr ""
 msgid "Search submissions"
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:242, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:460, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:286, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:438
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:242, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:460, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:415, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:567
 msgid "Submission not found."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:274, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:437, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:422
+#: ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:274, ../src/Admin/WPRobo_DocuMerge_Submissions_Page.php:437, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:551
 msgid "Invalid submission ID."
 msgstr ""
 
@@ -447,32 +447,32 @@ msgstr ""
 msgid "Failed to move uploaded file to templates directory."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:240
+#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:242
 msgid "Template name is required."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:296
+#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:298
 msgid "Failed to save template."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:323, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:380
+#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:325, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:384
 msgid "Invalid template ID."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:332, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:388
+#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:334, ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:392
 msgid "Template not found."
 msgstr ""
 
 #. translators: %d: number of forms using the template
-#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:343
+#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:346
 msgid "Cannot delete — template is used by %d form(s)."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:353
+#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:357
 msgid "Failed to delete template."
 msgstr ""
 
-#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:357
+#: ../src/Admin/WPRobo_DocuMerge_Templates_Page.php:361
 msgid "Template deleted successfully."
 msgstr ""
 
@@ -552,7 +552,7 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:142, ../templates/admin/dashboard/main.php:168
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:142, ../templates/admin/dashboard/main.php:171
 msgid "Analytics"
 msgstr ""
 
@@ -564,47 +564,47 @@ msgstr ""
 msgid "Settings saved."
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:147, ../templates/admin/form-builder/builder.php:90, ../templates/admin/form-builder/builder.php:561, ../templates/admin/form-builder/builder.php:575
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:147, ../templates/admin/form-builder/builder.php:92, ../templates/admin/form-builder/builder.php:563, ../templates/admin/form-builder/builder.php:577
 msgid "Text"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:148, ../src/Form/Fields/WPRobo_DocuMerge_Field_Textarea.php:43, ../templates/admin/form-builder/builder.php:94
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:148, ../src/Form/Fields/WPRobo_DocuMerge_Field_Textarea.php:43, ../templates/admin/form-builder/builder.php:96
 msgid "Textarea"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:150, ../src/Form/Fields/WPRobo_DocuMerge_Field_Phone.php:43, ../templates/admin/form-builder/builder.php:102
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:150, ../src/Form/Fields/WPRobo_DocuMerge_Field_Phone.php:43, ../templates/admin/form-builder/builder.php:104
 msgid "Phone"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:151, ../src/Form/Fields/WPRobo_DocuMerge_Field_Number.php:43, ../templates/admin/form-builder/builder.php:106
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:151, ../src/Form/Fields/WPRobo_DocuMerge_Field_Number.php:43, ../templates/admin/form-builder/builder.php:108
 msgid "Number"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:153, ../src/Form/Fields/WPRobo_DocuMerge_Field_Dropdown.php:43, ../templates/admin/form-builder/builder.php:118
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:153, ../src/Form/Fields/WPRobo_DocuMerge_Field_Dropdown.php:43, ../templates/admin/form-builder/builder.php:120
 msgid "Dropdown"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:154, ../templates/admin/form-builder/builder.php:122
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:154, ../templates/admin/form-builder/builder.php:124
 msgid "Radio"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:155, ../templates/admin/form-builder/builder.php:126
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:155, ../templates/admin/form-builder/builder.php:128
 msgid "Checkbox"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:156, ../templates/admin/form-builder/builder.php:139
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:156, ../templates/admin/form-builder/builder.php:141
 msgid "File Upload"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:157, ../templates/admin/form-builder/builder.php:140
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:157, ../templates/admin/form-builder/builder.php:142
 msgid "Address"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:159, ../templates/admin/form-builder/builder.php:142
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:159, ../templates/admin/form-builder/builder.php:144
 msgid "Hidden"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:160, ../templates/admin/form-builder/builder.php:162
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:160, ../templates/admin/form-builder/builder.php:164
 msgid "HTML Block"
 msgstr ""
 
@@ -612,39 +612,39 @@ msgstr ""
 msgid "Section Divider"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:162, ../src/Form/Fields/WPRobo_DocuMerge_Field_Url.php:44, ../templates/admin/form-builder/builder.php:146
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:162, ../src/Form/Fields/WPRobo_DocuMerge_Field_Url.php:44, ../templates/admin/form-builder/builder.php:148
 msgid "Website"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:163, ../src/Form/Fields/WPRobo_DocuMerge_Field_Ip_Address.php:49, ../templates/admin/form-builder/builder.php:152, ../templates/admin/submissions/detail-content.php:60, ../templates/admin/submissions/single.php:180
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:163, ../src/Form/Fields/WPRobo_DocuMerge_Field_Ip_Address.php:49, ../templates/admin/form-builder/builder.php:154, ../templates/admin/submissions/detail-content.php:62, ../templates/admin/submissions/single.php:182
 msgid "IP Address"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:164, ../templates/admin/form-builder/builder.php:156
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:164, ../templates/admin/form-builder/builder.php:158
 msgid "Tracking"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:165, ../templates/admin/form-builder/builder.php:132, ../templates/admin/submissions/detail-content.php:75, ../templates/admin/submissions/single.php:98
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:165, ../templates/admin/form-builder/builder.php:134, ../templates/admin/submissions/detail-content.php:77, ../templates/admin/submissions/single.php:100
 msgid "Signature"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:166, ../templates/admin/form-builder/builder.php:133, ../templates/admin/form-builder/builder.php:406
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:166, ../templates/admin/form-builder/builder.php:135, ../templates/admin/form-builder/builder.php:408
 msgid "Payment"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:167, ../templates/admin/form-builder/builder.php:134
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:167, ../templates/admin/form-builder/builder.php:136
 msgid "CAPTCHA"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:168, ../templates/admin/form-builder/builder.php:143
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:168, ../templates/admin/form-builder/builder.php:145
 msgid "Password"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:169, ../templates/admin/form-builder/builder.php:148
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:169, ../templates/admin/form-builder/builder.php:150
 msgid "Rating"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:170, ../templates/admin/form-builder/builder.php:149
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:170, ../templates/admin/form-builder/builder.php:151
 msgid "Repeater"
 msgstr ""
 
@@ -776,7 +776,7 @@ msgstr ""
 msgid "Optional unique HTML ID for this field."
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:205, ../templates/admin/form-builder/builder.php:47
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:205, ../templates/admin/form-builder/builder.php:49
 msgid "Untitled Form"
 msgstr ""
 
@@ -792,7 +792,7 @@ msgstr ""
 msgid "DocuMerge Form"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:209, ../templates/admin/form-builder/builder.php:403, ../templates/admin/settings/main.php:27
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:209, ../templates/admin/form-builder/builder.php:405, ../templates/admin/settings/main.php:29
 msgid "General"
 msgstr ""
 
@@ -808,7 +808,7 @@ msgstr ""
 msgid "For admin reference only. Not shown on the frontend."
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:213, ../src/Form/Fields/WPRobo_DocuMerge_Field_Date.php:146, ../templates/admin/settings/main.php:130
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:213, ../src/Form/Fields/WPRobo_DocuMerge_Field_Date.php:146, ../templates/admin/settings/main.php:167
 msgid "Date Format"
 msgstr ""
 
@@ -965,7 +965,7 @@ msgid "Custom Value"
 msgstr ""
 
 #: ../src/Core/WPRobo_DocuMerge_Assets.php:253
-msgid "<p>Add your content here.</p>"
+msgid "Add your content here."
 msgstr ""
 
 #: ../src/Core/WPRobo_DocuMerge_Assets.php:254
@@ -1012,7 +1012,7 @@ msgstr ""
 msgid "An error occurred."
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:265, ../templates/admin/form-builder/builder.php:382
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:265, ../templates/admin/form-builder/builder.php:384
 msgid "Select an external form to see field mapping."
 msgstr ""
 
@@ -1048,67 +1048,68 @@ msgstr ""
 msgid "Select submissions to delete"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:274
+#. translators: %d: number of selected submissions.
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:275
 msgid "Delete %d selected submissions?"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:275
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:276
 msgid "Delete this submission?"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:276
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:277
 msgid "Error loading submission."
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:277
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:278
 msgid "Submission #"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:278
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:279
 msgid "Paid"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:279, ../templates/admin/submissions/detail-content.php:118, ../templates/admin/submissions/single.php:145
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:280, ../templates/admin/submissions/detail-content.php:120, ../templates/admin/submissions/single.php:147
 msgid "Save Note"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:282
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:283
 msgid "Free"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:283
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:284
 msgid "Pending"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:284
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:285
 msgid "Failed"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:285
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:286
 msgid "Refunded"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:288
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:289
 msgid "Invalid number"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:289
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:290
 msgid "Invalid country code"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:290
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:291
 msgid "Too short"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:291
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:292
 msgid "Too long"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:292
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:293
 msgid "Invalid phone number"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Assets.php:295
+#: ../src/Core/WPRobo_DocuMerge_Assets.php:296
 msgid "Dismiss"
 msgstr ""
 
@@ -1128,16 +1129,24 @@ msgstr ""
 msgid "Please select a form in the block settings."
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Plugin.php:261
+#: ../src/Core/WPRobo_DocuMerge_Plugin.php:267
 msgid "Upgrade to DocuMerge Pro"
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Plugin.php:262
+#: ../src/Core/WPRobo_DocuMerge_Plugin.php:268
 msgid "Unlock Stripe payments, signature fields, multi-step forms, conditional logic, email delivery, and 20+ more features."
 msgstr ""
 
-#: ../src/Core/WPRobo_DocuMerge_Plugin.php:266
+#: ../src/Core/WPRobo_DocuMerge_Plugin.php:272
 msgid "Upgrade Now"
+msgstr ""
+
+#: ../src/Core/WPRobo_DocuMerge_Plugin.php:335
+msgid "Seeder script not found. This feature is only available in the development version."
+msgstr ""
+
+#: ../src/Core/WPRobo_DocuMerge_Plugin.php:336
+msgid "DocuMerge Seeder"
 msgstr ""
 
 #. translators: %d: submission ID
@@ -1150,35 +1159,40 @@ msgstr ""
 msgid "Form #%d not found."
 msgstr ""
 
-#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:218
+#. translators: %s: site name
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:157
+msgid "Your document is ready — %s"
+msgstr ""
+
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:331
 msgid "Failed to save download token."
 msgstr ""
 
-#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:255
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:384
 msgid "Invalid or missing download token."
 msgstr ""
 
-#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:265
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:394
 msgid "This download link has expired."
 msgstr ""
 
-#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:296, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:448
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:425, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:577
 msgid "The requested file does not exist."
 msgstr ""
 
-#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:375
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:504
 msgid "Missing download token."
 msgstr ""
 
-#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:376, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:390, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:423, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:439, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:449
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:505, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:519, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:552, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:568, ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:578
 msgid "Download Error"
 msgstr ""
 
-#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:409
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:538
 msgid "You do not have permission to download this file."
 msgstr ""
 
-#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:410
+#: ../src/Document/WPRobo_DocuMerge_Delivery_Engine.php:539
 msgid "Permission Denied"
 msgstr ""
 
@@ -1197,12 +1211,12 @@ msgid "Invalid form data JSON."
 msgstr ""
 
 #. translators: %s: site name
-#: ../src/Document/WPRobo_DocuMerge_Document_Generator.php:411
+#: ../src/Document/WPRobo_DocuMerge_Document_Generator.php:435
 msgid "[%s] DocuMerge: Document generation failed"
 msgstr ""
 
 #. translators: 1: submission ID, 2: error message, 3: admin URL
-#: ../src/Document/WPRobo_DocuMerge_Document_Generator.php:417
+#: ../src/Document/WPRobo_DocuMerge_Document_Generator.php:441
 msgid ""
 "A document generation error has occurred.\n"
 "\n"
@@ -1254,28 +1268,28 @@ msgstr ""
 msgid "PDF conversion failed for %1$s: %2$s"
 msgstr ""
 
-#: ../src/Form/WPRobo_DocuMerge_Form_Builder.php:174
+#: ../src/Form/WPRobo_DocuMerge_Form_Builder.php:191
 msgid "Failed to insert the form."
 msgstr ""
 
-#: ../src/Form/WPRobo_DocuMerge_Form_Builder.php:157
+#: ../src/Form/WPRobo_DocuMerge_Form_Builder.php:174
 msgid "Failed to update the form."
 msgstr ""
 
-#: ../src/Form/WPRobo_DocuMerge_Form_Builder.php:223
+#: ../src/Form/WPRobo_DocuMerge_Form_Builder.php:240
 msgid "Failed to delete the form."
 msgstr ""
 
 #. translators: %s: original form title
-#: ../src/Form/WPRobo_DocuMerge_Form_Builder.php:292
+#: ../src/Form/WPRobo_DocuMerge_Form_Builder.php:309
 msgid "Copy of %s"
 msgstr ""
 
-#: ../src/Form/WPRobo_DocuMerge_Form_Renderer.php:144, ../templates/frontend/form.php:19, ../templates/admin/form-builder/builder.php:499, ../templates/admin/form-builder/builder.php:500
+#: ../src/Form/WPRobo_DocuMerge_Form_Renderer.php:158, ../templates/frontend/form.php:21, ../templates/admin/form-builder/builder.php:501, ../templates/admin/form-builder/builder.php:502
 msgid "Submit"
 msgstr ""
 
-#: ../src/Form/WPRobo_DocuMerge_Form_Renderer.php:162, ../src/Form/WPRobo_DocuMerge_Form_Submission.php:164
+#: ../src/Form/WPRobo_DocuMerge_Form_Renderer.php:176, ../src/Form/WPRobo_DocuMerge_Form_Submission.php:164
 msgid "This form is no longer accepting submissions."
 msgstr ""
 
@@ -1331,15 +1345,15 @@ msgstr ""
 msgid "Your document has been generated successfully."
 msgstr ""
 
-#: ../src/Template/WPRobo_DocuMerge_Template_Scanner.php:51
+#: ../src/Template/WPRobo_DocuMerge_Template_Scanner.php:65
 msgid "The template file does not exist."
 msgstr ""
 
-#: ../src/Template/WPRobo_DocuMerge_Template_Scanner.php:62
+#: ../src/Template/WPRobo_DocuMerge_Template_Scanner.php:76
 msgid "Failed to scan the DOCX template."
 msgstr ""
 
-#: ../src/Wizard/WPRobo_DocuMerge_Setup_Wizard.php:52, ../src/Wizard/WPRobo_DocuMerge_Setup_Wizard.php:53, ../templates/admin/wizard/wizard.php:24, ../templates/admin/wizard/wizard.php:40
+#: ../src/Wizard/WPRobo_DocuMerge_Setup_Wizard.php:52, ../src/Wizard/WPRobo_DocuMerge_Setup_Wizard.php:53, ../templates/admin/wizard/wizard.php:26, ../templates/admin/wizard/wizard.php:42
 msgid "DocuMerge Setup"
 msgstr ""
 
@@ -1535,1176 +1549,1176 @@ msgstr ""
 msgid "%s must be a valid URL."
 msgstr ""
 
-#: ../templates/emails/admin-notification.php:20, ../templates/emails/admin-notification.php:25
+#: ../templates/emails/admin-notification.php:22, ../templates/emails/admin-notification.php:27
 msgid "New Form Submission"
 msgstr ""
 
 #. translators: %s: form title
-#: ../templates/emails/admin-notification.php:32
+#: ../templates/emails/admin-notification.php:34
 msgid "A new submission has been received for %s."
 msgstr ""
 
-#: ../templates/emails/admin-notification.php:42
+#: ../templates/emails/admin-notification.php:44
 msgid "Submission ID"
 msgstr ""
 
-#: ../templates/emails/admin-notification.php:71
+#: ../templates/emails/admin-notification.php:73
 msgid "Submitter"
 msgstr ""
 
-#: ../templates/emails/admin-notification.php:82
+#: ../templates/emails/admin-notification.php:84
 msgid "View Submission in Admin"
 msgstr ""
 
-#: ../templates/emails/base.php:118
+#: ../templates/emails/base.php:120
 msgid "Powered by WPRobo DocuMerge"
 msgstr ""
 
-#: ../templates/emails/document-delivery.php:21, ../templates/emails/document-delivery.php:26
+#: ../templates/emails/document-delivery.php:23, ../templates/emails/document-delivery.php:28
 msgid "Your Document Is Ready"
 msgstr ""
 
 #. translators: %s: submitter name
-#: ../templates/emails/document-delivery.php:33
+#: ../templates/emails/document-delivery.php:35
 msgid "Hi %s,"
 msgstr ""
 
 #. translators: %s: form title
-#: ../templates/emails/document-delivery.php:43
+#: ../templates/emails/document-delivery.php:45
 msgid "Thank you for submitting the %s. Your personalised document has been generated."
 msgstr ""
 
-#: ../templates/emails/document-delivery.php:51, ../templates/frontend/form.php:177
+#: ../templates/emails/document-delivery.php:53, ../templates/frontend/form.php:183
 msgid "Download Your Document"
 msgstr ""
 
-#: ../templates/emails/document-delivery.php:56
+#: ../templates/emails/document-delivery.php:58
 msgid "If the button doesn't work, copy this link:"
 msgstr ""
 
-#: ../templates/emails/document-delivery.php:69, ../templates/admin/submissions/single.php:184
+#: ../templates/emails/document-delivery.php:71, ../templates/admin/submissions/single.php:186
 msgid "Submitted"
 msgstr ""
 
-#: ../templates/emails/document-delivery.php:87
+#: ../templates/emails/document-delivery.php:89
 msgid "If you have any questions, please reply to this email."
 msgstr ""
 
-#: ../templates/frontend/form.php:34
+#: ../templates/frontend/form.php:36
 msgid "Leave empty"
 msgstr ""
 
-#: ../templates/frontend/form.php:90
+#: ../templates/frontend/form.php:92
 msgid "Previous"
 msgstr ""
 
-#: ../templates/frontend/form.php:93
+#: ../templates/frontend/form.php:95
 msgid "Next Step"
 msgstr ""
 
-#: ../templates/frontend/form.php:162
+#: ../templates/frontend/form.php:168
 msgid "Processing..."
 msgstr ""
 
-#: ../templates/frontend/form.php:173
+#: ../templates/frontend/form.php:179
 msgid "Your document is ready!"
 msgstr ""
 
-#: ../templates/frontend/form.php:187
+#: ../templates/frontend/form.php:193
 msgid "Something went wrong"
 msgstr ""
 
-#: ../templates/frontend/form.php:188
+#: ../templates/frontend/form.php:194
 msgid "We could not process your request. Please try again or contact us."
 msgstr ""
 
-#: ../templates/frontend/form.php:190
+#: ../templates/frontend/form.php:196
 msgid "Try Again"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:23
+#: ../templates/admin/dashboard/main.php:25
 msgid "DocuMerge Dashboard"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:24
+#: ../templates/admin/dashboard/main.php:26
 msgid "Overview of your document automation"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:27, ../templates/admin/dashboard/main.php:42
+#: ../templates/admin/dashboard/main.php:29, ../templates/admin/dashboard/main.php:44
 msgid "New Form"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:39, ../templates/admin/template-manager/main.php:28, ../templates/admin/template-manager/main.php:46
+#: ../templates/admin/dashboard/main.php:41, ../templates/admin/template-manager/main.php:30, ../templates/admin/template-manager/main.php:48
 msgid "Upload Template"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:51
+#: ../templates/admin/dashboard/main.php:53
 msgid "Docs"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:74, ../templates/admin/dashboard/main.php:83
+#: ../templates/admin/dashboard/main.php:76, ../templates/admin/dashboard/main.php:85
 msgid "Active"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:92, ../templates/admin/dashboard/main.php:107
+#: ../templates/admin/dashboard/main.php:94, ../templates/admin/dashboard/main.php:109
 msgid "This Month"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:105
+#: ../templates/admin/dashboard/main.php:107
 msgid "%d error(s)"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:112
+#: ../templates/admin/dashboard/main.php:114
 msgid "Success Rate"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:122
+#: ../templates/admin/dashboard/main.php:124
 msgid "Submissions (Last 7 Days)"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:132
+#: ../templates/admin/dashboard/main.php:134
 msgid "Status Breakdown"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:145
+#: ../templates/admin/dashboard/main.php:147
 msgid "Revenue"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:159
+#: ../templates/admin/dashboard/main.php:162
 msgid "Track payments and revenue with Stripe integration."
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:176
+#: ../templates/admin/dashboard/main.php:179
 msgid "Form analytics, revenue tracking, and detailed charts."
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:187
+#: ../templates/admin/dashboard/main.php:190
 msgid "Recent Submissions"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:189
+#: ../templates/admin/dashboard/main.php:192
 msgid "View All"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:210
+#: ../templates/admin/dashboard/main.php:213
 msgid "Doc"
 msgstr ""
 
 #. translators: %s: Human-readable time difference.
-#: ../templates/admin/dashboard/main.php:220
+#: ../templates/admin/dashboard/main.php:223
 msgid "%s ago"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:258
+#: ../templates/admin/dashboard/main.php:261
 msgid "Download document"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:197
+#: ../templates/admin/dashboard/main.php:200
 msgid "No submissions yet"
 msgstr ""
 
-#: ../templates/admin/dashboard/main.php:198
+#: ../templates/admin/dashboard/main.php:201
 msgid "Create a form and embed it on a page to start receiving submissions."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:41
+#: ../templates/admin/form-builder/builder.php:43
 msgid "Back to Forms"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:48
+#: ../templates/admin/form-builder/builder.php:50
 msgid "Form Title"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:52
+#: ../templates/admin/form-builder/builder.php:54
 msgid "Create Page"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:55
+#: ../templates/admin/form-builder/builder.php:57
 msgid "Save Form"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:74
+#: ../templates/admin/form-builder/builder.php:76
 msgid "Form saved successfully."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:86
+#: ../templates/admin/form-builder/builder.php:88
 msgid "Basic Fields"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:114
+#: ../templates/admin/form-builder/builder.php:116
 msgid "Choice Fields"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:130
+#: ../templates/admin/form-builder/builder.php:132
 msgid "Special Fields"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:137
+#: ../templates/admin/form-builder/builder.php:139
 msgid "Advanced Fields"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:160
+#: ../templates/admin/form-builder/builder.php:162
 msgid "Layout Elements"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:163
+#: ../templates/admin/form-builder/builder.php:165
 msgid "Divider"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:249
+#: ../templates/admin/form-builder/builder.php:251
 msgid "Click a field type or drag here"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:206
+#: ../templates/admin/form-builder/builder.php:208
 msgid "Fields are managed in %s"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:213
+#: ../templates/admin/form-builder/builder.php:215
 msgid "This form is running in integrated mode. Form fields are built and managed inside %s — not here in DocuMerge."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:224
+#: ../templates/admin/form-builder/builder.php:226
 msgid "Build your form fields in %s"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:230
+#: ../templates/admin/form-builder/builder.php:232
 msgid "Go to the Settings tab → select your template and external form"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:234
+#: ../templates/admin/form-builder/builder.php:236
 msgid "Map your merge tags to the external form fields"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:240
+#: ../templates/admin/form-builder/builder.php:242
 msgid "Change Mode"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:259
+#: ../templates/admin/form-builder/builder.php:261
 msgid "Form Settings"
 msgstr ""
 
 #. translators: %s: integration name
-#: ../templates/admin/form-builder/builder.php:295
+#: ../templates/admin/form-builder/builder.php:297
 msgid "%s Integration"
 msgstr ""
 
 #. translators: %s: integration name
-#: ../templates/admin/form-builder/builder.php:392
+#: ../templates/admin/form-builder/builder.php:394
 msgid "%s is not currently active. Please install and activate it to use this integration."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:305
+#: ../templates/admin/form-builder/builder.php:307
 msgid "%s Form"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:312
+#: ../templates/admin/form-builder/builder.php:314
 msgid "— Select %s Form —"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:324
+#: ../templates/admin/form-builder/builder.php:326
 msgid "Select the %s form that will trigger document generation."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:378
+#: ../templates/admin/form-builder/builder.php:380
 msgid "Select a template below, then save the form to configure field mapping."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:404
+#: ../templates/admin/form-builder/builder.php:406
 msgid "Button"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:405
+#: ../templates/admin/form-builder/builder.php:407
 msgid "Limits"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:407
+#: ../templates/admin/form-builder/builder.php:409
 msgid "Notifications"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:416
+#: ../templates/admin/form-builder/builder.php:418
 msgid "— Select Template —"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:431, ../templates/admin/settings/main.php:52, ../templates/admin/template-manager/slide-panel.php:73
+#: ../templates/admin/form-builder/builder.php:433, ../templates/admin/settings/main.php:75, ../templates/admin/template-manager/slide-panel.php:75
 msgid "Output Format"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:433, ../templates/admin/template-manager/main.php:64, ../templates/admin/template-manager/slide-panel.php:81
+#: ../templates/admin/form-builder/builder.php:435, ../templates/admin/template-manager/main.php:66, ../templates/admin/template-manager/slide-panel.php:83
 msgid "PDF"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:434, ../templates/admin/template-manager/main.php:65, ../templates/admin/template-manager/slide-panel.php:77
+#: ../templates/admin/form-builder/builder.php:436, ../templates/admin/template-manager/main.php:67, ../templates/admin/template-manager/slide-panel.php:79
 msgid "DOCX"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:435, ../templates/admin/template-manager/main.php:66, ../templates/admin/template-manager/slide-panel.php:85
+#: ../templates/admin/form-builder/builder.php:437, ../templates/admin/template-manager/main.php:68, ../templates/admin/template-manager/slide-panel.php:87
 msgid "Both"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:440
+#: ../templates/admin/form-builder/builder.php:442
 msgid "Delivery Methods"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:451, ../templates/admin/settings/main.php:65, ../templates/admin/wizard/wizard.php:178
+#: ../templates/admin/form-builder/builder.php:453, ../templates/admin/settings/main.php:88, ../templates/admin/wizard/wizard.php:180
 msgid "Download in browser"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:455, ../templates/admin/settings/main.php:66, ../templates/admin/wizard/wizard.php:173
+#: ../templates/admin/form-builder/builder.php:457, ../templates/admin/settings/main.php:89, ../templates/admin/wizard/wizard.php:175
 msgid "Email to submitter"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:460, ../templates/admin/settings/main.php:67
+#: ../templates/admin/form-builder/builder.php:462, ../templates/admin/settings/main.php:90
 msgid "Save to Media Library"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:464
+#: ../templates/admin/form-builder/builder.php:466
 msgid "How the generated document is delivered after submission. Email settings are configured in Settings → Email."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:468
+#: ../templates/admin/form-builder/builder.php:470
 msgid "Success Message"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:473
+#: ../templates/admin/form-builder/builder.php:475
 msgid "Thank you! Your document is ready."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:480
+#: ../templates/admin/form-builder/builder.php:482
 msgid "Enable multi-step form"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:484
+#: ../templates/admin/form-builder/builder.php:486
 msgid "Split your form into multiple steps. Drag fields between steps on the Fields tab."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:494
+#: ../templates/admin/form-builder/builder.php:496
 msgid "Submit Button Label"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:518
+#: ../templates/admin/form-builder/builder.php:520
 msgid "Button Width"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:520
+#: ../templates/admin/form-builder/builder.php:522
 msgid "Auto (fit content)"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:521
+#: ../templates/admin/form-builder/builder.php:523
 msgid "Full width"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:522
+#: ../templates/admin/form-builder/builder.php:524
 msgid "Half width"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:527
+#: ../templates/admin/form-builder/builder.php:529
 msgid "Button Alignment"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:536
+#: ../templates/admin/form-builder/builder.php:538
 msgid "Button Style"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:538
+#: ../templates/admin/form-builder/builder.php:540
 msgid "Filled (solid background)"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:539
+#: ../templates/admin/form-builder/builder.php:541
 msgid "Outline (border only)"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:540
+#: ../templates/admin/form-builder/builder.php:542
 msgid "Rounded (pill shape)"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:545
+#: ../templates/admin/form-builder/builder.php:547
 msgid "Button Size"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:547
+#: ../templates/admin/form-builder/builder.php:549
 msgid "Small"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:548
+#: ../templates/admin/form-builder/builder.php:550
 msgid "Medium"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:549
+#: ../templates/admin/form-builder/builder.php:551
 msgid "Large"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:554
+#: ../templates/admin/form-builder/builder.php:556
 msgid "Button Colors"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:557, ../templates/admin/form-builder/builder.php:571
+#: ../templates/admin/form-builder/builder.php:559, ../templates/admin/form-builder/builder.php:573
 msgid "Background"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:568
+#: ../templates/admin/form-builder/builder.php:570
 msgid "Hover Colors"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:582
+#: ../templates/admin/form-builder/builder.php:584
 msgid "Border Radius (px)"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:591
+#: ../templates/admin/form-builder/builder.php:593
 msgid "Entry Limits"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:591
+#: ../templates/admin/form-builder/builder.php:593
 msgid "Limit submissions per form, email, IP address, or user."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:600
+#: ../templates/admin/form-builder/builder.php:602
 msgid "Payment Settings"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:601
+#: ../templates/admin/form-builder/builder.php:603
 msgid "Require Stripe payment before delivering documents. Configure amount, currency, and more."
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:610
+#: ../templates/admin/form-builder/builder.php:612
 msgid "Webhooks"
 msgstr ""
 
-#: ../templates/admin/form-builder/builder.php:610
+#: ../templates/admin/form-builder/builder.php:612
 msgid "Send submission data to external services like Zapier, Make, and n8n."
 msgstr ""
 
-#: ../templates/admin/form-builder/list.php:92
+#: ../templates/admin/form-builder/list.php:118
 msgid "Actions"
 msgstr ""
 
-#: ../templates/admin/form-builder/list.php:121
+#: ../templates/admin/form-builder/list.php:152
 msgid "Edit template"
 msgstr ""
 
-#: ../templates/admin/help/main.php:23
+#: ../templates/admin/help/main.php:25
 msgid "Documentation, resources and support for DocuMerge"
 msgstr ""
 
-#: ../templates/admin/help/main.php:40
+#: ../templates/admin/help/main.php:42
 msgid "Documentation"
 msgstr ""
 
-#: ../templates/admin/help/main.php:41
+#: ../templates/admin/help/main.php:43
 msgid "Full plugin documentation covering every feature, setting, and integration."
 msgstr ""
 
-#: ../templates/admin/help/main.php:51
+#: ../templates/admin/help/main.php:53
 msgid "Getting Started"
 msgstr ""
 
-#: ../templates/admin/help/main.php:52
+#: ../templates/admin/help/main.php:54
 msgid "Step-by-step guide: Upload template, create form, embed on page, collect documents."
 msgstr ""
 
-#: ../templates/admin/help/main.php:62
+#: ../templates/admin/help/main.php:64
 msgid "Support"
 msgstr ""
 
-#: ../templates/admin/help/main.php:63
+#: ../templates/admin/help/main.php:65
 msgid "Need help? Open a support ticket and the WPRobo team will assist you."
 msgstr ""
 
-#: ../templates/admin/help/main.php:73
+#: ../templates/admin/help/main.php:75
 msgid "Rate DocuMerge"
 msgstr ""
 
-#: ../templates/admin/help/main.php:74
+#: ../templates/admin/help/main.php:76
 msgid "Enjoying the plugin? Your 5-star review helps us grow and improve."
 msgstr ""
 
-#: ../templates/admin/help/main.php:82
+#: ../templates/admin/help/main.php:84
 msgid "System Information"
 msgstr ""
 
-#: ../templates/admin/help/main.php:85
+#: ../templates/admin/help/main.php:87
 msgid "Copy System Info"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:19
+#: ../templates/admin/settings/main.php:21
 msgid "Configure WPRobo DocuMerge"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:28
+#: ../templates/admin/settings/main.php:30
 msgid "Stripe"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:30
+#: ../templates/admin/settings/main.php:32
 msgid "reCAPTCHA"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:31
+#: ../templates/admin/settings/main.php:33
 msgid "Styles"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:32, ../templates/admin/settings/main.php:215
+#: ../templates/admin/settings/main.php:34, ../templates/admin/settings/main.php:261
 msgid "Custom CSS"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:33
+#: ../templates/admin/settings/main.php:35
 msgid "Advanced"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:34
+#: ../templates/admin/settings/main.php:36
 msgid "Import / Export"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:35, ../templates/admin/settings/main.php:449
+#: ../templates/admin/settings/main.php:37, ../templates/admin/settings/main.php:496
 msgid "Danger Zone"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:46
+#: ../templates/admin/settings/main.php:69
 msgid "Document Output"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:47
+#: ../templates/admin/settings/main.php:70
 msgid "Default format and delivery settings for generated documents."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:55, ../templates/admin/wizard/wizard.php:157
+#: ../templates/admin/settings/main.php:78, ../templates/admin/wizard/wizard.php:159
 msgid "PDF only"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:56, ../templates/admin/wizard/wizard.php:152
+#: ../templates/admin/settings/main.php:79, ../templates/admin/wizard/wizard.php:154
 msgid "DOCX only"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:57, ../templates/admin/wizard/wizard.php:162
+#: ../templates/admin/settings/main.php:80, ../templates/admin/wizard/wizard.php:164
 msgid "Both DOCX and PDF"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:62
+#: ../templates/admin/settings/main.php:85
 msgid "Delivery Method"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:63
+#: ../templates/admin/settings/main.php:86
 msgid "Can be overridden per form."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:72
+#: ../templates/admin/settings/main.php:95
 msgid "Download Link Expiry"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:75
+#: ../templates/admin/settings/main.php:98
 msgid "hours (0 = never)"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:86
+#: ../templates/admin/settings/main.php:109
 msgid "Form Configuration"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:87
+#: ../templates/admin/settings/main.php:110
 msgid "How forms work and display date/time values."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:92
+#: ../templates/admin/settings/main.php:115
 msgid "Form Mode"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:95
+#: ../templates/admin/settings/main.php:118
 msgid "Standalone (built-in form builder)"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:96
+#: ../templates/admin/settings/main.php:119
 msgid "Integrated (WPForms / CF7 / Gravity Forms etc.)"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:101
+#: ../templates/admin/settings/main.php:124
 msgid "Active Integration"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:116
+#: ../templates/admin/settings/main.php:153
 msgid "— Select —"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:124
+#: ../templates/admin/settings/main.php:161
 msgid "No supported form plugins detected. Install WPForms, Contact Form 7, Gravity Forms, or Fluent Forms."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:139
+#: ../templates/admin/settings/main.php:176
 msgid "Time Format"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:142
+#: ../templates/admin/settings/main.php:179
 msgid "24-hour"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:143
+#: ../templates/admin/settings/main.php:180
 msgid "12-hour"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:155
+#: ../templates/admin/settings/main.php:192
 msgid "Admin Notifications"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:156
+#: ../templates/admin/settings/main.php:193
 msgid "Email alerts when submissions arrive or errors occur."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:162
+#: ../templates/admin/settings/main.php:199
 msgid "Send notification on new submission"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:163
+#: ../templates/admin/settings/main.php:200
 msgid "Send notification on generation error"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:168
+#: ../templates/admin/settings/main.php:205
 msgid "Notification Email"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:170
+#: ../templates/admin/settings/main.php:207
 msgid "Defaults to WordPress admin email if left blank."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:176
+#: ../templates/admin/settings/main.php:213
 msgid "Save General Settings"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:183
+#: ../templates/admin/settings/main.php:221
 msgid "Stripe Payments"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:184
+#: ../templates/admin/settings/main.php:222
 msgid "Accept payments before delivering documents. Supports test and live mode with full Stripe integration."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:191
+#: ../templates/admin/settings/main.php:231
 msgid "Email Delivery"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:192
+#: ../templates/admin/settings/main.php:232
 msgid "Send generated documents via email with customizable templates, sender details, and attachment settings."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:199
+#: ../templates/admin/settings/main.php:241
 msgid "CAPTCHA / Spam Protection"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:200
+#: ../templates/admin/settings/main.php:242
 msgid "Protect your forms with Google reCAPTCHA v2, v3, or hCaptcha integration."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:207
+#: ../templates/admin/settings/main.php:251
 msgid "Form Styles"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:208
+#: ../templates/admin/settings/main.php:252
 msgid "Customize form appearance — colors, fonts, spacing, borders, and button styles with a visual designer."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:216
+#: ../templates/admin/settings/main.php:262
 msgid "Add custom CSS to fully control the look of your forms with a syntax-highlighted code editor."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:228
+#: ../templates/admin/settings/main.php:275
 msgid "Storage & Cleanup"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:229
+#: ../templates/admin/settings/main.php:276
 msgid "Automatic cleanup of generated documents and log files."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:235
+#: ../templates/admin/settings/main.php:282
 msgid "Auto-delete documents after"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:238, ../templates/admin/settings/main.php:246
+#: ../templates/admin/settings/main.php:285, ../templates/admin/settings/main.php:293
 msgid "days"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:240
+#: ../templates/admin/settings/main.php:287
 msgid "0 = never delete automatically."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:243
+#: ../templates/admin/settings/main.php:290
 msgid "Keep error logs for"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:258
+#: ../templates/admin/settings/main.php:305
 msgid "Developer Options"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:259
+#: ../templates/admin/settings/main.php:306
 msgid "Debug logging and data retention on uninstall."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:264
+#: ../templates/admin/settings/main.php:311
 msgid "Enable debug logging"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:265
+#: ../templates/admin/settings/main.php:312
 msgid "Only works when WP_DEBUG is true. Logs are stored in wp-content/uploads/documerge-logs/."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:269
+#: ../templates/admin/settings/main.php:316
 msgid "Delete ALL plugin data when uninstalling"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:272
+#: ../templates/admin/settings/main.php:319
 msgid "This removes all database tables, generated documents, and settings permanently."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:283
+#: ../templates/admin/settings/main.php:330
 msgid "Setup Wizard"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:284
+#: ../templates/admin/settings/main.php:331
 msgid "Re-run the initial setup wizard to reconfigure plugin defaults."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:290
+#: ../templates/admin/settings/main.php:337
 msgid "Re-run Setup Wizard"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:296
+#: ../templates/admin/settings/main.php:343
 msgid "Save Advanced Settings"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:310
+#: ../templates/admin/settings/main.php:357
 msgid "Export Data"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:311
+#: ../templates/admin/settings/main.php:358
 msgid "Download your DocuMerge data as a JSON file. Select which data to include."
 msgstr ""
 
 #. translators: %s: number of templates
-#: ../templates/admin/settings/main.php:331
+#: ../templates/admin/settings/main.php:378
 msgid "Templates (%s)"
 msgstr ""
 
 #. translators: %s: number of forms
-#: ../templates/admin/settings/main.php:341
+#: ../templates/admin/settings/main.php:388
 msgid "Forms (%s)"
 msgstr ""
 
 #. translators: %s: number of submissions
-#: ../templates/admin/settings/main.php:351
+#: ../templates/admin/settings/main.php:398
 msgid "Submissions (%s)"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:364
+#: ../templates/admin/settings/main.php:411
 msgid "Export Selected"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:368
+#: ../templates/admin/settings/main.php:415
 msgid "Export All"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:379
+#: ../templates/admin/settings/main.php:426
 msgid "Import Data"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:380
+#: ../templates/admin/settings/main.php:427
 msgid "Restore data from a previously exported DocuMerge JSON file."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:389
+#: ../templates/admin/settings/main.php:436
 msgid "Drag & drop your .json file here"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:390
+#: ../templates/admin/settings/main.php:437
 msgid "or"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:392
+#: ../templates/admin/settings/main.php:439
 msgid "Browse Files"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:403
+#: ../templates/admin/settings/main.php:450
 msgid "Remove file"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:412
+#: ../templates/admin/settings/main.php:459
 msgid "Import Mode"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:416
+#: ../templates/admin/settings/main.php:463
 msgid "Merge with existing data (default)"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:420
+#: ../templates/admin/settings/main.php:467
 msgid "Replace all (destructive — removes existing data first)"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:428
+#: ../templates/admin/settings/main.php:475
 msgid "Import Selected"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:450
+#: ../templates/admin/settings/main.php:497
 msgid "These actions are destructive and cannot be undone. Proceed with extreme caution."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:469
+#: ../templates/admin/settings/main.php:516
 msgid "Data Cleanup"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:470
+#: ../templates/admin/settings/main.php:517
 msgid "Selectively remove specific types of data. Other data remains intact."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:476
+#: ../templates/admin/settings/main.php:523
 msgid "Delete All Submissions"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:477
+#: ../templates/admin/settings/main.php:524
 msgid "Removes all submission records and generated documents (PDF/DOCX)."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:478
+#: ../templates/admin/settings/main.php:525
 msgid "submissions"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:484
+#: ../templates/admin/settings/main.php:531
 msgid "Delete All Forms"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:485
+#: ../templates/admin/settings/main.php:532
 msgid "Removes all form configurations and field layouts. Templates are not affected."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:486
+#: ../templates/admin/settings/main.php:533
 msgid "forms"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:492
+#: ../templates/admin/settings/main.php:539
 msgid "Delete All Templates"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:493
+#: ../templates/admin/settings/main.php:540
 msgid "Removes all templates and their uploaded DOCX files."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:494
+#: ../templates/admin/settings/main.php:541
 msgid "templates"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:500
+#: ../templates/admin/settings/main.php:547
 msgid "Delete Generated Documents Only"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:501
+#: ../templates/admin/settings/main.php:548
 msgid "Deletes PDF/DOCX files only. Submission records are kept but downloads stop working."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:513
+#: ../templates/admin/settings/main.php:560
 msgid "Reset & Restore"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:514
+#: ../templates/admin/settings/main.php:561
 msgid "Reset settings, analytics, or perform a complete factory reset."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:520
+#: ../templates/admin/settings/main.php:567
 msgid "Reset All Settings"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:521
+#: ../templates/admin/settings/main.php:568
 msgid "Resets General, Stripe, Email, reCAPTCHA, Styles, and Custom CSS to defaults. Data is not affected."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:523
+#: ../templates/admin/settings/main.php:570
 msgid "Reset"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:527
+#: ../templates/admin/settings/main.php:574
 msgid "Full Factory Reset"
 msgstr ""
 
-#: ../templates/admin/settings/main.php:528
+#: ../templates/admin/settings/main.php:575
 msgid "Wipes EVERYTHING — submissions, forms, templates, documents, settings, analytics, logs. Returns the plugin to a freshly-installed state. You must type \"RESET\" to confirm."
 msgstr ""
 
-#: ../templates/admin/settings/main.php:532
+#: ../templates/admin/settings/main.php:579
 msgid "Factory Reset"
 msgstr ""
 
-#: ../templates/admin/submissions/detail-content.php:25
+#: ../templates/admin/submissions/detail-content.php:27
 msgid "Details"
 msgstr ""
 
-#: ../templates/admin/submissions/detail-content.php:69, ../templates/admin/submissions/single.php:86
+#: ../templates/admin/submissions/detail-content.php:71, ../templates/admin/submissions/single.php:88
 msgid "Submitted Data"
 msgstr ""
 
-#: ../templates/admin/submissions/detail-content.php:107
+#: ../templates/admin/submissions/detail-content.php:109
 msgid "No documents generated yet."
 msgstr ""
 
-#: ../templates/admin/submissions/detail-content.php:96, ../templates/admin/submissions/single.php:63
+#: ../templates/admin/submissions/detail-content.php:98, ../templates/admin/submissions/single.php:65
 msgid "Download PDF"
 msgstr ""
 
-#: ../templates/admin/submissions/detail-content.php:102, ../templates/admin/submissions/single.php:69
+#: ../templates/admin/submissions/detail-content.php:104, ../templates/admin/submissions/single.php:71
 msgid "Download DOCX"
 msgstr ""
 
-#: ../templates/admin/submissions/detail-content.php:113, ../templates/admin/submissions/single.php:137
+#: ../templates/admin/submissions/detail-content.php:115, ../templates/admin/submissions/single.php:139
 msgid "Admin Notes"
 msgstr ""
 
-#: ../templates/admin/submissions/detail-content.php:115
+#: ../templates/admin/submissions/detail-content.php:117
 msgid "Add internal notes..."
 msgstr ""
 
-#: ../templates/admin/submissions/detail-panel.php:22
+#: ../templates/admin/submissions/detail-panel.php:24
 msgid "Submission #0"
 msgstr ""
 
-#: ../templates/admin/submissions/detail-panel.php:23, ../templates/admin/template-manager/slide-panel.php:23
+#: ../templates/admin/submissions/detail-panel.php:25, ../templates/admin/template-manager/slide-panel.php:25
 msgid "Close"
 msgstr ""
 
-#: ../templates/admin/submissions/detail-panel.php:36, ../templates/admin/submissions/single.php:222
+#: ../templates/admin/submissions/detail-panel.php:38, ../templates/admin/submissions/single.php:224
 msgid "Delete Submission"
 msgstr ""
 
-#: ../templates/admin/submissions/main.php:57
+#: ../templates/admin/submissions/main.php:59
 msgid "From date"
 msgstr ""
 
-#: ../templates/admin/submissions/main.php:58
+#: ../templates/admin/submissions/main.php:60
 msgid "To date"
 msgstr ""
 
-#: ../templates/admin/submissions/main.php:91
+#: ../templates/admin/submissions/main.php:93
 msgid "Delete Selected"
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:38
+#: ../templates/admin/submissions/single.php:40
 msgid "Back to Submissions"
 msgstr ""
 
 #. translators: %d: submission ID
-#: ../templates/admin/submissions/single.php:45
+#: ../templates/admin/submissions/single.php:47
 msgid "Submission #%d"
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:55
+#: ../templates/admin/submissions/single.php:57
 msgid "Unknown Form"
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:87
+#: ../templates/admin/submissions/single.php:89
 msgid "All field values from this submission."
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:111
+#: ../templates/admin/submissions/single.php:113
 msgid "No field data recorded."
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:122
+#: ../templates/admin/submissions/single.php:124
 msgid "Error Log"
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:123
+#: ../templates/admin/submissions/single.php:125
 msgid "Error details for this submission."
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:138
+#: ../templates/admin/submissions/single.php:140
 msgid "Internal notes visible only to administrators."
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:143
+#: ../templates/admin/submissions/single.php:145
 msgid "Add internal notes about this submission..."
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:159
+#: ../templates/admin/submissions/single.php:161
 msgid "Submission Info"
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:189
+#: ../templates/admin/submissions/single.php:191
 msgid "Delivery"
 msgstr ""
 
-#: ../templates/admin/submissions/single.php:202
+#: ../templates/admin/submissions/single.php:204
 msgid "Tracking Data"
 msgstr ""
 
-#: ../templates/admin/template-manager/main.php:24
+#: ../templates/admin/template-manager/main.php:26
 msgid "Document Templates"
 msgstr ""
 
-#: ../templates/admin/template-manager/main.php:25
+#: ../templates/admin/template-manager/main.php:27
 msgid "Manage your Word/DOCX document templates"
 msgstr ""
 
-#: ../templates/admin/template-manager/main.php:89
+#: ../templates/admin/template-manager/main.php:91
 msgid "Tags"
 msgstr ""
 
-#: ../templates/admin/template-manager/main.php:99
+#: ../templates/admin/template-manager/main.php:101
 msgid "more"
 msgstr ""
 
-#: ../templates/admin/template-manager/main.php:103
+#: ../templates/admin/template-manager/main.php:105
 msgid "No tags detected"
 msgstr ""
 
-#: ../templates/admin/template-manager/main.php:120
+#: ../templates/admin/template-manager/main.php:122
 msgid "Not used in any form"
 msgstr ""
 
-#: ../templates/admin/template-manager/main.php:42
+#: ../templates/admin/template-manager/main.php:44
 msgid "No templates yet"
 msgstr ""
 
-#: ../templates/admin/template-manager/main.php:43
+#: ../templates/admin/template-manager/main.php:45
 msgid "Upload your first document template to get started."
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:22
+#: ../templates/admin/template-manager/slide-panel.php:24
 msgid "Upload New Template"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:36
+#: ../templates/admin/template-manager/slide-panel.php:38
 msgid "Template Name"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:37
+#: ../templates/admin/template-manager/slide-panel.php:39
 msgid "e.g. Invoice Template"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:42
+#: ../templates/admin/template-manager/slide-panel.php:44
 msgid "Description"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:43
+#: ../templates/admin/template-manager/slide-panel.php:45
 msgid "Optional description for this template"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:48
+#: ../templates/admin/template-manager/slide-panel.php:50
 msgid "Upload DOCX File"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:51
+#: ../templates/admin/template-manager/slide-panel.php:53
 msgid "Drag & drop your .docx file here, or click to browse"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:52
+#: ../templates/admin/template-manager/slide-panel.php:54
 msgid "Maximum file size: 10 MB"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:92
+#: ../templates/admin/template-manager/slide-panel.php:94
 msgid "Detected Merge Tags"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:102
+#: ../templates/admin/template-manager/slide-panel.php:104
 msgid "Cancel"
 msgstr ""
 
-#: ../templates/admin/template-manager/slide-panel.php:105
+#: ../templates/admin/template-manager/slide-panel.php:107
 msgid "Save Template"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:53
+#: ../templates/admin/wizard/wizard.php:55
 msgid "Welcome"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:57
+#: ../templates/admin/wizard/wizard.php:59
 msgid "Detect"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:61
+#: ../templates/admin/wizard/wizard.php:63
 msgid "Configure"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:65
+#: ../templates/admin/wizard/wizard.php:67
 msgid "Done"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:87
+#: ../templates/admin/wizard/wizard.php:89
 msgid "Welcome to WPRobo DocuMerge"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:88
+#: ../templates/admin/wizard/wizard.php:90
 msgid "Automate your document generation in minutes."
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:92
+#: ../templates/admin/wizard/wizard.php:94
 msgid "Upload Word/DOCX templates with merge tags"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:96
+#: ../templates/admin/wizard/wizard.php:98
 msgid "Connect to your existing forms or use our built-in form builder"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:100
+#: ../templates/admin/wizard/wizard.php:102
 msgid "Deliver personalised documents automatically on every submission"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:109
+#: ../templates/admin/wizard/wizard.php:111
 msgid "Form Builder"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:110
+#: ../templates/admin/wizard/wizard.php:112
 msgid "DocuMerge Lite uses the built-in form builder."
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:116
+#: ../templates/admin/wizard/wizard.php:118
 msgid "Built-in Form Builder"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:117
+#: ../templates/admin/wizard/wizard.php:119
 msgid "Create forms with our drag-and-drop builder. Upgrade to Pro to integrate with WPForms, Contact Form 7, Gravity Forms, and Fluent Forms."
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:127
+#: ../templates/admin/wizard/wizard.php:129
 msgid "Basic Configuration"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:128
+#: ../templates/admin/wizard/wizard.php:130
 msgid "Set your default preferences. You can change these later in Settings."
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:131
+#: ../templates/admin/wizard/wizard.php:133
 msgid "Document Storage"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:136
+#: ../templates/admin/wizard/wizard.php:138
 msgid "Save generated documents to server (recommended)"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:141
+#: ../templates/admin/wizard/wizard.php:143
 msgid "Delete after delivery"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:147
+#: ../templates/admin/wizard/wizard.php:149
 msgid "Default Output Format"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:168
+#: ../templates/admin/wizard/wizard.php:170
 msgid "Default Delivery Method"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:183
+#: ../templates/admin/wizard/wizard.php:185
 msgid "Save to media library"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:199
+#: ../templates/admin/wizard/wizard.php:201
 msgid "You're all set!"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:200
+#: ../templates/admin/wizard/wizard.php:202
 msgid "WPRobo DocuMerge is ready to use."
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:203
+#: ../templates/admin/wizard/wizard.php:205
 msgid "Upload Your First Template"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:206
+#: ../templates/admin/wizard/wizard.php:208
 msgid "Go to Dashboard"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:217
+#: ../templates/admin/wizard/wizard.php:219
 msgid "Skip Setup"
 msgstr ""
 
-#: ../templates/admin/wizard/wizard.php:220
+#: ../templates/admin/wizard/wizard.php:222
 msgid "Continue"
 msgstr ""

@@ -46,7 +46,7 @@ class WPRobo_DocuMerge_Field_Ip_Address {
 	 * @return string
 	 */
 	public function wprobo_documerge_get_label() {
-		return __( 'IP Address', 'wprobo-documerge' );
+		return __( 'IP Address', 'wprobo-documerge-lite' );
 	}
 
 	/**
@@ -98,9 +98,9 @@ class WPRobo_DocuMerge_Field_Ip_Address {
 
 		// Label (admin reference only).
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="label" class="wdm-builder-setting-input" value="' . $label . '">';
-		$html .= '<span class="wdm-description">' . esc_html__( 'For admin reference only. Not shown on the frontend.', 'wprobo-documerge' ) . '</span>';
+		$html .= '<span class="wdm-description">' . esc_html__( 'For admin reference only. Not shown on the frontend.', 'wprobo-documerge-lite' ) . '</span>';
 		$html .= '</div>';
 
 		return $html;

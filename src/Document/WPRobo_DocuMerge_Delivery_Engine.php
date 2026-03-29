@@ -70,7 +70,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 			return new \WP_Error(
 				'submission_not_found',
 				/* translators: %d: submission ID */
-				sprintf( __( 'Submission #%d not found.', 'wprobo-documerge' ), $submission_id )
+				sprintf( __( 'Submission #%d not found.', 'wprobo-documerge-lite' ), $submission_id )
 			);
 		}
 
@@ -89,7 +89,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 			return new \WP_Error(
 				'form_not_found',
 				/* translators: %d: form ID */
-				sprintf( __( 'Form #%d not found.', 'wprobo-documerge' ), absint( $submission->form_id ) )
+				sprintf( __( 'Form #%d not found.', 'wprobo-documerge-lite' ), absint( $submission->form_id ) )
 			);
 		}
 
@@ -154,7 +154,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 			$to      = sanitize_email( $submission->submitter_email );
 			$subject = sprintf(
 				/* translators: %s: site name */
-				__( 'Your document is ready — %s', 'wprobo-documerge' ),
+				__( 'Your document is ready — %s', 'wprobo-documerge-lite' ),
 				get_bloginfo( 'name' )
 			);
 			$body        = '';
@@ -328,7 +328,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		if ( ! $saved ) {
 			return new \WP_Error(
 				'token_save_failed',
-				__( 'Failed to save download token.', 'wprobo-documerge' )
+				__( 'Failed to save download token.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -381,7 +381,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		if ( empty( $token_data ) || ! is_array( $token_data ) ) {
 			return new \WP_Error(
 				'invalid_token',
-				__( 'Invalid or missing download token.', 'wprobo-documerge' )
+				__( 'Invalid or missing download token.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -391,7 +391,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 			return new \WP_Error(
 				'expired_token',
-				__( 'This download link has expired.', 'wprobo-documerge' )
+				__( 'This download link has expired.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -412,7 +412,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 			return new \WP_Error(
 				'submission_not_found',
-				__( 'Submission not found.', 'wprobo-documerge' )
+				__( 'Submission not found.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -422,7 +422,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		if ( empty( $file_path ) || ! file_exists( $file_path ) ) {
 			return new \WP_Error(
 				'file_not_found',
-				__( 'The requested file does not exist.', 'wprobo-documerge' )
+				__( 'The requested file does not exist.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -501,8 +501,8 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 		if ( empty( $token ) ) {
 			wp_die(
-				esc_html__( 'Missing download token.', 'wprobo-documerge' ),
-				esc_html__( 'Download Error', 'wprobo-documerge' ),
+				esc_html__( 'Missing download token.', 'wprobo-documerge-lite' ),
+				esc_html__( 'Download Error', 'wprobo-documerge-lite' ),
 				array( 'response' => 400 )
 			);
 		}
@@ -516,7 +516,7 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		if ( is_wp_error( $result ) ) {
 			wp_die(
 				esc_html( $result->get_error_message() ),
-				esc_html__( 'Download Error', 'wprobo-documerge' ),
+				esc_html__( 'Download Error', 'wprobo-documerge-lite' ),
 				array( 'response' => 403 )
 			);
 		}
@@ -535,8 +535,8 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die(
-				esc_html__( 'You do not have permission to download this file.', 'wprobo-documerge' ),
-				esc_html__( 'Permission Denied', 'wprobo-documerge' ),
+				esc_html__( 'You do not have permission to download this file.', 'wprobo-documerge-lite' ),
+				esc_html__( 'Permission Denied', 'wprobo-documerge-lite' ),
 				array( 'response' => 403 )
 			);
 		}
@@ -548,8 +548,8 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 		if ( ! $submission_id ) {
 			wp_die(
-				esc_html__( 'Invalid submission ID.', 'wprobo-documerge' ),
-				esc_html__( 'Download Error', 'wprobo-documerge' ),
+				esc_html__( 'Invalid submission ID.', 'wprobo-documerge-lite' ),
+				esc_html__( 'Download Error', 'wprobo-documerge-lite' ),
 				array( 'response' => 400 )
 			);
 		}
@@ -564,8 +564,8 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 		if ( ! $submission ) {
 			wp_die(
-				esc_html__( 'Submission not found.', 'wprobo-documerge' ),
-				esc_html__( 'Download Error', 'wprobo-documerge' ),
+				esc_html__( 'Submission not found.', 'wprobo-documerge-lite' ),
+				esc_html__( 'Download Error', 'wprobo-documerge-lite' ),
 				array( 'response' => 404 )
 			);
 		}
@@ -574,8 +574,8 @@ class WPRobo_DocuMerge_Delivery_Engine {
 
 		if ( empty( $file_path ) || ! file_exists( $file_path ) ) {
 			wp_die(
-				esc_html__( 'The requested file does not exist.', 'wprobo-documerge' ),
-				esc_html__( 'Download Error', 'wprobo-documerge' ),
+				esc_html__( 'The requested file does not exist.', 'wprobo-documerge-lite' ),
+				esc_html__( 'Download Error', 'wprobo-documerge-lite' ),
 				array( 'response' => 404 )
 			);
 		}

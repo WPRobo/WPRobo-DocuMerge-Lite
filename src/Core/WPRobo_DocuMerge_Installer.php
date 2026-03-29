@@ -54,8 +54,8 @@ class WPRobo_DocuMerge_Installer {
 		if ( version_compare( PHP_VERSION, '7.4', '<' ) ) {
 			deactivate_plugins( WPROBO_DOCUMERGE_BASENAME );
 			wp_die(
-				esc_html__( 'WPRobo DocuMerge requires PHP 7.4 or higher.', 'wprobo-documerge' ),
-				esc_html__( 'Plugin Activation Error', 'wprobo-documerge' ),
+				esc_html__( 'WPRobo DocuMerge requires PHP 7.4 or higher.', 'wprobo-documerge-lite' ),
+				esc_html__( 'Plugin Activation Error', 'wprobo-documerge-lite' ),
 				array( 'back_link' => true )
 			);
 		}
@@ -64,8 +64,8 @@ class WPRobo_DocuMerge_Installer {
 		if ( version_compare( $wp_version, '6.0', '<' ) ) {
 			deactivate_plugins( WPROBO_DOCUMERGE_BASENAME );
 			wp_die(
-				esc_html__( 'WPRobo DocuMerge requires WordPress 6.0 or higher.', 'wprobo-documerge' ),
-				esc_html__( 'Plugin Activation Error', 'wprobo-documerge' ),
+				esc_html__( 'WPRobo DocuMerge requires WordPress 6.0 or higher.', 'wprobo-documerge-lite' ),
+				esc_html__( 'Plugin Activation Error', 'wprobo-documerge-lite' ),
 				array( 'back_link' => true )
 			);
 		}

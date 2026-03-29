@@ -22,21 +22,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 // Page header variables.
-$page_title     = __( 'Forms', 'wprobo-documerge' );
-$page_subtitle  = __( 'Build and manage your document collection forms', 'wprobo-documerge' );
+$page_title     = __( 'Forms', 'wprobo-documerge-lite' );
+$page_subtitle  = __( 'Build and manage your document collection forms', 'wprobo-documerge-lite' );
 $primary_action = array(
 	'url'   => admin_url( 'admin.php?page=wprobo-documerge-forms&action=new' ),
-	'label' => __( 'Create Form', 'wprobo-documerge' ),
+	'label' => __( 'Create Form', 'wprobo-documerge-lite' ),
 	'icon'  => 'dashicons-plus-alt2',
 );
 
 // Mode badge labels.
 $mode_labels = array(
-	'standalone' => __( 'Standalone', 'wprobo-documerge' ),
-	'wpforms'    => __( 'WPForms', 'wprobo-documerge' ),
-	'gravity'    => __( 'Gravity Forms', 'wprobo-documerge' ),
-	'cf7'        => __( 'Contact Form 7', 'wprobo-documerge' ),
+	'standalone' => __( 'Standalone', 'wprobo-documerge-lite' ),
+	'wpforms'    => __( 'WPForms', 'wprobo-documerge-lite' ),
+	'gravity'    => __( 'Gravity Forms', 'wprobo-documerge-lite' ),
+	'cf7'        => __( 'Contact Form 7', 'wprobo-documerge-lite' ),
 );
 ?>
 <div class="wdm-admin-wrap">
@@ -48,11 +50,11 @@ $mode_labels = array(
 		<!-- Empty State -->
 		<div class="wdm-empty-state">
 			<span class="dashicons dashicons-feedback"></span>
-			<h3><?php esc_html_e( 'No forms yet', 'wprobo-documerge' ); ?></h3>
-			<p><?php esc_html_e( 'Create your first form to start collecting submissions.', 'wprobo-documerge' ); ?></p>
+			<h3><?php esc_html_e( 'No forms yet', 'wprobo-documerge-lite' ); ?></h3>
+			<p><?php esc_html_e( 'Create your first form to start collecting submissions.', 'wprobo-documerge-lite' ); ?></p>
 			<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprobo-documerge-forms&action=new' ) ); ?>" class="wdm-btn wdm-btn-primary">
 				<span class="dashicons dashicons-plus-alt2"></span>
-				<?php esc_html_e( 'Create Form', 'wprobo-documerge' ); ?>
+				<?php esc_html_e( 'Create Form', 'wprobo-documerge-lite' ); ?>
 			</a>
 		</div>
 
@@ -83,7 +85,7 @@ $mode_labels = array(
 						);
 						?>
 									" style="display:inline-flex;align-items:center;gap:2px;">
-							<?php esc_html_e( 'ID', 'wprobo-documerge' ); ?>
+							<?php esc_html_e( 'ID', 'wprobo-documerge-lite' ); ?>
 							<span class="dashicons dashicons-<?php echo ( 'id' === $current_orderby ) ? ( 'asc' === $current_order ? 'arrow-up-alt2' : 'arrow-down-alt2' ) : 'sort'; ?>" style="font-size:14px;width:14px;height:14px;<?php echo ( 'id' !== $current_orderby ) ? 'opacity:0.3;' : ''; ?>"></span>
 						</a>
 					</th>
@@ -101,19 +103,19 @@ $mode_labels = array(
 						);
 						?>
 									" style="display:inline-flex;align-items:center;gap:2px;">
-							<?php esc_html_e( 'Name', 'wprobo-documerge' ); ?>
+							<?php esc_html_e( 'Name', 'wprobo-documerge-lite' ); ?>
 							<span class="dashicons dashicons-<?php echo ( 'title' === $current_orderby ) ? ( 'asc' === $current_order ? 'arrow-up-alt2' : 'arrow-down-alt2' ) : 'sort'; ?>" style="font-size:14px;width:14px;height:14px;<?php echo ( 'title' !== $current_orderby ) ? 'opacity:0.3;' : ''; ?>"></span>
 						</a>
 					</th>
-					<th><?php esc_html_e( 'Template', 'wprobo-documerge' ); ?></th>
-					<th><?php esc_html_e( 'Fields', 'wprobo-documerge' ); ?></th>
-					<th><?php esc_html_e( 'Submissions', 'wprobo-documerge' ); ?></th>
-					<th><?php esc_html_e( 'Views', 'wprobo-documerge' ); ?></th>
-					<th><?php esc_html_e( 'Starts', 'wprobo-documerge' ); ?></th>
-					<th><?php esc_html_e( 'Completions', 'wprobo-documerge' ); ?></th>
-					<th><?php esc_html_e( 'Shortcode', 'wprobo-documerge' ); ?></th>
-					<th><?php esc_html_e( 'Mode', 'wprobo-documerge' ); ?></th>
-					<th><?php esc_html_e( 'Actions', 'wprobo-documerge' ); ?></th>
+					<th><?php esc_html_e( 'Template', 'wprobo-documerge-lite' ); ?></th>
+					<th><?php esc_html_e( 'Fields', 'wprobo-documerge-lite' ); ?></th>
+					<th><?php esc_html_e( 'Submissions', 'wprobo-documerge-lite' ); ?></th>
+					<th><?php esc_html_e( 'Views', 'wprobo-documerge-lite' ); ?></th>
+					<th><?php esc_html_e( 'Starts', 'wprobo-documerge-lite' ); ?></th>
+					<th><?php esc_html_e( 'Completions', 'wprobo-documerge-lite' ); ?></th>
+					<th><?php esc_html_e( 'Shortcode', 'wprobo-documerge-lite' ); ?></th>
+					<th><?php esc_html_e( 'Mode', 'wprobo-documerge-lite' ); ?></th>
+					<th><?php esc_html_e( 'Actions', 'wprobo-documerge-lite' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -128,7 +130,7 @@ $mode_labels = array(
 					$template_id   = absint( $form->template_id );
 					$template_name = isset( $templates[ $template_id ] )
 						? $templates[ $template_id ]->name
-						: __( 'Unknown', 'wprobo-documerge' );
+						: __( 'Unknown', 'wprobo-documerge-lite' );
 
 					$form_mode  = isset( $form->mode ) ? sanitize_key( $form->mode ) : 'standalone';
 					$mode_label = isset( $mode_labels[ $form_mode ] )
@@ -147,11 +149,11 @@ $mode_labels = array(
 						</td>
 						<td>
 							<?php if ( $template_id > 0 ) : ?>
-								<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprobo-documerge-templates&edit=' . $template_id ) ); ?>" class="wdm-template-link" title="<?php esc_attr_e( 'Edit template', 'wprobo-documerge' ); ?>">
+								<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprobo-documerge-templates&edit=' . $template_id ) ); ?>" class="wdm-template-link" title="<?php esc_attr_e( 'Edit template', 'wprobo-documerge-lite' ); ?>">
 									<?php echo esc_html( $template_name ); ?>
 								</a>
 							<?php else : ?>
-								<span class="wdm-text-muted"><?php esc_html_e( 'None', 'wprobo-documerge' ); ?></span>
+								<span class="wdm-text-muted"><?php esc_html_e( 'None', 'wprobo-documerge-lite' ); ?></span>
 							<?php endif; ?>
 						</td>
 						<td><?php echo absint( $form->field_count ); ?></td>
@@ -169,13 +171,13 @@ $mode_labels = array(
 						<td>
 							<?php echo esc_html( number_format_i18n( $form_stats['completions'] ) ); ?>
 							<?php if ( $form_stats['abandonment'] > 0 ) : ?>
-								<span class="wdm-text-muted" title="<?php esc_attr_e( 'Abandonment rate', 'wprobo-documerge' ); ?>">(<?php echo esc_html( $form_stats['abandonment'] ); ?>%&nbsp;<?php esc_html_e( 'drop', 'wprobo-documerge' ); ?>)</span>
+								<span class="wdm-text-muted" title="<?php esc_attr_e( 'Abandonment rate', 'wprobo-documerge-lite' ); ?>">(<?php echo esc_html( $form_stats['abandonment'] ); ?>%&nbsp;<?php esc_html_e( 'drop', 'wprobo-documerge-lite' ); ?>)</span>
 							<?php endif; ?>
 						</td>
 						<td>
 							<div class="wdm-shortcode-cell">
 								<code class="wdm-shortcode-code"><?php echo esc_html( $shortcode ); ?></code>
-								<button type="button" class="wdm-copy-shortcode-btn wdm-copy-shortcode" data-shortcode="<?php echo esc_attr( $shortcode ); ?>" title="<?php esc_attr_e( 'Copy', 'wprobo-documerge' ); ?>">
+								<button type="button" class="wdm-copy-shortcode-btn wdm-copy-shortcode" data-shortcode="<?php echo esc_attr( $shortcode ); ?>" title="<?php esc_attr_e( 'Copy', 'wprobo-documerge-lite' ); ?>">
 									<span class="dashicons dashicons-clipboard"></span>
 								</button>
 							</div>
@@ -189,11 +191,11 @@ $mode_labels = array(
 							<div class="wdm-table-actions">
 								<a href="<?php echo esc_url( $edit_url ); ?>" class="wdm-btn wdm-btn-sm">
 									<span class="dashicons dashicons-edit"></span>
-									<?php esc_html_e( 'Edit', 'wprobo-documerge' ); ?>
+									<?php esc_html_e( 'Edit', 'wprobo-documerge-lite' ); ?>
 								</a>
 								<button type="button" class="wdm-btn wdm-btn-sm wdm-btn-danger wdm-form-delete" data-id="<?php echo esc_attr( $form->id ); ?>">
 									<span class="dashicons dashicons-trash"></span>
-									<?php esc_html_e( 'Delete', 'wprobo-documerge' ); ?>
+									<?php esc_html_e( 'Delete', 'wprobo-documerge-lite' ); ?>
 								</button>
 							</div>
 						</td>
@@ -205,3 +207,5 @@ $mode_labels = array(
 	<?php endif; ?>
 
 </div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

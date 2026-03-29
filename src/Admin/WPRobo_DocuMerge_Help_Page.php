@@ -39,7 +39,7 @@ class WPRobo_DocuMerge_Help_Page {
 	 */
 	public function wprobo_documerge_render() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to access this page.', 'wprobo-documerge' ) );
+			wp_die( esc_html__( 'You do not have permission to access this page.', 'wprobo-documerge-lite' ) );
 		}
 
 		$system_info = $this->wprobo_documerge_get_system_info();
@@ -73,7 +73,7 @@ class WPRobo_DocuMerge_Help_Page {
 		global $wp_version;
 
 		// PHPWord version detection.
-		$phpword_version = __( 'Not installed', 'wprobo-documerge' );
+		$phpword_version = __( 'Not installed', 'wprobo-documerge-lite' );
 		if ( class_exists( '\PhpOffice\PhpWord\PhpWord' ) ) {
 			$phpword_composer = WPROBO_DOCUMERGE_PATH . 'vendor/phpoffice/phpword/composer.json';
 			if ( file_exists( $phpword_composer ) ) {
@@ -86,7 +86,7 @@ class WPRobo_DocuMerge_Help_Page {
 		}
 
 		// mPDF version detection.
-		$mpdf_version = __( 'Not installed', 'wprobo-documerge' );
+		$mpdf_version = __( 'Not installed', 'wprobo-documerge-lite' );
 		if ( class_exists( '\Mpdf\Mpdf' ) ) {
 			$mpdf_composer = WPROBO_DOCUMERGE_PATH . 'vendor/mpdf/mpdf/composer.json';
 			if ( file_exists( $mpdf_composer ) ) {
@@ -149,7 +149,7 @@ class WPRobo_DocuMerge_Help_Page {
 						$detected_plugins
 					)
 				)
-				: __( 'None detected', 'wprobo-documerge' ),
+				: __( 'None detected', 'wprobo-documerge-lite' ),
 			'max_upload_size'  => size_format( wp_max_upload_size() ),
 			'memory_limit'     => ini_get( 'memory_limit' ),
 		);

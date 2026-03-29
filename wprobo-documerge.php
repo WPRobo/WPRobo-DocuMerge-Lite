@@ -17,7 +17,7 @@
  * Requires PHP:      7.4
  * Author:            Ali Shan
  * Author URI:        https://wprobo.com
- * Text Domain:       wprobo-documerge
+ * Text Domain:       wprobo-documerge-lite
  * Domain Path:       /languages
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.txt

@@ -14,9 +14,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 // Decode settings with defaults.
 // $submit_label and $classes are set by the renderer before this template is included.
-$submit_label      = isset( $submit_label ) ? $submit_label : ( ! empty( $settings['submit_label'] ) ? $settings['submit_label'] : __( 'Submit', 'wprobo-documerge' ) );
+$submit_label      = isset( $submit_label ) ? $submit_label : ( ! empty( $settings['submit_label'] ) ? $settings['submit_label'] : __( 'Submit', 'wprobo-documerge-lite' ) );
 $success_message   = ! empty( $settings['success_message'] ) ? $settings['success_message'] : '';
 $step_labels       = ! empty( $settings['multistep_labels'] ) ? $settings['multistep_labels'] : array( 'Step 1', 'Step 2', 'Step 3' );
 $classes           = isset( $classes ) ? $classes : array( 'wdm-form-wrap' );
@@ -31,7 +33,7 @@ $multistep_enabled = isset( $form->multistep_enabled ) ? absint( $form->multiste
 
 		<!-- Honeypot — hidden via CSS, not type="hidden" -->
 		<div class="wdm-hp" aria-hidden="true">
-			<label for="wdm-trap-<?php echo absint( $form_id ); ?>"><?php esc_html_e( 'Leave empty', 'wprobo-documerge' ); ?></label>
+			<label for="wdm-trap-<?php echo absint( $form_id ); ?>"><?php esc_html_e( 'Leave empty', 'wprobo-documerge-lite' ); ?></label>
 			<input type="text" name="wdm_trap" id="wdm-trap-<?php echo absint( $form_id ); ?>" tabindex="-1" autocomplete="off" value="">
 		</div>
 
@@ -87,10 +89,10 @@ $multistep_enabled = isset( $form->multistep_enabled ) ? absint( $form->multiste
 			<div class="wdm-form-nav">
 				<button type="button" class="wdm-btn wdm-step-back wdm-step-back-btn" style="display:none;">
 					<span class="dashicons dashicons-arrow-left-alt2"></span>
-					<?php esc_html_e( 'Previous', 'wprobo-documerge' ); ?>
+					<?php esc_html_e( 'Previous', 'wprobo-documerge-lite' ); ?>
 				</button>
 				<button type="button" class="wdm-btn wdm-btn-primary wdm-step-next">
-					<?php esc_html_e( 'Next Step', 'wprobo-documerge' ); ?>
+					<?php esc_html_e( 'Next Step', 'wprobo-documerge-lite' ); ?>
 					<span class="dashicons dashicons-arrow-right-alt2"></span>
 				</button>
 			</div>
@@ -163,7 +165,7 @@ $multistep_enabled = isset( $form->multistep_enabled ) ? absint( $form->multiste
 				<span class="wdm-submit-text"><?php echo esc_html( $submit_label ); ?></span>
 				<span class="wdm-submit-spinner" style="display:none;">
 					<span class="wdm-spinner"></span>
-					<?php esc_html_e( 'Processing...', 'wprobo-documerge' ); ?>
+					<?php esc_html_e( 'Processing...', 'wprobo-documerge-lite' ); ?>
 				</span>
 			</button>
 		</div>
@@ -174,11 +176,11 @@ $multistep_enabled = isset( $form->multistep_enabled ) ? absint( $form->multiste
 		<div class="wdm-success-icon">
 			<span class="dashicons dashicons-yes-alt"></span>
 		</div>
-		<h3 class="wdm-success-title"><?php esc_html_e( 'Your document is ready!', 'wprobo-documerge' ); ?></h3>
+		<h3 class="wdm-success-title"><?php esc_html_e( 'Your document is ready!', 'wprobo-documerge-lite' ); ?></h3>
 		<p class="wdm-success-message" id="wdm-success-msg"></p>
 		<a href="#" class="wdm-btn wdm-btn-primary wdm-download-btn" id="wdm-download-link" target="_blank">
 			<span class="dashicons dashicons-download"></span>
-			<?php esc_html_e( 'Download Your Document', 'wprobo-documerge' ); ?>
+			<?php esc_html_e( 'Download Your Document', 'wprobo-documerge-lite' ); ?>
 		</a>
 		<p class="wdm-success-email" id="wdm-success-email" style="display:none;"></p>
 	</div>
@@ -188,10 +190,11 @@ $multistep_enabled = isset( $form->multistep_enabled ) ? absint( $form->multiste
 		<div class="wdm-error-icon">
 			<span class="dashicons dashicons-warning"></span>
 		</div>
-		<h3 class="wdm-error-title"><?php esc_html_e( 'Something went wrong', 'wprobo-documerge' ); ?></h3>
-		<p class="wdm-error-message"><?php esc_html_e( 'We could not process your request. Please try again or contact us.', 'wprobo-documerge' ); ?></p>
+		<h3 class="wdm-error-title"><?php esc_html_e( 'Something went wrong', 'wprobo-documerge-lite' ); ?></h3>
+		<p class="wdm-error-message"><?php esc_html_e( 'We could not process your request. Please try again or contact us.', 'wprobo-documerge-lite' ); ?></p>
 		<button type="button" class="wdm-btn wdm-btn-primary wdm-try-again">
-			<?php esc_html_e( 'Try Again', 'wprobo-documerge' ); ?>
+			<?php esc_html_e( 'Try Again', 'wprobo-documerge-lite' ); ?>
 		</button>
 	</div>
 </div>
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

@@ -106,12 +106,12 @@ class WPRobo_DocuMerge_Admin_Menu {
 		$this->wprobo_documerge_capability = apply_filters( 'wprobo_documerge_admin_menu_capability', $this->wprobo_documerge_capability );
 
 		// Parent menu — DocuMerge.
-		$menu_label = defined( 'WPROBO_DOCUMERGE_LITE' ) && WPROBO_DOCUMERGE_LITE ? __( 'DocuMerge Lite', 'wprobo-documerge' ) : __( 'DocuMerge', 'wprobo-documerge' );
+		$menu_label = defined( 'WPROBO_DOCUMERGE_LITE' ) && WPROBO_DOCUMERGE_LITE ? __( 'DocuMerge Lite', 'wprobo-documerge-lite' ) : __( 'DocuMerge', 'wprobo-documerge-lite' );
 		add_menu_page(
-			__( 'DocuMerge', 'wprobo-documerge' ),
+			__( 'DocuMerge', 'wprobo-documerge-lite' ),
 			$menu_label,
 			$this->wprobo_documerge_capability,
-			'wprobo-documerge',
+			'wprobo-documerge-lite',
 			array( $this, 'wprobo_documerge_render_dashboard' ),
 			$this->wprobo_documerge_icon,
 			30
@@ -119,19 +119,19 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Dashboard (replaces default parent duplicate).
 		add_submenu_page(
-			'wprobo-documerge',
-			__( 'Dashboard', 'wprobo-documerge' ),
-			__( 'Dashboard', 'wprobo-documerge' ),
+			'wprobo-documerge-lite',
+			__( 'Dashboard', 'wprobo-documerge-lite' ),
+			__( 'Dashboard', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
-			'wprobo-documerge',
+			'wprobo-documerge-lite',
 			array( $this, 'wprobo_documerge_render_dashboard' )
 		);
 
 		// Submenu — Templates.
 		add_submenu_page(
-			'wprobo-documerge',
-			__( 'Templates', 'wprobo-documerge' ),
-			__( 'Templates', 'wprobo-documerge' ),
+			'wprobo-documerge-lite',
+			__( 'Templates', 'wprobo-documerge-lite' ),
+			__( 'Templates', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
 			'wprobo-documerge-templates',
 			array( $this, 'wprobo_documerge_render_templates' )
@@ -139,9 +139,9 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Forms (with screen options for WP_List_Table).
 		$forms_hook = add_submenu_page(
-			'wprobo-documerge',
-			__( 'Forms', 'wprobo-documerge' ),
-			__( 'Forms', 'wprobo-documerge' ),
+			'wprobo-documerge-lite',
+			__( 'Forms', 'wprobo-documerge-lite' ),
+			__( 'Forms', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
 			'wprobo-documerge-forms',
 			array( $this, 'wprobo_documerge_render_forms' )
@@ -152,9 +152,9 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Submissions (with screen options for WP_List_Table).
 		$submissions_hook = add_submenu_page(
-			'wprobo-documerge',
-			__( 'Submissions', 'wprobo-documerge' ),
-			__( 'Submissions', 'wprobo-documerge' ),
+			'wprobo-documerge-lite',
+			__( 'Submissions', 'wprobo-documerge-lite' ),
+			__( 'Submissions', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
 			'wprobo-documerge-submissions',
 			array( $this, 'wprobo_documerge_render_submissions' )
@@ -165,9 +165,9 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Settings.
 		add_submenu_page(
-			'wprobo-documerge',
-			__( 'Settings', 'wprobo-documerge' ),
-			__( 'Settings', 'wprobo-documerge' ),
+			'wprobo-documerge-lite',
+			__( 'Settings', 'wprobo-documerge-lite' ),
+			__( 'Settings', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
 			'wprobo-documerge-settings',
 			array( $this, 'wprobo_documerge_render_settings' )
@@ -175,9 +175,9 @@ class WPRobo_DocuMerge_Admin_Menu {
 
 		// Submenu — Help & Support.
 		add_submenu_page(
-			'wprobo-documerge',
-			__( 'Help & Support', 'wprobo-documerge' ),
-			__( 'Help & Support', 'wprobo-documerge' ),
+			'wprobo-documerge-lite',
+			__( 'Help & Support', 'wprobo-documerge-lite' ),
+			__( 'Help & Support', 'wprobo-documerge-lite' ),
 			$this->wprobo_documerge_capability,
 			'wprobo-documerge-help',
 			array( $this, 'wprobo_documerge_render_help' )

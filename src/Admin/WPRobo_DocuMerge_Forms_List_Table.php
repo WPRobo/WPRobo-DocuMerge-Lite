@@ -59,16 +59,16 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 	public function get_columns() {
 		return array(
 			'cb'          => '<input type="checkbox" />',
-			'id'          => __( 'ID', 'wprobo-documerge' ),
-			'title'       => __( 'Name', 'wprobo-documerge' ),
-			'template'    => __( 'Template', 'wprobo-documerge' ),
-			'fields'      => __( 'Fields', 'wprobo-documerge' ),
-			'submissions' => __( 'Submissions', 'wprobo-documerge' ),
-			'views'       => __( 'Views', 'wprobo-documerge' ),
-			'starts'      => __( 'Starts', 'wprobo-documerge' ),
-			'completions' => __( 'Completions', 'wprobo-documerge' ),
-			'shortcode'   => __( 'Shortcode', 'wprobo-documerge' ),
-			'mode'        => __( 'Mode', 'wprobo-documerge' ),
+			'id'          => __( 'ID', 'wprobo-documerge-lite' ),
+			'title'       => __( 'Name', 'wprobo-documerge-lite' ),
+			'template'    => __( 'Template', 'wprobo-documerge-lite' ),
+			'fields'      => __( 'Fields', 'wprobo-documerge-lite' ),
+			'submissions' => __( 'Submissions', 'wprobo-documerge-lite' ),
+			'views'       => __( 'Views', 'wprobo-documerge-lite' ),
+			'starts'      => __( 'Starts', 'wprobo-documerge-lite' ),
+			'completions' => __( 'Completions', 'wprobo-documerge-lite' ),
+			'shortcode'   => __( 'Shortcode', 'wprobo-documerge-lite' ),
+			'mode'        => __( 'Mode', 'wprobo-documerge-lite' ),
 		);
 	}
 
@@ -130,12 +130,12 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 			'edit'   => sprintf(
 				'<a href="%s">%s</a>',
 				esc_url( $edit_url ),
-				__( 'Edit', 'wprobo-documerge' )
+				__( 'Edit', 'wprobo-documerge-lite' )
 			),
 			'delete' => sprintf(
 				'<a href="#" class="wdm-form-delete" data-id="%d" style="color:#dc2626;">%s</a>',
 				absint( $item->id ),
-				__( 'Delete', 'wprobo-documerge' )
+				__( 'Delete', 'wprobo-documerge-lite' )
 			),
 		);
 
@@ -157,7 +157,7 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 				esc_html( $item->template_name )
 			);
 		}
-		return '<span class="wdm-text-muted">' . esc_html__( 'None', 'wprobo-documerge' ) . '</span>';
+		return '<span class="wdm-text-muted">' . esc_html__( 'None', 'wprobo-documerge-lite' ) . '</span>';
 	}
 
 	/**
@@ -226,8 +226,8 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 		$output = esc_html( number_format_i18n( $completions ) );
 
 		if ( $abandonment > 0 ) {
-			$output .= ' <span class="wdm-text-muted" title="' . esc_attr__( 'Abandonment rate', 'wprobo-documerge' ) . '">('
-				. esc_html( $abandonment ) . '%&nbsp;' . esc_html__( 'drop', 'wprobo-documerge' ) . ')</span>';
+			$output .= ' <span class="wdm-text-muted" title="' . esc_attr__( 'Abandonment rate', 'wprobo-documerge-lite' ) . '">('
+				. esc_html( $abandonment ) . '%&nbsp;' . esc_html__( 'drop', 'wprobo-documerge-lite' ) . ')</span>';
 		}
 
 		return $output;
@@ -245,7 +245,7 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 
 		return '<div class="wdm-shortcode-cell">' .
 			'<code class="wdm-shortcode-code">' . esc_html( $shortcode ) . '</code>' .
-			'<button type="button" class="wdm-copy-shortcode-btn wdm-copy-shortcode" data-shortcode="' . esc_attr( $shortcode ) . '" title="' . esc_attr__( 'Copy', 'wprobo-documerge' ) . '">' .
+			'<button type="button" class="wdm-copy-shortcode-btn wdm-copy-shortcode" data-shortcode="' . esc_attr( $shortcode ) . '" title="' . esc_attr__( 'Copy', 'wprobo-documerge-lite' ) . '">' .
 				'<span class="dashicons dashicons-clipboard"></span>' .
 			'</button>' .
 		'</div>';
@@ -262,11 +262,11 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 		$mode = ! empty( $item->mode ) ? sanitize_key( $item->mode ) : 'standalone';
 
 		$labels = array(
-			'standalone' => __( 'Standalone', 'wprobo-documerge' ),
-			'integrated' => __( 'Integrated', 'wprobo-documerge' ),
-			'wpforms'    => __( 'WPForms', 'wprobo-documerge' ),
-			'gravity'    => __( 'Gravity Forms', 'wprobo-documerge' ),
-			'cf7'        => __( 'Contact Form 7', 'wprobo-documerge' ),
+			'standalone' => __( 'Standalone', 'wprobo-documerge-lite' ),
+			'integrated' => __( 'Integrated', 'wprobo-documerge-lite' ),
+			'wpforms'    => __( 'WPForms', 'wprobo-documerge-lite' ),
+			'gravity'    => __( 'Gravity Forms', 'wprobo-documerge-lite' ),
+			'cf7'        => __( 'Contact Form 7', 'wprobo-documerge-lite' ),
 		);
 
 		$label = isset( $labels[ $mode ] ) ? $labels[ $mode ] : ucfirst( $mode );
@@ -282,7 +282,7 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 	 */
 	public function get_bulk_actions() {
 		return array(
-			'delete' => __( 'Delete', 'wprobo-documerge' ),
+			'delete' => __( 'Delete', 'wprobo-documerge-lite' ),
 		);
 	}
 
@@ -295,10 +295,10 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 	public function no_items() {
 		echo '<div class="wdm-empty-state" style="padding:40px 20px;">';
 		echo '<span class="dashicons dashicons-feedback"></span>';
-		echo '<h3>' . esc_html__( 'No forms yet', 'wprobo-documerge' ) . '</h3>';
-		echo '<p>' . esc_html__( 'Create your first form to start collecting submissions.', 'wprobo-documerge' ) . '</p>';
+		echo '<h3>' . esc_html__( 'No forms yet', 'wprobo-documerge-lite' ) . '</h3>';
+		echo '<p>' . esc_html__( 'Create your first form to start collecting submissions.', 'wprobo-documerge-lite' ) . '</p>';
 		echo '<a href="' . esc_url( admin_url( 'admin.php?page=wprobo-documerge-forms&action=new' ) ) . '" class="wdm-btn wdm-btn-primary">';
-		echo '<span class="dashicons dashicons-plus-alt2"></span> ' . esc_html__( 'Create Form', 'wprobo-documerge' ) . '</a>';
+		echo '<span class="dashicons dashicons-plus-alt2"></span> ' . esc_html__( 'Create Form', 'wprobo-documerge-lite' ) . '</a>';
 		echo '</div>';
 	}
 

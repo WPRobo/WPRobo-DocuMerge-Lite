@@ -57,14 +57,14 @@ class WPRobo_DocuMerge_Docx_Processor {
 				'error',
 				sprintf(
 					/* translators: %s: template file path. */
-					__( 'Template file not found: %s', 'wprobo-documerge' ),
+					__( 'Template file not found: %s', 'wprobo-documerge-lite' ),
 					$template_path
 				)
 			);
 
 			return new WP_Error(
 				'wprobo_documerge_docx_failed',
-				__( 'Template file does not exist.', 'wprobo-documerge' )
+				__( 'Template file does not exist.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -151,7 +151,7 @@ class WPRobo_DocuMerge_Docx_Processor {
 				'info',
 				sprintf(
 					/* translators: 1: submission ID, 2: output file path. */
-					__( 'DOCX generated successfully for submission #%1$d: %2$s', 'wprobo-documerge' ),
+					__( 'DOCX generated successfully for submission #%1$d: %2$s', 'wprobo-documerge-lite' ),
 					$submission_id,
 					$output_path
 				)
@@ -165,7 +165,7 @@ class WPRobo_DocuMerge_Docx_Processor {
 				'error',
 				sprintf(
 					/* translators: 1: submission ID, 2: error message. */
-					__( 'DOCX generation failed for submission #%1$d: %2$s', 'wprobo-documerge' ),
+					__( 'DOCX generation failed for submission #%1$d: %2$s', 'wprobo-documerge-lite' ),
 					$submission_id,
 					$e->getMessage()
 				)

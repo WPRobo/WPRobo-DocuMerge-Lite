@@ -19,6 +19,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
 <div class="wdm-page-header">
 	<div class="wdm-page-header-left">
@@ -51,3 +53,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</div>
 </div>
 <div class="wdm-notices-wrap" id="wdm-notices"></div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

@@ -57,14 +57,14 @@ class WPRobo_DocuMerge_Pdf_Converter {
 				'error',
 				sprintf(
 					/* translators: %s: DOCX file path. */
-					__( 'DOCX file not found for PDF conversion: %s', 'wprobo-documerge' ),
+					__( 'DOCX file not found for PDF conversion: %s', 'wprobo-documerge-lite' ),
 					$docx_path
 				)
 			);
 
 			return new WP_Error(
 				'wprobo_documerge_pdf_failed',
-				__( 'DOCX file does not exist.', 'wprobo-documerge' )
+				__( 'DOCX file does not exist.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -123,7 +123,7 @@ class WPRobo_DocuMerge_Pdf_Converter {
 			if ( false === $html_content ) {
 				return new WP_Error(
 					'wprobo_documerge_pdf_failed',
-					__( 'Failed to read HTML intermediary file.', 'wprobo-documerge' )
+					__( 'Failed to read HTML intermediary file.', 'wprobo-documerge-lite' )
 				);
 			}
 
@@ -192,7 +192,7 @@ class WPRobo_DocuMerge_Pdf_Converter {
 				'info',
 				sprintf(
 					/* translators: %s: PDF file path. */
-					__( 'PDF generated successfully: %s', 'wprobo-documerge' ),
+					__( 'PDF generated successfully: %s', 'wprobo-documerge-lite' ),
 					$pdf_path
 				)
 			);
@@ -205,7 +205,7 @@ class WPRobo_DocuMerge_Pdf_Converter {
 				'error',
 				sprintf(
 					/* translators: 1: DOCX file path, 2: error message. */
-					__( 'PDF conversion failed for %1$s: %2$s', 'wprobo-documerge' ),
+					__( 'PDF conversion failed for %1$s: %2$s', 'wprobo-documerge-lite' ),
 					$docx_path,
 					$e->getMessage()
 				)

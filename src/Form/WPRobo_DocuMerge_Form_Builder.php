@@ -171,7 +171,7 @@ class WPRobo_DocuMerge_Form_Builder {
 			if ( false === $updated ) {
 				return new \WP_Error(
 					'wprobo_documerge_form_update_failed',
-					__( 'Failed to update the form.', 'wprobo-documerge' )
+					__( 'Failed to update the form.', 'wprobo-documerge-lite' )
 				);
 			}
 		} else {
@@ -188,7 +188,7 @@ class WPRobo_DocuMerge_Form_Builder {
 			if ( false === $inserted ) {
 				return new \WP_Error(
 					'wprobo_documerge_form_insert_failed',
-					__( 'Failed to insert the form.', 'wprobo-documerge' )
+					__( 'Failed to insert the form.', 'wprobo-documerge-lite' )
 				);
 			}
 
@@ -227,7 +227,7 @@ class WPRobo_DocuMerge_Form_Builder {
 		if ( 0 === $id ) {
 			return new \WP_Error(
 				'wprobo_documerge_invalid_form_id',
-				__( 'Invalid form ID.', 'wprobo-documerge' )
+				__( 'Invalid form ID.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -237,7 +237,7 @@ class WPRobo_DocuMerge_Form_Builder {
 		if ( false === $deleted ) {
 			return new \WP_Error(
 				'wprobo_documerge_form_delete_failed',
-				__( 'Failed to delete the form.', 'wprobo-documerge' )
+				__( 'Failed to delete the form.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -298,7 +298,7 @@ class WPRobo_DocuMerge_Form_Builder {
 		if ( null === $form ) {
 			return new \WP_Error(
 				'wprobo_documerge_form_not_found',
-				__( 'Form not found.', 'wprobo-documerge' )
+				__( 'Form not found.', 'wprobo-documerge-lite' )
 			);
 		}
 
@@ -306,7 +306,7 @@ class WPRobo_DocuMerge_Form_Builder {
 		unset( $data['id'] );
 
 		/* translators: %s: original form title */
-		$data['title'] = sprintf( __( 'Copy of %s', 'wprobo-documerge' ), $form->title );
+		$data['title'] = sprintf( __( 'Copy of %s', 'wprobo-documerge-lite' ), $form->title );
 
 		$now                = current_time( 'mysql' );
 		$data['created_at'] = $now;

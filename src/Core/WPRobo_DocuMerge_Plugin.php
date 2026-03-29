@@ -144,7 +144,7 @@ class WPRobo_DocuMerge_Plugin {
 		$form_id = isset( $attributes['formId'] ) ? absint( $attributes['formId'] ) : 0;
 		if ( ! $form_id ) {
 			return '<p class="wdm-block-placeholder">' .
-					esc_html__( 'Please select a form in the block settings.', 'wprobo-documerge' ) .
+					esc_html__( 'Please select a form in the block settings.', 'wprobo-documerge-lite' ) .
 					'</p>';
 		}
 		return \WPRobo\DocuMerge\Form\WPRobo_DocuMerge_Form_Renderer::get_instance()
@@ -158,7 +158,7 @@ class WPRobo_DocuMerge_Plugin {
 	 */
 	private function wprobo_documerge_load_textdomain() {
 		load_plugin_textdomain(
-			'wprobo-documerge',
+			'wprobo-documerge-lite',
 			false,
 			dirname( WPROBO_DOCUMERGE_BASENAME ) . '/languages'
 		);
@@ -251,7 +251,7 @@ class WPRobo_DocuMerge_Plugin {
 	 */
 	public function wprobo_documerge_lite_admin_notice() {
 		$screen = get_current_screen();
-		if ( ! $screen || strpos( $screen->id, 'wprobo-documerge' ) === false ) {
+		if ( ! $screen || strpos( $screen->id, 'wprobo-documerge-lite' ) === false ) {
 			return;
 		}
 		// Only show once per session (dismiss with user meta).
@@ -264,12 +264,12 @@ class WPRobo_DocuMerge_Plugin {
 			<div class="wdm-lite-upgrade-banner-content">
 				<span class="dashicons dashicons-star-filled wdm-lite-upgrade-banner-icon"></span>
 				<div>
-					<strong class="wdm-lite-upgrade-banner-title"><?php esc_html_e( 'Upgrade to DocuMerge Pro', 'wprobo-documerge' ); ?></strong>
-					<p class="wdm-lite-upgrade-banner-desc"><?php esc_html_e( 'Unlock Stripe payments, signature fields, multi-step forms, conditional logic, email delivery, and 20+ more features.', 'wprobo-documerge' ); ?></p>
+					<strong class="wdm-lite-upgrade-banner-title"><?php esc_html_e( 'Upgrade to DocuMerge Pro', 'wprobo-documerge-lite' ); ?></strong>
+					<p class="wdm-lite-upgrade-banner-desc"><?php esc_html_e( 'Unlock Stripe payments, signature fields, multi-step forms, conditional logic, email delivery, and 20+ more features.', 'wprobo-documerge-lite' ); ?></p>
 				</div>
 			</div>
 			<a href="<?php echo esc_url( $upgrade_url ); ?>" target="_blank" rel="noopener noreferrer" class="wdm-lite-upgrade-banner-btn">
-				<?php esc_html_e( 'Upgrade Now', 'wprobo-documerge' ); ?>
+				<?php esc_html_e( 'Upgrade Now', 'wprobo-documerge-lite' ); ?>
 			</a>
 		</div>
 		<?php
@@ -307,8 +307,8 @@ class WPRobo_DocuMerge_Plugin {
 	 */
 	public function wprobo_documerge_plugin_action_links( $links ) {
 		$plugin_links = array(
-			'<a href="' . esc_url( admin_url( 'admin.php?page=wprobo-documerge-settings' ) ) . '">' . esc_html__( 'Settings', 'wprobo-documerge' ) . '</a>',
-			'<a href="' . esc_url( admin_url( 'admin.php?page=wprobo-documerge-forms' ) ) . '">' . esc_html__( 'Forms', 'wprobo-documerge' ) . '</a>',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=wprobo-documerge-settings' ) ) . '">' . esc_html__( 'Settings', 'wprobo-documerge-lite' ) . '</a>',
+			'<a href="' . esc_url( admin_url( 'admin.php?page=wprobo-documerge-forms' ) ) . '">' . esc_html__( 'Forms', 'wprobo-documerge-lite' ) . '</a>',
 		);
 
 		return array_merge( $plugin_links, $links );
@@ -332,8 +332,8 @@ class WPRobo_DocuMerge_Plugin {
 
 		if ( ! file_exists( $seeder_path ) ) {
 			wp_die(
-				esc_html__( 'Seeder script not found. This feature is only available in the development version.', 'wprobo-documerge' ),
-				esc_html__( 'DocuMerge Seeder', 'wprobo-documerge' ),
+				esc_html__( 'Seeder script not found. This feature is only available in the development version.', 'wprobo-documerge-lite' ),
+				esc_html__( 'DocuMerge Seeder', 'wprobo-documerge-lite' ),
 				array( 'back_link' => true )
 			);
 		}

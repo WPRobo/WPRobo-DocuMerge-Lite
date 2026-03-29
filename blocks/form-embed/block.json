@@ -19,7 +19,7 @@
             "default": 0
         }
     },
-    "textdomain": "wprobo-documerge",
+    "textdomain": "wprobo-documerge-lite",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./editor.css"
 }

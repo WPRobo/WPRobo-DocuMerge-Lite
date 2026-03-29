@@ -49,8 +49,8 @@ class WPRobo_DocuMerge_Setup_Wizard {
 	public function wprobo_documerge_register_wizard_page() {
 		add_submenu_page(
 			null,
-			__( 'DocuMerge Setup', 'wprobo-documerge' ),
-			__( 'DocuMerge Setup', 'wprobo-documerge' ),
+			__( 'DocuMerge Setup', 'wprobo-documerge-lite' ),
+			__( 'DocuMerge Setup', 'wprobo-documerge-lite' ),
 			'manage_options',
 			'wprobo-documerge-wizard',
 			array( $this, 'wprobo_documerge_render_wizard' )
@@ -114,17 +114,17 @@ class WPRobo_DocuMerge_Setup_Wizard {
 				'templates_url'    => admin_url( 'admin.php?page=wprobo-documerge-templates' ),
 				'detected_plugins' => $this->wprobo_documerge_detect_form_plugins(),
 				'i18n'             => array(
-					'saving'           => __( 'Saving...', 'wprobo-documerge' ),
-					'saved'            => __( 'Saved!', 'wprobo-documerge' ),
-					'error'            => __( 'An error occurred. Please try again.', 'wprobo-documerge' ),
-					'network_error'    => __( 'Network error. Please check your connection.', 'wprobo-documerge' ),
-					'no_plugins_title' => __( 'No supported form plugins detected.', 'wprobo-documerge' ),
-					'no_plugins_desc'  => __( 'DocuMerge will use its built-in form builder. You can change this at any time in Settings.', 'wprobo-documerge' ),
-					'detected_suffix'  => __( 'detected', 'wprobo-documerge' ),
-					'integrate_prefix' => __( 'Would you like DocuMerge to integrate with', 'wprobo-documerge' ),
-					'yes_use_prefix'   => __( 'Yes — use', 'wprobo-documerge' ),
-					'yes_use_suffix'   => __( 'with DocuMerge', 'wprobo-documerge' ),
-					'standalone_label' => __( 'No — use DocuMerge standalone forms', 'wprobo-documerge' ),
+					'saving'           => __( 'Saving...', 'wprobo-documerge-lite' ),
+					'saved'            => __( 'Saved!', 'wprobo-documerge-lite' ),
+					'error'            => __( 'An error occurred. Please try again.', 'wprobo-documerge-lite' ),
+					'network_error'    => __( 'Network error. Please check your connection.', 'wprobo-documerge-lite' ),
+					'no_plugins_title' => __( 'No supported form plugins detected.', 'wprobo-documerge-lite' ),
+					'no_plugins_desc'  => __( 'DocuMerge will use its built-in form builder. You can change this at any time in Settings.', 'wprobo-documerge-lite' ),
+					'detected_suffix'  => __( 'detected', 'wprobo-documerge-lite' ),
+					'integrate_prefix' => __( 'Would you like DocuMerge to integrate with', 'wprobo-documerge-lite' ),
+					'yes_use_prefix'   => __( 'Yes — use', 'wprobo-documerge-lite' ),
+					'yes_use_suffix'   => __( 'with DocuMerge', 'wprobo-documerge-lite' ),
+					'standalone_label' => __( 'No — use DocuMerge standalone forms', 'wprobo-documerge-lite' ),
 				),
 			)
 		);
@@ -185,7 +185,7 @@ class WPRobo_DocuMerge_Setup_Wizard {
 	 */
 	public function wprobo_documerge_render_wizard() {
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_die( esc_html__( 'You do not have permission to access this page.', 'wprobo-documerge' ) );
+			wp_die( esc_html__( 'You do not have permission to access this page.', 'wprobo-documerge-lite' ) );
 		}
 
 		include WPROBO_DOCUMERGE_PATH . 'templates/admin/wizard/wizard.php';
@@ -200,7 +200,7 @@ class WPRobo_DocuMerge_Setup_Wizard {
 		check_ajax_referer( 'wprobo_documerge_wizard', 'nonce' );
 
 		if ( ! current_user_can( 'manage_options' ) ) {
-			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge' ) ) );
+			wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wprobo-documerge-lite' ) ) );
 			return;
 		}
 
@@ -252,6 +252,6 @@ class WPRobo_DocuMerge_Setup_Wizard {
 		// Mark wizard as completed.
 		update_option( 'wprobo_documerge_wizard_completed', 'yes' );
 
-		wp_send_json_success( array( 'message' => __( 'Settings saved successfully.', 'wprobo-documerge' ) ) );
+		wp_send_json_success( array( 'message' => __( 'Settings saved successfully.', 'wprobo-documerge-lite' ) ) );
 	}
 }

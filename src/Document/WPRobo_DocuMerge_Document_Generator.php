@@ -111,7 +111,7 @@ class WPRobo_DocuMerge_Document_Generator {
 			return new \WP_Error(
 				'submission_not_found',
 				/* translators: %d: submission ID */
-				sprintf( __( 'Submission #%d not found.', 'wprobo-documerge' ), $submission_id )
+				sprintf( __( 'Submission #%d not found.', 'wprobo-documerge-lite' ), $submission_id )
 			);
 		}
 
@@ -130,7 +130,7 @@ class WPRobo_DocuMerge_Document_Generator {
 			return new \WP_Error(
 				'form_not_found',
 				/* translators: %d: form ID */
-				sprintf( __( 'Form #%d not found.', 'wprobo-documerge' ), absint( $submission->form_id ) )
+				sprintf( __( 'Form #%d not found.', 'wprobo-documerge-lite' ), absint( $submission->form_id ) )
 			);
 		}
 
@@ -150,7 +150,7 @@ class WPRobo_DocuMerge_Document_Generator {
 			return new \WP_Error(
 				'template_not_found',
 				/* translators: %d: template ID */
-				sprintf( __( 'Template #%d not found.', 'wprobo-documerge' ), $template_id )
+				sprintf( __( 'Template #%d not found.', 'wprobo-documerge-lite' ), $template_id )
 			);
 		}
 
@@ -169,7 +169,7 @@ class WPRobo_DocuMerge_Document_Generator {
 		if ( empty( $template->file_path ) || ! file_exists( $template->file_path ) ) {
 			$error_msg = sprintf(
 				/* translators: %s: file path */
-				__( 'Template file does not exist: %s', 'wprobo-documerge' ),
+				__( 'Template file does not exist: %s', 'wprobo-documerge-lite' ),
 				$template->file_path
 			);
 			$this->wprobo_documerge_update_submission_status( $submission_id, 'error', $error_msg );
@@ -182,7 +182,7 @@ class WPRobo_DocuMerge_Document_Generator {
 		$form_data = json_decode( $submission->form_data, true );
 
 		if ( ! is_array( $form_data ) ) {
-			$error_msg = __( 'Invalid form data JSON.', 'wprobo-documerge' );
+			$error_msg = __( 'Invalid form data JSON.', 'wprobo-documerge-lite' );
 			$this->wprobo_documerge_update_submission_status( $submission_id, 'error', $error_msg );
 
 			return new \WP_Error( 'invalid_form_data', $error_msg );
@@ -432,7 +432,7 @@ class WPRobo_DocuMerge_Document_Generator {
 		$site_name   = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
 
 		/* translators: %s: site name */
-		$subject = sprintf( __( '[%s] DocuMerge: Document generation failed', 'wprobo-documerge' ), $site_name );
+		$subject = sprintf( __( '[%s] DocuMerge: Document generation failed', 'wprobo-documerge-lite' ), $site_name );
 
 		$admin_url = admin_url( 'admin.php?page=wprobo-documerge-submissions&id=' . absint( $submission_id ) );
 
@@ -440,7 +440,7 @@ class WPRobo_DocuMerge_Document_Generator {
 			/* translators: 1: submission ID, 2: error message, 3: admin URL */
 			__(
 				"A document generation error has occurred.\n\nSubmission ID: #%1\$d\nError: %2\$s\n\nView submission: %3\$s",
-				'wprobo-documerge'
+				'wprobo-documerge-lite'
 			),
 			absint( $submission_id ),
 			sanitize_textarea_field( $error_message ),

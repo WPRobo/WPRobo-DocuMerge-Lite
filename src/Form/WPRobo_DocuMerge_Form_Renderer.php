@@ -155,7 +155,7 @@ class WPRobo_DocuMerge_Form_Renderer {
 		 * @param string $submit_label The submit button label.
 		 * @param int    $form_id      The form ID.
 		 */
-		$submit_label = ! empty( $form->submit_label ) ? $form->submit_label : ( ! empty( $settings['submit_label'] ) ? $settings['submit_label'] : __( 'Submit', 'wprobo-documerge' ) );
+		$submit_label = ! empty( $form->submit_label ) ? $form->submit_label : ( ! empty( $settings['submit_label'] ) ? $settings['submit_label'] : __( 'Submit', 'wprobo-documerge-lite' ) );
 		$submit_label = apply_filters( 'wprobo_documerge_submit_button_label', $submit_label, $form_id );
 
 		// Check entry limit before rendering the form.
@@ -173,7 +173,7 @@ class WPRobo_DocuMerge_Form_Renderer {
 			if ( $submission_count >= $entry_limit ) {
 				$closed_message = ! empty( $settings['closed_message'] )
 					? $settings['closed_message']
-					: __( 'This form is no longer accepting submissions.', 'wprobo-documerge' );
+					: __( 'This form is no longer accepting submissions.', 'wprobo-documerge-lite' );
 
 				return '<div class="wdm-form-wrap wdm-form-closed">' .
 					'<div class="wdm-form-closed-message">' .

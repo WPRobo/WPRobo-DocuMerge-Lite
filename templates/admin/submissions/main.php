@@ -19,12 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 // Page header variables.
-$page_title     = __( 'Submissions', 'wprobo-documerge' );
-$page_subtitle  = __( 'All form submissions and generated documents', 'wprobo-documerge' );
+$page_title     = __( 'Submissions', 'wprobo-documerge-lite' );
+$page_subtitle  = __( 'All form submissions and generated documents', 'wprobo-documerge-lite' );
 $primary_action = array(
 	'url'   => '#',
-	'label' => __( 'Export CSV', 'wprobo-documerge' ),
+	'label' => __( 'Export CSV', 'wprobo-documerge-lite' ),
 	'icon'  => 'dashicons-download',
 	'id'    => 'wdm-export-csv',
 );
@@ -37,7 +39,7 @@ $primary_action = array(
 	<div class="wdm-filter-bar">
 
 		<select id="wdm-filter-form" class="wdm-select">
-			<option value=""><?php esc_html_e( 'All Forms', 'wprobo-documerge' ); ?></option>
+			<option value=""><?php esc_html_e( 'All Forms', 'wprobo-documerge-lite' ); ?></option>
 			<?php if ( ! empty( $forms ) && is_array( $forms ) ) : ?>
 				<?php foreach ( $forms as $form ) : ?>
 					<option value="<?php echo esc_attr( $form->id ); ?>">
@@ -48,17 +50,17 @@ $primary_action = array(
 		</select>
 
 		<select id="wdm-filter-status" class="wdm-select">
-			<option value=""><?php esc_html_e( 'All Statuses', 'wprobo-documerge' ); ?></option>
-			<option value="completed"><?php esc_html_e( 'Completed', 'wprobo-documerge' ); ?></option>
-			<option value="processing"><?php esc_html_e( 'Processing', 'wprobo-documerge' ); ?></option>
-			<option value="error"><?php esc_html_e( 'Error', 'wprobo-documerge' ); ?></option>
+			<option value=""><?php esc_html_e( 'All Statuses', 'wprobo-documerge-lite' ); ?></option>
+			<option value="completed"><?php esc_html_e( 'Completed', 'wprobo-documerge-lite' ); ?></option>
+			<option value="processing"><?php esc_html_e( 'Processing', 'wprobo-documerge-lite' ); ?></option>
+			<option value="error"><?php esc_html_e( 'Error', 'wprobo-documerge-lite' ); ?></option>
 		</select>
 
-		<input type="text" id="wdm-filter-from" class="wdm-datepicker wdm-input" placeholder="<?php esc_attr_e( 'From date', 'wprobo-documerge' ); ?>">
-		<input type="text" id="wdm-filter-to" class="wdm-datepicker wdm-input" placeholder="<?php esc_attr_e( 'To date', 'wprobo-documerge' ); ?>">
+		<input type="text" id="wdm-filter-from" class="wdm-datepicker wdm-input" placeholder="<?php esc_attr_e( 'From date', 'wprobo-documerge-lite' ); ?>">
+		<input type="text" id="wdm-filter-to" class="wdm-datepicker wdm-input" placeholder="<?php esc_attr_e( 'To date', 'wprobo-documerge-lite' ); ?>">
 
 		<button type="button" id="wdm-filter-btn" class="wdm-btn wdm-btn-primary">
-			<?php esc_html_e( 'Filter', 'wprobo-documerge' ); ?>
+			<?php esc_html_e( 'Filter', 'wprobo-documerge-lite' ); ?>
 		</button>
 
 	</div>
@@ -68,11 +70,11 @@ $primary_action = array(
 		<thead>
 			<tr>
 				<th class="wdm-col-check"><input type="checkbox" id="wdm-select-all"></th>
-				<th><?php esc_html_e( 'Date', 'wprobo-documerge' ); ?></th>
-				<th><?php esc_html_e( 'Form', 'wprobo-documerge' ); ?></th>
-				<th><?php esc_html_e( 'Email', 'wprobo-documerge' ); ?></th>
-				<th><?php esc_html_e( 'Status', 'wprobo-documerge' ); ?></th>
-				<th><?php esc_html_e( 'Documents', 'wprobo-documerge' ); ?></th>
+				<th><?php esc_html_e( 'Date', 'wprobo-documerge-lite' ); ?></th>
+				<th><?php esc_html_e( 'Form', 'wprobo-documerge-lite' ); ?></th>
+				<th><?php esc_html_e( 'Email', 'wprobo-documerge-lite' ); ?></th>
+				<th><?php esc_html_e( 'Status', 'wprobo-documerge-lite' ); ?></th>
+				<th><?php esc_html_e( 'Documents', 'wprobo-documerge-lite' ); ?></th>
 			</tr>
 		</thead>
 		<tbody id="wdm-submissions-tbody">
@@ -88,7 +90,7 @@ $primary_action = array(
 	<!-- ── Bulk Actions ──────────────────────────────────────────── -->
 	<div class="wdm-bulk-actions">
 		<button type="button" id="wdm-bulk-delete" class="wdm-btn wdm-btn-danger">
-			<?php esc_html_e( 'Delete Selected', 'wprobo-documerge' ); ?>
+			<?php esc_html_e( 'Delete Selected', 'wprobo-documerge-lite' ); ?>
 		</button>
 	</div>
 
@@ -100,3 +102,5 @@ require WPROBO_DOCUMERGE_PATH . 'templates/admin/submissions/detail-panel.php';
 ?>
 
 <div class="wdm-overlay" id="wdm-overlay"></div>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

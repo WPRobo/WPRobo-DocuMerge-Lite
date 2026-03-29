@@ -40,7 +40,7 @@ class WPRobo_DocuMerge_Field_Date {
 	 * @return string
 	 */
 	public function wprobo_documerge_get_label() {
-		return __( 'Date', 'wprobo-documerge' );
+		return __( 'Date', 'wprobo-documerge-lite' );
 	}
 
 	/**
@@ -110,25 +110,25 @@ class WPRobo_DocuMerge_Field_Date {
 
 		// Label.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="label" class="wdm-builder-setting-input" value="' . $label . '">';
 		$html .= '</div>';
 
 		// Placeholder.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Placeholder', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Placeholder', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="placeholder" class="wdm-builder-setting-input" value="' . $placeholder . '">';
 		$html .= '</div>';
 
 		// Help Text.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Help Text', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Help Text', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="help_text" class="wdm-builder-setting-input" value="' . $help_text . '">';
 		$html .= '</div>';
 
 		// Required.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Required', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Required', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="checkbox" data-setting="required" class="wdm-builder-setting-input" ' . $required . '>';
 		$html .= '</div>';
 
@@ -143,7 +143,7 @@ class WPRobo_DocuMerge_Field_Date {
 		);
 
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Date Format', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Date Format', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<select data-setting="date_format" class="wdm-builder-setting-input">';
 		foreach ( $date_formats as $format_value => $format_preview ) {
 			$html .= '<option value="' . esc_attr( $format_value ) . '"' . selected( $date_format, $format_value, false ) . '>' . esc_html( $format_value . ' (' . $format_preview . ')' ) . '</option>';
@@ -153,45 +153,45 @@ class WPRobo_DocuMerge_Field_Date {
 
 		// Min Date.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Min Date', 'wprobo-documerge' ) . '</label>';
-		$html .= '<input type="text" data-setting="min_date" class="wdm-builder-setting-input" value="' . $min_date . '" placeholder="' . esc_attr__( 'YYYY-MM-DD', 'wprobo-documerge' ) . '">';
+		$html .= '<label>' . esc_html__( 'Min Date', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<input type="text" data-setting="min_date" class="wdm-builder-setting-input" value="' . $min_date . '" placeholder="' . esc_attr__( 'YYYY-MM-DD', 'wprobo-documerge-lite' ) . '">';
 		$html .= '</div>';
 
 		// Max Date.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Max Date', 'wprobo-documerge' ) . '</label>';
-		$html .= '<input type="text" data-setting="max_date" class="wdm-builder-setting-input" value="' . $max_date . '" placeholder="' . esc_attr__( 'YYYY-MM-DD', 'wprobo-documerge' ) . '">';
+		$html .= '<label>' . esc_html__( 'Max Date', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<input type="text" data-setting="max_date" class="wdm-builder-setting-input" value="' . $max_date . '" placeholder="' . esc_attr__( 'YYYY-MM-DD', 'wprobo-documerge-lite' ) . '">';
 		$html .= '</div>';
 
 		// Disable past dates.
 		$disable_past_checked = ! empty( $field_data['disable_past'] ) ? 'checked' : '';
 		$html                .= '<div class="wdm-builder-field-setting">';
 		$html                .= '<label><input type="checkbox" data-setting="disable_past" class="wdm-builder-setting-input" ' . $disable_past_checked . '> ';
-		$html                .= esc_html__( 'Disable past dates (today is the earliest)', 'wprobo-documerge' ) . '</label>';
+		$html                .= esc_html__( 'Disable past dates (today is the earliest)', 'wprobo-documerge-lite' ) . '</label>';
 		$html                .= '</div>';
 
 		// Max future months.
 		$max_future_months = esc_attr( isset( $field_data['max_future_months'] ) ? $field_data['max_future_months'] : '' );
 		$html             .= '<div class="wdm-builder-field-setting">';
-		$html             .= '<label>' . esc_html__( 'Max Future Months', 'wprobo-documerge' ) . '</label>';
-		$html             .= '<input type="number" data-setting="max_future_months" class="wdm-builder-setting-input wdm-input" value="' . $max_future_months . '" placeholder="' . esc_attr__( 'e.g. 6 (leave blank for unlimited)', 'wprobo-documerge' ) . '" min="0">';
-		$html             .= '<span class="wdm-description">' . esc_html__( 'How many months ahead users can select. 0 or blank = unlimited.', 'wprobo-documerge' ) . '</span>';
+		$html             .= '<label>' . esc_html__( 'Max Future Months', 'wprobo-documerge-lite' ) . '</label>';
+		$html             .= '<input type="number" data-setting="max_future_months" class="wdm-builder-setting-input wdm-input" value="' . $max_future_months . '" placeholder="' . esc_attr__( 'e.g. 6 (leave blank for unlimited)', 'wprobo-documerge-lite' ) . '" min="0">';
+		$html             .= '<span class="wdm-description">' . esc_html__( 'How many months ahead users can select. 0 or blank = unlimited.', 'wprobo-documerge-lite' ) . '</span>';
 		$html             .= '</div>';
 
 		// Custom Error Message.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Custom Error Message', 'wprobo-documerge' ) . '</label>';
-		$html .= '<input type="text" data-setting="error_message" class="wdm-builder-setting-input wdm-input" value="' . $error_message . '" placeholder="' . esc_attr__( 'Leave blank for default', 'wprobo-documerge' ) . '">';
-		$html .= '<span class="wdm-description">' . esc_html__( 'Optional. Shown when validation fails.', 'wprobo-documerge' ) . '</span>';
+		$html .= '<label>' . esc_html__( 'Custom Error Message', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<input type="text" data-setting="error_message" class="wdm-builder-setting-input wdm-input" value="' . $error_message . '" placeholder="' . esc_attr__( 'Leave blank for default', 'wprobo-documerge-lite' ) . '">';
+		$html .= '<span class="wdm-description">' . esc_html__( 'Optional. Shown when validation fails.', 'wprobo-documerge-lite' ) . '</span>';
 		$html .= '</div>';
 
 		// Width.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Width', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Width', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<div class="wdm-width-selector">';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="full"' . checked( $width, 'full', false ) . '> ' . esc_html__( 'Full', 'wprobo-documerge' ) . '</label>';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="half"' . checked( $width, 'half', false ) . '> ' . esc_html__( 'Half', 'wprobo-documerge' ) . '</label>';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="third"' . checked( $width, 'third', false ) . '> ' . esc_html__( 'Third', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="full"' . checked( $width, 'full', false ) . '> ' . esc_html__( 'Full', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="half"' . checked( $width, 'half', false ) . '> ' . esc_html__( 'Half', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="third"' . checked( $width, 'third', false ) . '> ' . esc_html__( 'Third', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '</div>';
 		$html .= '</div>';
 
@@ -264,7 +264,7 @@ class WPRobo_DocuMerge_Field_Date {
 			$html .= $help_text . ' ';
 		}
 		/* translators: %s: date format example like 25/03/2026 */
-		$html .= '<span class="wdm-date-format-hint">' . sprintf( esc_html__( 'Format: %s', 'wprobo-documerge' ), esc_html( $format_hint ) ) . '</span>';
+		$html .= '<span class="wdm-date-format-hint">' . sprintf( esc_html__( 'Format: %s', 'wprobo-documerge-lite' ), esc_html( $format_hint ) ) . '</span>';
 		$html .= '</p>';
 		$html .= '</div>';
 
@@ -303,7 +303,7 @@ class WPRobo_DocuMerge_Field_Date {
 				'' !== $custom_error
 					? esc_html( $custom_error )
 					/* translators: %s: field label */
-					: sprintf( __( '%s is required.', 'wprobo-documerge' ), $field_data['label'] )
+					: sprintf( __( '%s is required.', 'wprobo-documerge-lite' ), $field_data['label'] )
 			);
 		}
 
@@ -317,7 +317,7 @@ class WPRobo_DocuMerge_Field_Date {
 					'' !== $custom_error
 						? esc_html( $custom_error )
 						/* translators: 1: field label, 2: expected date format */
-						: sprintf( __( '%1$s must be a valid date in the format %2$s.', 'wprobo-documerge' ), $field_data['label'], $format )
+						: sprintf( __( '%1$s must be a valid date in the format %2$s.', 'wprobo-documerge-lite' ), $field_data['label'], $format )
 				);
 			}
 
@@ -330,7 +330,7 @@ class WPRobo_DocuMerge_Field_Date {
 						'' !== $custom_error
 							? esc_html( $custom_error )
 							/* translators: 1: field label, 2: minimum date */
-							: sprintf( __( '%1$s must be on or after %2$s.', 'wprobo-documerge' ), $field_data['label'], $field_data['min_date'] )
+							: sprintf( __( '%1$s must be on or after %2$s.', 'wprobo-documerge-lite' ), $field_data['label'], $field_data['min_date'] )
 					);
 				}
 			}
@@ -344,7 +344,7 @@ class WPRobo_DocuMerge_Field_Date {
 						'' !== $custom_error
 							? esc_html( $custom_error )
 							/* translators: 1: field label, 2: maximum date */
-							: sprintf( __( '%1$s must be on or before %2$s.', 'wprobo-documerge' ), $field_data['label'], $field_data['max_date'] )
+							: sprintf( __( '%1$s must be on or before %2$s.', 'wprobo-documerge-lite' ), $field_data['label'], $field_data['max_date'] )
 					);
 				}
 			}

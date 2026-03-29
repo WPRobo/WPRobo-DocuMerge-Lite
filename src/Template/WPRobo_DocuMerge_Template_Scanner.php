@@ -62,7 +62,7 @@ class WPRobo_DocuMerge_Template_Scanner {
 		if ( empty( $file_path ) || ! file_exists( $file_path ) ) {
 			return new WP_Error(
 				'wprobo_documerge_file_not_found',
-				__( 'The template file does not exist.', 'wprobo-documerge' ),
+				__( 'The template file does not exist.', 'wprobo-documerge-lite' ),
 				array( 'file_path' => $file_path )
 			);
 		}
@@ -73,7 +73,7 @@ class WPRobo_DocuMerge_Template_Scanner {
 		} catch ( \Exception $e ) {
 			return new WP_Error(
 				'wprobo_documerge_scan_failed',
-				__( 'Failed to scan the DOCX template.', 'wprobo-documerge' ),
+				__( 'Failed to scan the DOCX template.', 'wprobo-documerge-lite' ),
 				array(
 					'file_path' => $file_path,
 					'error'     => $e->getMessage(),

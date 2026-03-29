@@ -40,7 +40,7 @@ class WPRobo_DocuMerge_Field_Number {
 	 * @return string
 	 */
 	public function wprobo_documerge_get_label() {
-		return __( 'Number', 'wprobo-documerge' );
+		return __( 'Number', 'wprobo-documerge-lite' );
 	}
 
 	/**
@@ -108,60 +108,60 @@ class WPRobo_DocuMerge_Field_Number {
 
 		// Label.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Label', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="label" class="wdm-builder-setting-input" value="' . $label . '">';
 		$html .= '</div>';
 
 		// Placeholder.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Placeholder', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Placeholder', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="placeholder" class="wdm-builder-setting-input" value="' . $placeholder . '">';
 		$html .= '</div>';
 
 		// Help Text.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Help Text', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Help Text', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="text" data-setting="help_text" class="wdm-builder-setting-input" value="' . $help_text . '">';
 		$html .= '</div>';
 
 		// Required.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Required', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Required', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="checkbox" data-setting="required" class="wdm-builder-setting-input" ' . $required . '>';
 		$html .= '</div>';
 
 		// Min Value.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Min Value', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Min Value', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="number" data-setting="min_value" class="wdm-builder-setting-input" value="' . $min_value . '">';
 		$html .= '</div>';
 
 		// Max Value.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Max Value', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Max Value', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="number" data-setting="max_value" class="wdm-builder-setting-input" value="' . $max_value . '">';
 		$html .= '</div>';
 
 		// Step.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Step', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Step', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<input type="number" data-setting="step" class="wdm-builder-setting-input" value="' . $step . '">';
 		$html .= '</div>';
 
 		// Custom Error Message.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Custom Error Message', 'wprobo-documerge' ) . '</label>';
-		$html .= '<input type="text" data-setting="error_message" class="wdm-builder-setting-input wdm-input" value="' . $error_message . '" placeholder="' . esc_attr__( 'Leave blank for default', 'wprobo-documerge' ) . '">';
-		$html .= '<span class="wdm-description">' . esc_html__( 'Optional. Shown when validation fails.', 'wprobo-documerge' ) . '</span>';
+		$html .= '<label>' . esc_html__( 'Custom Error Message', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<input type="text" data-setting="error_message" class="wdm-builder-setting-input wdm-input" value="' . $error_message . '" placeholder="' . esc_attr__( 'Leave blank for default', 'wprobo-documerge-lite' ) . '">';
+		$html .= '<span class="wdm-description">' . esc_html__( 'Optional. Shown when validation fails.', 'wprobo-documerge-lite' ) . '</span>';
 		$html .= '</div>';
 
 		// Width.
 		$html .= '<div class="wdm-builder-field-setting">';
-		$html .= '<label>' . esc_html__( 'Width', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label>' . esc_html__( 'Width', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '<div class="wdm-width-selector">';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="full"' . checked( $width, 'full', false ) . '> ' . esc_html__( 'Full', 'wprobo-documerge' ) . '</label>';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="half"' . checked( $width, 'half', false ) . '> ' . esc_html__( 'Half', 'wprobo-documerge' ) . '</label>';
-		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="third"' . checked( $width, 'third', false ) . '> ' . esc_html__( 'Third', 'wprobo-documerge' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="full"' . checked( $width, 'full', false ) . '> ' . esc_html__( 'Full', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="half"' . checked( $width, 'half', false ) . '> ' . esc_html__( 'Half', 'wprobo-documerge-lite' ) . '</label>';
+		$html .= '<label><input type="radio" name="width_' . $id . '" data-setting="width" value="third"' . checked( $width, 'third', false ) . '> ' . esc_html__( 'Third', 'wprobo-documerge-lite' ) . '</label>';
 		$html .= '</div>';
 		$html .= '</div>';
 
@@ -241,7 +241,7 @@ class WPRobo_DocuMerge_Field_Number {
 				'' !== $custom_error
 					? esc_html( $custom_error )
 					/* translators: %s: field label */
-					: sprintf( __( '%s is required.', 'wprobo-documerge' ), $field_data['label'] )
+					: sprintf( __( '%s is required.', 'wprobo-documerge-lite' ), $field_data['label'] )
 			);
 		}
 
@@ -252,7 +252,7 @@ class WPRobo_DocuMerge_Field_Number {
 					'' !== $custom_error
 						? esc_html( $custom_error )
 						/* translators: %s: field label */
-						: sprintf( __( '%s must be a valid number.', 'wprobo-documerge' ), $field_data['label'] )
+						: sprintf( __( '%s must be a valid number.', 'wprobo-documerge-lite' ), $field_data['label'] )
 				);
 			}
 
@@ -264,7 +264,7 @@ class WPRobo_DocuMerge_Field_Number {
 					'' !== $custom_error
 						? esc_html( $custom_error )
 						/* translators: 1: field label, 2: minimum value */
-						: sprintf( __( '%1$s must be at least %2$s.', 'wprobo-documerge' ), $field_data['label'], $field_data['min_value'] )
+						: sprintf( __( '%1$s must be at least %2$s.', 'wprobo-documerge-lite' ), $field_data['label'], $field_data['min_value'] )
 				);
 			}
 
@@ -274,7 +274,7 @@ class WPRobo_DocuMerge_Field_Number {
 					'' !== $custom_error
 						? esc_html( $custom_error )
 						/* translators: 1: field label, 2: maximum value */
-						: sprintf( __( '%1$s must be no more than %2$s.', 'wprobo-documerge' ), $field_data['label'], $field_data['max_value'] )
+						: sprintf( __( '%1$s must be no more than %2$s.', 'wprobo-documerge-lite' ), $field_data['label'], $field_data['max_value'] )
 				);
 			}
 		}

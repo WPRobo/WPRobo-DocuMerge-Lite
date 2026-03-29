@@ -34,7 +34,7 @@ class WPRobo_DocuMerge_Pro_Upsell {
 	 * @return string HTML markup for the PRO badge.
 	 */
 	public static function wprobo_documerge_render_badge() {
-		return '<span class="wdm-pro-badge">' . esc_html__( 'PRO', 'wprobo-documerge' ) . '</span>';
+		return '<span class="wdm-pro-badge">' . esc_html__( 'PRO', 'wprobo-documerge-lite' ) . '</span>';
 	}
 
 	/**
@@ -54,7 +54,7 @@ class WPRobo_DocuMerge_Pro_Upsell {
 		$html .= '<h3 class="wdm-pro-overlay-title">' . esc_html( $title ) . '</h3>';
 		$html .= '<p class="wdm-pro-overlay-desc">' . esc_html( $description ) . '</p>';
 		$html .= '<a href="' . esc_url( $upgrade_url ) . '" class="wdm-btn wdm-btn-primary wdm-pro-overlay-btn" target="_blank" rel="noopener noreferrer">';
-		$html .= esc_html__( 'Upgrade to Pro', 'wprobo-documerge' );
+		$html .= esc_html__( 'Upgrade to Pro', 'wprobo-documerge-lite' );
 		$html .= '</a>';
 		$html .= '</div>';
 		$html .= '</div>';
@@ -90,7 +90,7 @@ class WPRobo_DocuMerge_Pro_Upsell {
 	public static function wprobo_documerge_render_field_type_locked( $icon, $label ) {
 		$upgrade_url = WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_get_upgrade_url();
 
-		$html  = '<a href="' . esc_url( $upgrade_url ) . '" class="wdm-pro-locked-field" target="_blank" rel="noopener noreferrer" title="' . esc_attr__( 'Upgrade to Pro to unlock this field type', 'wprobo-documerge' ) . '">';
+		$html  = '<a href="' . esc_url( $upgrade_url ) . '" class="wdm-pro-locked-field" target="_blank" rel="noopener noreferrer" title="' . esc_attr__( 'Upgrade to Pro to unlock this field type', 'wprobo-documerge-lite' ) . '">';
 		$html .= '<span class="dashicons ' . esc_attr( $icon ) . '" aria-hidden="true"></span>';
 		$html .= '<span class="wdm-pro-locked-field-label">' . esc_html( $label ) . '</span>';
 		$html .= ' ' . self::wprobo_documerge_render_badge();

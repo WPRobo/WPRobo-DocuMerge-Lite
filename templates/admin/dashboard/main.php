@@ -19,12 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+
 // Page header variables.
-$page_title     = __( 'DocuMerge Dashboard', 'wprobo-documerge' );
-$page_subtitle  = __( 'Overview of your document automation', 'wprobo-documerge' );
+$page_title     = __( 'DocuMerge Dashboard', 'wprobo-documerge-lite' );
+$page_subtitle  = __( 'Overview of your document automation', 'wprobo-documerge-lite' );
 $primary_action = array(
 	'url'   => admin_url( 'admin.php?page=wprobo-documerge-forms' ),
-	'label' => __( 'New Form', 'wprobo-documerge' ),
+	'label' => __( 'New Form', 'wprobo-documerge-lite' ),
 	'icon'  => 'dashicons-plus-alt2',
 );
 ?>
@@ -36,19 +38,19 @@ $primary_action = array(
 	<!-- ── Quick Actions Bar ────────────────────────────────────── -->
 	<div class="wdm-quick-bar">
 		<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprobo-documerge-templates' ) ); ?>">
-			<span class="dashicons dashicons-upload"></span> <?php esc_html_e( 'Upload Template', 'wprobo-documerge' ); ?>
+			<span class="dashicons dashicons-upload"></span> <?php esc_html_e( 'Upload Template', 'wprobo-documerge-lite' ); ?>
 		</a>
 		<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprobo-documerge-forms&action=new' ) ); ?>">
-			<span class="dashicons dashicons-plus-alt2"></span> <?php esc_html_e( 'New Form', 'wprobo-documerge' ); ?>
+			<span class="dashicons dashicons-plus-alt2"></span> <?php esc_html_e( 'New Form', 'wprobo-documerge-lite' ); ?>
 		</a>
 		<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprobo-documerge-submissions' ) ); ?>">
-			<span class="dashicons dashicons-list-view"></span> <?php esc_html_e( 'Submissions', 'wprobo-documerge' ); ?>
+			<span class="dashicons dashicons-list-view"></span> <?php esc_html_e( 'Submissions', 'wprobo-documerge-lite' ); ?>
 		</a>
 		<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprobo-documerge-settings' ) ); ?>">
-			<span class="dashicons dashicons-admin-generic"></span> <?php esc_html_e( 'Settings', 'wprobo-documerge' ); ?>
+			<span class="dashicons dashicons-admin-generic"></span> <?php esc_html_e( 'Settings', 'wprobo-documerge-lite' ); ?>
 		</a>
 		<a href="<?php echo esc_url( 'https://wprobo.com/docs/documerge' ); ?>" target="_blank" rel="noopener noreferrer">
-			<span class="dashicons dashicons-book"></span> <?php esc_html_e( 'Docs', 'wprobo-documerge' ); ?>
+			<span class="dashicons dashicons-book"></span> <?php esc_html_e( 'Docs', 'wprobo-documerge-lite' ); ?>
 		</a>
 	</div>
 
@@ -71,27 +73,27 @@ $primary_action = array(
 			<div class="wdm-stat-card-icon"><span class="dashicons dashicons-media-document"></span></div>
 			<div class="wdm-stat-card-content">
 				<span class="wdm-stat-value"><?php echo esc_html( $stats['templates'] ); ?></span>
-				<span class="wdm-stat-label"><?php esc_html_e( 'Active', 'wprobo-documerge' ); ?></span>
+				<span class="wdm-stat-label"><?php esc_html_e( 'Active', 'wprobo-documerge-lite' ); ?></span>
 			</div>
-			<span class="wdm-stat-card-title"><?php esc_html_e( 'Templates', 'wprobo-documerge' ); ?></span>
+			<span class="wdm-stat-card-title"><?php esc_html_e( 'Templates', 'wprobo-documerge-lite' ); ?></span>
 		</div>
 
 		<div class="wdm-stat-card">
 			<div class="wdm-stat-card-icon"><span class="dashicons dashicons-feedback"></span></div>
 			<div class="wdm-stat-card-content">
 				<span class="wdm-stat-value"><?php echo esc_html( $stats['forms'] ); ?></span>
-				<span class="wdm-stat-label"><?php esc_html_e( 'Active', 'wprobo-documerge' ); ?></span>
+				<span class="wdm-stat-label"><?php esc_html_e( 'Active', 'wprobo-documerge-lite' ); ?></span>
 			</div>
-			<span class="wdm-stat-card-title"><?php esc_html_e( 'Forms', 'wprobo-documerge' ); ?></span>
+			<span class="wdm-stat-card-title"><?php esc_html_e( 'Forms', 'wprobo-documerge-lite' ); ?></span>
 		</div>
 
 		<div class="wdm-stat-card">
 			<div class="wdm-stat-card-icon"><span class="dashicons dashicons-email-alt"></span></div>
 			<div class="wdm-stat-card-content">
 				<span class="wdm-stat-value"><?php echo esc_html( $stats['submissions'] ); ?></span>
-				<span class="wdm-stat-label"><?php esc_html_e( 'This Month', 'wprobo-documerge' ); ?></span>
+				<span class="wdm-stat-label"><?php esc_html_e( 'This Month', 'wprobo-documerge-lite' ); ?></span>
 			</div>
-			<span class="wdm-stat-card-title"><?php esc_html_e( 'Submissions', 'wprobo-documerge' ); ?></span>
+			<span class="wdm-stat-card-title"><?php esc_html_e( 'Submissions', 'wprobo-documerge-lite' ); ?></span>
 		</div>
 
 		<div class="wdm-stat-card">
@@ -102,14 +104,14 @@ $primary_action = array(
 					<?php
 					if ( $error_count > 0 ) {
 						/* translators: %d: number of errors */
-						printf( esc_html__( '%d error(s)', 'wprobo-documerge' ), $error_count );
+						printf( esc_html__( '%d error(s)', 'wprobo-documerge-lite' ), $error_count );
 					} else {
-						esc_html_e( 'This Month', 'wprobo-documerge' );
+						esc_html_e( 'This Month', 'wprobo-documerge-lite' );
 					}
 					?>
 				</span>
 			</div>
-			<span class="wdm-stat-card-title"><?php esc_html_e( 'Success Rate', 'wprobo-documerge' ); ?></span>
+			<span class="wdm-stat-card-title"><?php esc_html_e( 'Success Rate', 'wprobo-documerge-lite' ); ?></span>
 		</div>
 	</div>
 
@@ -119,7 +121,7 @@ $primary_action = array(
 		<!-- Submissions Trend (Line Chart) -->
 		<div class="wdm-card wdm-chart-card">
 			<div class="wdm-card-header">
-				<h2 class="wdm-card-title"><?php esc_html_e( 'Submissions (Last 7 Days)', 'wprobo-documerge' ); ?></h2>
+				<h2 class="wdm-card-title"><?php esc_html_e( 'Submissions (Last 7 Days)', 'wprobo-documerge-lite' ); ?></h2>
 			</div>
 			<div class="wdm-card-body">
 				<canvas id="wdm-chart-daily" height="220"></canvas>
@@ -129,7 +131,7 @@ $primary_action = array(
 		<!-- Status Breakdown (Doughnut Chart) -->
 		<div class="wdm-card wdm-chart-card">
 			<div class="wdm-card-header">
-				<h2 class="wdm-card-title"><?php esc_html_e( 'Status Breakdown', 'wprobo-documerge' ); ?></h2>
+				<h2 class="wdm-card-title"><?php esc_html_e( 'Status Breakdown', 'wprobo-documerge-lite' ); ?></h2>
 			</div>
 			<div class="wdm-card-body">
 				<canvas id="wdm-chart-status" height="220"></canvas>
@@ -142,7 +144,7 @@ $primary_action = array(
 	<div class="wdm-charts-row">
 		<div class="wdm-card wdm-chart-card">
 			<div class="wdm-card-header">
-				<h2 class="wdm-card-title"><?php esc_html_e( 'Revenue', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></h2>
+				<h2 class="wdm-card-title"><?php esc_html_e( 'Revenue', 'wprobo-documerge-lite' ); ?> <span class="wdm-pro-badge">PRO</span></h2>
 			</div>
 			<div class="wdm-card-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;text-align:center;padding:24px;">
 				<div style="display:flex;align-items:flex-end;gap:8px;margin-bottom:16px;">
@@ -157,16 +159,16 @@ $primary_action = array(
 					</div>
 					<?php endforeach; ?>
 				</div>
-				<p style="color:#6b7280;font-size:13px;margin:0 0 12px;"><?php esc_html_e( 'Track payments and revenue with Stripe integration.', 'wprobo-documerge' ); ?></p>
+				<p style="color:#6b7280;font-size:13px;margin:0 0 12px;"><?php esc_html_e( 'Track payments and revenue with Stripe integration.', 'wprobo-documerge-lite' ); ?></p>
 				<a href="<?php echo esc_url( \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_get_upgrade_url() ); ?>" target="_blank" class="wdm-btn-upgrade" style="font-size:12px;padding:6px 16px;">
-					<?php esc_html_e( 'Upgrade to Pro', 'wprobo-documerge' ); ?>
+					<?php esc_html_e( 'Upgrade to Pro', 'wprobo-documerge-lite' ); ?>
 				</a>
 			</div>
 		</div>
 
 		<div class="wdm-card wdm-chart-card">
 			<div class="wdm-card-header">
-				<h2 class="wdm-card-title"><?php esc_html_e( 'Analytics', 'wprobo-documerge' ); ?> <span class="wdm-pro-badge">PRO</span></h2>
+				<h2 class="wdm-card-title"><?php esc_html_e( 'Analytics', 'wprobo-documerge-lite' ); ?> <span class="wdm-pro-badge">PRO</span></h2>
 			</div>
 			<div class="wdm-card-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;text-align:center;padding:24px;">
 				<div style="display:flex;gap:6px;margin-bottom:16px;">
@@ -174,9 +176,9 @@ $primary_action = array(
 					<div style="width:32px;background:linear-gradient(to top,#042157,#0a3d8f);border-radius:4px 4px 0 0;opacity:<?php echo esc_attr( 0.15 + ( $b * 0.12 ) ); ?>;height:<?php echo esc_attr( 30 + ( $b * 25 ) ); ?>px;"></div>
 					<?php endfor; ?>
 				</div>
-				<p style="color:#6b7280;font-size:13px;margin:0 0 12px;"><?php esc_html_e( 'Form analytics, revenue tracking, and detailed charts.', 'wprobo-documerge' ); ?></p>
+				<p style="color:#6b7280;font-size:13px;margin:0 0 12px;"><?php esc_html_e( 'Form analytics, revenue tracking, and detailed charts.', 'wprobo-documerge-lite' ); ?></p>
 				<a href="<?php echo esc_url( \WPRobo\DocuMerge\Core\WPRobo_DocuMerge_Feature_Gate::get_instance()->wprobo_documerge_get_upgrade_url() ); ?>" target="_blank" class="wdm-btn-upgrade" style="font-size:12px;padding:6px 16px;">
-					<?php esc_html_e( 'Upgrade to Pro', 'wprobo-documerge' ); ?>
+					<?php esc_html_e( 'Upgrade to Pro', 'wprobo-documerge-lite' ); ?>
 				</a>
 			</div>
 		</div>
@@ -185,9 +187,9 @@ $primary_action = array(
 	<!-- ── Recent Submissions ────────────────────────────────────── -->
 	<div class="wdm-card">
 		<div class="wdm-card-header">
-			<h2 class="wdm-card-title"><?php esc_html_e( 'Recent Submissions', 'wprobo-documerge' ); ?></h2>
+			<h2 class="wdm-card-title"><?php esc_html_e( 'Recent Submissions', 'wprobo-documerge-lite' ); ?></h2>
 			<a href="<?php echo esc_url( admin_url( 'admin.php?page=wprobo-documerge-submissions' ) ); ?>" class="wdm-card-link">
-				<?php esc_html_e( 'View All', 'wprobo-documerge' ); ?> &rarr;
+				<?php esc_html_e( 'View All', 'wprobo-documerge-lite' ); ?> &rarr;
 			</a>
 		</div>
 		<div class="wdm-card-body">
@@ -195,8 +197,8 @@ $primary_action = array(
 
 				<div class="wdm-empty-state">
 					<span class="dashicons dashicons-email-alt"></span>
-					<h3><?php esc_html_e( 'No submissions yet', 'wprobo-documerge' ); ?></h3>
-					<p><?php esc_html_e( 'Create a form and embed it on a page to start receiving submissions.', 'wprobo-documerge' ); ?></p>
+					<h3><?php esc_html_e( 'No submissions yet', 'wprobo-documerge-lite' ); ?></h3>
+					<p><?php esc_html_e( 'Create a form and embed it on a page to start receiving submissions.', 'wprobo-documerge-lite' ); ?></p>
 				</div>
 
 			<?php else : ?>
@@ -204,11 +206,11 @@ $primary_action = array(
 				<table class="wdm-table">
 					<thead>
 						<tr>
-							<th><?php esc_html_e( 'Date', 'wprobo-documerge' ); ?></th>
-							<th><?php esc_html_e( 'Form', 'wprobo-documerge' ); ?></th>
-							<th><?php esc_html_e( 'Email', 'wprobo-documerge' ); ?></th>
-							<th><?php esc_html_e( 'Status', 'wprobo-documerge' ); ?></th>
-							<th><?php esc_html_e( 'Doc', 'wprobo-documerge' ); ?></th>
+							<th><?php esc_html_e( 'Date', 'wprobo-documerge-lite' ); ?></th>
+							<th><?php esc_html_e( 'Form', 'wprobo-documerge-lite' ); ?></th>
+							<th><?php esc_html_e( 'Email', 'wprobo-documerge-lite' ); ?></th>
+							<th><?php esc_html_e( 'Status', 'wprobo-documerge-lite' ); ?></th>
+							<th><?php esc_html_e( 'Doc', 'wprobo-documerge-lite' ); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -218,7 +220,7 @@ $primary_action = array(
 									<?php
 									printf(
 										/* translators: %s: Human-readable time difference. */
-										esc_html__( '%s ago', 'wprobo-documerge' ),
+										esc_html__( '%s ago', 'wprobo-documerge-lite' ),
 										esc_html( human_time_diff( strtotime( $submission->created_at ), time() ) )
 									);
 									?>
@@ -256,7 +258,7 @@ $primary_action = array(
 										$dl_format = ! empty( $submission->doc_path_pdf ) ? 'pdf' : 'docx';
 										$dl_url    = admin_url( 'admin-ajax.php?action=wprobo_documerge_download_document&submission_id=' . absint( $submission->id ) . '&format=' . $dl_format . '&nonce=' . wp_create_nonce( 'wprobo_documerge_admin' ) );
 										?>
-										<a href="<?php echo esc_url( $dl_url ); ?>" class="wdm-doc-download" title="<?php esc_attr_e( 'Download document', 'wprobo-documerge' ); ?>" target="_blank" rel="noopener noreferrer">
+										<a href="<?php echo esc_url( $dl_url ); ?>" class="wdm-doc-download" title="<?php esc_attr_e( 'Download document', 'wprobo-documerge-lite' ); ?>" target="_blank" rel="noopener noreferrer">
 											<span class="dashicons dashicons-download"></span>
 										</a>
 									<?php else : ?>
@@ -296,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		data: {
 			labels: dailyLabels,
 			datasets: [{
-				label: '<?php echo esc_js( __( 'Submissions', 'wprobo-documerge' ) ); ?>',
+				label: '<?php echo esc_js( __( 'Submissions', 'wprobo-documerge-lite' ) ); ?>',
 				data: dailyCounts,
 				borderColor: blue,
 				backgroundColor: 'rgba(4, 33, 87, 0.08)',
@@ -404,3 +406,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 </script>
+
+<?php // phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound ?>

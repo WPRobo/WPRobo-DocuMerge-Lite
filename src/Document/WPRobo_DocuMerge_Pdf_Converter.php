@@ -24,6 +24,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, Squiz.PHP.DiscouragedFunctions.Discouraged
+
 /**
  * Class WPRobo_DocuMerge_Pdf_Converter
  *

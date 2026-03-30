@@ -24,19 +24,19 @@ $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wprdm_forms" ); // phpcs:igno
 $wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}wprdm_templates" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 
 // 2. Delete all plugin options.
-$options = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+$wprobo_documerge_options = $wpdb->get_col( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 	"SELECT option_name FROM {$wpdb->options}
      WHERE option_name LIKE 'wprobo_documerge_%'"
 );
-foreach ( $options as $option ) {
-	delete_option( $option );
+foreach ( $wprobo_documerge_options as $wprobo_documerge_option ) {
+	delete_option( $wprobo_documerge_option );
 }
 
 // 3. Delete all generated document files.
-$upload_dir = wp_upload_dir();
-$docs_dir   = $upload_dir['basedir'] . '/documerge-docs/';
-$temp_dir   = $upload_dir['basedir'] . '/documerge-temp/';
-$logs_dir   = $upload_dir['basedir'] . '/documerge-logs/';
+$wprobo_documerge_upload_dir = wp_upload_dir();
+$wprobo_documerge_docs_dir   = $wprobo_documerge_upload_dir['basedir'] . '/documerge-docs/';
+$wprobo_documerge_temp_dir   = $wprobo_documerge_upload_dir['basedir'] . '/documerge-temp/';
+$wprobo_documerge_logs_dir   = $wprobo_documerge_upload_dir['basedir'] . '/documerge-logs/';
 
 /**
  * Recursively delete a directory and all its contents.
@@ -60,9 +60,9 @@ function wprobo_documerge_delete_directory( $dir ) {
 	rmdir( $dir ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 }
 
-wprobo_documerge_delete_directory( $docs_dir );
-wprobo_documerge_delete_directory( $temp_dir );
-wprobo_documerge_delete_directory( $logs_dir );
+wprobo_documerge_delete_directory( $wprobo_documerge_docs_dir );
+wprobo_documerge_delete_directory( $wprobo_documerge_temp_dir );
+wprobo_documerge_delete_directory( $wprobo_documerge_logs_dir );
 
 // 4. Clear scheduled cron events.
 wp_clear_scheduled_hook( 'wprobo_documerge_cleanup_temp_files' );

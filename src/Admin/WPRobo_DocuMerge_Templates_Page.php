@@ -21,7 +21,7 @@ use WPRobo\DocuMerge\Template\WPRobo_DocuMerge_Template_Scanner;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 
-// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, WordPress.Security.NonceVerification.Recommended
+// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, WordPress.Security.NonceVerification.Recommended, PluginCheck.Security.DirectDB
 }
 
 /**

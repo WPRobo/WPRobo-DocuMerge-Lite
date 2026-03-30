@@ -81,8 +81,8 @@ register_deactivation_hook(
 );
 
 // ─── Check if Pro is actually active (not just in memory from this request) ───
-$wprobo_active_plugins = (array) get_option( 'active_plugins', array() );
-if ( in_array( 'wprobo-docu-merge/wprobo-documerge.php', $wprobo_active_plugins, true ) ) {
+$wprobo_documerge_active_plugins = (array) get_option( 'active_plugins', array() );
+if ( in_array( 'wprobo-docu-merge/wprobo-documerge.php', $wprobo_documerge_active_plugins, true ) ) {
 	return;
 }
 

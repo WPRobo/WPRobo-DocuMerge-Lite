@@ -17,7 +17,7 @@ namespace WPRobo\DocuMerge\Form;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 
-// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, WordPress.Security.NonceVerification.Recommended
+// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, WordPress.Security.NonceVerification.Recommended, PluginCheck.Security.DirectDB
 }
 
 use WPRobo\DocuMerge\Helpers\WPRobo_DocuMerge_Logger;

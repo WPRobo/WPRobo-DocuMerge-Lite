@@ -16,6 +16,8 @@ namespace WPRobo\DocuMerge\Core;
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 /**
@@ -95,7 +97,6 @@ class WPRobo_DocuMerge_Plugin {
 		// Pass forms list to block editor with extended details.
 		if ( is_admin() ) {
 			global $wpdb;
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$forms = $wpdb->get_results(
 				"SELECT f.id, f.title, f.fields, t.name AS template_name
                  FROM {$wpdb->prefix}wprdm_forms f

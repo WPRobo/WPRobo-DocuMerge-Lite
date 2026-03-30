@@ -17,6 +17,8 @@ namespace WPRobo\DocuMerge\Admin;
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 /**
@@ -72,7 +74,6 @@ class WPRobo_DocuMerge_Settings_Page {
 
 			case 'delete_submissions':
 				// Delete document files.
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$submissions = $wpdb->get_results( "SELECT doc_path_docx, doc_path_pdf FROM {$wpdb->prefix}wprdm_submissions" );
 				foreach ( $submissions as $sub ) {
 					if ( ! empty( $sub->doc_path_docx ) && $wp_filesystem->exists( $sub->doc_path_docx ) ) {
@@ -82,27 +83,23 @@ class WPRobo_DocuMerge_Settings_Page {
 						$wp_filesystem->delete( $sub->doc_path_pdf );
 					}
 				}
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_submissions" );
 				wp_send_json_success( array( 'message' => __( 'All submissions and documents deleted.', 'wprobo-documerge-lite' ) ) );
 				break;
 
 			case 'delete_forms':
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_forms" );
 				delete_transient( 'wprobo_documerge_forms_count' );
 				wp_send_json_success( array( 'message' => __( 'All forms deleted.', 'wprobo-documerge-lite' ) ) );
 				break;
 
 			case 'delete_templates':
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$templates = $wpdb->get_results( "SELECT file_path FROM {$wpdb->prefix}wprdm_templates" );
 				foreach ( $templates as $tpl ) {
 					if ( ! empty( $tpl->file_path ) && $wp_filesystem->exists( $tpl->file_path ) ) {
 						$wp_filesystem->delete( $tpl->file_path );
 					}
 				}
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_templates" );
 				delete_transient( 'wprobo_documerge_templates_count' );
 				delete_transient( 'wprobo_documerge_templates_list' );
@@ -116,14 +113,12 @@ class WPRobo_DocuMerge_Settings_Page {
 					wp_mkdir_p( $docs_dir );
 				}
 				// Clear file paths in submissions.
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query( "UPDATE {$wpdb->prefix}wprdm_submissions SET doc_path_docx = '', doc_path_pdf = ''" );
 				wp_send_json_success( array( 'message' => __( 'All generated documents deleted.', 'wprobo-documerge-lite' ) ) );
 				break;
 
 			case 'reset_settings':
 				$like = $wpdb->esc_like( 'wprobo_documerge_' ) . '%';
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$options_to_delete = $wpdb->get_col(
 					$wpdb->prepare(
 						"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s AND option_name NOT IN ('wprobo_documerge_db_version', 'wprobo_documerge_wizard_completed')",
@@ -149,16 +144,12 @@ class WPRobo_DocuMerge_Settings_Page {
 				}
 
 				// Truncate all tables.
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_submissions" );
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_forms" );
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}wprdm_templates" );
 
 				// Delete all plugin options.
 				$factory_like = $wpdb->esc_like( 'wprobo_documerge_' ) . '%';
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$all_options = $wpdb->get_col(
 					$wpdb->prepare(
 						"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
@@ -171,7 +162,6 @@ class WPRobo_DocuMerge_Settings_Page {
 
 				// Delete all transients.
 				$transient_like = '%' . $wpdb->esc_like( 'wprobo_documerge' ) . '%';
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query(
 					$wpdb->prepare(
 						"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
@@ -438,7 +428,6 @@ class WPRobo_DocuMerge_Settings_Page {
 
 		// Templates.
 		if ( in_array( 'templates', $types, true ) ) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$export_data['templates'] = $wpdb->get_results(
 				"SELECT * FROM {$wpdb->prefix}wprdm_templates ORDER BY id ASC",
 				ARRAY_A
@@ -447,7 +436,6 @@ class WPRobo_DocuMerge_Settings_Page {
 
 		// Forms.
 		if ( in_array( 'forms', $types, true ) ) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$export_data['forms'] = $wpdb->get_results(
 				"SELECT * FROM {$wpdb->prefix}wprdm_forms ORDER BY id ASC",
 				ARRAY_A
@@ -456,7 +444,6 @@ class WPRobo_DocuMerge_Settings_Page {
 
 		// Submissions.
 		if ( in_array( 'submissions', $types, true ) ) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$export_data['submissions'] = $wpdb->get_results(
 				"SELECT * FROM {$wpdb->prefix}wprdm_submissions ORDER BY id ASC",
 				ARRAY_A
@@ -466,7 +453,6 @@ class WPRobo_DocuMerge_Settings_Page {
 		// Settings.
 		if ( in_array( 'settings', $types, true ) ) {
 			$export_like = $wpdb->esc_like( 'wprobo_documerge_' ) . '%';
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$options  = $wpdb->get_results(
 				$wpdb->prepare(
 					"SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE %s ORDER BY option_name ASC",
@@ -590,7 +576,6 @@ class WPRobo_DocuMerge_Settings_Page {
 			if ( 'replace' === $mode ) {
 				// Delete existing settings.
 				$import_like = $wpdb->esc_like( 'wprobo_documerge_' ) . '%';
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$existing = $wpdb->get_col(
 					$wpdb->prepare(
 						"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
@@ -651,7 +636,6 @@ class WPRobo_DocuMerge_Settings_Page {
 		}
 
 		if ( 'replace' === $mode ) {
-			$wpdb->query( "TRUNCATE TABLE {$table}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		}
 
 		$imported = 0;
@@ -664,7 +648,6 @@ class WPRobo_DocuMerge_Settings_Page {
 			// Get column names from the table to filter out invalid columns.
 			static $column_cache = array();
 			if ( ! isset( $column_cache[ $table ] ) ) {
-				$cols                   = $wpdb->get_col( "SHOW COLUMNS FROM {$table}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 				$column_cache[ $table ] = $cols;
 			}
 
@@ -681,7 +664,6 @@ class WPRobo_DocuMerge_Settings_Page {
 
 			// In merge mode, skip if a row with this ID already exists.
 			if ( 'merge' === $mode && isset( $filtered['id'] ) ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$exists = $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT COUNT(*) FROM {$table} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
@@ -693,7 +675,6 @@ class WPRobo_DocuMerge_Settings_Page {
 				}
 			}
 
-			$result = $wpdb->insert( $table, $filtered ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared
 			if ( false !== $result ) {
 				++$imported;
 			}

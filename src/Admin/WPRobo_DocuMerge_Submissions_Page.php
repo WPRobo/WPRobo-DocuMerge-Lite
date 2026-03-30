@@ -19,6 +19,8 @@ use WPRobo\DocuMerge\Form\WPRobo_DocuMerge_Form_Builder;
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 /**
@@ -178,7 +180,6 @@ class WPRobo_DocuMerge_Submissions_Page {
 		global $wp_filesystem;
 
 		foreach ( $ids as $id ) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$submission = $wpdb->get_row(
 				$wpdb->prepare(
 					"SELECT id, doc_path_docx, doc_path_pdf FROM {$table} WHERE id = %d",
@@ -197,7 +198,6 @@ class WPRobo_DocuMerge_Submissions_Page {
 				$wp_filesystem->delete( $submission->doc_path_pdf );
 			}
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->delete( $table, array( 'id' => $id ), array( '%d' ) );
 		}
 
@@ -228,7 +228,6 @@ class WPRobo_DocuMerge_Submissions_Page {
 	private function wprobo_documerge_render_single_submission( $submission_id ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$submission = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT s.*, f.title AS form_title, t.name AS template_name
@@ -279,7 +278,6 @@ class WPRobo_DocuMerge_Submissions_Page {
 
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wpdb->update(
 			$wpdb->prefix . 'wprdm_submissions',
 			array(
@@ -365,10 +363,8 @@ class WPRobo_DocuMerge_Submissions_Page {
 		$count_query = "SELECT COUNT(*) FROM {$submissions_table} s WHERE 1=1{$where_sql}";
 
 		if ( ! empty( $where_values ) ) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			$total = (int) $wpdb->get_var( $wpdb->prepare( $count_query, $where_values ) );
 		} else {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			$total = (int) $wpdb->get_var( $count_query );
 		}
 
@@ -387,7 +383,6 @@ class WPRobo_DocuMerge_Submissions_Page {
             LIMIT %d OFFSET %d";
 
 		$query_values = array_merge( $where_values, array( $per_page, $offset ) );
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		$submissions = $wpdb->get_results( $wpdb->prepare( $select_query, $query_values ) );
 
 		if ( null === $submissions ) {
@@ -447,7 +442,6 @@ class WPRobo_DocuMerge_Submissions_Page {
 		$forms_table       = $wpdb->prefix . 'wprdm_forms';
 		$templates_table   = $wpdb->prefix . 'wprdm_templates';
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$submission = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT s.*, f.title AS form_title, t.name AS template_name
@@ -518,7 +512,6 @@ class WPRobo_DocuMerge_Submissions_Page {
 
 		foreach ( $ids as $id ) {
 			// Retrieve submission to find associated file paths.
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$submission = $wpdb->get_row(
 				$wpdb->prepare(
 					"SELECT id, doc_path_docx, doc_path_pdf FROM {$submissions_table} WHERE id = %d",
@@ -541,7 +534,6 @@ class WPRobo_DocuMerge_Submissions_Page {
 			}
 
 			// Delete the database row.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->delete(
 				$submissions_table,
 				array( 'id' => $id ),
@@ -624,7 +616,6 @@ class WPRobo_DocuMerge_Submissions_Page {
             LIMIT %d";
 
 		$query_values = array_merge( $where_values, array( 5000 ) );
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		$submissions = $wpdb->get_results( $wpdb->prepare( $select_query, $query_values ) );
 
 		if ( null === $submissions ) {

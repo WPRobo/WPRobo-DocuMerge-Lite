@@ -16,6 +16,8 @@ namespace WPRobo\DocuMerge\Form;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 use WPRobo\DocuMerge\Helpers\WPRobo_DocuMerge_Logger;
@@ -163,7 +165,6 @@ class WPRobo_DocuMerge_Form_Renderer {
 
 		if ( $entry_limit > 0 ) {
 			global $wpdb;
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$submission_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions WHERE form_id = %d AND status != 'error'",

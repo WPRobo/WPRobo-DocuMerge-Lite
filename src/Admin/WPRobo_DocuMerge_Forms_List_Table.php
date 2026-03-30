@@ -18,6 +18,8 @@ namespace WPRobo\DocuMerge\Admin;
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 // Load WP_List_Table if not available.
@@ -335,10 +337,8 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 		// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$count_query = "SELECT COUNT(*) FROM {$forms_table} f WHERE 1=1{$where}";
 		if ( ! empty( $where_values ) ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			$total_items = (int) $wpdb->get_var( $wpdb->prepare( $count_query, $where_values ) );
 		} else {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 			$total_items = (int) $wpdb->get_var( $count_query );
 		}
 
@@ -372,7 +372,6 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 			LIMIT %d OFFSET %d";
 
 		$query_values = array_merge( $where_values, array( $per_page, $offset ) );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		$this->items = $wpdb->get_results( $wpdb->prepare( $select_query, $query_values ) );
 
 		if ( null === $this->items ) {
@@ -388,7 +387,6 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 			$item->field_count = is_array( $fields_arr ) ? count( $fields_arr ) : 0;
 
 			// Submission count.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$item->submission_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
 					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared

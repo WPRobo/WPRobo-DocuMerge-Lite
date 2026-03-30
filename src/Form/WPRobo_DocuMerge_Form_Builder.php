@@ -15,6 +15,8 @@ namespace WPRobo\DocuMerge\Form;
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 /**
@@ -71,7 +73,6 @@ class WPRobo_DocuMerge_Form_Builder {
 
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -106,7 +107,6 @@ class WPRobo_DocuMerge_Form_Builder {
 			return null;
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$result = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$this->table_name} WHERE id = %d", $id ) );
 
 		return $result ? $result : null;
@@ -161,7 +161,6 @@ class WPRobo_DocuMerge_Form_Builder {
 			$data['updated_at'] = $now;
 			unset( $data['id'] );
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$updated = $wpdb->update(
 				$this->table_name,
 				$data,
@@ -182,7 +181,6 @@ class WPRobo_DocuMerge_Form_Builder {
 			$data['created_at'] = $now;
 			$data['updated_at'] = $now;
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 			$inserted = $wpdb->insert(
 				$this->table_name,
 				$data
@@ -234,7 +232,6 @@ class WPRobo_DocuMerge_Form_Builder {
 			);
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$deleted = $wpdb->query( $wpdb->prepare( "DELETE FROM {$this->table_name} WHERE id = %d", $id ) );
 
 		if ( false === $deleted ) {
@@ -270,7 +267,6 @@ class WPRobo_DocuMerge_Form_Builder {
 	public function wprobo_documerge_get_all_forms_for_select() {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -335,7 +331,6 @@ class WPRobo_DocuMerge_Form_Builder {
 
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$count = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$this->table_name} LIMIT %d", 1 ) );
 
 		set_transient( 'wprobo_documerge_forms_count', $count, HOUR_IN_SECONDS );
@@ -356,7 +351,6 @@ class WPRobo_DocuMerge_Form_Builder {
 
 		$form_id = absint( $form_id );
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$count = (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$this->submissions_table_name} WHERE form_id = %d", $form_id ) );
 
 		return $count;

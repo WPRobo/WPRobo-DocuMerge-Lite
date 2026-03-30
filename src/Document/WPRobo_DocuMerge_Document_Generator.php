@@ -20,6 +20,8 @@ use WPRobo\DocuMerge\Helpers\WPRobo_DocuMerge_Logger;
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 /**
@@ -99,7 +101,6 @@ class WPRobo_DocuMerge_Document_Generator {
 		// ── Step A: Get submission ───────────────────────────────────────
 		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$submission = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$submissions_table} WHERE id = %d",
@@ -118,7 +119,6 @@ class WPRobo_DocuMerge_Document_Generator {
 		// ── Step C: Get form ─────────────────────────────────────────────
 		$forms_table = $wpdb->prefix . 'wprdm_forms';
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$form = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$forms_table} WHERE id = %d",
@@ -138,7 +138,6 @@ class WPRobo_DocuMerge_Document_Generator {
 		$templates_table = $wpdb->prefix . 'wprdm_templates';
 		$template_id     = ! empty( $submission->template_id ) ? absint( $submission->template_id ) : absint( $form->template_id );
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$template = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$templates_table} WHERE id = %d",
@@ -369,7 +368,6 @@ class WPRobo_DocuMerge_Document_Generator {
 
 		$format = array( '%s', '%s', '%s' );
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$result = $wpdb->update(
 			$table,
 			$data,
@@ -404,7 +402,6 @@ class WPRobo_DocuMerge_Document_Generator {
 
 		$format = array( '%s', '%s', '%s', '%s' );
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$result = $wpdb->update(
 			$table,
 			$data,

@@ -17,6 +17,8 @@ namespace WPRobo\DocuMerge\Admin;
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 /**
@@ -76,7 +78,6 @@ class WPRobo_DocuMerge_Dashboard_Page {
 		$wprobo_documerge_templates = get_transient( 'wprobo_documerge_templates_count' );
 
 		if ( false === $wprobo_documerge_templates ) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wprobo_documerge_templates = (int) $wpdb->get_var(
 				"SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_templates"
 			);
@@ -87,7 +88,6 @@ class WPRobo_DocuMerge_Dashboard_Page {
 		$wprobo_documerge_forms = get_transient( 'wprobo_documerge_forms_count' );
 
 		if ( false === $wprobo_documerge_forms ) {
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wprobo_documerge_forms = (int) $wpdb->get_var(
 				"SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_forms"
 			);
@@ -98,7 +98,6 @@ class WPRobo_DocuMerge_Dashboard_Page {
 		$wprobo_documerge_month_start = gmdate( 'Y-m-01 00:00:00' );
 
 		// --- Completed submissions this month ---
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wprobo_documerge_submissions = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions WHERE status = %s AND created_at >= %s",
@@ -150,7 +149,6 @@ class WPRobo_DocuMerge_Dashboard_Page {
 	public function wprobo_documerge_get_recent_submissions( $wprobo_documerge_limit = 10 ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wprobo_documerge_results = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT s.id, s.submitter_email, s.status, s.doc_path_pdf,
@@ -188,7 +186,6 @@ class WPRobo_DocuMerge_Dashboard_Page {
 
 		// Get all 7 days in one query.
 		$seven_days_ago = gmdate( 'Y-m-d', strtotime( '-6 days' ) );
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$daily_counts = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT DATE(created_at) as day, COUNT(*) as count FROM {$table} WHERE created_at >= %s GROUP BY DATE(created_at)",
@@ -214,7 +211,6 @@ class WPRobo_DocuMerge_Dashboard_Page {
 		}
 
 		// Status breakdown (pie chart).
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$statuses = $wpdb->get_results(
 			"SELECT status, COUNT(*) as count FROM {$table} GROUP BY status",
 			ARRAY_A

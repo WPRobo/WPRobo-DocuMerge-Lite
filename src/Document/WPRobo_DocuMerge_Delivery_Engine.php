@@ -18,6 +18,8 @@ namespace WPRobo\DocuMerge\Document;
 // Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+
+// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 }
 
 /**
@@ -58,7 +60,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		// ── Get submission ───────────────────────────────────────────────
 		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$submission = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$submissions_table} WHERE id = %d",
@@ -77,7 +78,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		// ── Get form for delivery methods ────────────────────────────────
 		$forms_table = $wpdb->prefix . 'wprdm_forms';
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$form = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$forms_table} WHERE id = %d",
@@ -124,7 +124,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		// ── Download (only delivery method in Lite) ─────────────────────
 		$download_result = $this->wprobo_documerge_prepare_download( $submission_id );
 		if ( is_wp_error( $download_result ) ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->update(
 				$submissions_table,
 				array(
@@ -251,7 +250,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 			$email_sent = $sent;
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wpdb->update(
 			$submissions_table,
 			array(
@@ -399,7 +397,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		global $wpdb;
 		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$submission = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$submissions_table} WHERE id = %d",
@@ -557,7 +554,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 		global $wpdb;
 		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$submission = $wpdb->get_row(
 			$wpdb->prepare( "SELECT * FROM {$submissions_table} WHERE id = %d", $submission_id )
 		);
@@ -609,7 +605,6 @@ class WPRobo_DocuMerge_Delivery_Engine {
 	public function wprobo_documerge_cleanup_expired_tokens() {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$rows = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE %s",

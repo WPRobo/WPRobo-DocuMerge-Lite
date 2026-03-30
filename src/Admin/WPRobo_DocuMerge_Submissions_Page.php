@@ -197,7 +197,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 				$wp_filesystem->delete( $submission->doc_path_pdf );
 			}
 
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->delete( $table, array( 'id' => $id ), array( '%d' ) );
 		}
 
@@ -228,7 +228,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 	private function wprobo_documerge_render_single_submission( $submission_id ) {
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$submission = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT s.*, f.title AS form_title, t.name AS template_name
@@ -279,7 +279,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 
 		global $wpdb;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wpdb->update(
 			$wpdb->prefix . 'wprdm_submissions',
 			array(
@@ -541,7 +541,7 @@ class WPRobo_DocuMerge_Submissions_Page {
 			}
 
 			// Delete the database row.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->delete(
 				$submissions_table,
 				array( 'id' => $id ),

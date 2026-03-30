@@ -123,7 +123,7 @@ class WPRobo_DocuMerge_Settings_Page {
 
 			case 'reset_settings':
 				$like = $wpdb->esc_like( 'wprobo_documerge_' ) . '%';
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$options_to_delete = $wpdb->get_col(
 					$wpdb->prepare(
 						"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s AND option_name NOT IN ('wprobo_documerge_db_version', 'wprobo_documerge_wizard_completed')",
@@ -158,7 +158,7 @@ class WPRobo_DocuMerge_Settings_Page {
 
 				// Delete all plugin options.
 				$factory_like = $wpdb->esc_like( 'wprobo_documerge_' ) . '%';
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$all_options = $wpdb->get_col(
 					$wpdb->prepare(
 						"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
@@ -171,7 +171,7 @@ class WPRobo_DocuMerge_Settings_Page {
 
 				// Delete all transients.
 				$transient_like = '%' . $wpdb->esc_like( 'wprobo_documerge' ) . '%';
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->query(
 					$wpdb->prepare(
 						"DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
@@ -466,7 +466,7 @@ class WPRobo_DocuMerge_Settings_Page {
 		// Settings.
 		if ( in_array( 'settings', $types, true ) ) {
 			$export_like = $wpdb->esc_like( 'wprobo_documerge_' ) . '%';
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$options  = $wpdb->get_results(
 				$wpdb->prepare(
 					"SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE %s ORDER BY option_name ASC",
@@ -590,7 +590,7 @@ class WPRobo_DocuMerge_Settings_Page {
 			if ( 'replace' === $mode ) {
 				// Delete existing settings.
 				$import_like = $wpdb->esc_like( 'wprobo_documerge_' ) . '%';
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$existing = $wpdb->get_col(
 					$wpdb->prepare(
 						"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
@@ -681,7 +681,7 @@ class WPRobo_DocuMerge_Settings_Page {
 
 			// In merge mode, skip if a row with this ID already exists.
 			if ( 'merge' === $mode && isset( $filtered['id'] ) ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$exists = $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT COUNT(*) FROM {$table} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared

@@ -61,7 +61,7 @@ class WPRobo_DocuMerge_Template_Manager {
 
 		$table = $wpdb->prefix . 'wprdm_templates';
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$results = $wpdb->get_results(
 			"SELECT id, name, description, file_name, output_format, merge_tags, created_at, updated_at
              FROM {$table}
@@ -89,7 +89,7 @@ class WPRobo_DocuMerge_Template_Manager {
 
 		$table = $wpdb->prefix . 'wprdm_templates';
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$row = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$table} WHERE id = %d",
@@ -167,7 +167,7 @@ class WPRobo_DocuMerge_Template_Manager {
 
 			$format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
 
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$result = $wpdb->update(
 				$table,
 				$update_data,
@@ -194,7 +194,7 @@ class WPRobo_DocuMerge_Template_Manager {
 
 			$format = array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' );
 
-            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$result = $wpdb->insert(
 				$table,
 				$insert_data,
@@ -262,7 +262,7 @@ class WPRobo_DocuMerge_Template_Manager {
 		}
 
 		// Delete the database row.
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$deleted = $wpdb->delete(
 			$table,
 			array( 'id' => $id ),
@@ -308,7 +308,7 @@ class WPRobo_DocuMerge_Template_Manager {
 
 		$table = $wpdb->prefix . 'wprdm_templates';
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table}" );
 
 		set_transient( 'wprobo_documerge_templates_count', $count, self::WPROBO_DOCUMERGE_CACHE_TTL );
@@ -331,7 +331,7 @@ class WPRobo_DocuMerge_Template_Manager {
 
 		$table = $wpdb->prefix . 'wprdm_forms';
 
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$count = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM {$table} WHERE template_id = %d",

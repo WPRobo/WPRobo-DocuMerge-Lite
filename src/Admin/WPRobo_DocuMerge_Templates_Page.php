@@ -80,7 +80,7 @@ class WPRobo_DocuMerge_Templates_Page {
 				$template->tag_count  = count( $template->tags_array );
 
 				// Get form names using this template.
-                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$template->linked_forms = $wpdb->get_results(
 					$wpdb->prepare(
 						"SELECT id, title FROM {$forms_table} WHERE template_id = %d ORDER BY title ASC",

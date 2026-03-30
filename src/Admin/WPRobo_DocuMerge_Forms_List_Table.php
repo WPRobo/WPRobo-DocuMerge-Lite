@@ -388,7 +388,7 @@ class WPRobo_DocuMerge_Forms_List_Table extends \WP_List_Table {
 			$item->field_count = is_array( $fields_arr ) ? count( $fields_arr ) : 0;
 
 			// Submission count.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$item->submission_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
 					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared

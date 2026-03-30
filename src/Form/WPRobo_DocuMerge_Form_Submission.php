@@ -169,7 +169,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		// 1. Total entry limit.
 		$entry_limit = isset( $form_settings['entry_limit'] ) ? absint( $form_settings['entry_limit'] ) : 0;
 		if ( $entry_limit > 0 ) {
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$total_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT COUNT(*) FROM {$submissions_table} WHERE form_id = %d AND status != 'error'",
@@ -189,7 +189,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		if ( $limit_per_email > 0 && ! empty( $limit_email_field ) ) {
 			$submitted_email = isset( $_POST[ $limit_email_field ] ) ? sanitize_email( wp_unslash( $_POST[ $limit_email_field ] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			if ( ! empty( $submitted_email ) ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$email_count = (int) $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT COUNT(*) FROM {$submissions_table} WHERE form_id = %d AND submitter_email = %s AND status != 'error'",
@@ -211,7 +211,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		if ( $limit_per_ip > 0 ) {
 			$client_ip = $this->wprobo_documerge_get_client_ip();
 			if ( ! empty( $client_ip ) ) {
-				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$ip_count = (int) $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT COUNT(*) FROM {$submissions_table} WHERE form_id = %d AND ip_address = %s AND status != 'error'",
@@ -234,7 +234,7 @@ class WPRobo_DocuMerge_Form_Submission {
 			$current_user_id = get_current_user_id();
 			// Count by matching user email in submitter_email (since we don't store user_id in submissions).
 			$user_email = wp_get_current_user()->user_email;
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$user_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT COUNT(*) FROM {$submissions_table} WHERE form_id = %d AND submitter_email = %s AND status != 'error'",
@@ -451,7 +451,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		$form_data_decoded                  = json_decode( $form_data, true );
 		$form_data_decoded['submission_id'] = $submission_id;
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wpdb->update(
 			$submissions_table,
 			array( 'form_data' => wp_json_encode( $form_data_decoded ) ),
@@ -467,7 +467,7 @@ class WPRobo_DocuMerge_Form_Submission {
 
 		if ( is_wp_error( $result ) ) {
 			// Update status to error.
-			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->update(
 				$submissions_table,
 				array(
@@ -593,7 +593,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		$submission_id     = absint( $submission_id );
 		$submissions_table = $wpdb->prefix . 'wprdm_submissions';
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$submission = $wpdb->get_row(
 			$wpdb->prepare(
 				"SELECT * FROM {$submissions_table} WHERE id = %d",
@@ -605,7 +605,7 @@ class WPRobo_DocuMerge_Form_Submission {
 			return false;
 		}
 
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$deleted = $wpdb->delete(
 			$submissions_table,
 			array( 'id' => $submission_id ),

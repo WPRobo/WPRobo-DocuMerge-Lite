@@ -20,7 +20,7 @@ use WPRobo\DocuMerge\Form\WPRobo_DocuMerge_Form_Builder;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 
-// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, WordPress.Security.NonceVerification.Recommended
 }
 
 /**

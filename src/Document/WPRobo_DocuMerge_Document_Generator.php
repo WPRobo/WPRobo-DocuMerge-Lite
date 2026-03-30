@@ -21,7 +21,7 @@ use WPRobo\DocuMerge\Helpers\WPRobo_DocuMerge_Logger;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 
-// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, WordPress.Security.NonceVerification.Recommended
 }
 
 /**

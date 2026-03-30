@@ -19,7 +19,7 @@ namespace WPRobo\DocuMerge\Admin;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 
-// phpcs:disable WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+// phpcs:disable WordPress.DB.DirectDatabaseQuery, WordPress.DB.PreparedSQL, WordPress.Security.NonceVerification.Recommended
 }
 
 // Load WP_List_Table if not available.

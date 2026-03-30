@@ -359,6 +359,16 @@ echo "  ZIP:      production/$ZIP_NAME"
 echo "  Size:     $ZIP_SIZE"
 echo "  Files:    $FILE_COUNT"
 echo ""
+
+# ── Recreate symlink for local testing site ────────────────────
+SYMLINK_TARGET="/Users/alishan/local-by-flywheel/wordpress-default/app/public/wp-content/plugins/wprobo-documerge-lite"
+if [ -d "$(dirname "$SYMLINK_TARGET")" ]; then
+    rm -f "$SYMLINK_TARGET" 2>/dev/null
+    ln -s "$BUILD_DIR" "$SYMLINK_TARGET"
+    echo "  Symlink: → wordpress-default/plugins/wprobo-documerge-lite"
+fi
+
+echo ""
 echo "  Next steps:"
 echo "  1. Test the ZIP on a fresh WordPress install"
 echo "  2. Submit at: https://wordpress.org/plugins/developers/add/"

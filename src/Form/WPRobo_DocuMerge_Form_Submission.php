@@ -169,6 +169,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		// 1. Total entry limit.
 		$entry_limit = isset( $form_settings['entry_limit'] ) ? absint( $form_settings['entry_limit'] ) : 0;
 		if ( $entry_limit > 0 ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$total_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT COUNT(*) FROM {$submissions_table} WHERE form_id = %d AND status != 'error'",
@@ -188,6 +189,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		if ( $limit_per_email > 0 && ! empty( $limit_email_field ) ) {
 			$submitted_email = isset( $_POST[ $limit_email_field ] ) ? sanitize_email( wp_unslash( $_POST[ $limit_email_field ] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			if ( ! empty( $submitted_email ) ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$email_count = (int) $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT COUNT(*) FROM {$submissions_table} WHERE form_id = %d AND submitter_email = %s AND status != 'error'",
@@ -209,6 +211,7 @@ class WPRobo_DocuMerge_Form_Submission {
 		if ( $limit_per_ip > 0 ) {
 			$client_ip = $this->wprobo_documerge_get_client_ip();
 			if ( ! empty( $client_ip ) ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$ip_count = (int) $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT COUNT(*) FROM {$submissions_table} WHERE form_id = %d AND ip_address = %s AND status != 'error'",
@@ -231,6 +234,7 @@ class WPRobo_DocuMerge_Form_Submission {
 			$current_user_id = get_current_user_id();
 			// Count by matching user email in submitter_email (since we don't store user_id in submissions).
 			$user_email = wp_get_current_user()->user_email;
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$user_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
 					"SELECT COUNT(*) FROM {$submissions_table} WHERE form_id = %d AND submitter_email = %s AND status != 'error'",

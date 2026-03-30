@@ -70,6 +70,7 @@ class WPRobo_DocuMerge_Setup_Wizard {
 		delete_transient( 'wprobo_documerge_activation_redirect' );
 
 		// Do not redirect on bulk activations or network admin.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( wp_doing_ajax() || is_network_admin() || isset( $_GET['activate-multi'] ) ) {
 			return;
 		}

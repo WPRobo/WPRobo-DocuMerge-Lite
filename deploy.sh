@@ -124,6 +124,7 @@ echo "[4/8] Copying production files..."
 cp "$PLUGIN_DIR/wprobo-documerge.php" "$BUILD_DIR/"
 cp "$PLUGIN_DIR/uninstall.php" "$BUILD_DIR/"
 cp "$PLUGIN_DIR/readme.txt" "$BUILD_DIR/"
+cp "$PLUGIN_DIR/composer.json" "$BUILD_DIR/"
 
 # PHP source.
 cp -R "$PLUGIN_DIR/src" "$BUILD_DIR/"
@@ -312,7 +313,6 @@ check_no_file() {
 
 check_no_file "package.json"
 check_no_file "package-lock.json"
-check_no_file "composer.json"
 check_no_file "composer.lock"
 check_no_file ".gitignore"
 check_no_file ".distignore"

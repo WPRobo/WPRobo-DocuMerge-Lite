@@ -104,7 +104,7 @@ $primary_action = array(
 					<?php
 					if ( $error_count > 0 ) {
 						/* translators: %d: number of errors */
-						printf( esc_html__( '%d error(s)', 'wprobo-documerge-lite' ), $error_count );
+						printf( esc_html__( '%d error(s)', 'wprobo-documerge-lite' ), absint( $error_count ) );
 					} else {
 						esc_html_e( 'This Month', 'wprobo-documerge-lite' );
 					}

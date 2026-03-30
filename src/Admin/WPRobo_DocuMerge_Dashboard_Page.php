@@ -98,6 +98,7 @@ class WPRobo_DocuMerge_Dashboard_Page {
 		$wprobo_documerge_month_start = gmdate( 'Y-m-01 00:00:00' );
 
 		// --- Completed submissions this month ---
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wprobo_documerge_submissions = (int) $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT COUNT(*) FROM {$wpdb->prefix}wprdm_submissions WHERE status = %s AND created_at >= %s",
@@ -149,6 +150,7 @@ class WPRobo_DocuMerge_Dashboard_Page {
 	public function wprobo_documerge_get_recent_submissions( $wprobo_documerge_limit = 10 ) {
 		global $wpdb;
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wprobo_documerge_results = $wpdb->get_results(
 			$wpdb->prepare(
 				"SELECT s.id, s.submitter_email, s.status, s.doc_path_pdf,

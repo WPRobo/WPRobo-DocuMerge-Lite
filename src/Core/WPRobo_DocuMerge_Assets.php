@@ -302,7 +302,7 @@ class WPRobo_DocuMerge_Assets {
 		if ( 'toplevel_page_wprobo-documerge' === $hook ) {
 			wp_enqueue_script(
 				'wprobo-documerge-chartjs',
-				'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js',
+				WPROBO_DOCUMERGE_URL . 'assets/vendor/chartjs/chart.umd.min.js',
 				array(),
 				'4.4.1',
 				true

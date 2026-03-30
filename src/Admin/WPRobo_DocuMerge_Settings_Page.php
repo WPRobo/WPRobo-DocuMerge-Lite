@@ -651,7 +651,7 @@ class WPRobo_DocuMerge_Settings_Page {
 		}
 
 		if ( 'replace' === $mode ) {
-			$wpdb->query( "TRUNCATE TABLE {$table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$wpdb->query( "TRUNCATE TABLE {$table}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 		}
 
 		$imported = 0;
@@ -664,7 +664,7 @@ class WPRobo_DocuMerge_Settings_Page {
 			// Get column names from the table to filter out invalid columns.
 			static $column_cache = array();
 			if ( ! isset( $column_cache[ $table ] ) ) {
-				$cols                   = $wpdb->get_col( "SHOW COLUMNS FROM {$table}" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+				$cols                   = $wpdb->get_col( "SHOW COLUMNS FROM {$table}" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
 				$column_cache[ $table ] = $cols;
 			}
 
@@ -681,6 +681,7 @@ class WPRobo_DocuMerge_Settings_Page {
 
 			// In merge mode, skip if a row with this ID already exists.
 			if ( 'merge' === $mode && isset( $filtered['id'] ) ) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$exists = $wpdb->get_var(
 					$wpdb->prepare(
 						"SELECT COUNT(*) FROM {$table} WHERE id = %d", // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
@@ -692,7 +693,7 @@ class WPRobo_DocuMerge_Settings_Page {
 				}
 			}
 
-			$result = $wpdb->insert( $table, $filtered ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			$result = $wpdb->insert( $table, $filtered ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.PreparedSQL.NotPrepared
 			if ( false !== $result ) {
 				++$imported;
 			}

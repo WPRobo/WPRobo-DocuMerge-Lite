@@ -131,24 +131,24 @@ $form_multistep = isset( $form->multistep_enabled ) ? absint( $form->multistep_e
 
 			<h3><?php esc_html_e( 'Special Fields', 'wprobo-documerge-lite' ); ?></h3>
 			<div class="wdm-field-type-grid">
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-art', __( 'Signature', 'wprobo-documerge-lite' ) ); ?>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-money-alt', __( 'Payment', 'wprobo-documerge-lite' ) ); ?>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-shield', __( 'CAPTCHA', 'wprobo-documerge-lite' ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-art', __( 'Signature', 'wprobo-documerge-lite' ) ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-money-alt', __( 'Payment', 'wprobo-documerge-lite' ) ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-shield', __( 'CAPTCHA', 'wprobo-documerge-lite' ) ) ); ?>
 			</div>
 
 			<h3><?php esc_html_e( 'Advanced Fields', 'wprobo-documerge-lite' ); ?></h3>
 			<div class="wdm-field-type-grid">
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-upload', __( 'File Upload', 'wprobo-documerge-lite' ) ); ?>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-location', __( 'Address', 'wprobo-documerge-lite' ) ); ?>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-admin-users', __( 'Name', 'wprobo-documerge-lite' ) ); ?>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-hidden', __( 'Hidden', 'wprobo-documerge-lite' ) ); ?>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-lock', __( 'Password', 'wprobo-documerge-lite' ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-upload', __( 'File Upload', 'wprobo-documerge-lite' ) ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-location', __( 'Address', 'wprobo-documerge-lite' ) ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-admin-users', __( 'Name', 'wprobo-documerge-lite' ) ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-hidden', __( 'Hidden', 'wprobo-documerge-lite' ) ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-lock', __( 'Password', 'wprobo-documerge-lite' ) ) ); ?>
 				<button type="button" class="wdm-field-type-btn" data-type="url">
 					<span class="dashicons dashicons-admin-links"></span>
 					<?php esc_html_e( 'Website', 'wprobo-documerge-lite' ); ?>
 				</button>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-star-filled', __( 'Rating', 'wprobo-documerge-lite' ) ); ?>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-plus-alt', __( 'Repeater', 'wprobo-documerge-lite' ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-star-filled', __( 'Rating', 'wprobo-documerge-lite' ) ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-plus-alt', __( 'Repeater', 'wprobo-documerge-lite' ) ) ); ?>
 				<button type="button" class="wdm-field-type-btn" data-type="ip_address">
 					<span class="dashicons dashicons-admin-site-alt3"></span>
 					<?php esc_html_e( 'IP Address', 'wprobo-documerge-lite' ); ?>
@@ -161,8 +161,8 @@ $form_multistep = isset( $form->multistep_enabled ) ? absint( $form->multistep_e
 
 			<h3><?php esc_html_e( 'Layout Elements', 'wprobo-documerge-lite' ); ?></h3>
 			<div class="wdm-field-type-grid">
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-editor-code', __( 'HTML Block', 'wprobo-documerge-lite' ) ); ?>
-				<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-minus', __( 'Divider', 'wprobo-documerge-lite' ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-editor-code', __( 'HTML Block', 'wprobo-documerge-lite' ) ) ); ?>
+				<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_field_type_locked( 'dashicons-minus', __( 'Divider', 'wprobo-documerge-lite' ) ) ); ?>
 			</div>
 
 		</div>
@@ -455,12 +455,12 @@ $form_multistep = isset( $form->multistep_enabled ) ? absint( $form->multistep_e
 								<label class="wdm-checkbox-label wdm-pro-disabled-toggle">
 									<input type="checkbox" disabled="disabled">
 									<?php esc_html_e( 'Email to submitter', 'wprobo-documerge-lite' ); ?>
-									<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?>
+									<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge() ); ?>
 								</label>
 								<label class="wdm-checkbox-label wdm-pro-disabled-toggle">
 									<input type="checkbox" disabled="disabled">
 									<?php esc_html_e( 'Save to Media Library', 'wprobo-documerge-lite' ); ?>
-									<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?>
+									<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge() ); ?>
 								</label>
 							</div>
 							<span class="wdm-description"><?php esc_html_e( 'How the generated document is delivered after submission. Email settings are configured in Settings → Email.', 'wprobo-documerge-lite' ); ?></span>
@@ -478,9 +478,9 @@ $form_multistep = isset( $form->multistep_enabled ) ? absint( $form->multistep_e
 
 						<div class="wdm-field-group">
 							<?php
-							echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_disabled_toggle(
+							echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_disabled_toggle(
 								__( 'Enable multi-step form', 'wprobo-documerge-lite' )
-							);
+							) );
 							?>
 							<span class="wdm-description">
 								<?php esc_html_e( 'Split your form into multiple steps. Drag fields between steps on the Fields tab.', 'wprobo-documerge-lite' ); ?>
@@ -590,7 +590,7 @@ $form_multistep = isset( $form->multistep_enabled ) ? absint( $form->multistep_e
 					<!-- ── Limits Sub-tab ──────────────────────────────────── -->
 					<div class="wdm-settings-subtab-content" data-subtab="limits">
 
-						<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Entry Limits', 'wprobo-documerge-lite' ), esc_html__( 'Limit submissions per form, email, IP address, or user.', 'wprobo-documerge-lite' ) ); ?>
+						<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Entry Limits', 'wprobo-documerge-lite' ), esc_html__( 'Limit submissions per form, email, IP address, or user.', 'wprobo-documerge-lite' ) ) ); ?>
 
 					</div>
 
@@ -598,10 +598,10 @@ $form_multistep = isset( $form->multistep_enabled ) ? absint( $form->multistep_e
 					<div class="wdm-settings-subtab-content" data-subtab="payment">
 
 						<?php
-						echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+						echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
 							__( 'Payment Settings', 'wprobo-documerge-lite' ),
 							__( 'Require Stripe payment before delivering documents. Configure amount, currency, and more.', 'wprobo-documerge-lite' )
-						);
+						) );
 						?>
 
 					</div>
@@ -609,7 +609,7 @@ $form_multistep = isset( $form->multistep_enabled ) ? absint( $form->multistep_e
 					<!-- ── Notifications Sub-tab ───────────────────────────── -->
 					<div class="wdm-settings-subtab-content" data-subtab="notifications">
 
-						<?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Webhooks', 'wprobo-documerge-lite' ), esc_html__( 'Send submission data to external services like Zapier, Make, and n8n.', 'wprobo-documerge-lite' ) ); ?>
+						<?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay( esc_html__( 'Webhooks', 'wprobo-documerge-lite' ), esc_html__( 'Send submission data to external services like Zapier, Make, and n8n.', 'wprobo-documerge-lite' ) ) ); ?>
 
 					</div>
 

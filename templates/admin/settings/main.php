@@ -116,7 +116,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php $mode = get_option( 'wprobo_documerge_form_mode', 'standalone' ); ?>
 						<div class="wdm-radio-group">
 							<label class="wdm-radio-label"><input type="radio" name="wprobo_documerge_form_mode" value="standalone" <?php checked( $mode, 'standalone' ); ?>> <?php esc_html_e( 'Standalone (built-in form builder)', 'wprobo-documerge-lite' ); ?></label>
-							<label class="wdm-radio-label wdm-pro-disabled-toggle"><input type="radio" disabled="disabled"> <?php esc_html_e( 'Integrated (WPForms / CF7 / Gravity Forms etc.)', 'wprobo-documerge-lite' ); ?> <?php echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge(); ?></label>
+							<label class="wdm-radio-label wdm-pro-disabled-toggle"><input type="radio" disabled="disabled"> <?php esc_html_e( 'Integrated (WPForms / CF7 / Gravity Forms etc.)', 'wprobo-documerge-lite' ); ?> <?php echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_badge() ); ?></label>
 						</div>
 					</div>
 
@@ -217,50 +217,50 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<!-- ══════════════ STRIPE (PRO) ══════════════ -->
 		<div class="wdm-settings-panel" data-tab="stripe">
 			<?php
-			echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+			echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
 				__( 'Stripe Payments', 'wprobo-documerge-lite' ),
 				__( 'Accept payments before delivering documents. Supports test and live mode with full Stripe integration.', 'wprobo-documerge-lite' )
-			);
+			) );
 			?>
 		</div>
 
 		<!-- ══════════════ EMAIL (PRO) ══════════════ -->
 		<div class="wdm-settings-panel" data-tab="email">
 			<?php
-			echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+			echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
 				__( 'Email Delivery', 'wprobo-documerge-lite' ),
 				__( 'Send generated documents via email with customizable templates, sender details, and attachment settings.', 'wprobo-documerge-lite' )
-			);
+			) );
 			?>
 		</div>
 
 		<!-- ══════════════ RECAPTCHA (PRO) ══════════════ -->
 		<div class="wdm-settings-panel" data-tab="recaptcha">
 			<?php
-			echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+			echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
 				__( 'CAPTCHA / Spam Protection', 'wprobo-documerge-lite' ),
 				__( 'Protect your forms with Google reCAPTCHA v2, v3, or hCaptcha integration.', 'wprobo-documerge-lite' )
-			);
+			) );
 			?>
 		</div>
 
 		<!-- ══════════════ STYLES (PRO) ══════════════ -->
 		<div class="wdm-settings-panel" data-tab="styles">
 			<?php
-			echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+			echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
 				__( 'Form Styles', 'wprobo-documerge-lite' ),
 				__( 'Customize form appearance — colors, fonts, spacing, borders, and button styles with a visual designer.', 'wprobo-documerge-lite' )
-			);
+			) );
 			?>
 		</div>
 
 		<!-- ══════════════ CUSTOM CSS (PRO) ══════════════ -->
 		<div class="wdm-settings-panel" data-tab="customcss">
 			<?php
-			echo \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
+			echo wp_kses_post( \WPRobo\DocuMerge\Admin\WPRobo_DocuMerge_Pro_Upsell::wprobo_documerge_render_overlay(
 				__( 'Custom CSS', 'wprobo-documerge-lite' ),
 				__( 'Add custom CSS to fully control the look of your forms with a syntax-highlighted code editor.', 'wprobo-documerge-lite' )
-			);
+			) );
 			?>
 		</div>
 

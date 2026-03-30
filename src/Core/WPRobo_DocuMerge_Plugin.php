@@ -67,15 +67,9 @@ class WPRobo_DocuMerge_Plugin {
 	 * @since 1.0.0
 	 */
 	public function wprobo_documerge_run() {
-		$this->wprobo_documerge_load_textdomain();
 		$this->wprobo_documerge_register_hooks();
 	}
 
-	/**
-	 * Load plugin text domain for translations.
-	 *
-	 * @since 1.0.0
-	 */
 	/**
 	 * Register the Gutenberg block for embedding forms.
 	 *
@@ -149,19 +143,6 @@ class WPRobo_DocuMerge_Plugin {
 		}
 		return \WPRobo\DocuMerge\Form\WPRobo_DocuMerge_Form_Renderer::get_instance()
 			->wprobo_documerge_render( $form_id );
-	}
-
-	/**
-	 * Load plugin text domain for translations.
-	 *
-	 * @since 1.0.0
-	 */
-	private function wprobo_documerge_load_textdomain() {
-		load_plugin_textdomain(
-			'wprobo-documerge-lite',
-			false,
-			dirname( WPROBO_DOCUMERGE_BASENAME ) . '/languages'
-		);
 	}
 
 	/**
